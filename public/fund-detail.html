@@ -62,9 +62,21 @@
             width: 100%;
             height: 100%;
             background: var(--color-bg-primary);
-            overflow-y: auto;
+            overflow: hidden;
             position: relative;
-            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fund-content {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            padding-bottom: 80px;
+        }
+
+        .fund-content::-webkit-scrollbar {
+            display: none;
         }
 
         /* Header */
@@ -252,32 +264,50 @@
             color: var(--color-text-secondary);
         }
 
-        /* Floating CTA Button */
+        /* Floating CTA Buttons */
         .floating-cta {
-            position: fixed;
+            position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
             width: 340px;
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: transparent;
         }
 
         .floating-btn {
-            width: 100%;
-            padding: 14px 24px;
-            background: var(--color-blue);
-            color: white;
-            border: none;
+            flex: 1;
+            padding: 14px 20px;
             border-radius: var(--radius-md);
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
             transition: all 0.2s ease;
+            border: none;
         }
 
-        .floating-btn:active {
+        .floating-btn-primary {
+            background: var(--color-blue);
+            color: white;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .floating-btn-primary:active {
             background: var(--color-blue-dark);
+            transform: scale(0.98);
+        }
+
+        .floating-btn-secondary {
+            background: var(--color-surface);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .floating-btn-secondary:active {
+            background: var(--color-border);
             transform: scale(0.98);
         }
 
@@ -595,8 +625,9 @@
 
 
         <div class="iphone-screen">
-            <!-- Header -->
-            <div class="header">
+            <div class="fund-content">
+                <!-- Header -->
+                <div class="header">
                 <button class="back-btn" onclick="window.location.href='mutual-funds.html#all-funds'">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
@@ -955,14 +986,16 @@
                 </div>
             </div>
 
-            <!-- Disclaimer -->
-            <div class="disclaimer">
-                Mutual Fund investments are subject to market risks, <a href="#" class="disclaimer-link">read all scheme related documents carefully</a>.
+                <!-- Disclaimer -->
+                <div class="disclaimer">
+                    Mutual Fund investments are subject to market risks, <a href="#" class="disclaimer-link">read all scheme related documents carefully</a>.
+                </div>
             </div>
 
-            <!-- Floating CTA Button -->
+            <!-- Floating CTA Buttons -->
             <div class="floating-cta">
-                <button class="floating-btn" onclick="showInvestmentOptions()">Invest Now</button>
+                <button class="floating-btn floating-btn-primary" onclick="showInvestmentOptions('sip')">Start SIP</button>
+                <button class="floating-btn floating-btn-secondary" onclick="showInvestmentOptions('lumpsum')">One Time</button>
             </div>
         </div>
         <!-- iPhone Home Indicator -->
@@ -999,10 +1032,10 @@
         }
 
         // Show investment options (SIP or One-time)
-        function showInvestmentOptions() {
-            // Navigate to add funds page with current fund slug
+        function showInvestmentOptions(type) {
+            // Navigate to add funds page with current fund slug and investment type
             const fundSlug = getFundSlug();
-            window.location.href = 'add-funds.html?fund=' + fundSlug;
+            window.location.href = 'add-funds.html?fund=' + fundSlug + '&type=' + type;
         }
 
         // Select period and update returns display

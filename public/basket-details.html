@@ -466,7 +466,31 @@
             color: var(--color-green);
         }
 
-        /* Fund Allocation within Calculator */
+        /* Fund Allocation Section */
+        .fund-allocation-container {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+        }
+
+        /* Description Card */
+        .description-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .description-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        /* Fund Allocation within Calculator (kept for reference) */
         .allocation-divider {
             border-top: 1px solid var(--color-border);
             margin: var(--space-lg) 0 var(--space-md);
@@ -527,9 +551,10 @@
             left: 0;
             top: 0;
             bottom: 0;
-            background: linear-gradient(90deg, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0.08) 100%);
+            background: var(--color-green);
+            opacity: 0.15;
             border-radius: var(--radius-sm);
-            transition: width 0.3s ease;
+            transition: width 0.5s ease;
         }
 
         .allocation-content {
@@ -660,7 +685,7 @@
 
         /* Floating CTA */
         .floating-cta {
-            position: fixed;
+            position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
@@ -669,9 +694,7 @@
             display: flex;
             gap: 12px;
             padding: 12px;
-            background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+            background: transparent;
         }
 
         .floating-btn {
@@ -769,7 +792,15 @@
                     </div>
                 </div>
 
-                <!-- Detail Sections -->
+                <!-- Fund Allocation Section (moved from calculator) -->
+                <div class="section">
+                    <h2 class="section-title">Fund Allocation</h2>
+                    <div class="fund-allocation-container" id="fundAllocationSection">
+                        <!-- Fund allocation items will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- Detail Sections (COMMENTED OUT - will be used later)
                 <div class="section">
                     <div class="detail-card open">
                         <div class="detail-header" onclick="toggleDetail(this)">
@@ -821,6 +852,7 @@
                         </div>
                     </div>
                 </div>
+                -->
 
                 <!-- Unified Calculator & Allocation -->
                 <div class="section">
@@ -887,12 +919,14 @@
                             </div>
                         </div>
 
-                        <!-- Fund Allocation within Calculator -->
-                        <div class="allocation-divider">
-                            <h3 class="allocation-section-title">Fund Allocation</h3>
-                            <p class="allocation-helper-text" id="allocationHelperText">Your ₹5,000 will be allocated across these funds:</p>
-                            <!-- Fund allocation items will be dynamically rendered here -->
-                        </div>
+                        <!-- Fund Allocation removed from calculator - now shown after hero card -->
+                    </div>
+                </div>
+
+                <!-- Description Card -->
+                <div class="section">
+                    <div class="description-card">
+                        <p class="description-text" id="basketDescription">This basket automatically spreads your money across equity (for growth), debt (for stability), gold (for protection), and index funds (for market returns). The mix adjusts based on market conditions.</p>
                     </div>
                 </div>
             </div>
@@ -938,20 +972,9 @@
             if (metricRows[1]) metricRows[1].querySelector('.hero-metric-value').textContent = basket.minSip;
             if (metricRows[2]) metricRows[2].querySelector('.hero-metric-value').textContent = basket.minLumpsum;
 
-            // Update detail sections
-            // What is this
-            const whatIsThisText = document.querySelector('.detail-card:nth-child(1) .detail-text');
-            if (whatIsThisText) whatIsThisText.textContent = basket.whatIsThis;
-
-            // Why this basket
-            const whyBasketList = document.querySelector('.detail-card:nth-child(2) .detail-list');
-            if (whyBasketList) {
-                whyBasketList.innerHTML = basket.whyThisBasket.map(item => `<li>${item}</li>`).join('');
-            }
-
-            // How it works
-            const howItWorksText = document.querySelector('.detail-card:nth-child(3) .detail-text');
-            if (howItWorksText) howItWorksText.textContent = basket.howItWorks;
+            // Update description card at the bottom
+            const basketDescription = document.getElementById('basketDescription');
+            if (basketDescription) basketDescription.textContent = basket.howItWorks;
 
             // Store annual return and funds for calculator
             window.currentBasketReturn = basket.annualReturn;
@@ -963,12 +986,11 @@
 
         // Render fund allocation cards based on basket data
         function renderFundAllocations(funds) {
-            const allocationDivider = document.querySelector('.allocation-divider');
+            const fundAllocationSection = document.getElementById('fundAllocationSection');
+            if (!fundAllocationSection) return;
 
-            // Find the helper text and remove all existing allocation items
-            const helperText = document.getElementById('allocationHelperText');
-            const existingItems = allocationDivider.querySelectorAll('.allocation-item');
-            existingItems.forEach(item => item.remove());
+            // Clear existing items
+            fundAllocationSection.innerHTML = '';
 
             // Create new allocation items for each fund
             funds.forEach((fund, index) => {
@@ -981,7 +1003,7 @@
 
                 allocationItem.innerHTML = `
                     <div class="allocation-card" onclick="navigateToFund('${fundSlug}')">
-                        <div class="allocation-card-bg" style="background: ${fund.color}; opacity: 0.15;"></div>
+                        <div class="allocation-card-bg" style="width: ${fund.allocation}%;"></div>
                         <div class="allocation-content">
                             <div class="allocation-left">
                                 <span class="fund-name">${fund.name}</span>
@@ -994,7 +1016,7 @@
                     </div>
                 `;
 
-                allocationDivider.appendChild(allocationItem);
+                fundAllocationSection.appendChild(allocationItem);
             });
         }
 
@@ -1015,18 +1037,6 @@
         // Navigate to fund details
         function navigateToFund(fundSlug) {
             window.location.href = 'fund-detail.html?fund=' + fundSlug;
-        }
-
-        // Update fund allocation helper text based on investment amount
-        function updateAllocation(amount) {
-            const helperText = document.getElementById('allocationHelperText');
-            const funds = window.currentBasketFunds || [];
-
-            if (funds.length === 1) {
-                helperText.textContent = `Your ₹${amount.toLocaleString('en-IN')} will be allocated to:`;
-            } else {
-                helperText.textContent = `Your ₹${amount.toLocaleString('en-IN')} will be allocated across ${funds.length} funds:`;
-            }
         }
 
         // Calculator type switch
@@ -1057,7 +1067,7 @@
             const duration = parseInt(document.getElementById('duration').value);
             const annualReturn = window.currentBasketReturn || 0.125; // Use basket-specific return or default to 12.5%
 
-            let totalInvestment, futureValue, investmentAmount;
+            let totalInvestment, futureValue;
 
             if (type === 'sip') {
                 const amount = parseInt(document.getElementById('amount').value) || 0;
@@ -1067,7 +1077,6 @@
                                         frequency === 'weekly' ? 52 : 12;
 
                 totalInvestment = amount * investmentsPerYear * duration;
-                investmentAmount = amount; // Per period amount for allocation
 
                 const r = Math.pow(1 + annualReturn, 1/investmentsPerYear) - 1;
                 const n = investmentsPerYear * duration;
@@ -1075,7 +1084,6 @@
             } else {
                 const amount = parseInt(document.getElementById('lumpsumAmount').value) || 0;
                 totalInvestment = amount;
-                investmentAmount = amount; // Full lumpsum amount for allocation
                 futureValue = amount * Math.pow(1 + annualReturn, duration);
             }
 
@@ -1085,9 +1093,6 @@
             document.getElementById('totalInvested').textContent = '₹' + Math.round(totalInvestment).toLocaleString('en-IN');
             document.getElementById('expectedReturns').textContent = '₹' + Math.round(futureValue).toLocaleString('en-IN');
             document.getElementById('profit').textContent = '₹' + Math.round(profit).toLocaleString('en-IN') + ' (' + profitPercentage + '%)';
-
-            // Update fund allocation based on investment amount
-            updateAllocation(investmentAmount);
         }
 
         // Toggle detail sections
