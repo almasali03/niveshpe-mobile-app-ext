@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Goal - NiveshPe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <style>
+        :root {
+            --color-bg-primary: #F5F7FA;
+            --color-blue: #2563EB;
+            --color-blue-dark: #1D4ED8;
+            --color-green: #10B981;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-border: #E5E7EB;
+            --color-surface: #FFFFFF;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-2xl: 24px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            position: relative;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mobile-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Main page hidden - overlay opens on load */
+        .main-page {
+            display: none;
+        }
+
+        /* Goal Creation Overlay */
+        .goal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: none;
+        }
+
+        .goal-overlay.active {
+            display: flex;
+        }
+
+        .goal-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .goal-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .drag-handle {
+            padding: 12px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .drag-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: var(--radius-full);
+        }
+
+        .goal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-bg-primary);
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s;
+        }
+
+        .goal-close-btn:hover {
+            background: var(--color-border);
+        }
+
+        .goal-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .goal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .goal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .goal-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 20px;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .text-input {
+            width: 100%;
+            height: 52px;
+            padding: 0 16px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Category Selection */
+        .category-grid {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+
+        .category-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-item {
+            padding: 12px;
+            border: 1px solid transparent;
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-width: 100px;
+            max-width: 100px;
+            flex-shrink: 0;
+        }
+
+        .category-item:active {
+            transform: scale(0.95);
+        }
+
+        .category-item.selected {
+            border-color: currentColor;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .category-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-icon {
+            font-size: 22px;
+        }
+
+        /* Vacation - Very Light Blue */
+        .category-item[data-category="vacation"] {
+            background: linear-gradient(135deg, #F1F8FE 0%, #E3F2FD 100%);
+        }
+        .category-item[data-category="vacation"] .category-icon-wrapper {
+            background: rgba(33, 150, 243, 0.08);
+        }
+        .category-item[data-category="vacation"] .category-icon {
+            color: #42A5F5;
+        }
+
+        /* Home - Very Light Green */
+        .category-item[data-category="home"] {
+            background: linear-gradient(135deg, #F6FBF6 0%, #E8F5E9 100%);
+        }
+        .category-item[data-category="home"] .category-icon-wrapper {
+            background: rgba(76, 175, 80, 0.08);
+        }
+        .category-item[data-category="home"] .category-icon {
+            color: #66BB6A;
+        }
+
+        /* Education - Very Light Purple */
+        .category-item[data-category="education"] {
+            background: linear-gradient(135deg, #FAF7FB 0%, #F3E5F5 100%);
+        }
+        .category-item[data-category="education"] .category-icon-wrapper {
+            background: rgba(156, 39, 176, 0.08);
+        }
+        .category-item[data-category="education"] .category-icon {
+            color: #AB47BC;
+        }
+
+        /* Retirement - Very Light Orange */
+        .category-item[data-category="retirement"] {
+            background: linear-gradient(135deg, #FFFAF6 0%, #FFF3E0 100%);
+        }
+        .category-item[data-category="retirement"] .category-icon-wrapper {
+            background: rgba(255, 152, 0, 0.08);
+        }
+        .category-item[data-category="retirement"] .category-icon {
+            color: #FFA726;
+        }
+
+        /* Car - Very Light Teal */
+        .category-item[data-category="car"] {
+            background: linear-gradient(135deg, #F5FAFA 0%, #E0F2F1 100%);
+        }
+        .category-item[data-category="car"] .category-icon-wrapper {
+            background: rgba(0, 150, 136, 0.08);
+        }
+        .category-item[data-category="car"] .category-icon {
+            color: #26A69A;
+        }
+
+        /* Emergency - Very Light Red */
+        .category-item[data-category="emergency"] {
+            background: linear-gradient(135deg, #FFF8F8 0%, #FFEBEE 100%);
+        }
+        .category-item[data-category="emergency"] .category-icon-wrapper {
+            background: rgba(244, 67, 54, 0.08);
+        }
+        .category-item[data-category="emergency"] .category-icon {
+            color: #EF5350;
+        }
+
+        /* Custom - Very Light Indigo */
+        .category-item[data-category="custom"] {
+            background: linear-gradient(135deg, #F7F8FB 0%, #E8EAF6 100%);
+        }
+        .category-item[data-category="custom"] .category-icon-wrapper {
+            background: rgba(63, 81, 181, 0.08);
+        }
+        .category-item[data-category="custom"] .category-icon {
+            color: #5C6BC0;
+        }
+
+        .category-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.3;
+        }
+
+        /* Duration Input - Sentence Format */
+        .duration-sentence {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        .duration-input {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            border: 2px solid var(--color-border);
+            background: white;
+            text-align: center;
+            width: 60px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .duration-input::-webkit-inner-spin-button,
+        .duration-input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .duration-input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .duration-input:focus {
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .slider-wrapper {
+            position: relative;
+            padding: 0 4px;
+        }
+
+        .tenure-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: #F0F0F0;
+            outline: none;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .tenure-slider:hover {
+            opacity: 1;
+        }
+
+        .tenure-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--color-blue);
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .tenure-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .tenure-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border: none;
+            border-radius: 50%;
+            background: var(--color-blue);
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .tenure-slider::-moz-range-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .slider-markers {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4px;
+            padding: 0 4px;
+        }
+
+        .slider-marker {
+            font-size: 11px;
+            color: #999;
+            font-weight: 400;
+        }
+
+        .goal-actions {
+            padding: 20px;
+            border-top: 1px solid var(--color-border);
+            background: white;
+        }
+
+        .btn-primary {
+            width: 100%;
+            height: 52px;
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-blue-dark);
+        }
+
+        .btn-primary:disabled {
+            background: var(--color-border);
+            cursor: not-allowed;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 200;
+            padding: 40px 20px;
+        }
+
+        .loading-screen.hidden {
+            display: none;
+        }
+
+        .loading-screen.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .loading-content {
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .progress-text-container {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .progress-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+
+        .loading-dots {
+            display: inline-flex;
+            gap: 4px;
+            margin-left: 2px;
+        }
+
+        .loading-dots span {
+            animation: dotPulse 1.8s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        .loading-dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .ready-text {
+            text-align: center;
+            animation: fadeInScale 0.5s ease-out;
+            margin-bottom: 32px;
+        }
+
+        .ready-text h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Skeleton Loaders */
+        .skeleton-container {
+            width: 100%;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .skeleton-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-circle {
+            width: 48px;
+            height: 48px;
+            background: #f0f0f0;
+            border-radius: var(--radius-md);
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skeleton-circle::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            animation: shimmer 1.5s infinite;
+        }
+
+        .skeleton-text-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .skeleton-bar {
+            background: #f0f0f0;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skeleton-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            animation: shimmer 1.5s infinite;
+        }
+
+        .skeleton-title {
+            width: 60%;
+            height: 20px;
+        }
+
+        .skeleton-subtitle {
+            width: 80%;
+            height: 16px;
+        }
+
+        .skeleton-stats {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-stat-box {
+            flex: 1;
+            height: 48px;
+            background: #f0f0f0;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skeleton-stat-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            animation: shimmer 1.5s infinite;
+        }
+
+        .skeleton-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skeleton-feature-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .skeleton-feature-circle {
+            width: 32px;
+            height: 32px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skeleton-feature-circle::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            animation: shimmer 1.5s infinite;
+        }
+
+        .skeleton-feature-bar {
+            flex: 1;
+            height: 16px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skeleton-feature-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Funds Overlay */
+        .funds-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 300;
+        }
+
+        .funds-overlay.hidden {
+            display: none;
+        }
+
+        .overlay-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .funds-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .funds-drag-handle {
+            padding: 12px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .funds-drag-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: var(--radius-full);
+        }
+
+        .funds-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-bg-primary);
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s;
+        }
+
+        .funds-close-btn:active {
+            background: var(--color-border);
+        }
+
+        .funds-header {
+            padding: 0 20px 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .funds-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .funds-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .funds-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .funds-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .funds-ctas {
+            padding: 16px 20px 24px;
+            background: white;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            gap: 12px;
+        }
+
+        .funds-btn-primary {
+            flex: 1;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            border: none;
+            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+            transition: all 0.2s;
+        }
+
+        .funds-btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .funds-btn-secondary {
+            flex: 1;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--color-blue);
+            background: white;
+            color: var(--color-blue);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .funds-btn-secondary:active {
+            transform: scale(0.98);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        /* Fund Card */
+        .balanced-fund-card {
+            background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+        }
+
+        .fund-card-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .fund-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .fund-title-section {
+            flex: 1;
+        }
+
+        .fund-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .fund-card-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        .fund-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-item {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            background: white;
+            border-radius: var(--radius-md);
+        }
+
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .stat-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .fund-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--color-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/iphone-toggle.css">
+</head>
+<body>
+    <!-- Frame Toggle Button -->
+    <button class="frame-toggle-btn" id="frameToggleBtn" onclick="toggleFrameMode()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z"/>
+        </svg>
+        <span id="frameToggleText">Phone View</span>
+    </button>
+
+    <div class="iphone-frame">
+        <!-- iPhone Notch -->
+        <div class="iphone-notch"></div>
+
+        <div class="iphone-screen">
+            <div class="mobile-container">
+                <!-- No main page - directly show overlay -->
+
+                <!-- Goal Creation Overlay -->
+                <div class="goal-overlay" id="goalOverlay">
+                    <div class="goal-backdrop" onclick="closeGoalOverlay()"></div>
+
+                    <div class="goal-modal">
+                        <!-- Drag Handle -->
+                        <div class="drag-handle">
+                            <div class="drag-bar"></div>
+                        </div>
+
+                        <!-- Close Button -->
+                        <button class="goal-close-btn" onclick="closeGoalOverlay()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </button>
+
+                        <!-- Header -->
+                        <div class="goal-header">
+                            <h2 class="goal-title">Create a Goal</h2>
+                            <p class="goal-subtitle">Define your financial goal and start investing</p>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="goal-content">
+                            <!-- Goal Name -->
+                            <div class="input-group">
+                                <label class="input-label">Goal Name</label>
+                                <input type="text"
+                                       id="goalName"
+                                       class="text-input"
+                                       placeholder="e.g., Dream Vacation, New Home"
+                                       maxlength="50"
+                                       oninput="validateForm()">
+                            </div>
+
+                            <!-- Goal Tenure -->
+                            <div class="input-group">
+                                <div class="duration-sentence">
+                                    <span>I want to achieve this goal in</span>
+                                    <input type="number" id="durationInput" class="duration-input" value="5" min="1" max="20">
+                                    <span id="durationUnit">years.</span>
+                                </div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="tenureSlider" class="tenure-slider" min="1" max="20" value="5" step="1">
+                                </div>
+                                <div class="slider-markers">
+                                    <span class="slider-marker">1Y</span>
+                                    <span class="slider-marker">5Y</span>
+                                    <span class="slider-marker">10Y</span>
+                                    <span class="slider-marker">15Y</span>
+                                    <span class="slider-marker">20Y+</span>
+                                </div>
+                            </div>
+
+                            <!-- Category Templates -->
+                            <div class="input-group">
+                                <label class="input-label">or Choose a Template</label>
+                                <div class="category-grid">
+                                    <div class="category-item" data-category="vacation" onclick="selectCategory('vacation')">
+                                        <div class="category-icon-wrapper">
+                                            <span class="material-symbols-outlined category-icon">flight_takeoff</span>
+                                        </div>
+                                        <div class="category-name">Vacation</div>
+                                    </div>
+                                    <div class="category-item" data-category="home" onclick="selectCategory('home')">
+                                        <div class="category-icon-wrapper">
+                                            <span class="material-symbols-outlined category-icon">home</span>
+                                        </div>
+                                        <div class="category-name">Home</div>
+                                    </div>
+                                    <div class="category-item" data-category="education" onclick="selectCategory('education')">
+                                        <div class="category-icon-wrapper">
+                                            <span class="material-symbols-outlined category-icon">school</span>
+                                        </div>
+                                        <div class="category-name">Child's Education</div>
+                                    </div>
+                                    <div class="category-item" data-category="retirement" onclick="selectCategory('retirement')">
+                                        <div class="category-icon-wrapper">
+                                            <span class="material-symbols-outlined category-icon">beach_access</span>
+                                        </div>
+                                        <div class="category-name">Retirement</div>
+                                    </div>
+                                    <div class="category-item" data-category="car" onclick="selectCategory('car')">
+                                        <div class="category-icon-wrapper">
+                                            <span class="material-symbols-outlined category-icon">directions_car</span>
+                                        </div>
+                                        <div class="category-name">Car</div>
+                                    </div>
+                                    <div class="category-item" data-category="emergency" onclick="selectCategory('emergency')">
+                                        <div class="category-icon-wrapper">
+                                            <span class="material-symbols-outlined category-icon">health_and_safety</span>
+                                        </div>
+                                        <div class="category-name">Emergency Fund</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="goal-actions">
+                            <button class="btn-primary" id="createGoalBtn" disabled onclick="createGoal()">
+                                <span>Create My Plan</span>
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Screen -->
+                <div id="loadingScreen" class="loading-screen hidden">
+                    <div class="loading-content">
+                        <!-- Progress Text -->
+                        <div class="progress-text-container">
+                            <h3 class="progress-text" id="progressText">
+                                Creating your plan<span class="loading-dots"><span>•</span><span>•</span><span>•</span></span>
+                            </h3>
+                        </div>
+
+                        <!-- Ready Text -->
+                        <div class="ready-text" id="readyText" style="display: none;">
+                            <h3>Ready! ✨</h3>
+                        </div>
+
+                        <!-- Skeleton Loaders -->
+                        <div class="skeleton-container">
+                            <div class="skeleton-header">
+                                <div class="skeleton-circle"></div>
+                                <div class="skeleton-text-group">
+                                    <div class="skeleton-bar skeleton-title"></div>
+                                    <div class="skeleton-bar skeleton-subtitle"></div>
+                                </div>
+                            </div>
+                            <div class="skeleton-stats">
+                                <div class="skeleton-stat-box"></div>
+                                <div class="skeleton-stat-box"></div>
+                            </div>
+                            <div class="skeleton-features">
+                                <div class="skeleton-feature-row">
+                                    <div class="skeleton-feature-circle"></div>
+                                    <div class="skeleton-feature-bar"></div>
+                                </div>
+                                <div class="skeleton-feature-row">
+                                    <div class="skeleton-feature-circle"></div>
+                                    <div class="skeleton-feature-bar"></div>
+                                </div>
+                                <div class="skeleton-feature-row">
+                                    <div class="skeleton-feature-circle"></div>
+                                    <div class="skeleton-feature-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommended Funds Overlay -->
+                <div id="recommendedOverlay" class="funds-overlay hidden">
+                    <div class="overlay-backdrop" onclick="closeRecommendedFunds()"></div>
+
+                    <div class="funds-modal">
+                        <!-- Drag Handle -->
+                        <div class="funds-drag-handle">
+                            <div class="funds-drag-bar"></div>
+                        </div>
+
+                        <!-- Close Button -->
+                        <button class="funds-close-btn" onclick="closeRecommendedFunds()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </button>
+
+                        <!-- Header -->
+                        <div class="funds-header">
+                            <h2 class="funds-title">Recommended Funds</h2>
+                            <p class="funds-subtitle">Based on your goal timeline</p>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="funds-content">
+                            <div id="fundsList" class="funds-list">
+                                <!-- Fund card will be generated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- CTAs -->
+                        <div class="funds-ctas">
+                            <button class="funds-btn-primary" onclick="startSIP()">Start SIP</button>
+                            <button class="funds-btn-secondary" onclick="oneTimeInvestment()">One Time</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- iPhone Home Indicator -->
+        <div class="iphone-home-indicator"></div>
+    </div>
+
+    <script>
+        let selectedCategory = null;
+        let selectedIcon = null;
+        let selectedTenure = 5; // Default to 5 years
+
+        // Category templates with names and icons
+        const categoryTemplates = {
+            'vacation': { name: 'Vacation', icon: 'flight_takeoff' },
+            'home': { name: 'Home', icon: 'home' },
+            'education': { name: "Child's Education", icon: 'school' },
+            'retirement': { name: 'Retirement', icon: 'beach_access' },
+            'car': { name: 'Car', icon: 'directions_car' },
+            'emergency': { name: 'Emergency Fund', icon: 'health_and_safety' }
+        };
+
+        // Auto-open overlay and initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            // Open goal overlay
+            document.getElementById('goalOverlay').classList.add('active');
+            initSlider();
+
+            // Load saved frame mode preference
+            const savedMode = localStorage.getItem('iphone-frame-mode');
+            const frame = document.querySelector('.iphone-frame');
+            const toggleText = document.getElementById('frameToggleText');
+
+            // Default to iPhone view unless user explicitly chose normal view
+            if (savedMode !== 'normal') {
+                frame.classList.add('iphone-mode');
+                toggleText.textContent = 'Normal View';
+            }
+        });
+
+        function closeGoalOverlay() {
+            // Navigate back to home when closing
+            window.location.href = 'index.html';
+        }
+
+        function selectCategory(category) {
+            selectedCategory = category;
+            const template = categoryTemplates[category];
+
+            // Auto-fill goal name
+            document.getElementById('goalName').value = template.name;
+
+            // Set icon
+            selectedIcon = template.icon;
+
+            // Update selection UI
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+
+            validateForm();
+        }
+
+        function initSlider() {
+            const slider = document.getElementById('tenureSlider');
+            const durationInput = document.getElementById('durationInput');
+            const unitLabel = document.getElementById('durationUnit');
+
+            // Slider changes number input
+            slider.addEventListener('input', function() {
+                selectedTenure = parseInt(this.value);
+                durationInput.value = selectedTenure;
+                updateLabel();
+                validateForm();
+            });
+
+            // Number input changes slider
+            durationInput.addEventListener('input', function() {
+                let value = parseInt(this.value);
+
+                // Validate and clamp to range
+                if (isNaN(value) || value < 1) {
+                    value = 1;
+                } else if (value > 20) {
+                    value = 20;
+                }
+
+                selectedTenure = value;
+                this.value = value; // Update input to clamped value
+                slider.value = value;
+                updateLabel();
+                validateForm();
+            });
+
+            // Handle blur to ensure valid value
+            durationInput.addEventListener('blur', function() {
+                if (!this.value || parseInt(this.value) < 1) {
+                    this.value = 1;
+                    slider.value = 1;
+                    selectedTenure = 1;
+                    updateLabel();
+                    validateForm();
+                }
+            });
+
+            function updateLabel() {
+                unitLabel.textContent = selectedTenure === 1 ? 'year.' : 'years.';
+            }
+
+            // Initialize display
+            validateForm();
+        }
+
+        function validateForm() {
+            const goalName = document.getElementById('goalName').value.trim();
+            const isValid = goalName && selectedTenure;
+
+            // If no icon selected yet, use default
+            if (!selectedIcon) {
+                selectedIcon = 'flag';
+            }
+
+            document.getElementById('createGoalBtn').disabled = !isValid;
+        }
+
+        function createGoal() {
+            const goalName = document.getElementById('goalName').value.trim();
+
+            // If no icon selected, use default
+            if (!selectedIcon) {
+                selectedIcon = 'flag';
+            }
+
+            // Store goal data
+            const goalData = {
+                name: goalName,
+                category: selectedCategory || 'custom', // custom if no template selected
+                icon: selectedIcon,
+                tenure: selectedTenure,
+                isCustom: !selectedCategory, // true if no template was used
+                createdAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('newGoal', JSON.stringify(goalData));
+
+            // Show loading screen instead of immediate redirect
+            showLoadingScreen();
+        }
+
+        function showLoadingScreen() {
+            // Hide goal modal
+            document.getElementById('goalOverlay').classList.remove('active');
+
+            // Show loading screen
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.classList.remove('hidden');
+            loadingScreen.classList.add('active');
+
+            // Start animations
+            startLoadingAnimation();
+
+            // After 3.5 seconds, show recommended funds
+            setTimeout(() => {
+                showRecommendedFunds();
+            }, 3500);
+        }
+
+        function startLoadingAnimation() {
+            const progressText = document.getElementById('progressText');
+            const readyText = document.getElementById('readyText');
+
+            // Show progress text initially
+            if (progressText) progressText.style.display = 'block';
+            if (readyText) readyText.style.display = 'none';
+
+            // After 3 seconds, transition to "Ready! ✨"
+            setTimeout(() => {
+                if (progressText) progressText.style.display = 'none';
+                if (readyText) readyText.style.display = 'block';
+            }, 3000);
+        }
+
+        function showRecommendedFunds() {
+            // Hide loading screen
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.classList.remove('active');
+            loadingScreen.classList.add('hidden');
+
+            // Show recommended funds overlay
+            const overlay = document.getElementById('recommendedOverlay');
+            overlay.classList.remove('hidden');
+
+            // Generate fund recommendations based on tenure
+            generateFundRecommendations();
+        }
+
+        function generateFundRecommendations() {
+            const fundsList = document.getElementById('fundsList');
+
+            // Build fund card HTML (show Balanced Returns Fund)
+            fundsList.innerHTML = `
+                <div class="balanced-fund-card">
+                    <div class="fund-card-header">
+                        <div class="fund-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                            </svg>
+                        </div>
+                        <div class="fund-title-section">
+                            <h3 class="fund-card-title">Balanced Returns Fund</h3>
+                            <p class="fund-card-subtitle">Hybrid Fund – Dynamic Asset / Balanced Advantage</p>
+                        </div>
+                    </div>
+                    <div class="fund-stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#10B981">
+                                    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Returns</span>
+                                <span class="stat-value">10–13% p.a.</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#10B981">
+                                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Duration</span>
+                                <span class="stat-value">${selectedTenure}+ years</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fund-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <span class="feature-title">Balanced Growth + Safety</span>
+                                <span class="feature-desc">Mix of stocks & bonds for stable returns</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <span class="feature-title">Less Ups & Downs</span>
+                                <span class="feature-desc">Lower volatility than pure equity funds</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <span class="feature-title">Best For</span>
+                                <span class="feature-desc">Goals ${selectedTenure} years away with moderate risk</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function startSIP() {
+            closeRecommendedFunds();
+            setTimeout(() => {
+                window.location.href = 'add-funds.html?type=sip';
+            }, 300);
+        }
+
+        function oneTimeInvestment() {
+            closeRecommendedFunds();
+            setTimeout(() => {
+                window.location.href = 'add-funds.html?type=lumpsum';
+            }, 300);
+        }
+
+        function closeRecommendedFunds() {
+            const overlay = document.getElementById('recommendedOverlay');
+            overlay.classList.add('hidden');
+        }
+
+        // Frame toggle functionality
+        function toggleFrameMode() {
+            const frame = document.querySelector('.iphone-frame');
+            const toggleText = document.getElementById('frameToggleText');
+
+            if (frame.classList.contains('iphone-mode')) {
+                // Switch to Normal View
+                frame.classList.remove('iphone-mode');
+                toggleText.textContent = 'iPhone View';
+                localStorage.setItem('iphone-frame-mode', 'normal');
+            } else {
+                // Switch to iPhone View
+                frame.classList.add('iphone-mode');
+                toggleText.textContent = 'Normal View';
+                localStorage.setItem('iphone-frame-mode', 'iphone');
+            }
+        }
+    </script>
+</body>
+</html>
