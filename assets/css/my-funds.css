@@ -1585,6 +1585,12 @@ body {
   border: 1px solid var(--color-border);
   position: relative;
   margin-bottom: var(--space-md);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.goals-card:active {
+  transform: scale(0.98);
 }
 
 .goals-card:last-child {
@@ -1763,13 +1769,7 @@ body {
   background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
   border: 2px dashed #3B82F6 !important;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.add-goal-card:hover {
-  border-color: #2563EB !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  transition: transform 0.1s ease;
 }
 
 .add-goal-card:active {

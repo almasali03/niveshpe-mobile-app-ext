@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Details - NiveshPe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <style>
+        :root {
+            --color-bg-primary: #F5F7FA;
+            --color-card: #FFFFFF;
+            --color-surface: #F8F9FA;
+            --color-border: #E5E7EB;
+            --color-blue: #2563EB;
+            --color-blue-dark: #1D4ED8;
+            --color-blue-light: #60A5FA;
+            --color-green: #10B981;
+            --color-orange: #F59E0B;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-text-muted: #9CA3AF;
+            --gradient-blue: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            --gradient-success: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            --gradient-purple: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%);
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            position: relative;
+            margin: 0 auto;
+            flex-shrink: 0;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            height: 44px;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* Header */
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--color-surface);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:active {
+            background: var(--color-border);
+            transform: scale(0.95);
+        }
+
+        .goal-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Scrollable Content */
+        .goal-content {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            padding-bottom: 80px;
+        }
+
+        .goal-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hero Card */
+        .hero-card {
+            background: white;
+            padding: var(--space-xl);
+            margin: var(--space-md);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+
+        .goal-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-md);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .goal-icon {
+            font-size: 48px;
+        }
+
+        .goal-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .goal-tagline {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: left;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* Section */
+        .section {
+            margin: var(--space-md);
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Basket Card */
+        .basket-card {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+        }
+
+        .basket-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .basket-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .basket-info {
+            flex: 1;
+        }
+
+        .basket-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .basket-description {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        .basket-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .basket-stat {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            background: white;
+            border-radius: var(--radius-md);
+        }
+
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-info-label {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .stat-info-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* Fund Allocation */
+        .fund-allocation-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .allocation-item {
+            width: 100%;
+        }
+
+        .allocation-card {
+            position: relative;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            overflow: hidden;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .allocation-card:active {
+            transform: scale(0.98);
+            background: var(--color-border);
+        }
+
+        .allocation-card-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: var(--color-green);
+            opacity: 0.15;
+            border-radius: var(--radius-sm);
+            transition: width 0.5s ease;
+        }
+
+        .allocation-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .allocation-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .fund-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .allocation-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .percentage {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        .allocation-chevron {
+            font-size: 16px;
+            color: var(--color-text-muted);
+            line-height: 1;
+        }
+
+        /* Floating CTA */
+        .floating-cta {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: 340px;
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: transparent;
+        }
+
+        .floating-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .floating-btn-primary {
+            background: var(--color-blue);
+            color: white;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .floating-btn-primary:active {
+            background: var(--color-blue-dark);
+            transform: scale(0.98);
+        }
+
+        .floating-btn-secondary {
+            background: var(--color-surface);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .floating-btn-secondary:active {
+            background: var(--color-border);
+            transform: scale(0.98);
+        }
+
+        /* Category-specific colors (from create-goal.html) */
+        .category-vacation .goal-icon-wrapper {
+            background: linear-gradient(135deg, #F1F8FE 0%, #E3F2FD 100%);
+        }
+        .category-vacation .goal-icon {
+            color: #42A5F5;
+        }
+
+        .category-home .goal-icon-wrapper {
+            background: linear-gradient(135deg, #F6FBF6 0%, #E8F5E9 100%);
+        }
+        .category-home .goal-icon {
+            color: #66BB6A;
+        }
+
+        .category-education .goal-icon-wrapper {
+            background: linear-gradient(135deg, #FAF7FB 0%, #F3E5F5 100%);
+        }
+        .category-education .goal-icon {
+            color: #AB47BC;
+        }
+
+        .category-retirement .goal-icon-wrapper {
+            background: linear-gradient(135deg, #FFFAF6 0%, #FFF3E0 100%);
+        }
+        .category-retirement .goal-icon {
+            color: #FFA726;
+        }
+
+        .category-car .goal-icon-wrapper {
+            background: linear-gradient(135deg, #F5FAFA 0%, #E0F2F1 100%);
+        }
+        .category-car .goal-icon {
+            color: #26A69A;
+        }
+
+        .category-emergency .goal-icon-wrapper {
+            background: linear-gradient(135deg, #FFF8F8 0%, #FFEBEE 100%);
+        }
+        .category-emergency .goal-icon {
+            color: #EF5350;
+        }
+
+        .category-custom .goal-icon-wrapper {
+            background: linear-gradient(135deg, #F7F8FB 0%, #E8EAF6 100%);
+        }
+        .category-custom .goal-icon {
+            color: #5C6BC0;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/iphone-toggle.css">
+</head>
+<body>
+    <!-- Frame Toggle Button -->
+    <button class="frame-toggle-btn" onclick="toggleFrameMode()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z"/>
+        </svg>
+        <span id="frameToggleText">Normal View</span>
+    </button>
+
+    <div class="iphone-frame">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>9:41</div>
+                <div class="status-icons">
+                    <span>•••</span>
+                    <span>📶</span>
+                    <span>🔋</span>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div class="goal-header">
+                <button class="back-btn" onclick="window.history.back()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
+                    </svg>
+                </button>
+                <div class="goal-title" id="goalTitle">Goal Details</div>
+            </div>
+
+            <!-- Scrollable Content -->
+            <div class="goal-content">
+                <!-- Hero Card -->
+                <div class="hero-card" id="heroCard">
+                    <div class="goal-icon-wrapper">
+                        <span class="material-symbols-outlined goal-icon" id="goalIcon">flag</span>
+                    </div>
+                    <div class="goal-name" id="goalName">My Goal</div>
+                    <div class="goal-tagline" id="goalTagline">Achieve your financial goal</div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Tenure</div>
+                            <div class="stat-value" id="tenureStat">5 years</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Risk Level</div>
+                            <div class="stat-value">Medium Risk</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Category</div>
+                            <div class="stat-value" id="categoryStat">Custom</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Active</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommended Basket Section -->
+                <div class="section">
+                    <h2 class="section-title">Your Investment Strategy</h2>
+                    <div class="basket-card" id="basketCard">
+                        <div class="basket-header">
+                            <div class="basket-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                                </svg>
+                            </div>
+                            <div class="basket-info">
+                                <h3 class="basket-name" id="basketName">Growth Basket</h3>
+                                <p class="basket-description" id="basketDescription">Diversified growth basket for your goal</p>
+                            </div>
+                        </div>
+
+                        <div class="basket-stats">
+                            <div class="basket-stat">
+                                <div class="stat-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#10B981">
+                                        <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-info-value" id="basketReturns">11-15% p.a.</span>
+                                    <span class="stat-info-label">Expected Returns</span>
+                                </div>
+                            </div>
+                            <div class="basket-stat">
+                                <div class="stat-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#3B82F6">
+                                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-info-value" id="basketDuration">5+ years</span>
+                                    <span class="stat-info-label">Duration</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fund Allocation Section -->
+                <div class="section">
+                    <h2 class="section-title">Fund Allocation</h2>
+                    <div class="fund-allocation-container" id="fundAllocationSection">
+                        <!-- Fund allocation items will be rendered here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating CTA Buttons -->
+            <div class="floating-cta">
+                <button class="floating-btn floating-btn-primary" onclick="addFunds()">Add Funds</button>
+            </div>
+        </div>
+        <div class="iphone-home-indicator"></div>
+    </div>
+
+    <script>
+        // Embedded basket configuration (from create-goal.html)
+        const basketsConfig = {
+            "FundRecommendationMatrix": {
+                "Medium Risk": {
+                    "<1 Year": "B2.1",
+                    "1-2 Years": "B2.2",
+                    "2-4 Years": "B2.3",
+                    "4+ Years": "B2.4"
+                }
+            },
+            "CoreBaskets": {
+                "B2.1": {
+                    "basket_name": "B2_1",
+                    "description": "Low-volatility arbitrage-focused basket.",
+                    "schemes": [
+                        { "FundRankingCategory": "ARBITRAGE", "ratio": 75 },
+                        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 25 }
+                    ]
+                },
+                "B2.2": {
+                    "basket_name": "B2_2",
+                    "description": "Low-risk hybrid basket combining stability and balanced advantage.",
+                    "schemes": [
+                        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 70 },
+                        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 30 }
+                    ]
+                },
+                "B2.3": {
+                    "basket_name": "B2_3",
+                    "description": "Diversified growth basket blending balanced advantage and large caps.",
+                    "schemes": [
+                        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 55 },
+                        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 15 },
+                        { "FundRankingCategory": "LARGE_CAP", "ratio": 20 },
+                        { "FundRankingCategory": "GOLD", "ratio": 10 }
+                    ]
+                },
+                "B2.4": {
+                    "basket_name": "B2_4",
+                    "description": "Growth basket with strong large & mid-cap allocation and aggressive exposure.",
+                    "schemes": [
+                        { "FundRankingCategory": "LARGE_MID_CAP", "ratio": 75 },
+                        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 15 },
+                        { "FundRankingCategory": "GOLD", "ratio": 10 }
+                    ]
+                }
+            }
+        };
+
+        const hdfcFundsMapping = {
+            "CONSERVATIVE_HYBRID": {
+                "name": "HDFC Hybrid Debt Fund",
+                "category": "Hybrid"
+            },
+            "BALANCED_ADVANTAGE": {
+                "name": "HDFC Balanced Advantage Fund",
+                "category": "Hybrid"
+            },
+            "AGGRESSIVE_HYBRID": {
+                "name": "HDFC Hybrid Equity Fund",
+                "category": "Hybrid"
+            },
+            "LARGE_CAP": {
+                "name": "HDFC Top 100 Fund",
+                "category": "Equity"
+            },
+            "LARGE_MID_CAP": {
+                "name": "HDFC Large and Mid Cap Fund",
+                "category": "Equity"
+            },
+            "MULTICAP": {
+                "name": "HDFC Multi Cap Fund",
+                "category": "Equity"
+            },
+            "GOLD": {
+                "name": "HDFC Gold Fund",
+                "category": "Fund of Funds"
+            },
+            "ARBITRAGE": {
+                "name": "HDFC Arbitrage Fund",
+                "category": "Hybrid"
+            }
+        };
+
+        // Category taglines
+        const categoryTaglines = {
+            'vacation': 'Save for your dream getaway',
+            'home': 'Build your future home fund',
+            'education': "Invest in your child's future",
+            'retirement': 'Secure your golden years',
+            'car': 'Drive your dream vehicle',
+            'emergency': 'Stay prepared for uncertainties',
+            'custom': 'Achieve your financial goal'
+        };
+
+        // Map tenure to bucket
+        function mapTenureToBucket(tenure) {
+            if (tenure === 1) return '<1 Year';
+            if (tenure === 2) return '1-2 Years';
+            if (tenure === 3 || tenure === 4) return '2-4 Years';
+            return '4+ Years';
+        }
+
+        // Calculate approximate returns
+        function getApproximateReturns(schemes) {
+            const hasArbitrage = schemes.some(s => s.FundRankingCategory === 'ARBITRAGE');
+            const hasEquity = schemes.some(s =>
+                ['MULTICAP', 'LARGE_CAP', 'MID_CAP', 'SMALL_CAP', 'LARGE_MID_CAP'].includes(s.FundRankingCategory)
+            );
+
+            let equityWeight = 0;
+            schemes.forEach(s => {
+                if (['MULTICAP', 'LARGE_CAP', 'MID_CAP', 'SMALL_CAP', 'LARGE_MID_CAP', 'AGGRESSIVE_HYBRID'].includes(s.FundRankingCategory)) {
+                    equityWeight += s.ratio;
+                }
+            });
+
+            if (hasArbitrage && equityWeight < 30) return '7-9% p.a.';
+            if (hasArbitrage && equityWeight < 50) return '8-11% p.a.';
+            if (equityWeight < 30) return '8-10% p.a.';
+            if (equityWeight < 50) return '9-12% p.a.';
+            if (equityWeight < 70) return '10-13% p.a.';
+            return '11-15% p.a.';
+        }
+
+        // Load goal data from URL
+        function loadGoalData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const goalName = urlParams.get('name') || 'My Goal';
+            const category = urlParams.get('category') || 'custom';
+            const tenure = parseInt(urlParams.get('tenure')) || 5;
+            const icon = urlParams.get('icon') || 'flag';
+
+            // Update header
+            document.getElementById('goalTitle').textContent = goalName;
+
+            // Update hero card
+            document.getElementById('goalName').textContent = goalName;
+            document.getElementById('goalIcon').textContent = icon;
+            document.getElementById('goalTagline').textContent = categoryTaglines[category] || categoryTaglines['custom'];
+            document.getElementById('heroCard').className = `hero-card category-${category}`;
+
+            // Update stats
+            document.getElementById('tenureStat').textContent = `${tenure} ${tenure === 1 ? 'year' : 'years'}`;
+            document.getElementById('categoryStat').textContent = category.charAt(0).toUpperCase() + category.slice(1);
+
+            // Calculate basket recommendation
+            const bucket = mapTenureToBucket(tenure);
+            const basketId = basketsConfig.FundRecommendationMatrix['Medium Risk'][bucket];
+            const basket = basketsConfig.CoreBaskets[basketId];
+
+            // Update basket section
+            document.getElementById('basketName').textContent = `${basketId} - ${basket.basket_name}`;
+            document.getElementById('basketDescription').textContent = basket.description;
+            document.getElementById('basketReturns').textContent = getApproximateReturns(basket.schemes);
+            document.getElementById('basketDuration').textContent = `${tenure}+ years`;
+
+            // Render fund allocations
+            const fundAllocations = basket.schemes.map(scheme => {
+                const hdfcFund = hdfcFundsMapping[scheme.FundRankingCategory];
+                return {
+                    name: hdfcFund ? hdfcFund.name : scheme.FundRankingCategory,
+                    allocation: scheme.ratio,
+                    category: hdfcFund ? hdfcFund.category : 'Unknown'
+                };
+            });
+
+            renderFundAllocations(fundAllocations);
+
+            // Store goal and basket data for "Add Funds" action
+            window.goalData = {
+                name: goalName,
+                category: category,
+                tenure: tenure,
+                icon: icon,
+                basketId: basketId,
+                basket: basket,
+                fundAllocations: fundAllocations,
+                returns: getApproximateReturns(basket.schemes)
+            };
+        }
+
+        // Render fund allocations
+        function renderFundAllocations(fundAllocations) {
+            const fundAllocationSection = document.getElementById('fundAllocationSection');
+            fundAllocationSection.innerHTML = '';
+
+            fundAllocations.forEach((fund, index) => {
+                const allocationItem = document.createElement('div');
+                allocationItem.className = 'allocation-item';
+
+                const fundSlug = fund.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+                allocationItem.innerHTML = `
+                    <div class="allocation-card" onclick="navigateToFund('${fundSlug}')">
+                        <div class="allocation-card-bg" style="width: ${fund.allocation}%;"></div>
+                        <div class="allocation-content">
+                            <div class="allocation-left">
+                                <span class="fund-name">${fund.name}</span>
+                            </div>
+                            <div class="allocation-right">
+                                <span class="percentage">${fund.allocation}%</span>
+                                <span class="allocation-chevron">›</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                fundAllocationSection.appendChild(allocationItem);
+            });
+        }
+
+        // Navigate to fund details
+        function navigateToFund(fundSlug) {
+            window.location.href = 'fund-detail.html?fund=' + fundSlug;
+        }
+
+        // Add funds action
+        function addFunds() {
+            // Store goal and basket info in localStorage for add-funds page
+            localStorage.setItem('selectedBasket', JSON.stringify({
+                fromGoal: true,
+                basketId: window.goalData.basketId,
+                basketName: `${window.goalData.name} Basket`,
+                description: window.goalData.basket.description,
+                funds: window.goalData.fundAllocations,
+                returns: window.goalData.returns,
+                tenure: window.goalData.tenure,
+                goalName: window.goalData.name,
+                goalCategory: window.goalData.category,
+                goalIcon: window.goalData.icon
+            }));
+
+            window.location.href = 'add-funds.html';
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadGoalData();
+        });
+    </script>
+    <script src="assets/js/iphone-toggle.js"></script>
+</body>
+</html>

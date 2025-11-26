@@ -372,6 +372,9 @@ class TabManager {
                 name: 'NiveshPe Wealth',
                 amount: '₹6,200',
                 duration: '5 years',
+                category: 'custom',
+                tenure: 5,
+                iconName: 'trending_up',
                 funds: [
                     { name: 'Parag Parikh Flexi Cap' },
                     { name: 'Axis Bluechip Fund' },
@@ -384,6 +387,9 @@ class TabManager {
                 name: 'Bike Fund',
                 amount: '₹3,000',
                 duration: '2 years',
+                category: 'car',
+                tenure: 3,
+                iconName: 'directions_car',
                 funds: [
                     { name: 'Kotak Emerging Equity' }
                 ]
@@ -399,8 +405,11 @@ class TabManager {
                 `<span class="fund-chip">${fund.name}</span>`
             ).join('');
 
+            // Build goal detail URL
+            const goalUrl = `goal-detail.html?name=${encodeURIComponent(goal.name)}&category=${goal.category}&tenure=${goal.tenure}&icon=${goal.iconName}`;
+
             html += `
-                <div class="goals-card">
+                <div class="goals-card" onclick="window.location.href='${goalUrl}'" style="cursor: pointer;">
                     <div class="goals-header-row">
                         <div class="goals-name-section">
                             <div class="goals-icon" style="${goal.iconBg}">

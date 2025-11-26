@@ -1,0 +1,234 @@
+{
+  "Instant Withdrawal": {
+    "name": "Instant Withdrawal",
+    "description": "Ultra-short-term liquid basket designed for instant access to funds.",
+    "holding_period": "<1 year",
+    "schemes": [
+      {
+        "fund": "HDFC Liquid Fund",
+        "percentage": 100
+      }
+    ]
+  },
+  "Tax Saver (ELSS)": {
+    "name": "Tax Saver (ELSS)",
+    "description": "Equity-linked savings basket focused on tax-efficient long-term growth.",
+    "holding_period": "3 year lock-in",
+    "schemes": [
+      {
+        "fund": "HDFC Tax Saver Fund",
+        "percentage": 100
+      }
+    ]
+  },
+  "Islamic Halal & Ethical": {
+    "name": "Islamic Halal & Ethical",
+    "description": "Ethical and Shariah-compliant investment basket for value-driven investors.",
+    "holding_period": "3-5 years",
+    "schemes": [
+      {
+        "fund": "HDFC Ethical Fund",
+        "percentage": 90
+      },
+      {
+        "fund": "HDFC Gold Fund",
+        "percentage": 10
+      }
+    ]
+  },
+  "Safe & Stable – Better than FD": {
+    "name": "Safe & Stable – Better than FD",
+    "description": "Low-risk stable-income basket offering better-than-FD returns.",
+    "holding_period": "1-3 years",
+    "schemes": [
+      {
+        "fund": "HDFC Banking and PSU Debt Fund",
+        "percentage": 100
+      }
+    ]
+  },
+  "Long-Term Wealth Building (4+ yrs)": {
+    "name": "Long-Term Wealth Building (4+ yrs)",
+    "description": "Growth-oriented basket for long-term wealth creation.",
+    "holding_period": "4+ years",
+    "core_basket_used": "B2.4",
+    "schemes": [
+      {
+        "fund": "HDFC Large and Mid Cap Fund",
+        "percentage": 75
+      },
+      {
+        "fund": "HDFC Hybrid Equity Fund",
+        "percentage": 15
+      },
+      {
+        "fund": "HDFC Gold Fund",
+        "percentage": 10
+      }
+    ]
+  },
+  "Mid-Term Balanced Growth (>2 yrs)": {
+    "name": "Mid-Term Balanced Growth (>2 yrs)",
+    "description": "Balanced basket optimized for medium-term wealth growth.",
+    "holding_period": "2-4 years",
+    "core_basket_used": "B2.3",
+    "schemes": [
+      {
+        "fund": "HDFC Balanced Advantage Fund",
+        "percentage": 55
+      },
+      {
+        "fund": "HDFC Hybrid Debt Fund",
+        "percentage": 15
+      },
+      {
+        "fund": "HDFC Top 100 Fund",
+        "percentage": 20
+      },
+      {
+        "fund": "HDFC Gold Fund",
+        "percentage": 10
+      }
+    ]
+  },
+  "Short Holding Growth (1-2 yr)": {
+    "name": "Short Holding Growth (1-2 yr)",
+    "description": "Short-term growth basket for moderate-return opportunities.",
+    "holding_period": "1-2 years",
+    "core_basket_used": "B2.2",
+    "schemes": [
+      {
+        "fund": "HDFC Hybrid Debt Fund",
+        "percentage": 70
+      },
+      {
+        "fund": "HDFC Balanced Advantage Fund",
+        "percentage": 30
+      }
+    ]
+  },
+  "Low-tenure deposit (<1 yr)": {
+    "name": "Low-tenure deposit (<1 yr)",
+    "description": "Very short-term parking basket for high liquidity and safety.",
+    "holding_period": "<1 year",
+    "core_basket_used": "B2.1",
+    "schemes": [
+      {
+        "fund": "HDFC Arbitrage Fund",
+        "percentage": 75
+      },
+      {
+        "fund": "HDFC Hybrid Debt Fund",
+        "percentage": 25
+      }
+    ]
+  },
+  "Ideal for Students": {
+    "name": "Ideal for Students",
+    "description": "Beginner-friendly investment basket designed for students.",
+    "holding_period": "2-4 years",
+    "core_basket_used": "B2.3",
+    "schemes": [
+      {
+        "fund": "HDFC Balanced Advantage Fund",
+        "percentage": 55
+      },
+      {
+        "fund": "HDFC Hybrid Debt Fund",
+        "percentage": 15
+      },
+      {
+        "fund": "HDFC Top 100 Fund",
+        "percentage": 20
+      },
+      {
+        "fund": "HDFC Gold Fund",
+        "percentage": 10
+      }
+    ]
+  },
+  "Ideal for Housewives": {
+    "name": "Ideal for Housewives",
+    "description": "Stable and simple investment basket tailored for households.",
+    "holding_period": "3-5 years",
+    "core_basket_used": "B2.4",
+    "schemes": [
+      {
+        "fund": "HDFC Large and Mid Cap Fund",
+        "percentage": 75
+      },
+      {
+        "fund": "HDFC Hybrid Equity Fund",
+        "percentage": 15
+      },
+      {
+        "fund": "HDFC Gold Fund",
+        "percentage": 10
+      }
+    ]
+  },
+  "Ideal for Senior Citizens": {
+    "name": "Ideal for Senior Citizens",
+    "description": "Safe income-oriented basket for senior citizens.",
+    "holding_period": "3-5 years",
+    "core_basket_used": "B2.4",
+    "schemes": [
+      {
+        "fund": "HDFC Large and Mid Cap Fund",
+        "percentage": 75
+      },
+      {
+        "fund": "HDFC Hybrid Equity Fund",
+        "percentage": 15
+      },
+      {
+        "fund": "HDFC Gold Fund",
+        "percentage": 10
+      }
+    ]
+  },
+  "Ideal for Salaried People": {
+    "name": "Ideal for Salaried People",
+    "description": "Long-term wealth creation basket designed for salaried earners.",
+    "holding_period": "5+ years",
+    "core_basket_used": "B2.4",
+    "schemes": [
+      {
+        "fund": "HDFC Large and Mid Cap Fund",
+        "percentage": 75
+      },
+      {
+        "fund": "HDFC Hybrid Equity Fund",
+        "percentage": 15
+      },
+      {
+        "fund": "HDFC Gold Fund",
+        "percentage": 10
+      }
+    ]
+  },
+  "Family Goals Fund": {
+    "name": "Family Goals Fund (Marriage, Education, Home, etc)",
+    "description": "Goal-based basket ideal for family milestones and long-term planning.",
+    "holding_period": "2-5 years",
+    "core_basket_used": "B2.3",
+    "schemes": [
+      {
+        "fund": "HDFC Balanced Advantage Fund",
+        "percentage": 55
+      },
+      {
+        "fund": "HDFC Hybrid Debt Fund",
+        "percentage": 15
+      },
+      {
+        "fund": "HDFC Top 100 Fund",
+        "percentage": 20
+      },
+      {
+        "fund": "HDFC Gold Fund",
+        "percentage": 10
+      }
+    ]
+  }
+}
