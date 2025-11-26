@@ -1484,17 +1484,14 @@
                     </div>
 
                     <!-- Header -->
-                    <div class="header">
-                        <button class="back-btn" onclick="window.location.href='index.html'">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-                            </svg>
-                        </button>
+                    <div class="header" style="justify-content: center; position: relative;">
                         <div class="header-title">Portfolio</div>
-                        <div class="header-actions">
-                            <button class="icon-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                        <div class="header-actions" style="position: absolute; right: 20px;">
+                            <button class="icon-btn" onclick="window.location.href='menu.html'">
+                                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="44" height="44" rx="12" fill="#F1F5F9"/>
+                                    <circle cx="22" cy="18" r="5" stroke="#2563EB" stroke-width="2" fill="none"/>
+                                    <path d="M14 32C14 28 17 25 22 25C27 25 30 28 30 32" stroke="#2563EB" stroke-width="2" stroke-linecap="round" fill="none"/>
                                 </svg>
                             </button>
                         </div>
@@ -1572,7 +1569,7 @@
                         </div>
 
                         <!-- Portfolio Summary Card (NiveshPe Insights) -->
-                        <div class="portfolio-summary-card">
+                        <div class="portfolio-summary-card" id="insights">
                             <div class="summary-header">
                                 <div class="summary-title"><span class="nivesh">Nivesh</span><span class="pe">Pe</span> Insights</div>
                                 <span class="material-symbols-outlined">info</span>
@@ -1786,7 +1783,7 @@
 
                             <div class="breakdown-items">
                                 <!-- Allocation -->
-                                <div class="breakdown-item" id="allocationItem">
+                                <div class="breakdown-item expanded" id="allocationItem">
                                     <div class="breakdown-header" onclick="toggleBreakdown('allocationItem')">
                                         <div class="breakdown-icon">
                                             <span class="material-symbols-outlined">view_agenda</span>
@@ -1824,7 +1821,7 @@
                                 </div>
 
                                 <!-- Distribution -->
-                                <div class="breakdown-item" id="distributionItem">
+                                <div class="breakdown-item expanded" id="distributionItem">
                                     <div class="breakdown-header" onclick="toggleBreakdown('distributionItem')">
                                         <div class="breakdown-icon">
                                             <span class="material-symbols-outlined">pie_chart</span>
@@ -1969,7 +1966,7 @@
                                 END COMMENTED OUT -->
 
                                 <!-- Overlap Calculator -->
-                                <div class="breakdown-item" id="overlapItem">
+                                <div class="breakdown-item expanded" id="overlapItem">
                                     <div class="breakdown-header" onclick="toggleBreakdown('overlapItem')">
                                         <div class="breakdown-icon">
                                             <span class="material-symbols-outlined">join_inner</span>
