@@ -1,0 +1,106 @@
+{
+  "CONSERVATIVE_HYBRID": {
+    "name": "HDFC Hybrid Debt Fund",
+    "amfiCode": "102147",
+    "planName": "HDFC Hybrid Debt Fund - Growth Plan",
+    "navAmount": "83.4110",
+    "navDate": "25 Nov, 2025",
+    "category": "Hybrid"
+  },
+  "BALANCED_ADVANTAGE": {
+    "name": "HDFC Balanced Advantage Fund",
+    "amfiCode": "100119",
+    "planName": "HDFC Balanced Advantage Fund - Regular Plan - Growth Option",
+    "navAmount": "531.8890",
+    "navDate": "25 Nov, 2025",
+    "category": "Hybrid"
+  },
+  "AGGRESSIVE_HYBRID": {
+    "name": "HDFC Hybrid Equity Fund",
+    "amfiCode": "102948",
+    "planName": "HDFC Hybrid Equity Fund - Regular Plan - Growth Option",
+    "navAmount": "120.4180",
+    "navDate": "25 Nov, 2025",
+    "category": "Hybrid"
+  },
+  "LARGE_CAP": {
+    "name": "HDFC Top 100 Fund",
+    "amfiCode": "102000",
+    "planName": "HDFC Top 100 Fund - Regular Plan - Growth Option",
+    "navAmount": "1,167.6750",
+    "navDate": "25 Nov, 2025",
+    "category": "Equity"
+  },
+  "MID_CAP": {
+    "name": "HDFC Mid Cap Fund",
+    "amfiCode": "105758",
+    "planName": "HDFC Mid Cap Fund - Growth Option",
+    "navAmount": "203.0780",
+    "navDate": "25 Nov, 2025",
+    "category": "Equity"
+  },
+  "SMALL_CAP": {
+    "name": "HDFC Small Cap Fund",
+    "amfiCode": "130502",
+    "planName": "HDFC Small Cap Fund - Regular Plan - Growth Option",
+    "navAmount": "140.1810",
+    "navDate": "25 Nov, 2025",
+    "category": "Equity"
+  },
+  "LARGE_MID_CAP": {
+    "name": "HDFC Large and Mid Cap Fund",
+    "amfiCode": "130496",
+    "planName": "HDFC Large and Mid Cap Fund - Regular Plan - Growth Option",
+    "navAmount": "347.9760",
+    "navDate": "25 Nov, 2025",
+    "category": "Equity"
+  },
+  "MULTICAP": {
+    "name": "HDFC Multi Cap Fund",
+    "amfiCode": "149366",
+    "planName": "HDFC Multi Cap Fund - Regular Plan - Growth Option",
+    "navAmount": "19.2260",
+    "navDate": "25 Nov, 2025",
+    "category": "Equity"
+  },
+  "GOLD": {
+    "name": "HDFC Gold Fund",
+    "amfiCode": "115934",
+    "planName": "HDFC Gold Fund - Regular Plan - Growth Option",
+    "navAmount": "37.2485",
+    "navDate": "25 Nov, 2025",
+    "category": "Fund of Funds"
+  },
+  "ARBITRAGE": {
+    "name": "HDFC Arbitrage Fund",
+    "amfiCode": "106796",
+    "planName": "HDFC Arbitrage Fund - Regular Plan - Retail Plan Growth Option",
+    "navAmount": "30.3700",
+    "navDate": "25 Nov, 2025",
+    "category": "Hybrid"
+  },
+  "LIQUID": {
+    "name": "HDFC Liquid Fund",
+    "amfiCode": "100868",
+    "planName": "HDFC Liquid Fund - Regular Plan - Growth Option",
+    "navAmount": "5,241.7371",
+    "navDate": "25 Nov, 2025",
+    "category": "Debt"
+  },
+  "BANKING_PSU_DEBT": {
+    "name": "HDFC Banking and PSU Debt Fund",
+    "amfiCode": "128628",
+    "planName": "HDFC Banking and PSU Debt Fund - Regular Plan - Growth Option",
+    "navAmount": "23.6161",
+    "navDate": "25 Nov, 2025",
+    "category": "Debt"
+  },
+  "ELSS": {
+    "name": "HDFC Tax Saver Fund",
+    "amfiCode": "100055",
+    "planName": "HDFC Tax Saver - Regular Plan - Growth Option",
+    "navAmount": "N/A",
+    "navDate": "25 Nov, 2025",
+    "category": "Equity"
+  }
+}

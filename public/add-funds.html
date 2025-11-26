@@ -527,9 +527,9 @@
             border-color: var(--color-blue);
         }
 
-        /* Pot Selection */
-        .pot-section {
-            margin-bottom: var(--space-xl);
+        /* Goal Selection */
+        .goal-section {
+            margin-bottom: var(--space-lg);
         }
 
         .section-label {
@@ -544,9 +544,9 @@
             font-weight: 500;
         }
 
-        .pot-selection {
+        .goal-selection {
             display: flex;
-            gap: var(--space-sm);
+            gap: 10px;
             overflow-x: auto;
             padding-bottom: var(--space-xs);
             scroll-behavior: smooth;
@@ -555,59 +555,111 @@
             margin-bottom: var(--space-sm);
         }
 
-        .pot-selection::-webkit-scrollbar {
+        .goal-selection::-webkit-scrollbar {
             display: none;
         }
 
-        .pot-btn {
-            padding: 10px 16px;
-            border-radius: var(--radius-full);
-            border: 2px solid var(--color-border);
+        .goal-card-compact {
             background: var(--color-card);
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            min-width: 120px;
+            max-width: 140px;
+            flex-shrink: 0;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: var(--shadow-sm);
-            white-space: nowrap;
-            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .pot-btn.selected {
+        .goal-card-compact:active {
+            transform: scale(0.95);
+        }
+
+        .goal-card-compact.selected {
             border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+        }
+
+        .goal-card-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-green);
+        }
+
+        .goal-card-compact.selected .goal-card-icon {
             background: rgba(37, 99, 235, 0.1);
             color: var(--color-blue);
         }
 
-        .add-pot-btn {
-            padding: 10px 16px;
-            border-radius: var(--radius-full);
-            border: 2px dashed var(--color-border);
-            background: var(--color-surface);
+        .goal-card-name {
             font-size: 13px;
             font-weight: 600;
-            color: var(--color-text-secondary);
+            color: var(--color-text-primary);
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .add-goal-card {
+            background: var(--color-surface);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            min-width: 100px;
+            flex-shrink: 0;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: var(--shadow-sm);
-            white-space: nowrap;
-            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
-        .add-pot-btn:active {
+        .add-goal-card:active {
             border-color: var(--color-green);
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--color-green);
+            background: rgba(16, 185, 129, 0.05);
+            transform: scale(0.95);
         }
 
-        .pot-scroll-indicators {
+        .add-goal-card-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--color-green);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .add-goal-card-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-green);
+            text-align: center;
+        }
+
+        .goal-scroll-indicators {
             display: flex;
             justify-content: center;
             gap: 6px;
         }
 
-        .pot-scroll-dot {
+        .goal-scroll-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
@@ -616,10 +668,21 @@
             cursor: pointer;
         }
 
-        .pot-scroll-dot.active {
+        .goal-scroll-dot.active {
             background: var(--color-green);
             width: 20px;
             border-radius: 4px;
+        }
+
+        .goal-card-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-green);
+            margin-top: 4px;
+        }
+
+        .goal-card-compact.selected .goal-card-amount {
+            color: var(--color-blue);
         }
 
         /* Fund Selection */
@@ -655,6 +718,170 @@
             font-weight: 600;
             color: var(--color-blue);
             flex: 1;
+        }
+
+        /* Assign Goal Section */
+        .assign-goal-section {
+            margin: 12px 0;
+        }
+
+        .assign-goal-card {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .assign-goal-card:active {
+            opacity: 0.6;
+        }
+
+        .assign-goal-icon {
+            display: none;
+        }
+
+        .assign-goal-content {
+            flex: initial;
+        }
+
+        .assign-goal-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-blue);
+        }
+
+        .assign-goal-subtitle {
+            display: none;
+        }
+
+        .assign-goal-arrow {
+            display: flex;
+            align-items: center;
+        }
+
+        .assign-goal-arrow svg {
+            color: var(--color-blue);
+            opacity: 1;
+        }
+
+        .basket-card {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .basket-header {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .basket-header-left {
+            flex: 1;
+            display: none;  /* Hide basket title and description */
+        }
+
+        .basket-header-right {
+            display: none;  /* Hide returns - now shown in funds section header */
+        }
+
+        /* Show basket title as heading when coming from create-goal */
+        .basket-card-with-goal .basket-header {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .basket-card-with-goal .basket-header-left {
+            display: block;
+        }
+
+        .basket-card-with-goal .basket-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0;
+        }
+
+        .basket-card-with-goal .basket-description {
+            display: none;
+        }
+
+        .basket-returns-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .basket-returns-value {
+            font-size: 13px;
+            font-weight: 700;
+            color: #10B981;
+        }
+
+        .basket-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .basket-description {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            line-height: 1.4;
+        }
+
+        .basket-funds {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .basket-fund-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .fund-info {
+            flex: 1;
+        }
+
+        .fund-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .fund-category {
+            font-size: 11px;
+            color: var(--color-text-muted);
+        }
+
+        .fund-allocation {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-blue);
+            margin-left: var(--space-sm);
+        }
+
+        .returns-green {
+            color: var(--color-green);
+            font-weight: 600;
         }
 
         .change-indicator {
@@ -863,8 +1090,532 @@
             }
         }
 
-        .investment-tabs, .amount-section, .pot-section, .fund-section {
+        .investment-tabs, .amount-section, .goal-section, .fund-section {
             animation: slideInUp 0.5s ease-out;
+        }
+
+        /* Progress Bar Fund Items (for create-goal flow) */
+        .basket-fund-item-progress {
+            margin-bottom: 8px;
+        }
+
+        .fund-progress-card {
+            position: relative;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            overflow: hidden;
+            min-height: 54px;
+        }
+
+        .fund-progress-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: #10B981;
+            opacity: 0.12;
+            border-radius: var(--radius-sm);
+            transition: width 0.5s ease;
+        }
+
+        .fund-progress-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .fund-progress-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .fund-progress-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.3;
+        }
+
+        .fund-progress-category {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .fund-progress-right {
+            padding-left: 12px;
+        }
+
+        .fund-progress-percentage {
+            font-size: 14px;
+            font-weight: 700;
+            color: #3B82F6;
+        }
+
+        /* Basket Stats */
+        .basket-stats {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Basket Stats Only (for create-goal flow - no border top) */
+        .basket-stats-only {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 8px 0;
+        }
+
+        .basket-stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .basket-stat-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .basket-stat-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* Fund Capsules Section (horizontal scrollable funds) */
+        .funds-capsules-section {
+            margin-top: 12px;
+        }
+
+        .funds-section-header {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .fund-capsules-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            scroll-behavior: smooth;
+            padding-bottom: 4px;
+        }
+
+        .fund-capsules-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Scroll Indicator for Fund Capsules */
+        .capsules-scroll-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .capsule-scroll-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .capsule-scroll-dot.active {
+            background: #3B82F6;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Customization Link */
+        .customize-link-container {
+            margin-top: 12px;
+            text-align: center;
+            animation: slideInUp 0.5s ease-out;
+        }
+
+        .customize-link {
+            background: transparent;
+            border: none;
+            color: var(--color-blue);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+        }
+
+        .customize-link:active {
+            background: rgba(37, 99, 235, 0.1);
+            transform: scale(0.98);
+        }
+
+        /* Overlay Backdrop & Modal */
+        .overlay-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .overlay-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        .drag-handle {
+            padding: 12px 0;
+            display: flex;
+            justify-content: center;
+            cursor: grab;
+        }
+
+        .drag-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 9999px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(0); }
+            to { transform: translateY(100%); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(37, 99, 235, 0.1);
+            border-top-color: var(--color-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close-btn:active {
+            background: var(--color-border);
+            transform: scale(0.95);
+        }
+
+        .modal-header-custom {
+            padding: 16px 20px 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal-title-custom {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Customization Options */
+        .customization-options {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-card {
+            background: var(--color-card);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 80px;
+        }
+
+        .option-card:active {
+            transform: scale(0.98);
+            border-color: var(--color-blue);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .option-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .option-description {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        .option-arrow {
+            color: var(--color-text-muted);
+            flex-shrink: 0;
+        }
+
+        /* Basket & Fund List Containers */
+        .basket-list-container,
+        .fund-list-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            scrollbar-width: none;
+        }
+
+        .basket-list-container::-webkit-scrollbar,
+        .fund-list-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Basket Item Card */
+        .basket-item-card {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 2px solid #BFDBFE;
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .basket-item-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .basket-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .basket-item-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .basket-item-returns {
+            font-size: 14px;
+            font-weight: 700;
+            color: #10B981;
+        }
+
+        .basket-item-description {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .basket-item-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 11px;
+            color: var(--color-text-muted);
+        }
+
+        /* Fund Item Card */
+        .fund-item-card {
+            background: white;
+            border: 2px solid var(--color-border);
+            border-left: 4px solid var(--color-blue);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .fund-item-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .fund-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+        }
+
+        .fund-item-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            flex: 1;
+        }
+
+        .fund-item-category {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .fund-item-nav {
+            display: flex;
+            gap: 4px;
+            align-items: baseline;
+            font-size: 11px;
+            color: var(--color-text-muted);
+        }
+
+        .fund-item-nav-value {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .fund-capsule {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            flex-shrink: 0;
+            cursor: pointer;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .fund-capsule:active {
+            background: var(--color-surface);
+            transform: scale(0.98);
+        }
+
+        .fund-name-text {
+            flex: 1;
+            white-space: nowrap;
+            line-height: 1.4;
+        }
+
+        .capsule-percentage {
+            font-size: 13px;
+            font-weight: 700;
+            color: #3B82F6;
+            flex-shrink: 0;
+            margin-left: 8px;
         }
     </style>
     <link rel="stylesheet" href="assets/css/iphone-toggle.css">
@@ -919,9 +1670,9 @@
                         <!-- SIP Frequency -->
                         <div class="frequency-section" id="sipFrequency">
                             <div class="frequency-tabs">
-                                <button class="frequency-btn active" data-frequency="daily">Daily</button>
+                                <button class="frequency-btn" data-frequency="daily">Daily</button>
                                 <button class="frequency-btn" data-frequency="weekly">Weekly</button>
-                                <button class="frequency-btn" data-frequency="monthly">Monthly</button>
+                                <button class="frequency-btn active" data-frequency="monthly">Monthly</button>
                             </div>
                             
                             <!-- Timing Display -->
@@ -942,14 +1693,14 @@
                                 <div class="amount-display">
                                     <span class="currency-symbol">₹</span>
                                     <div class="amount-input-wrapper">
-                                        <input type="tel" class="amount-input" id="amountInput" placeholder="100" value="100" max="1000000">
+                                        <input type="tel" class="amount-input" id="amountInput" placeholder="5000" value="5000" max="1000000">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Compact Expected Returns Card -->
-                        <div class="projection-card compact">
+                        <!-- <div class="projection-card compact" id="projectionCard">
                             <div class="projection-header">
                                 <div class="projection-title">
                                     Expected Returns
@@ -960,7 +1711,7 @@
                                     <button class="time-btn active" data-years="5">5Y</button>
                                 </div>
                             </div>
-                            
+
                             <div class="projection-main compact">
                                 <div class="projection-amount" id="projectionAmount">₹ 1,56,067</div>
                                 <div class="projection-growth" id="projectionGrowth">
@@ -970,37 +1721,82 @@
                                     +₹31,067 (24.9%)
                                 </div>
                             </div>
+                        </div> -->
+
+                        <!-- Assign Goal Link (for direct invest) -->
+                        <div class="assign-goal-section" id="assignGoalSection" style="display: none;">
+                            <div class="assign-goal-card" onclick="window.location.href='create-goal.html'">
+                                <div class="assign-goal-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14h-3v3h-2v-3H8v-2h3v-3h2v3h3v2zm-3-7V3.5L18.5 9H13z"/>
+                                    </svg>
+                                </div>
+                                <div class="assign-goal-content">
+                                    <div class="assign-goal-title">Assign a goal</div>
+                                    <div class="assign-goal-subtitle">Create a financial goal for your investment</div>
+                                </div>
+                                <div class="assign-goal-arrow">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Pot Selection -->
-                        <div class="pot-section">
-                            <div class="pot-selection" id="potScroll">
-                                <button class="pot-btn selected">Emergency Funds</button>
-                                <button class="pot-btn">Bike Funds</button>
-                                <button class="pot-btn">Home Fund</button>
-                                <button class="pot-btn">Vacation Fund</button>
-                                <button class="add-pot-btn">
-                                    + Add Pot
-                                </button>
-                            </div>
-                            <div class="pot-scroll-indicators">
-                                <div class="pot-scroll-dot active"></div>
-                                <div class="pot-scroll-dot"></div>
-                                <div class="pot-scroll-dot"></div>
-                            </div>
-                        </div>
+                        <!-- Goal Selection -->
+                        <div class="goal-section" id="goalSection">
+                            <div class="goal-selection" id="goalScroll">
+                                <!-- Goal 1: NiveshPe Wealth (Default Selected) -->
+                                <div class="goal-card-compact selected" data-goal="NiveshPe Wealth" data-tenure="5">
+                                    <div class="goal-card-icon" style="background: white; padding: 4px;">
+                                        <img src="assets/favicon.png" alt="NiveshPe" style="width: 16px; height: 16px; object-fit: contain;">
+                                    </div>
+                                    <div class="goal-card-name">NiveshPe Wealth</div>
+                                    <div class="goal-card-amount">₹6,200</div>
+                                </div>
 
-                        <!-- Fund Selection -->
-                        <div class="fund-section">
-                            <div class="fund-card" onclick="changeFund()">
-                                <div class="fund-content">
-                                    <div class="fund-title">SBI Hybrid Mutual Funds</div>
-                                    <div class="change-indicator">
-                                        Change
+                                <!-- Goal 2: Bike Fund -->
+                                <div class="goal-card-compact" data-goal="Bike Fund" data-tenure="2">
+                                    <div class="goal-card-icon">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                                            <path d="M5,11L6.5,6.5H17.5L19,11M17.5,16A1.5,1.5 0 0,1 16,14.5A1.5,1.5 0 0,1 17.5,13A1.5,1.5 0 0,1 19,14.5A1.5,1.5 0 0,1 17.5,16M6.5,16A1.5,1.5 0 0,1 5,14.5A1.5,1.5 0 0,1 6.5,13A1.5,1.5 0 0,1 8,14.5A1.5,1.5 0 0,1 6.5,16M18.92,6C18.72,5.42 18.16,5 17.5,5H6.5C5.84,5 5.28,5.42 5.08,6L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6Z"/>
                                         </svg>
                                     </div>
+                                    <div class="goal-card-name">Bike Fund</div>
+                                    <div class="goal-card-amount">₹3,000</div>
+                                </div>
+
+                                <!-- Add Goal Card -->
+                                <div class="add-goal-card">
+                                    <div class="add-goal-card-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="add-goal-card-text">Add Goal</div>
+                                </div>
+                            </div>
+                            <div class="goal-scroll-indicators">
+                                <div class="goal-scroll-dot active"></div>
+                                <div class="goal-scroll-dot"></div>
+                                <div class="goal-scroll-dot"></div>
+                            </div>
+                        </div>
+
+                        <!-- Fund Selection / Basket Recommendation -->
+                        <div class="fund-section" id="fundSection">
+                            <div class="basket-card">
+                                <div class="basket-header">
+                                    <div class="basket-header-left">
+                                        <div class="basket-title" id="basketTitle">Recommended Basket</div>
+                                        <div class="basket-description" id="basketDescription">Loading...</div>
+                                    </div>
+                                    <div class="basket-header-right" id="basketReturns">
+                                        <!-- Returns will be populated dynamically -->
+                                    </div>
+                                </div>
+                                <div class="basket-funds" id="basketFunds">
+                                    <!-- Funds will be populated dynamically -->
                                 </div>
                             </div>
                         </div>
@@ -1075,7 +1871,129 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Customization Overlay -->
+            <div class="overlay-backdrop" id="customizationBackdrop" style="display: none;">
+                <div class="overlay-modal" id="customizationModal">
+                    <!-- Drag Handle -->
+                    <div class="drag-handle">
+                        <div class="drag-bar"></div>
+                    </div>
+
+                    <!-- Close Button -->
+                    <button class="modal-close-btn" onclick="closeCustomizationOverlay()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Modal Header -->
+                    <div class="modal-header-custom">
+                        <h3 class="modal-title-custom">Customize Your Investment</h3>
+                        <p class="modal-subtitle">Choose how you want to invest</p>
+                    </div>
+
+                    <!-- Selection Options -->
+                    <div class="customization-options">
+                        <div class="option-card" onclick="openBasketSelection()">
+                            <div class="option-icon" style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); color: #3B82F6;">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                                </svg>
+                            </div>
+                            <div class="option-content">
+                                <h4 class="option-title">Choose from NiveshPe Baskets</h4>
+                                <p class="option-description">Select from 15 expertly curated fund portfolios</p>
+                            </div>
+                            <div class="option-arrow">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="option-card" onclick="openFundSelection()">
+                            <div class="option-icon" style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); color: #10B981;">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <div class="option-content">
+                                <h4 class="option-title">Choose Individual Fund</h4>
+                                <p class="option-description">Pick a single fund with 100% allocation</p>
+                            </div>
+                            <div class="option-arrow">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basket Selection Overlay -->
+            <div class="overlay-backdrop" id="basketSelectionBackdrop" style="display: none;">
+                <div class="overlay-modal" id="basketSelectionModal">
+                    <!-- Drag Handle -->
+                    <div class="drag-handle">
+                        <div class="drag-bar"></div>
+                    </div>
+
+                    <!-- Close Button -->
+                    <button class="modal-close-btn" onclick="closeBasketSelection()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Modal Header -->
+                    <div class="modal-header-custom">
+                        <h3 class="modal-title-custom">Choose a Basket</h3>
+                        <p class="modal-subtitle">Select from pre-built portfolios</p>
+                    </div>
+
+                    <!-- Basket List -->
+                    <div class="basket-list-container" id="basketListContainer">
+                        <!-- Baskets will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fund Selection Overlay -->
+            <div class="overlay-backdrop" id="fundSelectionBackdrop" style="display: none;">
+                <div class="overlay-modal" id="fundSelectionModal">
+                    <!-- Drag Handle -->
+                    <div class="drag-handle">
+                        <div class="drag-bar"></div>
+                    </div>
+
+                    <!-- Close Button -->
+                    <button class="modal-close-btn" onclick="closeFundSelection()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Modal Header -->
+                    <div class="modal-header-custom">
+                        <h3 class="modal-title-custom">Choose a Fund</h3>
+                        <p class="modal-subtitle">100% allocation to selected fund</p>
+                    </div>
+
+                    <!-- Fund List -->
+                    <div class="fund-list-container" id="fundListContainer">
+                        <!-- Funds will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-spinner"></div>
+        </div>
+
         <!-- iPhone Home Indicator -->
         <div class="iphone-home-indicator"></div>
     </div>
@@ -1088,18 +2006,291 @@
             const tabBtns = document.querySelectorAll('.tab-btn');
             const frequencyBtns = document.querySelectorAll('.frequency-btn');
             const amountBtns = document.querySelectorAll('.amount-btn');
-            const potBtns = document.querySelectorAll('.pot-btn');
+            const goalCards = document.querySelectorAll('.goal-card-compact');
             const sipFrequency = document.getElementById('sipFrequency');
-            
+
             let currentType = 'sip';
             let currentFrequency = 'daily';
             let currentAmount = 100;
             let currentDay = 'monday';
             let currentDate = 5;
-            let currentPot = 'Emergency Funds';
+            let currentGoal = 'NiveshPe Wealth';  // Default to NiveshPe Wealth
+            let currentGoalTenure = 5;              // Default to 5+ years
+
+            // Load basket recommendation data
+            let claudeJsonData = null;
+            let hdfcFundsMapping = null;
+
+            // Customization state
+            let customizationActive = false;
+            let selectedCustomBasket = null;
+            let selectedCustomFund = null;
+
+            // Basket data for customization (15 NiveshPe baskets)
+            const BASKETS_DATA = {
+                'balanced-returns': {
+                    id: 'balanced-returns',
+                    name: 'Balanced Returns',
+                    description: 'Best for balanced risk-reward with steady returns',
+                    returns: '12-15% p.a.',
+                    holdingPeriod: '2-3 years',
+                    funds: [
+                        { name: 'HDFC Balanced Advantage Fund', allocation: 50, category: 'Hybrid' },
+                        { name: 'HDFC Hybrid Equity Fund', allocation: 30, category: 'Hybrid' },
+                        { name: 'HDFC Top 100 Fund', allocation: 10, category: 'Equity' },
+                        { name: 'HDFC Gold Fund', allocation: 10, category: 'Fund of Funds' }
+                    ]
+                },
+                'instant-withdrawal': {
+                    id: 'instant-withdrawal',
+                    name: 'Instant Withdrawal',
+                    description: 'Liquid funds for quick access to money',
+                    returns: '6-8% p.a.',
+                    holdingPeriod: '< 1 year',
+                    funds: [
+                        { name: 'HDFC Liquid Fund', allocation: 100, category: 'Debt' }
+                    ]
+                },
+                'long-term-wealth': {
+                    id: 'long-term-wealth',
+                    name: 'Long-Term Wealth Building',
+                    description: 'Growth-oriented basket for long-term wealth creation',
+                    returns: '15-18% p.a.',
+                    holdingPeriod: '5+ years',
+                    funds: [
+                        { name: 'HDFC Large and Mid Cap Fund', allocation: 75, category: 'Equity' },
+                        { name: 'HDFC Hybrid Equity Fund', allocation: 15, category: 'Hybrid' },
+                        { name: 'HDFC Gold Fund', allocation: 10, category: 'Fund of Funds' }
+                    ]
+                },
+                'tax-saver': {
+                    id: 'tax-saver',
+                    name: 'Tax Saver (ELSS)',
+                    description: 'Tax-saving equity funds under Section 80C',
+                    returns: '12-15% p.a.',
+                    holdingPeriod: '3+ years (Lock-in)',
+                    funds: [
+                        { name: 'HDFC Tax Saver Fund', allocation: 100, category: 'Equity' }
+                    ]
+                },
+                'safe-stable-fd': {
+                    id: 'safe-stable-fd',
+                    name: 'Safe & Stable (FD Alternative)',
+                    description: 'Conservative debt funds for stability',
+                    returns: '7-9% p.a.',
+                    holdingPeriod: '1-2 years',
+                    funds: [
+                        { name: 'HDFC Banking and PSU Debt Fund', allocation: 50, category: 'Debt' },
+                        { name: 'HDFC Short Term Debt Fund', allocation: 50, category: 'Debt' }
+                    ]
+                },
+                'mid-term-balanced': {
+                    id: 'mid-term-balanced',
+                    name: 'Mid-Term Balanced',
+                    description: 'Balanced portfolio for 2-4 year goals',
+                    returns: '10-12% p.a.',
+                    holdingPeriod: '2-4 years',
+                    funds: [
+                        { name: 'HDFC Balanced Advantage Fund', allocation: 60, category: 'Hybrid' },
+                        { name: 'HDFC Hybrid Debt Fund', allocation: 40, category: 'Hybrid' }
+                    ]
+                },
+                'short-holding': {
+                    id: 'short-holding',
+                    name: 'Short-Term Growth',
+                    description: 'Conservative growth for short holding periods',
+                    returns: '8-10% p.a.',
+                    holdingPeriod: '1-2 years',
+                    funds: [
+                        { name: 'HDFC Hybrid Debt Fund', allocation: 70, category: 'Hybrid' },
+                        { name: 'HDFC Balanced Advantage Fund', allocation: 30, category: 'Hybrid' }
+                    ]
+                },
+                'low-tenure-deposit': {
+                    id: 'low-tenure-deposit',
+                    name: 'Low-Tenure Deposit',
+                    description: 'Safe investment alternative to bank deposits',
+                    returns: '6-7% p.a.',
+                    holdingPeriod: '6-12 months',
+                    funds: [
+                        { name: 'HDFC Liquid Fund', allocation: 60, category: 'Debt' },
+                        { name: 'HDFC Banking and PSU Debt Fund', allocation: 40, category: 'Debt' }
+                    ]
+                },
+                'ideal-students': {
+                    id: 'ideal-students',
+                    name: 'Ideal for Students',
+                    description: 'Long-term growth portfolio for students',
+                    returns: '14-16% p.a.',
+                    holdingPeriod: '5+ years',
+                    funds: [
+                        { name: 'HDFC Multi Cap Fund', allocation: 50, category: 'Equity' },
+                        { name: 'HDFC Large and Mid Cap Fund', allocation: 30, category: 'Equity' },
+                        { name: 'HDFC Balanced Advantage Fund', allocation: 20, category: 'Hybrid' }
+                    ]
+                },
+                'ideal-housewives': {
+                    id: 'ideal-housewives',
+                    name: 'Ideal for Housewives',
+                    description: 'Balanced portfolio for homemakers',
+                    returns: '10-12% p.a.',
+                    holdingPeriod: '3-5 years',
+                    funds: [
+                        { name: 'HDFC Balanced Advantage Fund', allocation: 50, category: 'Hybrid' },
+                        { name: 'HDFC Hybrid Debt Fund', allocation: 30, category: 'Hybrid' },
+                        { name: 'HDFC Gold Fund', allocation: 20, category: 'Fund of Funds' }
+                    ]
+                },
+                'ideal-senior-citizens': {
+                    id: 'ideal-senior-citizens',
+                    name: 'Ideal for Senior Citizens',
+                    description: 'Conservative portfolio with regular income focus',
+                    returns: '7-9% p.a.',
+                    holdingPeriod: '2-4 years',
+                    funds: [
+                        { name: 'HDFC Banking and PSU Debt Fund', allocation: 60, category: 'Debt' },
+                        { name: 'HDFC Hybrid Debt Fund', allocation: 40, category: 'Hybrid' }
+                    ]
+                },
+                'ideal-salaried-people': {
+                    id: 'ideal-salaried-people',
+                    name: 'Ideal for Salaried People',
+                    description: 'Growth-focused portfolio for regular investors',
+                    returns: '12-15% p.a.',
+                    holdingPeriod: '4+ years',
+                    funds: [
+                        { name: 'HDFC Large and Mid Cap Fund', allocation: 40, category: 'Equity' },
+                        { name: 'HDFC Balanced Advantage Fund', allocation: 30, category: 'Hybrid' },
+                        { name: 'HDFC Multi Cap Fund', allocation: 20, category: 'Equity' },
+                        { name: 'HDFC Gold Fund', allocation: 10, category: 'Fund of Funds' }
+                    ]
+                },
+                'real-estate-fund': {
+                    id: 'real-estate-fund',
+                    name: 'Real Estate Fund',
+                    description: 'Diversified portfolio for real estate goals',
+                    returns: '11-14% p.a.',
+                    holdingPeriod: '5+ years',
+                    funds: [
+                        { name: 'HDFC Large and Mid Cap Fund', allocation: 60, category: 'Equity' },
+                        { name: 'HDFC Multi Cap Fund', allocation: 30, category: 'Equity' },
+                        { name: 'HDFC Gold Fund', allocation: 10, category: 'Fund of Funds' }
+                    ]
+                },
+                'family-goals-fund': {
+                    id: 'family-goals-fund',
+                    name: 'Family Goals Fund',
+                    description: 'Balanced portfolio for family financial goals',
+                    returns: '10-13% p.a.',
+                    holdingPeriod: '3-5 years',
+                    funds: [
+                        { name: 'HDFC Balanced Advantage Fund', allocation: 45, category: 'Hybrid' },
+                        { name: 'HDFC Large and Mid Cap Fund', allocation: 35, category: 'Equity' },
+                        { name: 'HDFC Hybrid Debt Fund', allocation: 20, category: 'Hybrid' }
+                    ]
+                },
+                'islamic-halal-ethical': {
+                    id: 'islamic-halal-ethical',
+                    name: 'Islamic Halal & Ethical',
+                    description: 'Shariah-compliant investment portfolio',
+                    returns: '11-14% p.a.',
+                    holdingPeriod: '4+ years',
+                    funds: [
+                        { name: 'HDFC Multi Cap Fund', allocation: 50, category: 'Equity' },
+                        { name: 'HDFC Large and Mid Cap Fund', allocation: 30, category: 'Equity' },
+                        { name: 'HDFC Gold Fund', allocation: 20, category: 'Fund of Funds' }
+                    ]
+                }
+            };
+
+            // Check if user came from create-goal page or basket-details page
+            const selectedBasket = localStorage.getItem('selectedBasket');
+            let fromGoal = false;
+            let fromBasketDetails = false;
+            let basketData = null;
+
+            if (selectedBasket) {
+                try {
+                    basketData = JSON.parse(selectedBasket);
+                    fromGoal = basketData.fromGoal === true;
+                    fromBasketDetails = basketData.fromBasketDetails === true;
+
+                    if (fromGoal) {
+                        console.log('User came from create-goal page with basket:', basketData);
+
+                        // Set the current goal from basket data
+                        if (basketData.goalName) {
+                            currentGoal = basketData.goalName;
+                            currentGoalTenure = basketData.tenure || 3;
+                        }
+
+                        // Hide projection card when coming from create-goal
+                        const projectionCard = document.getElementById('projectionCard');
+                        if (projectionCard) projectionCard.style.display = 'none';
+
+                        // Hide goal section when coming from create-goal
+                        const goalSection = document.getElementById('goalSection');
+                        if (goalSection) goalSection.style.display = 'none';
+
+                        // Display the selected basket immediately
+                        displaySelectedBasket(basketData);
+
+                        // Clear the localStorage after reading
+                        localStorage.removeItem('selectedBasket');
+                    }
+
+                    if (fromBasketDetails) {
+                        console.log('User came from basket-details page with basket:', basketData);
+
+                        // Set the current goal from basket data
+                        if (basketData.basketName) {
+                            currentGoal = basketData.basketName;
+                        }
+
+                        // Hide projection card when coming from basket-details
+                        const projectionCard = document.getElementById('projectionCard');
+                        if (projectionCard) projectionCard.style.display = 'none';
+
+                        // Hide goal section when coming from basket-details
+                        const goalSection = document.getElementById('goalSection');
+                        if (goalSection) goalSection.style.display = 'none';
+
+                        // Display the selected basket immediately
+                        displaySelectedBasket(basketData);
+
+                        // Add class to basket card to show heading (same as create-goal flow)
+                        const basketCard = document.querySelector('.basket-card');
+                        if (basketCard) {
+                            basketCard.classList.add('basket-card-with-goal');
+                        }
+
+                        // Clear the localStorage after reading
+                        localStorage.removeItem('selectedBasket');
+                    }
+                } catch (e) {
+                    console.error('Error parsing selected basket:', e);
+                }
+            }
+
+            // Check for direct invest flow
+            const urlParams = new URLSearchParams(window.location.search);
+            const directInvest = urlParams.get('directInvest') === 'true';
+
+            if (directInvest && !fromGoal && !fromBasketDetails) {
+                console.log('Direct invest flow detected');
+
+                // Hide goal section
+                const goalSection = document.getElementById('goalSection');
+                if (goalSection) goalSection.style.display = 'none';
+
+                // Show assign goal section
+                const assignGoalSection = document.getElementById('assignGoalSection');
+                if (assignGoalSection) assignGoalSection.style.display = 'block';
+
+                // Basket will be loaded after data loads (in loadDataAndRecommendations function)
+            }
 
             // Load fund from URL parameter
-            const urlParams = new URLSearchParams(window.location.search);
             const fundSlug = urlParams.get('fund');
             let selectedFund = null;
 
@@ -1114,6 +2305,365 @@
                 if (fundTitle) {
                     fundTitle.textContent = selectedFund.name;
                 }
+            }
+
+            // Load goal from localStorage (if coming from create-goal page)
+            const newGoalData = localStorage.getItem('newGoal');
+            if (newGoalData && !fromGoal) {  // Skip if already handled in fromGoal block
+                try {
+                    const goalData = JSON.parse(newGoalData);
+                    currentGoal = goalData.name;
+                    currentGoalTenure = goalData.tenure || 3; // Get tenure from goal data
+
+                    // Add the new goal to the goal selection if it doesn't exist
+                    const goalSelection = document.querySelector('.goal-selection');
+                    const existingGoals = Array.from(goalCards).map(card => {
+                        const nameEl = card.querySelector('.goal-card-name');
+                        return nameEl ? nameEl.textContent.trim() : '';
+                    }).filter(name => name !== '');
+
+                    if (!existingGoals.includes(goalData.name)) {
+                        // Create new goal card
+                        const newGoalCard = document.createElement('div');
+                        newGoalCard.className = 'goal-card-compact selected';
+                        newGoalCard.setAttribute('data-goal', goalData.name);
+                        newGoalCard.setAttribute('data-tenure', goalData.tenure || 3);
+
+                        // Get icon SVG based on goal category
+                        const iconSvg = getGoalIconSvg(goalData.category || 'emergency');
+
+                        newGoalCard.innerHTML = `
+                            <div class="goal-card-icon">
+                                ${iconSvg}
+                            </div>
+                            <div class="goal-card-name">${goalData.name}</div>
+                        `;
+
+                        // Insert at the beginning (first position)
+                        goalSelection.insertBefore(newGoalCard, goalSelection.firstChild);
+
+                        // Add click handler to new card
+                        newGoalCard.addEventListener('click', function() {
+                            if (this.classList.contains('add-goal-card')) return;
+
+                            // Remove selected class from all cards
+                            document.querySelectorAll('.goal-card-compact').forEach(c => c.classList.remove('selected'));
+
+                            // Add selected class to clicked card
+                            this.classList.add('selected');
+
+                            // Update current goal name
+                            const nameEl = this.querySelector('.goal-card-name');
+                            currentGoal = nameEl ? nameEl.textContent.trim() : '';
+
+                            // Update current goal tenure from data attribute
+                            const tenure = this.getAttribute('data-tenure');
+                            currentGoalTenure = tenure ? parseInt(tenure, 10) : 3;
+
+                            // Trigger basket recommendation update
+                            displayBasketRecommendation();
+                        });
+
+                        // Add touch interaction
+                        newGoalCard.addEventListener('touchstart', function(e) {
+                            this.style.transition = 'transform 0.1s ease';
+                            this.style.transform = 'scale(0.95)';
+                        });
+                        newGoalCard.addEventListener('touchend', function(e) {
+                            setTimeout(() => {
+                                this.style.transform = '';
+                            }, 150);
+                        });
+
+                        // Remove selection from existing goals
+                        goalCards.forEach(c => c.classList.remove('selected'));
+                    } else {
+                        // Select existing goal if it matches and move to first position
+                        goalCards.forEach(card => {
+                            const nameEl = card.querySelector('.goal-card-name');
+                            const cardName = nameEl ? nameEl.textContent.trim() : '';
+                            if (cardName === goalData.name) {
+                                goalCards.forEach(c => c.classList.remove('selected'));
+                                card.classList.add('selected');
+
+                                // Move selected goal to first position
+                                goalSelection.insertBefore(card, goalSelection.firstChild);
+                            }
+                        });
+                    }
+
+                    // Clear the localStorage after reading
+                    localStorage.removeItem('newGoal');
+                } catch (e) {
+                    console.error('Error parsing goal data:', e);
+                }
+            }
+
+            // Display basket recommendations (data is now hard-coded, no fetch needed)
+            function loadDataAndRecommendations() {
+                try {
+                    console.log('Data already loaded (hard-coded)');
+
+                    // Calculate and display recommendations (skip for fromGoal, fromBasketDetails, and directInvest)
+                    if (!fromGoal && !fromBasketDetails && !directInvest) {
+                        console.log('Displaying recommendations for tenure:', currentGoalTenure);
+                        displayBasketRecommendation();
+                    }
+
+                    // Display Balanced Returns Basket for direct invest flow
+                    if (directInvest && !fromGoal && !fromBasketDetails) {
+                        console.log('Loading Balanced Returns Basket for direct invest...');
+
+                        const balancedReturnsBasket = {
+                            basketName: 'Balanced Returns Basket',
+                            description: 'Balanced approach between stability and growth',
+                            returns: '11-14% p.a.',
+                            holdingPeriod: '2+ years',
+                            funds: []
+                        };
+
+                        // Get Medium Risk basket from claudeJsonData
+                        if (claudeJsonData && claudeJsonData.FlagshipBaskets && claudeJsonData.FlagshipBaskets['Medium Risk']) {
+                            const mediumRiskBasket = claudeJsonData.FlagshipBaskets['Medium Risk'];
+
+                            // Convert schemes to fund allocations
+                            balancedReturnsBasket.funds = mediumRiskBasket.schemes.map(scheme => {
+                                const fundMapping = hdfcFundsMapping[scheme.FundRankingCategory];
+                                if (fundMapping) {
+                                    return {
+                                        name: fundMapping.name,
+                                        allocation: scheme.ratio,
+                                        category: fundMapping.category
+                                    };
+                                }
+                                return null;
+                            }).filter(fund => fund !== null);
+                        }
+
+                        console.log('Balanced Returns Basket funds:', balancedReturnsBasket.funds);
+
+                        // Display the basket
+                        displaySelectedBasket(balancedReturnsBasket);
+
+                        // Add class to basket card to show heading (same as create-goal flow)
+                        const basketCard = document.querySelector('.basket-card');
+                        if (basketCard) {
+                            basketCard.classList.add('basket-card-with-goal');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error loading data:', error);
+                    console.error('Error stack:', error.stack);
+                    document.getElementById('basketDescription').textContent = 'Unable to load recommendations: ' + error.message;
+                }
+            }
+
+            // Map tenure to time range
+            function getTenureRange(tenure) {
+                if (tenure < 1) return '<1 Year';
+                if (tenure >= 1 && tenure < 2) return '1-2 Years';
+                if (tenure >= 2 && tenure < 4) return '2-4 Years';
+                return '4+ Years';
+            }
+
+            // Find HDFC fund for a given category
+            function findHdfcFund(fundRankingCategory) {
+                // Simply return the mapped fund from our pre-built mapping
+                return hdfcFundsMapping[fundRankingCategory] || null;
+            }
+
+            // Display basket recommendation
+            function displayBasketRecommendation() {
+                if (!claudeJsonData) return;
+
+                // Get tenure range
+                const tenureRange = getTenureRange(currentGoalTenure);
+
+                // Get basket ID from recommendation matrix (Medium Risk)
+                const basketId = claudeJsonData.FundRecommendationMatrix['Medium Risk'][tenureRange];
+
+                // Get basket details from CoreBaskets
+                const basket = claudeJsonData.CoreBaskets[basketId];
+
+                if (!basket) {
+                    console.error('Basket not found:', basketId);
+                    return;
+                }
+
+                // Update basket header
+                document.getElementById('basketTitle').textContent = 'Recommended Portfolio';
+                document.getElementById('basketDescription').textContent = basket.description;
+
+                // Build funds array from basket schemes
+                const funds = [];
+                basket.schemes.forEach(scheme => {
+                    const fund = findHdfcFund(scheme.FundRankingCategory);
+                    if (fund) {
+                        funds.push({
+                            name: fund.name,
+                            allocation: scheme.ratio,
+                            category: fund.category
+                        });
+                    }
+                });
+
+                // Build fund capsules HTML
+                const basketFundsContainer = document.getElementById('basketFunds');
+                basketFundsContainer.innerHTML = '';
+
+                // Calculate number of scroll dots needed (show dots only if there are more than 2 funds)
+                const numFunds = funds.length;
+                const numDots = Math.min(Math.ceil(numFunds / 2), 3); // Show max 3 dots
+
+                // Add funds capsules section
+                const fundsCapsules = document.createElement('div');
+                fundsCapsules.className = 'funds-capsules-section';
+                fundsCapsules.innerHTML = `
+                    <div class="funds-section-header">Funds in this basket - Recommended by NiveshPe</div>
+                    <div class="fund-capsules-container" id="fundCapsulesContainer">
+                        ${funds.map(fund => `
+                            <div class="fund-capsule">
+                                <span class="fund-name-text">${fund.name}</span>
+                                <span class="capsule-percentage">${fund.allocation}%</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${numFunds > 2 ? `
+                        <div class="capsules-scroll-indicator" id="capsulesScrollIndicator">
+                            ${Array.from({ length: numDots }, (_, i) =>
+                                `<div class="capsule-scroll-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`
+                            ).join('')}
+                        </div>
+                    ` : ''}
+                    <!-- Customization Link -->
+                    <div class="customize-link-container" style="margin-top: 12px; text-align: center;">
+                        <button class="customize-link" id="customizeLink" onclick="openCustomizationOverlay()">
+                            <span>Want to customize? Choose your own funds</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                basketFundsContainer.appendChild(fundsCapsules);
+
+                // Add scroll event listener if there are scroll dots
+                if (numFunds > 2) {
+                    const container = document.getElementById('fundCapsulesContainer');
+                    const dots = document.querySelectorAll('.capsule-scroll-dot');
+
+                    container.addEventListener('scroll', () => {
+                        const scrollLeft = container.scrollLeft;
+                        const scrollWidth = container.scrollWidth - container.clientWidth;
+                        const scrollPercent = scrollLeft / scrollWidth;
+                        const activeIndex = Math.round(scrollPercent * (numDots - 1));
+
+                        dots.forEach((dot, index) => {
+                            dot.classList.toggle('active', index === activeIndex);
+                        });
+                    });
+
+                    // Make dots clickable
+                    dots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => {
+                            const scrollAmount = (container.scrollWidth - container.clientWidth) / (numDots - 1);
+                            container.scrollTo({
+                                left: scrollAmount * index,
+                                behavior: 'smooth'
+                            });
+                        });
+                    });
+                }
+            }
+
+            // Display basket selected from create-goal page
+            function displaySelectedBasket(data) {
+                // Add class to basket card to show heading when coming from create-goal
+                const basketCard = document.querySelector('.basket-card');
+                if (basketCard && data.goalName) {
+                    basketCard.classList.add('basket-card-with-goal');
+                }
+
+                // Update basket header
+                document.getElementById('basketTitle').textContent = data.basketName;
+                document.getElementById('basketDescription').textContent = data.description;
+
+                // Add expected returns to header right
+                const basketReturns = document.getElementById('basketReturns');
+                basketReturns.innerHTML = `
+                    <span class="basket-returns-label">Returns</span>
+                    <span class="basket-returns-value">${data.returns}</span>
+                `;
+
+                const basketFundsContainer = document.getElementById('basketFunds');
+                basketFundsContainer.innerHTML = '';
+
+                // Calculate number of scroll dots needed (show dots only if there are more than 2 funds)
+                const numFunds = data.funds.length;
+                const numDots = Math.min(Math.ceil(numFunds / 2), 3); // Show max 3 dots
+
+                // Add funds capsules section
+                const fundsCapsules = document.createElement('div');
+                fundsCapsules.className = 'funds-capsules-section';
+                fundsCapsules.innerHTML = `
+                    <div class="funds-section-header">Funds in this basket - Recommended by NiveshPe ${data.returns ? `<span class="returns-green">(Returns: ${data.returns})</span>` : ''}</div>
+                    <div class="fund-capsules-container" id="fundCapsulesContainer">
+                        ${data.funds.map(fund => `
+                            <div class="fund-capsule">
+                                <span class="fund-name-text">${fund.name}</span>
+                                <span class="capsule-percentage">${fund.allocation}%</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${numFunds > 2 ? `
+                        <div class="capsules-scroll-indicator" id="capsulesScrollIndicator">
+                            ${Array.from({ length: numDots }, (_, i) =>
+                                `<div class="capsule-scroll-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`
+                            ).join('')}
+                        </div>
+                    ` : ''}
+                    <!-- Customization Link -->
+                    <div class="customize-link-container" style="margin-top: 12px; text-align: center;">
+                        <button class="customize-link" id="customizeLink" onclick="openCustomizationOverlay()">
+                            <span>Want to customize? Choose your own funds</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                basketFundsContainer.appendChild(fundsCapsules);
+
+                // Add scroll event listener if there are scroll dots
+                if (numFunds > 2) {
+                    const container = document.getElementById('fundCapsulesContainer');
+                    const dots = document.querySelectorAll('.capsule-scroll-dot');
+
+                    container.addEventListener('scroll', () => {
+                        const scrollLeft = container.scrollLeft;
+                        const scrollWidth = container.scrollWidth - container.clientWidth;
+                        const scrollPercent = scrollLeft / scrollWidth;
+                        const activeIndex = Math.round(scrollPercent * (numDots - 1));
+
+                        dots.forEach((dot, index) => {
+                            dot.classList.toggle('active', index === activeIndex);
+                        });
+                    });
+
+                    // Make dots clickable
+                    dots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => {
+                            const scrollWidth = container.scrollWidth - container.clientWidth;
+                            const targetScroll = (scrollWidth / (numDots - 1)) * index;
+                            container.scrollTo({ left: targetScroll, behavior: 'smooth' });
+                        });
+                    });
+                }
+            }
+
+            // Initialize data loading (skip if coming from create-goal or basket-details)
+            if (!fromGoal && !fromBasketDetails) {
+                loadDataAndRecommendations();
             }
 
             // Time period selection
@@ -1245,51 +2795,93 @@
                 updateProjection();
             });
 
-            // Pot selection with scroll indicators
-            const potScroll = document.getElementById('potScroll');
-            const potScrollDots = document.querySelectorAll('.pot-scroll-dot');
-            
-            // Add click functionality to pot scroll dots
-            potScrollDots.forEach((dot, index) => {
+            // Goal selection with scroll indicators
+            const goalScroll = document.getElementById('goalScroll');
+            const goalScrollDots = document.querySelectorAll('.goal-scroll-dot');
+
+            // Add click functionality to goal scroll dots
+            goalScrollDots.forEach((dot, index) => {
                 dot.addEventListener('click', function() {
-                    const scrollAmount = (potScroll.scrollWidth - potScroll.clientWidth) * (index / (potScrollDots.length - 1));
-                    potScroll.scrollTo({
+                    const scrollAmount = (goalScroll.scrollWidth - goalScroll.clientWidth) * (index / (goalScrollDots.length - 1));
+                    goalScroll.scrollTo({
                         left: scrollAmount,
                         behavior: 'smooth'
                     });
                 });
             });
-            
+
             // Update active dot based on scroll position
-            potScroll.addEventListener('scroll', function() {
+            goalScroll.addEventListener('scroll', function() {
                 const scrollLeft = this.scrollLeft;
                 const maxScrollLeft = this.scrollWidth - this.clientWidth;
-                
+
                 if (maxScrollLeft > 0) {
                     const scrollPercentage = scrollLeft / maxScrollLeft;
-                    
-                    potScrollDots.forEach((dot) => {
+
+                    goalScrollDots.forEach((dot) => {
                         dot.classList.remove('active');
                     });
-                    
+
                     // Calculate which section we're in (0, 1, or 2)
-                    const activeIndex = Math.min(Math.round(scrollPercentage * (potScrollDots.length - 1)), potScrollDots.length - 1);
-                    
-                    if (potScrollDots[activeIndex]) {
-                        potScrollDots[activeIndex].classList.add('active');
+                    const activeIndex = Math.min(Math.round(scrollPercentage * (goalScrollDots.length - 1)), goalScrollDots.length - 1);
+
+                    if (goalScrollDots[activeIndex]) {
+                        goalScrollDots[activeIndex].classList.add('active');
                     }
                 }
             });
 
-            // Pot selection
-            potBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (this.classList.contains('add-pot-btn')) return; // Don't select add button
-                    potBtns.forEach(b => b.classList.remove('selected'));
+            // Helper function to get goal icon SVG
+            function getGoalIconSvg(category) {
+                const icons = {
+                    'emergency': '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18c-4.52-1.16-7.75-5.15-7.75-9.75V8.3l7.75-3.87 7.75 3.87v1.95c0 4.6-3.23 8.59-7.75 9.75z"/></svg>',
+                    'vacation': '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>',
+                    'home': '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>',
+                    'education': '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>',
+                    'retirement': '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.127 14.56l1.43-1.43 6.44 6.443L19.57 21zm4.293-5.73l2.86-2.86c-3.95-3.95-10.35-3.96-14.3-.02 3.93-1.3 8.31-.25 11.44 2.88zM5.95 5.98c-3.94 3.95-3.93 10.35.02 14.3l2.86-2.86C5.7 14.29 4.65 9.91 5.95 5.98zm.02-.02l-.01.01c-.38.39-.74.79-1.09 1.22l1.07 1.07c.27-.29.55-.56.84-.82l-.81-.48z"/></svg>',
+                    'car': '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>',
+                    'bike': '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/></svg>',
+                    'custom': '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>',
+                    'default': '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>'
+                };
+                return icons[category] || icons['default'];
+            }
+
+            // Goal selection
+            goalCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    if (this.classList.contains('add-goal-card')) {
+                        // Navigate to create-goal page
+                        window.location.href = 'create-goal.html';
+                        return;
+                    }
+
+                    // Remove selected class from all cards
+                    document.querySelectorAll('.goal-card-compact').forEach(c => c.classList.remove('selected'));
+
+                    // Add selected class to clicked card
                     this.classList.add('selected');
-                    currentPot = this.textContent.trim();
+
+                    // Update current goal name
+                    const nameEl = this.querySelector('.goal-card-name');
+                    currentGoal = nameEl ? nameEl.textContent.trim() : '';
+
+                    // Update current goal tenure from data attribute
+                    const tenure = this.getAttribute('data-tenure');
+                    currentGoalTenure = tenure ? parseInt(tenure, 10) : 3;
+
+                    // Trigger basket recommendation update
+                    displayBasketRecommendation();
                 });
             });
+
+            // Add goal card click handler
+            const addGoalCard = document.querySelector('.add-goal-card');
+            if (addGoalCard) {
+                addGoalCard.addEventListener('click', function() {
+                    window.location.href = 'create-goal.html';
+                });
+            }
 
             // Update quick amount buttons based on investment type and frequency
             function updateQuickAmounts() {
@@ -1496,12 +3088,14 @@
                     this.style.transform = '';
                     // Navigate to UPI autopay setup for SIP, direct investment for one-time
                     if (currentType === 'sip') {
-                        // Pass amount, frequency, type, and pot as URL parameters
+                        // Pass amount, frequency, type, and goal as URL parameters
                         const params = new URLSearchParams({
                             amount: currentAmount,
                             frequency: currentFrequency,
                             type: currentType,
-                            pot: currentPot
+                            goal: currentGoal,
+                            customBasket: selectedCustomBasket || '',
+                            customFund: selectedCustomFund || ''
                         });
                         window.location.href = 'upi-autopay.html?' + params.toString();
                     } else {
@@ -1512,12 +3106,12 @@
             });
 
             // Mobile touch interactions
-            document.querySelectorAll('.pot-btn, .frequency-btn, .tab-btn, .timing-btn').forEach(btn => {
+            document.querySelectorAll('.goal-card-compact, .frequency-btn, .tab-btn, .timing-btn').forEach(btn => {
                 btn.addEventListener('touchstart', function(e) {
                     this.style.transition = 'transform 0.1s ease';
                     this.style.transform = 'scale(0.95)';
                 });
-                
+
                 btn.addEventListener('touchend', function(e) {
                     setTimeout(() => {
                         this.style.transform = '';
@@ -1541,6 +3135,243 @@
             // Initialize projection
             updateProjection();
         });
+
+        // ==================== CUSTOMIZATION OVERLAY FUNCTIONS ====================
+
+        // Open main customization overlay
+        function openCustomizationOverlay() {
+            const backdrop = document.getElementById('customizationBackdrop');
+            backdrop.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close main customization overlay
+        function closeCustomizationOverlay() {
+            const backdrop = document.getElementById('customizationBackdrop');
+            const modal = document.getElementById('customizationModal');
+
+            backdrop.style.animation = 'fadeOut 0.3s ease-out';
+            modal.style.animation = 'slideDown 0.3s ease-out';
+
+            setTimeout(() => {
+                backdrop.style.display = 'none';
+                backdrop.style.animation = '';
+                modal.style.animation = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Open basket selection overlay - redirect to mutual-funds page (For You tab)
+        function openBasketSelection() {
+            // Show loader
+            const loader = document.getElementById('loadingOverlay');
+            loader.style.display = 'flex';
+
+            // Redirect after brief delay
+            setTimeout(() => {
+                window.location.href = 'mutual-funds.html#recommended';
+            }, 400);
+        }
+
+        // Close basket selection overlay
+        function closeBasketSelection() {
+            const backdrop = document.getElementById('basketSelectionBackdrop');
+            const modal = document.getElementById('basketSelectionModal');
+
+            backdrop.style.animation = 'fadeOut 0.3s ease-out';
+            modal.style.animation = 'slideDown 0.3s ease-out';
+
+            setTimeout(() => {
+                backdrop.style.display = 'none';
+                backdrop.style.animation = '';
+                modal.style.animation = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Open fund selection overlay - redirect to mutual-funds page (All Funds tab)
+        function openFundSelection() {
+            // Show loader
+            const loader = document.getElementById('loadingOverlay');
+            loader.style.display = 'flex';
+
+            // Redirect after brief delay
+            setTimeout(() => {
+                window.location.href = 'mutual-funds.html#all-funds';
+            }, 400);
+        }
+
+        // Close fund selection overlay
+        function closeFundSelection() {
+            const backdrop = document.getElementById('fundSelectionBackdrop');
+            const modal = document.getElementById('fundSelectionModal');
+
+            backdrop.style.animation = 'fadeOut 0.3s ease-out';
+            modal.style.animation = 'slideDown 0.3s ease-out';
+
+            setTimeout(() => {
+                backdrop.style.display = 'none';
+                backdrop.style.animation = '';
+                modal.style.animation = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // ==================== DATA POPULATION FUNCTIONS ====================
+
+        // Populate basket list
+        function populateBasketList() {
+            const container = document.getElementById('basketListContainer');
+
+            let html = '';
+            Object.values(BASKETS_DATA).forEach(basket => {
+                html += `
+                    <div class="basket-item-card" onclick="selectBasket('${basket.id}')">
+                        <div class="basket-item-header">
+                            <div class="basket-item-title">${basket.name}</div>
+                            <div class="basket-item-returns">${basket.returns}</div>
+                        </div>
+                        <div class="basket-item-description">${basket.description}</div>
+                        <div class="basket-item-meta">
+                            <span>📊 ${basket.funds.length} Fund${basket.funds.length > 1 ? 's' : ''}</span>
+                            <span>⏱️ ${basket.holdingPeriod}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Populate fund list from HDFC mapping
+        function populateFundList() {
+            const container = document.getElementById('fundListContainer');
+
+            if (!hdfcFundsMapping) {
+                container.innerHTML = '<p style="text-align: center; padding: 20px;">Loading funds...</p>';
+                return;
+            }
+
+            let html = '';
+            Object.entries(hdfcFundsMapping).forEach(([category, fund]) => {
+                const categoryName = category.replace(/_/g, ' ');
+                const borderColor = fund.category === 'Equity' ? '#2563EB' :
+                                   fund.category === 'Debt' ? '#10B981' : '#8B5CF6';
+
+                html += `
+                    <div class="fund-item-card" style="border-left-color: ${borderColor};"
+                         onclick="selectFund('${category}')">
+                        <div class="fund-item-header">
+                            <div class="fund-item-name">${fund.name}</div>
+                        </div>
+                        <div class="fund-item-category">${fund.category} • ${categoryName}</div>
+                        <div class="fund-item-nav">
+                            <span>NAV:</span>
+                            <span class="fund-item-nav-value">₹${fund.navAmount}</span>
+                            <span>• ${fund.navDate}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ==================== SELECTION HANDLER FUNCTIONS ====================
+
+        // Handle basket selection
+        function selectBasket(basketId) {
+            selectedCustomBasket = basketId;
+            selectedCustomFund = null;
+            customizationActive = true;
+
+            closeBasketSelection();
+
+            setTimeout(() => {
+                loadBasketDetailsAndUpdate(basketId);
+            }, 300);
+        }
+
+        // Handle fund selection
+        function selectFund(fundCategory) {
+            selectedCustomFund = fundCategory;
+            selectedCustomBasket = null;
+            customizationActive = true;
+
+            closeFundSelection();
+
+            setTimeout(() => {
+                updateDisplayWithSingleFund(fundCategory);
+            }, 300);
+        }
+
+        // Load basket details and update display
+        function loadBasketDetailsAndUpdate(basketId) {
+            const basketInfo = BASKETS_DATA[basketId];
+
+            if (!basketInfo) {
+                console.error(`Basket ${basketId} not found`);
+                return;
+            }
+
+            // Create basket data object matching create-goal format
+            const basketData = {
+                basketName: basketInfo.name,
+                description: basketInfo.description,
+                returns: basketInfo.returns,
+                tenure: basketInfo.holdingPeriod,
+                funds: basketInfo.funds,
+                fromGoal: false
+            };
+
+            // Update basket display using existing function
+            displaySelectedBasket(basketData);
+
+            // Update customization link text
+            updateCustomizationLinkText('Basket: ' + basketInfo.name);
+        }
+
+        // Update display with single fund (100% allocation)
+        function updateDisplayWithSingleFund(fundCategory) {
+            const fund = hdfcFundsMapping[fundCategory];
+
+            if (!fund) {
+                console.error(`Fund ${fundCategory} not found`);
+                return;
+            }
+
+            // Create basket data with single fund at 100%
+            const basketData = {
+                basketName: fund.name,
+                description: '100% allocation to single fund',
+                returns: 'Varies by fund performance',
+                tenure: 'Flexible',
+                funds: [
+                    { name: fund.name, allocation: 100, category: fund.category }
+                ],
+                fromGoal: false
+            };
+
+            // Update basket display
+            displaySelectedBasket(basketData);
+
+            // Update customization link text
+            updateCustomizationLinkText('Fund: ' + fund.name);
+        }
+
+        // Update customization link text after selection
+        function updateCustomizationLinkText(selectionText) {
+            const link = document.getElementById('customizeLink');
+            if (link) {
+                link.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    <span>${selectionText}</span>
+                    <span style="font-size: 12px; opacity: 0.7;">• Click to change</span>
+                `;
+            }
+        }
     </script>
     <script src="assets/js/iphone-toggle.js"></script>
 </body>

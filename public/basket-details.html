@@ -1116,9 +1116,25 @@
 
         // CTA action
         function showInvestmentOptions() {
-            // Navigate to add-funds page with current basket ID
+            // Get current basket data
             const basketId = getBasketIdFromURL();
-            window.location.href = 'add-funds.html?basket=' + basketId;
+            const basket = getBasketData(basketId);
+
+            // Prepare basket data for add-funds page
+            const basketDataForAddFunds = {
+                basketName: basket.title,
+                description: basket.tagline || basket.howItWorks,
+                returns: basket.returns,
+                holdingPeriod: basket.holdingPeriod,
+                funds: basket.funds,
+                fromBasketDetails: true
+            };
+
+            // Store in localStorage
+            localStorage.setItem('selectedBasket', JSON.stringify(basketDataForAddFunds));
+
+            // Navigate to add-funds page
+            window.location.href = 'add-funds.html';
         }
     </script>
     <script src="assets/js/iphone-toggle.js"></script>

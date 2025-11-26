@@ -1,0 +1,387 @@
+{
+  "FlagshipBaskets": {
+    "Low Risk": {
+      "name": "Low Risk",
+      "basket_id": "B_LOW_RISK",
+      "description": "Conservative investment approach with minimal risk",
+      "holding_period": "2+ years",
+      "is_default": false,
+      "is_active": true,
+      "idealAssetAllocation": [{ "Debt": 56 }, { "Equity": 34 }, { "Gold": 10 }],
+      "schemes": [
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 50 },
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 30 },
+        { "FundRankingCategory": "LARGE_CAP", "ratio": 10 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "Medium Risk": {
+      "name": "Medium Risk",
+      "basket_id": "B_MEDIUM_RISK",
+      "description": "Balanced approach between stability and growth",
+      "holdingUs_period": "2+ years",
+      "is_default": false,
+      "is_active": true,
+      "idealAssetAllocation": [{ "Debt": 28 }, { "Equity": 62 }, { "Gold": 10 }],
+      "schemes": [
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 50 },
+        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 30 },
+        { "FundRankingCategory": "LARGE_CAP", "ratio": 10 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "High Risk": {
+      "name": "High Risk",
+      "basket_id": "B_HIGH_RISK",
+      "description": "Designed for investors seeking higher returns and willing to take more risk",
+      "holding_period": "3+ years",
+      "is_default": true,
+      "is_active": true,
+      "idealAssetAllocation": [{ "Debt": 18 }, { "Equity": 72 }, { "Gold": 10 }],
+      "schemes": [
+        { "FundRankingCategory": "MULTICAP", "ratio": 50 },
+        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 30 },
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 10 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "Ultra High Risk": {
+      "name": "Ultra High Risk",
+      "basket_id": "B_ULTRA_HIGH_RISK",
+      "description": "Highly aggressive portfolio aimed at maximizing long-term growth",
+      "holding_period": "4+ years",
+      "is_default": false,
+      "is_active": true,
+      "idealAssetAllocation": [{ "Debt": 8 }, { "Equity": 83 }, { "Gold": 10 }],
+      "schemes": [
+        { "FundRankingCategory": "MULTICAP", "ratio": 50 },
+        { "FundRankingCategory": "LARGE_MID_CAP", "ratio": 30 },
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 10 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    }
+  },
+
+  "CoreBaskets": {
+    "B1.1": {
+      "basket_name": "B1_1",
+      "description": "Low-volatility arbitrage-focused basket.",
+      "schemes": [
+        { "FundRankingCategory": "ARBITRAGE", "ratio": 90 },
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 10 }
+      ]
+    },
+
+    "B2.1": {
+      "basket_name": "B2_1",
+      "description": "Low-volatility arbitrage-focused basket.",
+      "schemes": [
+        { "FundRankingCategory": "ARBITRAGE", "ratio": 75 },
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 25 }
+      ]
+    },
+
+    "B3.1": {
+      "basket_name": "B3_1",
+      "description": "Low-volatility arbitrage-focused basket.",
+      "schemes": [
+        { "FundRankingCategory": "ARBITRAGE", "ratio": 65 },
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 35 }
+      ]
+    },
+
+    "B4.1": {
+      "basket_name": "B4_1",
+      "description": "Low-volatility arbitrage-focused basket.",
+      "schemes": [
+        { "FundRankingCategory": "ARBITRAGE", "ratio": 55 },
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 45 }
+      ]
+    },
+
+    "B1.2": {
+      "basket_name": "B1_2",
+      "description": "Low-risk hybrid basket combining stability and balanced advantage.",
+      "schemes": [
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 80 },
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 20 }
+      ]
+    },
+
+    "B2.2": {
+      "basket_name": "B2_2",
+      "description": "Low-risk hybrid basket combining stability and balanced advantage.",
+      "schemes": [
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 70 },
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 30 }
+      ]
+    },
+
+    "B3.2": {
+      "basket_name": "B3_2",
+      "description": "Balanced hybrid basket with strong allocation to balanced advantage.",
+      "schemes": [
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 30 },
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 70 }
+      ]
+    },
+
+    "B4.2": {
+      "basket_name": "B4_2",
+      "description": "Balanced hybrid basket with dominant allocation to balanced advantage.",
+      "schemes": [
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 20 },
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 80 }
+      ]
+    },
+
+    "B1.3": {
+      "basket_name": "B1_3",
+      "description": "Diversified growth basket with balanced, conservative and large-cap exposure.",
+      "schemes": [
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 55 },
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 20 },
+        { "FundRankingCategory": "LARGE_CAP", "ratio": 15 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "B2.3": {
+      "basket_name": "B2_3",
+      "description": "Diversified growth basket blending balanced advantage and large caps.",
+      "schemes": [
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 55 },
+        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 15 },
+        { "FundRankingCategory": "LARGE_CAP", "ratio": 20 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "B3.3": {
+      "basket_name": "B3_3",
+      "description": "High-growth basket with aggressive and multicap exposure.",
+      "schemes": [
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 45 },
+        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 20 },
+        { "FundRankingCategory": "MULTICAP", "ratio": 25 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "B4.3": {
+      "basket_name": "B4_3",
+      "description": "High-growth basket focused on aggressive hybrid and multicap funds.",
+      "schemes": [
+        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 40 },
+        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 15 },
+        { "FundRankingCategory": "MULTICAP", "ratio": 35 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "B1.4": {
+      "basket_name": "B1_4",
+      "description": "Growth-oriented basket led by large & mid-cap exposure.",
+      "schemes": [
+        { "FundRankingCategory": "LARGE_MID_CAP", "ratio": 70 },
+        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 20 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "B2.4": {
+      "basket_name": "B2_4",
+      "description": "Growth basket with strong large & mid-cap allocation and aggressive exposure.",
+      "schemes": [
+        { "FundRankingCategory": "LARGE_MID_CAP", "ratio": 75 },
+        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 15 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "B3.4": {
+      "basket_name": "B3_4",
+      "description": "High-growth multicap basket with aggressive hybrid tilt.",
+      "schemes": [
+        { "FundRankingCategory": "MULTICAP", "ratio": 50 },
+        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 40 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "B4.4": {
+      "basket_name": "B4_4",
+      "description": "Aggressive multicap-dominant basket for high growth potential.",
+      "schemes": [
+        { "FundRankingCategory": "MULTICAP", "ratio": 70 },
+        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 20 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    }
+  },
+
+  "FundRecommendationMatrix": {
+    "Low Risk": {
+      "<1 Year": "B1.1",
+      "1-2 Years": "B1.2",
+      "2-4 Years": "B1.3",
+      "4+ Years": "B1.4"
+    },
+    "Medium Risk": {
+      "<1 Year": "B2.1",
+      "1-2 Years": "B2.2",
+      "2-4 Years": "B2.3",
+      "4+ Years": "B2.4"
+    },
+    "High Risk": {
+      "<1 Year": "B3.1",
+      "1-2 Years": "B3.2",
+      "2-4 Years": "B3.3",
+      "4+ Years": "B3.4"
+    },
+    "Ultra High Risk": {
+      "<1 Year": "B4.1",
+      "1-2 Years": "B4.2",
+      "2-4 Years": "B4.3",
+      "4+ Years": "B4.4"
+    }
+  },
+
+  "NiveshpeBaskets": {
+    "Tax Saver (ELSS)": {
+      "name": "Tax Saver (ELSS)",
+      "basket_name": "Tax Saver (ELSS)",
+      "description": "Equity-linked savings basket focused on tax-efficient long-term growth.",
+      "holding_period": "3 year lock-in",
+      "is_default": false,
+      "is_active": true,
+      "schemes": [{ "FundRankingCategory": "ELSS", "ratio": 100 }]
+    },
+
+    "Islamic Halal & Ethical": {
+      "name": "Islamic Halal & Ethical",
+      "basket_name": "Islamic Halal & Ethical",
+      "description": "Ethical and Shariah-compliant investment basket for value-driven investors.",
+      "holding_period": "3-5 years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": [
+        { "FundRankingCategory": "ETHICAL", "ratio": 90 },
+        { "FundRankingCategory": "GOLD", "ratio": 10 }
+      ]
+    },
+
+    "Instant Withdrawal": {
+      "name": "Instant Withdrawal",
+      "basket_name": "Instant Withdrawal",
+      "description": "Ultra-short-term liquid basket designed for instant access to funds.",
+      "holding_period": "<1years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": [{ "FundRankingCategory": "LIQUID", "ratio": 100 }]
+    },
+
+    "Safe & Stable – Better than FD": {
+      "name": "Safe & Stable – Better than FD",
+      "basket_name": "Safe & Stable – Better than FD",
+      "description": "Low-risk stable-income basket offering better-than-FD returns.",
+      "holding_period": "1-3 year",
+      "is_default": false,
+      "is_active": true,
+      "schemes": [{ "FundRankingCategory": "BANKING_PSU_DEBT", "ratio": 100 }]
+    },
+
+    "Long-Term Wealth Building (3+ yrs) - Wealth Pot": {
+      "name": "Long-Term Wealth Building (4+ yrs)",
+      "basket_name": "Long-Term Wealth Building (4+ yrs)",
+      "description": "Growth-oriented basket for long-term wealth creation.",
+      "holding_period": "4+ Years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": "dynamic"
+    },
+
+    "Mid-Term Balanced Growth (>2 yrs)": {
+      "name": "Mid-Term Balanced Growth (>2 yrs)",
+      "basket_name": "Mid-Term Balanced Growth (>2 yrs)",
+      "description": "Balanced basket optimized for medium-term wealth growth.",
+      "holding_period": "2-4 Years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": "dynamic"
+    },
+
+    "Short Holding Growth (1-2 yr)": {
+      "name": "Short Holding Growth (1-2 yr)",
+      "basket_name": "Short Holding Growth (1-2 yr)",
+      "description": "Short-term growth basket for moderate-return opportunities.",
+      "holding_period": "1-2year",
+      "is_default": false,
+      "is_active": true,
+      "schemes": "dynamic"
+    },
+
+    "Low-tenure deposit. (<1 yr)": {
+      "name": "Low-tenure deposit. (<1 yr)",
+      "basket_name": "Low-tenure deposit. (<1 yr)",
+      "description": "Very short-term parking basket for high liquidity and safety.",
+      "holding_period": "<1years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": "dynamic"
+    },
+
+    "Ideal for Students": {
+      "name": "Ideal for Students",
+      "basket_name": "Ideal for Students",
+      "description": "Beginner-friendly investment basket designed for students.",
+      "holding_period": "2-4 Years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": "dynamic"
+    },
+
+    "Ideal for Housewives": {
+      "name": "Ideal for Housewives",
+      "basket_name": "Ideal for Housewives",
+      "description": "Stable and simple investment basket tailored for households.",
+      "holding_period": "3-5 years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": "dynamic"
+    },
+
+    "Ideal for Senior Citizens": {
+      "name": "Ideal for Senior Citizens",
+      "basket_name": "Ideal for Senior Citizens",
+      "description": "Safe income-oriented basket for senior citizens.",
+      "holding_period": "3-5 years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": "dynamic"
+    },
+
+    "Ideal for Salaried People": {
+      "name": "Ideal for Salaried People",
+      "basket_name": "Ideal for Salaried People",
+      "description": "Long-term wealth creation basket designed for salaried earners.",
+      "holding_period": "> 5 years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": "dynamic"
+    },
+
+    "Family Goals Fund (Marriage, Education, Home, etc)": {
+      "basket_name": "Family Goals Fund (Marriage, Education, Home, etc)",
+      "name": "Family Goals Fund (Marriage, Education, Home, etc)",
+      "description": "Goal-based basket ideal for family milestones and long-term planning.",
+      "holding_period": "2-5 years",
+      "is_default": false,
+      "is_active": true,
+      "schemes": "dynamic"
+    }
+  }
+}

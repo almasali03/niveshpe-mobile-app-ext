@@ -102,7 +102,7 @@
                                         <span class="btn-text">Withdraw</span>
                                     </div>
                                 </button>
-                                <button class="btn btn-invest" onclick="openInvestorProfile()">
+                                <button class="btn btn-invest" onclick="window.location.href='add-funds.html?directInvest=true'">
                                     <div class="btn-content">
                                         <span class="btn-icon">
                                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -438,63 +438,20 @@
 
                     <div id="goals-tab" class="tab-content">
                         <div class="goals-list">
-                            <!-- Goal 1 -->
+                            <!-- Goal 1: NiveshPe Wealth -->
                             <div class="goals-card">
                                 <div class="goals-header">
-                                    <div class="goals-icon">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/>
-                                        </svg>
+                                    <div class="goals-icon" style="background: white; padding: 6px;">
+                                        <img src="assets/favicon.png" alt="NiveshPe" style="width: 24px; height: 24px; object-fit: contain;">
                                     </div>
                                     <div class="goals-info">
-                                        <div class="goals-name">Dream Home</div>
-                                        <div class="goals-target">Target: ₹15,00,000</div>
+                                        <div class="goals-name">NiveshPe Wealth</div>
+                                        <div class="goals-target">₹6,200</div>
                                     </div>
-                                </div>
-                                <div class="goals-amounts">
-                                    <div class="goals-achieved">₹5,25,000 achieved</div>
-                                    <div class="goals-percentage">35%</div>
-                                </div>
-                                <div class="goals-progress">
-                                    <div class="goals-progress-bar">
-                                        <div class="goals-progress-fill on-track" style="width: 35%;"></div>
-                                    </div>
-                                </div>
-                                <div class="goals-footer">
-                                    <div class="goals-status on-track">On track</div>
-                                    <div class="goals-timeline">3.5 years remaining</div>
                                 </div>
                             </div>
 
-                            <!-- Goal 2 -->
-                            <div class="goals-card">
-                                <div class="goals-header">
-                                    <div class="goals-icon">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.8C8,12.2 8.6,11.6 9.2,11.6V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,9.5V11.5H13.5V9.5C13.5,8.7 12.8,8.2 12,8.2Z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="goals-info">
-                                        <div class="goals-name">Child Education</div>
-                                        <div class="goals-target">Target: ₹25,00,000</div>
-                                    </div>
-                                </div>
-                                <div class="goals-amounts">
-                                    <div class="goals-achieved">₹3,75,000 achieved</div>
-                                    <div class="goals-percentage">15%</div>
-                                </div>
-                                <div class="goals-progress">
-                                    <div class="goals-progress-bar">
-                                        <div class="goals-progress-fill on-track" style="width: 15%;"></div>
-                                    </div>
-                                </div>
-                                <div class="goals-footer">
-                                    <div class="goals-status on-track">On track</div>
-                                    <div class="goals-timeline">8 years remaining</div>
-                                </div>
-                            </div>
-
-                            <!-- Goal 3 -->
+                            <!-- Goal 2: Bike Fund -->
                             <div class="goals-card">
                                 <div class="goals-header">
                                     <div class="goals-icon">
@@ -503,22 +460,21 @@
                                         </svg>
                                     </div>
                                     <div class="goals-info">
-                                        <div class="goals-name">New Car</div>
-                                        <div class="goals-target">Target: ₹8,00,000</div>
+                                        <div class="goals-name">Bike Fund</div>
+                                        <div class="goals-target">₹3,000</div>
                                     </div>
                                 </div>
-                                <div class="goals-amounts">
-                                    <div class="goals-achieved">₹4,80,000 achieved</div>
-                                    <div class="goals-percentage">60%</div>
-                                </div>
-                                <div class="goals-progress">
-                                    <div class="goals-progress-bar">
-                                        <div class="goals-progress-fill behind" style="width: 60%;"></div>
+                            </div>
+
+                            <!-- Add New Goal Card -->
+                            <div class="goals-card add-goal-card" onclick="window.location.href='create-goal.html'" style="cursor: pointer;">
+                                <div class="goals-header" style="justify-content: center; gap: 12px;">
+                                    <div class="add-goal-icon" style="background: #E0F2FE; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#2563EB">
+                                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                        </svg>
                                     </div>
-                                </div>
-                                <div class="goals-footer">
-                                    <div class="goals-status behind">Behind schedule</div>
-                                    <div class="goals-timeline">1 year remaining</div>
+                                    <div class="add-goal-text" style="font-size: 14px; font-weight: 600; color: #2563EB;">Add New Goal</div>
                                 </div>
                             </div>
                         </div>

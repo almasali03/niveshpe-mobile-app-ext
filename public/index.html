@@ -693,11 +693,11 @@
         }
 
         /* My Goals Section - Fixed Scrolling (No Card Container) */
-        .pots-container {
+        .goals-container {
             margin-bottom: 24px;
         }
 
-        .pots-scroll {
+        .goals-scroll {
             display: flex;
             gap: var(--space-sm);
             overflow-x: auto;
@@ -707,11 +707,11 @@
             scrollbar-width: none;
         }
 
-        .pots-scroll::-webkit-scrollbar {
+        .goals-scroll::-webkit-scrollbar {
             display: none;
         }
 
-        .pots-scroll-indicator {
+        .goals-scroll-indicator {
             display: flex;
             justify-content: center;
             gap: 6px;
@@ -733,24 +733,24 @@
             border-radius: 4px;
         }
 
-        .pot-card {
+        .goal-card {
             background: var(--color-card);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-lg);
             padding: 16px;
-            min-width: 160px;
+            min-width: 140px;
             flex-shrink: 0;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: var(--shadow-sm);
         }
 
-        .pot-card:active {
+        .goal-card:active {
             transform: scale(0.95);
             box-shadow: var(--shadow-md);
         }
 
-        .pot-icon {
+        .goal-icon {
             width: 36px;
             height: 36px;
             background: rgba(16, 185, 129, 0.1);
@@ -762,27 +762,27 @@
             color: var(--color-green);
         }
 
-        .pot-name {
+        .goal-name {
             font-size: 14px;
             font-weight: 600;
             color: var(--color-text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
-        .pot-target {
+        .goal-target {
             font-size: 11px;
             color: var(--color-text-muted);
             margin-bottom: 8px;
         }
 
-        .pot-amount {
-            font-size: 18px;
+        .goal-amount {
+            font-size: 20px;
             font-weight: 700;
             color: var(--color-green);
-            margin-bottom: 8px;
+            margin-bottom: 0;
         }
 
-        .pot-progress {
+        .goal-progress {
             margin-bottom: 4px;
         }
 
@@ -800,14 +800,14 @@
             transition: width 0.5s ease;
         }
 
-        .pot-percentage {
+        .goal-percentage {
             font-size: 12px;
             font-weight: 600;
             color: var(--color-green);
             text-align: right;
         }
 
-        .add-pot-card {
+        .add-goal-card {
             background: var(--color-surface);
             border: 2px dashed var(--color-border);
             display: flex;
@@ -815,14 +815,16 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        .add-pot-card:active {
+        .add-goal-card:active {
             border-color: var(--color-green);
             background: rgba(16, 185, 129, 0.05);
         }
 
-        .add-pot-icon {
+        .add-goal-icon {
             width: 48px;
             height: 48px;
             background: var(--color-green);
@@ -833,7 +835,7 @@
             color: white;
         }
 
-        .add-pot-text {
+        .add-goal-text {
             font-size: 14px;
             font-weight: 600;
             color: var(--color-green);
@@ -923,6 +925,116 @@
 
         .transaction-amount.debit {
             color: #EF4444;
+        }
+
+        /* Portfolio Health Card */
+        .portfolio-health-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .portfolio-health-card:active {
+            transform: scale(0.98);
+        }
+
+        /* Critical Insight */
+        .critical-insight {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            border-radius: var(--radius-md);
+        }
+
+        .critical-insight.warning {
+            background: rgba(239, 68, 68, 0.08);
+        }
+
+        .critical-insight.recommendation {
+            background: rgba(245, 158, 11, 0.08);
+        }
+
+        .critical-insight.info {
+            background: rgba(37, 99, 235, 0.08);
+        }
+
+        .insight-icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .critical-insight.warning .insight-icon-circle {
+            background: rgba(239, 68, 68, 0.15);
+            color: #EF4444;
+        }
+
+        .critical-insight.recommendation .insight-icon-circle {
+            background: rgba(245, 158, 11, 0.15);
+            color: #F59E0B;
+        }
+
+        .critical-insight.info .insight-icon-circle {
+            background: rgba(37, 99, 235, 0.15);
+            color: #2563EB;
+        }
+
+        .insight-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .insight-text {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--color-text-primary);
+        }
+
+        .insight-highlight {
+            font-weight: 700;
+            color: inherit;
+        }
+
+        /* Metrics Grid */
+        .health-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .metric-value.positive {
+            color: var(--color-green);
         }
 
         /* Footer Trust Section with Support */
@@ -1072,8 +1184,214 @@
             }
         }
 
-        .hero-card, .features-section, .transactions-card, .pots-container {
+        .hero-card, .features-section, .transactions-card, .goals-container {
             animation: slideInUp 0.5s ease-out;
+        }
+
+        /* Advisor Form Overlay Styles */
+        .investor-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            animation: fadeIn 0.3s ease-out;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .investor-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .profile-page {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            max-height: 85vh;
+            display: none;
+            flex-direction: column;
+            z-index: 101;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .profile-page.active {
+            display: flex;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .profile-drag-handle {
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-drag-bar {
+            width: 40px;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 9999px;
+        }
+
+        .profile-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 9999px;
+            background: #F8F9FA;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .profile-close-btn:active {
+            background: #E5E7EB;
+            transform: scale(0.95);
+        }
+
+        .profile-modal-header {
+            padding: 0 20px 16px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .profile-modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 4px;
+        }
+
+        .profile-modal-subtitle {
+            font-size: 14px;
+            color: #6B7280;
+            margin: 0;
+        }
+
+        .profile-content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px;
+            scrollbar-width: none;
+        }
+
+        .profile-content-area::-webkit-scrollbar {
+            display: none;
+        }
+
+        .profile-continue-section {
+            padding: 16px 20px 24px;
+            background: white;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .profile-continue-btn {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .profile-continue-btn.enabled {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .profile-continue-btn.enabled:active {
+            transform: scale(0.96);
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.4);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 15px;
+            color: #1F2937;
+            transition: all 0.2s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9CA3AF;
+        }
+
+        .form-input[type="number"]::-webkit-inner-spin-button,
+        .form-input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .form-input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 80px;
+            line-height: 1.5;
         }
     </style>
     <link rel="stylesheet" href="assets/css/iphone-toggle.css">
@@ -1113,18 +1431,6 @@
                 </svg>
             </div>
             <div class="header-actions">
-                <button class="icon-btn">
-                    <!-- New Gift Icon with Notification Dot -->
-                    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="44" height="44" rx="12" fill="#F1F5F9"/>
-                        <path d="M30 22V32H14V22" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M32 17H12V22H32V17Z" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M22 32V17" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M22 17H17.5C16.837 17 16.2011 16.7366 15.7322 16.2678C15.2634 15.7989 15 15.163 15 14.5C15 13.837 15.2634 13.2011 15.7322 12.7322C16.2011 12.2634 16.837 12 17.5 12C21 12 22 17 22 17Z" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M22 17H26.5C27.163 17 27.7989 16.7366 28.2678 16.2678C28.7366 15.7989 29 15.163 29 14.5C29 13.837 28.7366 13.2011 28.2678 12.7322C27.7989 12.2634 27.163 12 26.5 12C23 12 22 17 22 17Z" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <rect x="30" y="2" width="12" height="12" rx="6" fill="#F59E0B"/>
-                    </svg>
-                </button>
                 <button class="icon-btn" onclick="window.location.href='menu.html'">
                     <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="44" height="44" rx="12" fill="#F1F5F9"/>
@@ -1172,7 +1478,7 @@
                     </div>
                 </div>
                 <div class="hero-actions">
-                    <button class="btn btn-primary" onclick="window.location.href='add-funds.html'">
+                    <button class="btn btn-primary" onclick="window.location.href='add-funds.html?directInvest=true'">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                         </svg>
@@ -1183,7 +1489,7 @@
             </div>
 
             <!-- My Goals Section with Fixed Scrolling (Direct after Hero) -->
-            <div class="pots-container section-spacing">
+            <div class="goals-container section-spacing">
                 <div class="section-header">
                     <h2 class="section-title">My Goals</h2>
                     <a href="my-funds.html#goals-tab" class="view-all">
@@ -1193,70 +1499,36 @@
                         </svg>
                     </a>
                 </div>
-                <div class="pots-scroll" id="potsScroll">
-                    <div class="pot-card">
-                        <div class="pot-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.8C8,12.2 8.6,11.6 9.2,11.6V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,9.5V11.5H13.5V9.5C13.5,8.7 12.8,8.2 12,8.2Z"/>
-                            </svg>
+                <div class="goals-scroll" id="goalsScroll">
+                    <div class="goal-card">
+                        <div class="goal-icon" style="background: white; padding: 6px;">
+                            <img src="assets/favicon.png" alt="NiveshPe" style="width: 24px; height: 24px; object-fit: contain;">
                         </div>
-                        <div class="pot-name">Emergency Fund</div>
-                        <div class="pot-target">Target: ₹10,000</div>
-                        <div class="pot-amount">₹6,200</div>
-                        <div class="pot-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 62%"></div>
-                            </div>
-                        </div>
-                        <div class="pot-percentage">62%</div>
+                        <div class="goal-name">NiveshPe Wealth</div>
+                        <div class="goal-amount">₹6,200</div>
                     </div>
 
-                    <div class="pot-card">
-                        <div class="pot-icon">
+                    <div class="goal-card">
+                        <div class="goal-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M5,11L6.5,6.5H17.5L19,11M17.5,16A1.5,1.5 0 0,1 16,14.5A1.5,1.5 0 0,1 17.5,13A1.5,1.5 0 0,1 19,14.5A1.5,1.5 0 0,1 17.5,16M6.5,16A1.5,1.5 0 0,1 5,14.5A1.5,1.5 0 0,1 6.5,13A1.5,1.5 0 0,1 8,14.5A1.5,1.5 0 0,1 6.5,16M18.92,6C18.72,5.42 18.16,5 17.5,5H6.5C5.84,5 5.28,5.42 5.08,6L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6Z"/>
                             </svg>
                         </div>
-                        <div class="pot-name">Bike Fund</div>
-                        <div class="pot-target">Target: ₹10,000</div>
-                        <div class="pot-amount">₹3,000</div>
-                        <div class="pot-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 30%"></div>
-                            </div>
-                        </div>
-                        <div class="pot-percentage">30%</div>
+                        <div class="goal-name">Bike Fund</div>
+                        <div class="goal-amount">₹3,000</div>
                     </div>
 
-                    <div class="pot-card">
-                        <div class="pot-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/>
-                            </svg>
-                        </div>
-                        <div class="pot-name">Home Fund</div>
-                        <div class="pot-target">Target: ₹50,000</div>
-                        <div class="pot-amount">₹8,500</div>
-                        <div class="pot-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 17%"></div>
-                            </div>
-                        </div>
-                        <div class="pot-percentage">17%</div>
-                    </div>
-
-                    <div class="pot-card add-pot-card">
-                        <div class="add-pot-icon">
+                    <div class="goal-card add-goal-card" onclick="window.location.href='create-goal.html'">
+                        <div class="add-goal-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                             </svg>
                         </div>
-                        <div class="add-pot-text">Add New Pot</div>
+                        <div class="add-goal-text">Add New Goal</div>
                     </div>
                 </div>
-                <div class="pots-scroll-indicator">
+                <div class="goals-scroll-indicator">
                     <div class="scroll-dot active"></div>
-                    <div class="scroll-dot"></div>
                     <div class="scroll-dot"></div>
                 </div>
             </div>
@@ -1264,35 +1536,79 @@
             <!-- New Features Section -->
             <div class="features-section section-spacing">
                 <!-- NiveshPe Agent Card -->
-                <div class="feature-card agent-card">
+                <div class="feature-card agent-card" onclick="openAdvisorForm()" style="cursor: pointer;">
                     <div class="feature-left">
-                        <div class="feature-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                            </svg>
-                        </div>
                         <div class="feature-content">
-                            <h3 class="feature-title">NiveshPe Agent</h3>
-                            <p class="feature-subtitle">Create passive income</p>
+                            <h3 class="feature-title">Connect with our mutual fund advisor</h3>
+                            <p class="feature-subtitle">Get personalized guidance</p>
                         </div>
                     </div>
-                    <button class="feature-cta agent-cta">Start Earning</button>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: white; flex-shrink: 0;">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Portfolio Health Section -->
+            <div class="portfolio-health-container section-spacing-sm">
+                <div class="section-header">
+                    <h2 class="section-title">Portfolio Health</h2>
+                    <a href="portfolio.html#insights" class="view-all">
+                        Check insights
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                        </svg>
+                    </a>
                 </div>
 
-<!-- Loan Against Mutual Funds Card -->
-                <div class="feature-card loan-card">
-                    <div class="feature-left">
-                        <div class="feature-icon">
-                            <svg width="20" height="20" viewBox="0 0 11 15" fill="currentColor">
-                                <path d="M9.83594 2.8125C10.0301 2.8125 10.1875 2.65509 10.1875 2.46094V1.28906C10.1875 1.09491 10.0301 0.9375 9.83594 0.9375H1.16406C0.969912 0.9375 0.8125 1.09491 0.8125 1.28906V2.60004C0.8125 2.79419 0.969912 2.9516 1.16406 2.9516H3.6625C4.46254 2.9516 5.0764 3.24334 5.44873 3.75H1.16406C0.969912 3.75 0.8125 3.90741 0.8125 4.10156V5.27344C0.8125 5.46759 0.969912 5.625 1.16406 5.625H5.81515C5.63301 6.68221 4.84949 7.34273 3.625 7.34273H1.16406C0.969912 7.34273 0.8125 7.50015 0.8125 7.6943V9.24738C0.8125 9.3455 0.853516 9.43916 0.925615 9.50572L5.76112 13.9693C5.82606 14.0292 5.9112 14.0625 5.99957 14.0625H8.41838C8.73842 14.0625 8.89199 13.6697 8.65683 13.4526L4.23646 9.37225C6.47764 9.30369 8.07856 7.80794 8.28874 5.625H9.83594C10.0301 5.625 10.1875 5.46759 10.1875 5.27344V4.10156C10.1875 3.90741 10.0301 3.75 9.83594 3.75H8.1165C8.01437 3.41188 7.87393 3.09826 7.69896 2.8125H9.83594Z"/>
-                            </svg>
+                <div class="portfolio-health-card" id="portfolioHealthCard">
+                    <!-- Critical Insight -->
+                    <div class="critical-insight warning">
+                        <div class="insight-icon-circle">
+                            <span class="material-symbols-outlined">pie_chart</span>
                         </div>
-                        <div class="feature-content">
-                            <h3 class="feature-title">Loan Against MF</h3>
-                            <p class="feature-subtitle">Instant approval</p>
+                        <div class="insight-content">
+                            <div class="insight-text">
+                                Your portfolio has <span class="insight-highlight">98.18% in Equity</span>, only <span class="insight-highlight">0.03% in Debt</span>. High concentration risk detected.
+                            </div>
                         </div>
                     </div>
-                    <button class="feature-cta loan-cta" onclick="showLoanAlert()">Apply Now</button>
+
+                    <!-- Key Metrics Grid -->
+                    <div class="health-metrics-grid">
+                        <div class="metric-item">
+                            <div class="metric-label">Total Funds</div>
+                            <div class="metric-value">22</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Critical Funds</div>
+                            <div class="metric-value" style="color: #EF4444;">6</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Equity Allocation</div>
+                            <div class="metric-value">98.18%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Top Performer</div>
+                            <div class="metric-value">+276%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loan Against Mutual Funds Section -->
+            <div class="features-section section-spacing" style="margin-top: 32px;">
+                <!-- Loan Against Mutual Funds Card -->
+                <div class="feature-card loan-card" onclick="showLoanAlert()" style="cursor: pointer;">
+                    <div class="feature-left">
+                        <div class="feature-content">
+                            <h3 class="feature-title">You're eligible for ₹1.2 Lac Loan</h3>
+                            <p class="feature-subtitle">Against your mutual funds</p>
+                        </div>
+                    </div>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: white; flex-shrink: 0;">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                    </svg>
                 </div>
             </div>
 
@@ -1300,14 +1616,14 @@
             <div class="transactions-container section-spacing-sm">
                 <div class="section-header">
                     <h2 class="section-title">Recent Transactions</h2>
-                    <a href="portfolio.html" class="view-all">
+                    <a href="history.html" class="view-all">
                         View All
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
                         </svg>
                     </a>
                 </div>
-                <div class="transactions-card">
+                <div class="transactions-card" onclick="window.location.href='history.html'" style="cursor: pointer;">
                     <div class="transaction-item">
                         <div class="transaction-icon credit">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -1381,7 +1697,6 @@
                     </div>
                 </div>
             </div>
-
 
             <!-- Footer Trust Section with Support Buttons -->
             <div class="footer-trust">
@@ -1469,6 +1784,132 @@
                 <span class="nav-label">Portfolio</span>
             </a>
         </nav>
+
+        <!-- Advisor Form Overlay -->
+        <div id="advisorFormOverlay" class="investor-overlay hidden" onclick="closeAdvisorForm()">
+            <div id="advisorFormModal" class="profile-page" onclick="event.stopPropagation()">
+                <!-- Drag Handle -->
+                <div class="profile-drag-handle">
+                    <div class="profile-drag-bar"></div>
+                </div>
+
+                <!-- Close Button -->
+                <button class="profile-close-btn" onclick="closeAdvisorForm()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+
+                <!-- Modal Header -->
+                <div class="profile-modal-header">
+                    <h2 class="profile-modal-title">Connect with our mutual fund advisor</h2>
+                    <p class="profile-modal-subtitle">Get personalized investment guidance</p>
+                </div>
+
+                <!-- Content Area -->
+                <div class="profile-content-area">
+                    <form id="advisorForm">
+                        <!-- Investment Amount Field -->
+                        <div class="form-group">
+                            <label class="form-label">Investment Amount *</label>
+                            <input
+                                type="number"
+                                id="investmentAmount"
+                                class="form-input"
+                                placeholder="Enter amount (₹)"
+                                required
+                                min="100"
+                            />
+                        </div>
+
+                        <!-- Call Timing Field -->
+                        <div class="form-group">
+                            <label class="form-label">Preferred Call Timing *</label>
+                            <select id="callTiming" class="form-input" required>
+                                <option value="" disabled selected>Select your preferred time</option>
+                                <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                                <option value="Afternoon (12 PM - 5 PM)">Afternoon (12 PM - 5 PM)</option>
+                                <option value="Evening (5 PM - 9 PM)">Evening (5 PM - 9 PM)</option>
+                            </select>
+                        </div>
+
+                        <!-- Message Field -->
+                        <div class="form-group">
+                            <label class="form-label">Message (Optional)</label>
+                            <textarea
+                                id="advisorMessage"
+                                class="form-input"
+                                placeholder="Any specific questions or requirements?"
+                                rows="4"
+                                style="resize: vertical; min-height: 80px;"
+                            ></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Continue Section -->
+                <div class="profile-continue-section">
+                    <button class="profile-continue-btn" id="advisorSubmitBtn" onclick="submitAdvisorForm(event)" style="opacity: 0.5; pointer-events: none;">
+                        <span>Request Callback</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Success Screen -->
+            <div id="advisorSuccessScreen" class="profile-page hidden" onclick="event.stopPropagation()">
+                <!-- Drag Handle -->
+                <div class="profile-drag-handle">
+                    <div class="profile-drag-bar"></div>
+                </div>
+
+                <!-- Close Button -->
+                <button class="profile-close-btn" onclick="closeAdvisorForm()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+
+                <!-- Success Content -->
+                <div class="profile-content-area" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px;">
+                    <!-- Success Icon -->
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #34D399 0%, #10B981 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+
+                    <!-- Success Title -->
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1F2937; margin-bottom: 12px;">Request Submitted!</h2>
+
+                    <!-- Success Message -->
+                    <p id="successMessage" style="font-size: 15px; color: #6B7280; line-height: 1.6; margin-bottom: 32px; max-width: 300px;">
+                        Our advisor will call you during your selected time to discuss your investment.
+                    </p>
+
+                    <!-- Details Card -->
+                    <div style="width: 100%; background: #F8F9FA; border-radius: 12px; padding: 16px; margin-bottom: 32px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #6B7280; font-size: 14px;">Investment Amount</span>
+                            <span id="successAmount" style="color: #1F2937; font-weight: 600; font-size: 14px;">₹0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #6B7280; font-size: 14px;">Call Timing</span>
+                            <span id="successTiming" style="color: #1F2937; font-weight: 600; font-size: 14px;">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Done Button -->
+                <div class="profile-continue-section">
+                    <button class="profile-continue-btn" onclick="closeAdvisorForm()" style="opacity: 1; pointer-events: auto;">
+                        <span>Done</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1510,43 +1951,52 @@
             }, 500);
 
             // Fixed scroll indicator functionality
-            const potsScroll = document.getElementById('potsScroll');
+            const goalsScroll = document.getElementById('goalsScroll');
             const scrollDots = document.querySelectorAll('.scroll-dot');
-            
+
             // Add click functionality to dots
             scrollDots.forEach((dot, index) => {
                 dot.addEventListener('click', function() {
-                    const scrollAmount = (potsScroll.scrollWidth - potsScroll.clientWidth) * (index / (scrollDots.length - 1));
-                    potsScroll.scrollTo({
+                    const scrollAmount = (goalsScroll.scrollWidth - goalsScroll.clientWidth) * (index / (scrollDots.length - 1));
+                    goalsScroll.scrollTo({
                         left: scrollAmount,
                         behavior: 'smooth'
                     });
                 });
             });
-            
+
             // Update active dot based on scroll position
-            potsScroll.addEventListener('scroll', function() {
+            goalsScroll.addEventListener('scroll', function() {
                 const scrollLeft = this.scrollLeft;
                 const maxScrollLeft = this.scrollWidth - this.clientWidth;
-                
+
                 if (maxScrollLeft > 0) {
                     const scrollPercentage = scrollLeft / maxScrollLeft;
-                    
+
                     scrollDots.forEach((dot) => {
                         dot.classList.remove('active');
                     });
-                    
+
                     // Calculate which section we're in (0, 1, or 2)
                     const activeIndex = Math.min(Math.round(scrollPercentage * (scrollDots.length - 1)), scrollDots.length - 1);
-                    
+
                     if (scrollDots[activeIndex]) {
                         scrollDots[activeIndex].classList.add('active');
                     }
                 }
             });
 
+            // Portfolio Health Card click handler
+            const portfolioHealthCard = document.getElementById('portfolioHealthCard');
+
+            if (portfolioHealthCard) {
+                portfolioHealthCard.addEventListener('click', function() {
+                    window.location.href = 'portfolio.html#insights';
+                });
+            }
+
             // Mobile touch interactions
-            document.querySelectorAll('.pot-card, .action-card, .transaction-item, .support-btn').forEach(card => {
+            document.querySelectorAll('.goal-card, .action-card, .transaction-item, .support-btn').forEach(card => {
                 card.addEventListener('touchstart', function(e) {
                     this.style.transition = 'transform 0.1s ease';
                     this.style.transform = 'scale(0.95)';
@@ -1591,6 +2041,98 @@
             } else {
                 visibilityIcon.textContent = 'visibility';
             }
+        }
+
+        // Advisor Form Functions
+        function openAdvisorForm() {
+            const overlay = document.getElementById('advisorFormOverlay');
+            const modal = document.getElementById('advisorFormModal');
+
+            // Show overlay and modal
+            overlay.classList.remove('hidden');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Add event listeners for form validation
+            const investmentAmount = document.getElementById('investmentAmount');
+            const callTiming = document.getElementById('callTiming');
+
+            investmentAmount.addEventListener('input', checkAdvisorFormValid);
+            callTiming.addEventListener('change', checkAdvisorFormValid);
+        }
+
+        function closeAdvisorForm() {
+            const overlay = document.getElementById('advisorFormOverlay');
+            const formModal = document.getElementById('advisorFormModal');
+            const successScreen = document.getElementById('advisorSuccessScreen');
+
+            // Hide overlay and all modals
+            overlay.classList.add('hidden');
+            formModal.classList.remove('active');
+            successScreen.classList.remove('active');
+            successScreen.classList.add('hidden');
+            document.body.style.overflow = '';
+
+            // Reset form
+            document.getElementById('advisorForm').reset();
+            const submitBtn = document.getElementById('advisorSubmitBtn');
+            submitBtn.style.opacity = '0.5';
+            submitBtn.style.pointerEvents = 'none';
+
+            // Reset success screen data
+            document.getElementById('successAmount').textContent = '₹0';
+            document.getElementById('successTiming').textContent = '-';
+        }
+
+        function checkAdvisorFormValid() {
+            const investmentAmount = document.getElementById('investmentAmount');
+            const callTiming = document.getElementById('callTiming');
+            const submitBtn = document.getElementById('advisorSubmitBtn');
+
+            const isValid = investmentAmount.value &&
+                           investmentAmount.value >= 100 &&
+                           callTiming.value;
+
+            if (isValid) {
+                submitBtn.style.opacity = '1';
+                submitBtn.style.pointerEvents = 'auto';
+            } else {
+                submitBtn.style.opacity = '0.5';
+                submitBtn.style.pointerEvents = 'none';
+            }
+        }
+
+        function submitAdvisorForm(e) {
+            if (e) e.preventDefault();
+
+            const investmentAmount = document.getElementById('investmentAmount').value;
+            const callTiming = document.getElementById('callTiming').value;
+            const message = document.getElementById('advisorMessage').value;
+
+            // Validate before submitting
+            if (!investmentAmount || investmentAmount < 100 || !callTiming) {
+                return;
+            }
+
+            // Log form data (in production, this would send to backend)
+            console.log('Advisor Form Submitted:', {
+                investmentAmount,
+                callTiming,
+                message
+            });
+
+            // Hide form modal and show success screen
+            const formModal = document.getElementById('advisorFormModal');
+            const successScreen = document.getElementById('advisorSuccessScreen');
+
+            // Update success screen with submitted data
+            document.getElementById('successAmount').textContent = '₹' + parseInt(investmentAmount).toLocaleString('en-IN');
+            document.getElementById('successTiming').textContent = callTiming;
+
+            // Transition between screens
+            formModal.classList.remove('active');
+            successScreen.classList.remove('hidden');
+            successScreen.classList.add('active');
         }
     </script>
                 </div>
