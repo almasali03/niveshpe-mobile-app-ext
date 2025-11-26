@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NiveshPe - Risk Profile</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <style>
+        :root {
+            --color-bg-primary: #F5F7FA;
+            --color-blue: #2563EB;
+            --color-blue-dark: #1D4ED8;
+            --color-blue-light: #DBEAFE;
+            --color-blue-medium: #93C5FD;
+            --color-green: #10B981;
+            --color-green-light: #D1FAE5;
+            --color-green-medium: #34D399;
+            --color-orange: #F97316;
+            --color-orange-light: #FEF3C7;
+            --color-yellow: #F59E0B;
+            --color-yellow-light: #FDE68A;
+            --color-red: #EF4444;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-text-muted: #9CA3AF;
+            --color-border: #E5E7EB;
+            --color-surface: #F8F9FA;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            overflow: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            height: 44px;
+            flex-shrink: 0;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            background: white;
+            height: 58px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+            padding: 0 16px;
+            gap: 12px;
+        }
+
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-full);
+            background: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-text-primary);
+        }
+
+        .back-btn:active {
+            background: var(--color-surface);
+            transform: scale(0.95);
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            flex: 1;
+        }
+
+        .content-container {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            background: var(--color-bg-primary);
+            padding: var(--space-lg);
+        }
+
+        .content-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hero-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .greeting {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .current-badge {
+            display: inline-block;
+            background: var(--color-green);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .hero-tagline {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .risk-scale-container {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .risk-level-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .risk-level-label {
+            flex: 1;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .progress-bar {
+            position: relative;
+            height: 12px;
+            background: var(--color-border);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin-bottom: var(--space-md);
+        }
+
+        .progress-segments {
+            display: flex;
+            height: 100%;
+        }
+
+        .progress-segment {
+            flex: 1;
+            position: relative;
+        }
+
+        .progress-segment.conservative {
+            background: var(--color-blue-medium);
+        }
+
+        .progress-segment.balanced {
+            background: var(--color-green-medium);
+        }
+
+        .progress-segment.aggressive {
+            background: var(--color-yellow);
+        }
+
+        .progress-segment.opportunistic {
+            background: var(--color-orange);
+        }
+
+        .progress-marker {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 2px solid var(--color-green);
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+
+        .scale-labels {
+            display: flex;
+            gap: 6px;
+            justify-content: space-between;
+            margin-top: var(--space-md);
+        }
+
+        .scale-label-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .profile-badge {
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--color-green);
+            background: var(--color-green-light);
+            padding: 2px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        .scale-label {
+            width: 100%;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 8px 4px;
+            border-radius: var(--radius-full);
+            line-height: 1.3;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1.5px solid;
+            background: white;
+        }
+
+        .scale-label.conservative {
+            border-color: var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        .scale-label.conservative.viewing {
+            border-color: var(--color-blue-medium);
+            color: var(--color-blue-dark);
+            background: white;
+        }
+
+        .scale-label.balanced {
+            border-color: var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        .scale-label.balanced.user-profile {
+            background: var(--color-green-medium);
+            color: white;
+            border-color: var(--color-green-medium);
+            box-shadow: 0 2px 8px rgba(52, 211, 153, 0.3);
+        }
+
+        .scale-label.aggressive {
+            border-color: var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        .scale-label.aggressive.viewing {
+            border-color: var(--color-yellow);
+            color: #D97706;
+            background: white;
+        }
+
+        .scale-label.opportunistic {
+            border-color: var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        .scale-label.opportunistic.viewing {
+            border-color: var(--color-orange);
+            color: #EA580C;
+            background: white;
+        }
+
+        .scale-label:active {
+            transform: scale(0.96);
+        }
+
+        .profile-detail-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .detail-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .detail-icon .material-symbols-outlined {
+            font-size: 32px;
+        }
+
+        .detail-icon.conservative {
+            background: var(--color-blue-medium);
+        }
+
+        .detail-icon.balanced {
+            background: var(--color-green-medium);
+        }
+
+        .detail-icon.aggressive {
+            background: var(--color-yellow);
+        }
+
+        .detail-icon.opportunistic {
+            background: var(--color-orange);
+        }
+
+        .detail-title-section {
+            flex: 1;
+        }
+
+        .detail-risk-level {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .detail-investor-type {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .profile-context {
+            background: var(--color-surface);
+            padding: 10px 12px;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            border-left: 3px solid;
+        }
+
+        .profile-context.viewing {
+            border-left-color: var(--color-text-muted);
+        }
+
+        .profile-context.current {
+            border-left-color: var(--color-green-medium);
+            background: var(--color-green-light);
+        }
+
+        .context-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .context-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .fund-basket-tag {
+            display: inline-block;
+            background: var(--color-surface);
+            color: var(--color-text-primary);
+            padding: 6px 12px;
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: var(--space-sm);
+            margin-bottom: var(--space-xs);
+        }
+
+        .risk-description {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-top: var(--space-sm);
+        }
+
+        /* Asset Allocation Card Styles */
+        .asset-allocation-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin-top: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .allocation-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .allocation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-sm);
+        }
+
+        .allocation-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: var(--space-sm);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+
+        .allocation-column.debt {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.03) 100%);
+            border: 1.5px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .allocation-column.equity {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.03) 100%);
+            border: 1.5px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .allocation-column.gold {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.03) 100%);
+            border: 1.5px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .allocation-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 6px;
+        }
+
+        .debt .allocation-icon {
+            background: var(--color-blue-light);
+            color: var(--color-blue);
+        }
+
+        .equity .allocation-icon {
+            background: var(--color-green-light);
+            color: var(--color-green);
+        }
+
+        .gold .allocation-icon {
+            background: var(--color-yellow-light);
+            color: var(--color-yellow);
+        }
+
+        .allocation-icon .material-symbols-outlined {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .allocation-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .allocation-percentage {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            line-height: 1;
+        }
+
+        .matched-basket-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .matched-label {
+            display: inline-block;
+            background: var(--color-green);
+            color: white;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .basket-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .basket-stats {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-sm);
+            padding-top: var(--space-sm);
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .basket-stat {
+            flex: 1;
+        }
+
+        .stat-label-small {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-value-small {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-green);
+        }
+
+        .view-details-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--color-green);
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: var(--space-sm);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .cta-section {
+            margin-top: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+
+        .cta-description {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: var(--color-blue);
+            color: white;
+            padding: 16px 24px;
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/iphone-toggle.css">
+</head>
+<body>
+    <!-- Frame Toggle Button -->
+    <button class="frame-toggle-btn" id="frameToggleBtn" onclick="toggleFrameMode()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z"/>
+        </svg>
+        <span id="frameToggleText">Normal View</span>
+    </button>
+
+    <div class="iphone-frame">
+        <!-- iPhone Notch -->
+        <div class="iphone-notch"></div>
+
+        <div class="iphone-screen">
+            <div class="mobile-container">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <div>9:41</div>
+                    <div class="status-icons">
+                        <span>•••</span>
+                        <span>📶</span>
+                        <span>🔋</span>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="header">
+                    <button class="back-btn" onclick="window.location.href='mutual-funds.html'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <h1 class="header-title">Your Risk Profile</h1>
+                </div>
+
+                <!-- Content Container -->
+                <div class="content-container">
+                    <!-- Hero Section -->
+                    <div class="hero-section">
+                        <h2 class="greeting">Rajat, you are a <span style="color: var(--color-green-medium); font-weight: 800;">Balanced Investor</span></h2>
+                        <p class="hero-tagline">Your risk profile helps us recommend the best fund baskets tailored to your investment goals and comfort level.</p>
+                    </div>
+
+                    <!-- Risk Scale -->
+                    <div class="risk-scale-container">
+                        <h3 class="section-title">Risk Level Scale</h3>
+                        <div class="risk-level-labels">
+                            <div class="risk-level-label">Low</div>
+                            <div class="risk-level-label">Medium</div>
+                            <div class="risk-level-label">High</div>
+                            <div class="risk-level-label">Ultra-High</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-segments">
+                                <div class="progress-segment conservative"></div>
+                                <div class="progress-segment balanced">
+                                    <div class="progress-marker"></div>
+                                </div>
+                                <div class="progress-segment aggressive"></div>
+                                <div class="progress-segment opportunistic"></div>
+                            </div>
+                        </div>
+                        <div class="scale-labels">
+                            <div class="scale-label-wrapper">
+                                <div class="scale-label conservative" onclick="switchProfile('conservative')">Conservative</div>
+                            </div>
+                            <div class="scale-label-wrapper">
+                                <div class="profile-badge">Your Profile</div>
+                                <div class="scale-label balanced user-profile" onclick="switchProfile('balanced')">Balanced</div>
+                            </div>
+                            <div class="scale-label-wrapper">
+                                <div class="scale-label aggressive" onclick="switchProfile('aggressive')">Aggressive</div>
+                            </div>
+                            <div class="scale-label-wrapper">
+                                <div class="scale-label opportunistic" onclick="switchProfile('opportunistic')">Opportunistic</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Detail Card -->
+                    <div class="profile-detail-card">
+                        <!-- Profile Context -->
+                        <div class="profile-context current" id="profileContext">
+                            <div class="context-label" id="contextLabel">Your Current Profile</div>
+                        </div>
+
+                        <div class="detail-header">
+                            <div class="detail-icon balanced" id="detailIcon">
+                                <span class="material-symbols-outlined">balance</span>
+                            </div>
+                            <div class="detail-title-section">
+                                <div class="detail-risk-level" id="detailRiskLevel">Medium Risk</div>
+                                <div class="detail-investor-type" id="detailInvestorType">Balanced Investor</div>
+                            </div>
+                        </div>
+
+                        <p class="risk-description" id="detailDescription" style="margin-bottom: 0;">You want a mix of growth and stability. You can handle some market fluctuations but prefer a balanced approach to investing.</p>
+                    </div>
+
+                    <!-- Asset Allocation Card -->
+                    <div class="asset-allocation-card">
+                        <h3 class="allocation-card-title">Ideal Asset Allocation</h3>
+                        <div class="allocation-grid">
+                            <div class="allocation-column debt">
+                                <div class="allocation-icon">
+                                    <span class="material-symbols-outlined">account_balance</span>
+                                </div>
+                                <div class="allocation-label">Debt</div>
+                                <div class="allocation-percentage" id="debtPercentage">28%</div>
+                            </div>
+                            <div class="allocation-column equity">
+                                <div class="allocation-icon">
+                                    <span class="material-symbols-outlined">trending_up</span>
+                                </div>
+                                <div class="allocation-label">Equity</div>
+                                <div class="allocation-percentage" id="equityPercentage">62%</div>
+                            </div>
+                            <div class="allocation-column gold">
+                                <div class="allocation-icon">
+                                    <span class="material-symbols-outlined">diamond</span>
+                                </div>
+                                <div class="allocation-label">Gold</div>
+                                <div class="allocation-percentage" id="goldPercentage">10%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Basket Label -->
+                    <h3 class="section-title" style="margin-bottom: var(--space-md);">Recommended Basket</h3>
+
+                    <!-- Matched Basket Section -->
+                    <div class="matched-basket-section">
+                        <span class="matched-label">✓ Your Match</span>
+                        <h3 class="basket-name">Balanced Returns</h3>
+                        <p class="risk-description" style="margin-top: 8px; margin-bottom: 0;">A balanced mix of stability and growth to keep your wealth moving forward.</p>
+                        <div class="basket-stats">
+                            <div class="basket-stat">
+                                <div class="stat-label-small">Returns</div>
+                                <div class="stat-value-small">12.5% p.a.</div>
+                            </div>
+                            <div class="basket-stat">
+                                <div class="stat-label-small">Holding Period</div>
+                                <div class="stat-value-small">8+ months</div>
+                            </div>
+                        </div>
+                        <a href="basket-details.html?id=balanced-returns" class="view-details-link">
+                            View Full Details →
+                        </a>
+                    </div>
+
+                    <!-- CTA Section -->
+                    <div class="cta-section">
+                        <p class="cta-description">Want to refine your risk profile? Take our quick questionnaire to ensure you're matched with the perfect fund basket.</p>
+                        <button class="btn-primary" onclick="showQuestionnaire()">Fine-Tune My Risk Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- iPhone Home Indicator -->
+        <div class="iphone-home-indicator"></div>
+    </div>
+
+    <script>
+        // Profile data - Simple investor descriptions for risk profiling page
+        const profileData = {
+            conservative: {
+                riskLevel: 'Low Risk',
+                investorType: 'Conservative Investor',
+                description: 'You prefer stability and minimal risk. You want steady, predictable returns and are not comfortable with market volatility.',
+                basket: 'Stable Growth',
+                icon: 'shield',
+                iconClass: 'conservative'
+            },
+            balanced: {
+                riskLevel: 'Medium Risk',
+                investorType: 'Balanced Investor',
+                description: 'You want a mix of growth and stability. You can handle some market fluctuations but prefer a balanced approach to investing.',
+                basket: 'Balanced Returns',
+                icon: 'balance',
+                iconClass: 'balanced'
+            },
+            aggressive: {
+                riskLevel: 'High Risk',
+                investorType: 'Aggressive Investor',
+                description: 'You have a long-term investment horizon and can handle market ups and downs. You prioritize higher growth over short-term stability.',
+                basket: 'High Growth',
+                icon: 'rocket_launch',
+                iconClass: 'aggressive'
+            },
+            opportunistic: {
+                riskLevel: 'Ultra-High Risk',
+                investorType: 'Opportunistic Investor',
+                description: 'You are willing to take significant risks for maximum returns. You can handle high volatility and have a strong long-term wealth creation focus.',
+                basket: 'Max Growth',
+                icon: 'bolt',
+                iconClass: 'opportunistic'
+            }
+        };
+
+        // Basket data - Detailed content for basket detail pages (to be used later)
+        const basketData = {
+            'Stable Growth': {
+                tagline: 'Grow your money steadily with low volatility and high peace of mind. Significant protection against market volatility through gold and fixed income hedge.',
+                whoThisIsFor: 'For investors who want steady returns with very low risk — ideal for beginners, conservative savers, or anyone who hates market volatility.',
+                returns: '10% p.a.',
+                holdingPeriod: '8+ months'
+            },
+            'Balanced Returns': {
+                tagline: 'A balanced mix of stability and growth to keep your wealth moving forward. Good protection against market falls through gold and fixed income hedge.',
+                whoThisIsFor: 'For investors who want a balanced approach — some growth, some stability — without taking on too much market risk.',
+                returns: '12.5% p.a.',
+                holdingPeriod: '8+ months'
+            },
+            'High Growth': {
+                tagline: 'Built for long-term wealth creation with higher equity-driven growth. Protection against short-term market volatility through gold and fixed income hedge.',
+                whoThisIsFor: 'For long-term investors who can handle moderate ups and downs and want higher equity-driven growth.',
+                returns: '15% p.a.',
+                holdingPeriod: '12+ months'
+            },
+            'Max Growth': {
+                tagline: 'A high-conviction, high-growth basket for investors seeking maximum upside. Protection against short-term market volatility through gold and fixed income hedge.',
+                whoThisIsFor: 'For aggressive investors willing to take higher short-term volatility in exchange for maximum long-term wealth creation.',
+                returns: '18% p.a.',
+                holdingPeriod: '18+ months'
+            }
+        };
+
+        // Basket icons mapping
+        const basketIcons = {
+            'Stable Growth': 'trending_up',
+            'Balanced Returns': 'show_chart',
+            'High Growth': 'insights',
+            'Max Growth': 'local_fire_department'
+        };
+
+        // Asset Allocation data - Based on FlagshipBaskets from claudeJson.json
+        const assetAllocationData = {
+            conservative: {
+                Debt: 56,
+                Equity: 34,
+                Gold: 10
+            },
+            balanced: {
+                Debt: 28,
+                Equity: 62,
+                Gold: 10
+            },
+            aggressive: {
+                Debt: 18,
+                Equity: 72,
+                Gold: 10
+            },
+            opportunistic: {
+                Debt: 8,
+                Equity: 83,
+                Gold: 10
+            }
+        };
+
+        // User's actual profile (fixed)
+        const userProfile = 'balanced';
+
+        // Switch profile function
+        function switchProfile(profileType) {
+            const profile = profileData[profileType];
+            const basket = basketData[profile.basket];
+            const isUserProfile = profileType === userProfile;
+
+            // Update viewing state on scale labels
+            document.querySelectorAll('.scale-label').forEach(label => {
+                label.classList.remove('viewing');
+            });
+
+            // Add viewing state to non-user-profile labels
+            if (!isUserProfile) {
+                document.querySelector(`.scale-label.${profileType}`).classList.add('viewing');
+            }
+
+            // Progress marker stays FIXED on user's profile (balanced)
+            // No marker movement code needed
+
+            // Update profile context
+            const profileContext = document.getElementById('profileContext');
+            const contextLabel = document.getElementById('contextLabel');
+
+            if (isUserProfile) {
+                profileContext.style.display = 'block';
+                profileContext.className = 'profile-context current';
+                contextLabel.textContent = 'Your Current Profile';
+            } else {
+                // Hide context when viewing other profiles
+                profileContext.style.display = 'none';
+            }
+
+            // Update detail card - simple investor description
+            const detailIcon = document.getElementById('detailIcon');
+            detailIcon.className = `detail-icon ${profile.iconClass}`;
+            detailIcon.querySelector('.material-symbols-outlined').textContent = profile.icon;
+
+            document.getElementById('detailRiskLevel').textContent = profile.riskLevel;
+            document.getElementById('detailInvestorType').textContent = profile.investorType;
+            document.getElementById('detailDescription').textContent = profile.description;
+
+            // Update asset allocation percentages
+            const allocation = assetAllocationData[profileType];
+            document.getElementById('debtPercentage').textContent = allocation.Debt + '%';
+            document.getElementById('equityPercentage').textContent = allocation.Equity + '%';
+            document.getElementById('goldPercentage').textContent = allocation.Gold + '%';
+
+            // Update matched basket section with detailed basket data
+            updateMatchedBasket(profile.basket, basket);
+        }
+
+        // Update matched basket section
+        function updateMatchedBasket(basketName, basketDetails) {
+            const matchedSection = document.querySelector('.matched-basket-section');
+            matchedSection.innerHTML = `
+                <span class="matched-label">✓ Your Match</span>
+                <h3 class="basket-name">${basketName}</h3>
+                <p class="risk-description" style="margin-top: 8px; margin-bottom: 0;">${basketDetails.tagline}</p>
+                <div class="basket-stats">
+                    <div class="basket-stat">
+                        <div class="stat-label-small">Returns</div>
+                        <div class="stat-value-small">${basketDetails.returns}</div>
+                    </div>
+                    <div class="basket-stat">
+                        <div class="stat-label-small">Holding Period</div>
+                        <div class="stat-value-small">${basketDetails.holdingPeriod}</div>
+                    </div>
+                </div>
+                <a href="basket-details.html?id=${basketName.toLowerCase().replace(/ /g, '-')}" class="view-details-link">
+                    View Full Details →
+                </a>
+            `;
+        }
+
+        // Show questionnaire alert
+        function showQuestionnaire() {
+            alert('Risk Profiling Questionnaire');
+        }
+
+        // Frame toggle functionality
+        function toggleFrameMode() {
+            const frame = document.querySelector('.iphone-frame');
+            const toggleText = document.getElementById('frameToggleText');
+
+            if (frame.classList.contains('iphone-mode')) {
+                // Switch to Normal View
+                frame.classList.remove('iphone-mode');
+                toggleText.textContent = 'iPhone View';
+                localStorage.setItem('iphone-frame-mode', 'normal');
+            } else {
+                // Switch to iPhone View
+                frame.classList.add('iphone-mode');
+                toggleText.textContent = 'Normal View';
+                localStorage.setItem('iphone-frame-mode', 'iphone');
+            }
+        }
+
+        // Initialize with balanced profile on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            switchProfile('balanced');
+
+            // Load saved frame mode preference (consistent with iphone-toggle.js)
+            const savedMode = localStorage.getItem('iphone-frame-mode');
+            const frame = document.querySelector('.iphone-frame');
+            const toggleText = document.getElementById('frameToggleText');
+
+            // Default to iPhone view unless user explicitly chose normal view
+            if (savedMode !== 'normal') {
+                frame.classList.add('iphone-mode');
+                toggleText.textContent = 'Normal View';
+            }
+        });
+    </script>
+</body>
+</html>
