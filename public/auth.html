@@ -153,8 +153,37 @@
             gap: 6px;
         }
 
-        /* ==================== HEADER ==================== */
+        /* ==================== BRAND HEADER ==================== */
 
+        .brand-header {
+            text-align: center;
+            padding: 24px 20px 16px;
+            background: #EFF6FF;
+        }
+
+        .brand-logo {
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 4px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo .nivesh {
+            color: var(--color-blue);
+        }
+
+        .brand-logo .pe {
+            color: var(--color-green);
+        }
+
+        .brand-tagline {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        /* ==================== HEADER (COMMENTED OUT) ==================== */
+        /*
         .header {
             display: flex;
             flex-direction: row;
@@ -203,6 +232,7 @@
             cursor: pointer;
             padding: 8px 12px;
         }
+        */
 
         /* ==================== PROGRESS INDICATOR ==================== */
 
@@ -835,7 +865,13 @@
                     </div>
                 </div>
 
-                <!-- Header -->
+                <!-- Brand Header -->
+                <div class="brand-header">
+                    <h1 class="brand-logo"><span class="nivesh">Nivesh</span><span class="pe">Pe</span></h1>
+                    <p class="brand-tagline">Bharat's Must-Have Mutual Fund App</p>
+                </div>
+
+                <!-- Old Header (COMMENTED OUT)
                 <div class="header">
                     <button class="back-button" id="backButton" onclick="handleBack()">
                         <span class="material-symbols-outlined">arrow_back</span>
@@ -843,32 +879,31 @@
                     <h1 class="header-title" id="headerTitle">Welcome</h1>
                     <button class="skip-button" id="skipButton" onclick="skipCarousel()" style="display: none;">Skip</button>
                 </div>
+                -->
 
-                <!-- Progress Indicator -->
+                <!-- Progress Indicator (COMMENTED OUT)
                 <div class="progress-indicator" id="progressIndicator">
                     <div class="progress-dot" id="progressDot1"></div>
                     <div class="progress-dot" id="progressDot2"></div>
                 </div>
+                -->
 
                 <!-- Main Content -->
                 <div class="main-content">
-                    <!-- State 1: Welcome Carousel -->
-                    <div class="auth-state active" id="carouselState">
+                    <!-- State 1: Welcome Carousel (COMMENTED OUT - will be used later)
+                    <div class="auth-state" id="carouselState">
                         <div class="carousel-container">
                             <div class="carousel-slides">
-                                <!-- Slide 1: Growth -->
                                 <div class="carousel-slide active" data-slide="0">
                                     <h2 class="carousel-headline">Invest Smarter,<br>Grow Faster</h2>
                                     <p class="carousel-subtext">Build wealth with India's simplest investment app. Start with just ₹100.</p>
                                 </div>
 
-                                <!-- Slide 2: Auto-SIP -->
                                 <div class="carousel-slide" data-slide="1">
                                     <h2 class="carousel-headline">Auto-Invest.<br>Zero Hassle.</h2>
                                     <p class="carousel-subtext">Set it and forget it. Your money grows on autopilot with smart SIPs.</p>
                                 </div>
 
-                                <!-- Slide 3: Security -->
                                 <div class="carousel-slide" data-slide="2">
                                     <h2 class="carousel-headline">100% Safe<br>& Secure</h2>
                                     <p class="carousel-subtext">Bank-grade security. SEBI registered. Your investments are always protected.</p>
@@ -884,9 +919,10 @@
                             <button class="carousel-button" id="carouselButton" onclick="handleCarouselButton()">Next</button>
                         </div>
                     </div>
+                    -->
 
-                    <!-- State 2: Phone Entry -->
-                    <div class="auth-state" id="phoneState">
+                    <!-- State 2: Phone Entry (Now the initial state) -->
+                    <div class="auth-state active" id="phoneState">
                         <div class="phone-container">
                             <h2 class="welcome-text">Welcome!</h2>
                             <p class="subtitle-text">Enter your mobile number to get started</p>
@@ -1011,7 +1047,7 @@
         const RESEND_TIMER = 30;
 
         // State variables
-        let currentState = 'carousel';
+        let currentState = 'phone'; // Changed from 'carousel' to start with phone verification
         let currentSlide = 0;
         let mobileNumber = '';
         let otpAttempts = 0;
@@ -1238,7 +1274,7 @@
                 localStorage.setItem('niveshpe_session_token', 'demo_token_' + Date.now());
                 localStorage.setItem('niveshpe_user_type', isNewUser ? 'new' : 'existing');
 
-                window.location.href = 'auth-email.html';
+                window.location.href = 'investor-detail.html';
             }, 1500);
         }
 
@@ -1249,56 +1285,22 @@
                 el.classList.remove('active');
             });
 
-            const backButton = document.getElementById('backButton');
-            const skipButton = document.getElementById('skipButton');
-            const progressIndicator = document.getElementById('progressIndicator');
-            const progressDot1 = document.getElementById('progressDot1');
-            const progressDot2 = document.getElementById('progressDot2');
+            // Header replaced with brand header - no dynamic updates needed
+            // Navigation handled via "Change Mobile Number" link in OTP state
 
-            progressDot1.classList.remove('active');
-            progressDot2.classList.remove('active');
-
-            if (state === 'carousel') {
-                document.getElementById('carouselState').classList.add('active');
-                document.getElementById('headerTitle').textContent = 'Welcome';
-                backButton.classList.remove('visible');
-                skipButton.style.display = 'inline-block';
-                progressIndicator.classList.remove('show');
-                currentState = 'carousel';
-            } else if (state === 'phone') {
+            if (state === 'phone') {
                 document.getElementById('phoneState').classList.add('active');
-                document.getElementById('headerTitle').textContent = 'Sign In';
-                backButton.classList.add('visible');
-                skipButton.style.display = 'none';
-                progressIndicator.classList.add('show');
-                progressDot1.classList.add('active');
                 currentState = 'phone';
             } else if (state === 'otp') {
                 document.getElementById('otpState').classList.add('active');
-                document.getElementById('headerTitle').textContent = 'Verify Code';
-                backButton.classList.add('visible');
-                skipButton.style.display = 'none';
-                progressIndicator.classList.add('show');
-                progressDot2.classList.add('active');
                 currentState = 'otp';
             } else if (state === 'success') {
                 document.getElementById('successState').classList.add('active');
-                document.getElementById('headerTitle').textContent = 'Success';
-                backButton.classList.remove('visible');
-                skipButton.style.display = 'none';
-                progressIndicator.classList.remove('show');
                 currentState = 'success';
             }
         }
 
-        function handleBack() {
-            if (currentState === 'phone') {
-                switchState('carousel');
-                goToSlide(2);
-            } else if (currentState === 'otp') {
-                changeNumber();
-            }
-        }
+        // handleBack is no longer needed - navigation handled via "Change Mobile Number" link
 
         // ==================== ERROR HANDLING ====================
 
@@ -1336,7 +1338,8 @@
         // ==================== INITIALIZATION ====================
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('skipButton').style.display = 'inline-block';
+            // Initialize with phone state - header replaced with brand header
+            // Old header references removed
         });
 
         // Touch swipe for carousel

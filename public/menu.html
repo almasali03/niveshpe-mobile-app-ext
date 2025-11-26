@@ -213,6 +213,14 @@
             background: var(--color-blue);
             padding: 12px 16px 16px 16px;
             color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .menu-profile-container:active {
+            transform: scale(0.98);
+            opacity: 0.95;
         }
 
         /* User Profile Header - Vertical Centered Layout */
@@ -267,6 +275,18 @@
         .menu-user-phone .material-symbols-outlined {
             font-size: 14px;
             color: var(--color-green-light);
+        }
+
+        /* Risk Profile Badge */
+        .menu-risk-badge {
+            display: inline-block;
+            background: var(--color-green);
+            color: white;
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 6px;
         }
 
         /* Action Pills Section */
@@ -639,17 +659,9 @@
         <!-- User Profile Header -->
         <div class="menu-profile-container">
             <div class="menu-profile">
-                <div class="menu-avatar">AK</div>
-                <div class="menu-user-name">Almas Khan</div>
-            </div>
-
-            <!-- Action Pills Section -->
-            <div class="menu-action-pills">
-                <!-- KYC Pill -->
-                <button class="menu-action-pill pending" id="kycActionPill" onclick="toggleKYCState()">
-                    <span class="material-symbols-outlined">warning</span>
-                    <span class="pill-text">Complete KYC</span>
-                </button>
+                <div class="menu-avatar">RY</div>
+                <div class="menu-user-name">Rajat Yadav</div>
+                <div class="menu-risk-badge">Balanced Investor</div>
             </div>
         </div>
 
@@ -931,6 +943,12 @@
             window.location.href = 'support.html';
         });
 
+        // Profile Container Navigation to Risk Profiling
+        const profileContainer = document.querySelector('.menu-profile-container');
+        profileContainer.addEventListener('click', function() {
+            window.location.href = 'risk-profiling.html';
+        });
+
         // Function to activate NiveshPro subscription
         function activateNiveshPro() {
             const nonSubscriberSection = document.getElementById('niveshproNonSubscriber');
@@ -974,29 +992,8 @@
             }
         }
 
-        // Function to toggle KYC state
-        function toggleKYCState() {
-            const kycPill = document.getElementById('kycActionPill');
-            const icon = kycPill.querySelector('.material-symbols-outlined');
-            const text = kycPill.querySelector('.pill-text');
-
-            if (kycPill.classList.contains('pending')) {
-                // Change to completed state
-                kycPill.classList.remove('pending');
-                kycPill.classList.add('completed');
-                icon.textContent = 'verified_user';
-                text.textContent = 'KYC Verified';
-            } else {
-                // Change back to pending state
-                kycPill.classList.remove('completed');
-                kycPill.classList.add('pending');
-                icon.textContent = 'warning';
-                text.textContent = 'Complete KYC';
-            }
-        }
-
         // Mobile touch interactions
-        document.querySelectorAll('.menu-item, .menu-danger-item, .menu-action-pill, .niveshpro-upgrade, .niveshpro-cta, .floating-help-btn').forEach(item => {
+        document.querySelectorAll('.menu-profile-container, .menu-item, .menu-danger-item, .menu-action-pill, .niveshpro-upgrade, .niveshpro-cta, .floating-help-btn').forEach(item => {
             item.addEventListener('touchstart', function() {
                 this.style.transition = 'transform 0.1s ease';
                 this.style.transform = 'scale(0.98)';

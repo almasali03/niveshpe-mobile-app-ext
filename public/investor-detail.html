@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Details - NiveshPe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- iPhone Toggle CSS -->
+    <link rel="stylesheet" href="assets/css/iphone-toggle.css">
+
+    <style>
+        :root {
+            --color-bg-primary: #F5F7FA;
+            --color-blue: #2563EB;
+            --color-blue-dark: #1D4ED8;
+            --color-blue-light: #3B82F6;
+            --color-green: #10B981;
+            --color-green-light: #34D399;
+            --color-purple: #8B5CF6;
+            --color-orange: #F59E0B;
+            --color-red: #EF4444;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-text-muted: #9CA3AF;
+            --color-border: #E5E7EB;
+            --color-card: #FFFFFF;
+            --color-surface: #F9FAFB;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-2xl: 24px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            overflow: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(0); }
+            to { transform: translateY(100%); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* ==================== STATUS BAR ==================== */
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            height: 44px;
+            flex-shrink: 0;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* ==================== HEADER ==================== */
+
+        .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: white;
+            height: 58px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 0 20px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            padding: 8px;
+            margin-left: -8px;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-left: 12px;
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: white;
+        }
+
+        .kyc-container {
+            padding: 24px 20px;
+            background: white;
+            min-height: 100%;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .subtitle-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .error-message {
+            display: none;
+            padding: 12px 16px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius-sm);
+            color: var(--color-red);
+            font-size: 14px;
+            margin-bottom: 16px;
+            animation: shake 0.3s;
+        }
+
+        .error-message.show {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .text-input {
+            width: 100%;
+            height: 52px;
+            padding: 0 16px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .text-input.error {
+            border-color: var(--color-red);
+        }
+
+        .text-input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .amount-input-wrapper {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .amount-input {
+            padding-left: 40px !important;
+        }
+
+        .btn-primary {
+            width: 100%;
+            height: 52px;
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: scale(0.98);
+            background: var(--color-blue-dark);
+        }
+
+        .btn-primary:disabled {
+            background: var(--color-border);
+            color: var(--color-text-muted);
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            height: 52px;
+            background: white;
+            color: var(--color-blue);
+            border: 2px solid var(--color-blue);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.98);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .btn-text-only {
+            width: 100%;
+            height: 52px;
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-text-only:hover {
+            background: var(--color-bg-primary);
+        }
+
+        /* ==================== CHECKBOX ==================== */
+
+        .checkbox-group {
+            margin: 16px 0;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            cursor: pointer;
+        }
+
+        /* ==================== NOMINEE SECTION ==================== */
+
+        .nominee-section {
+            margin: 24px 0;
+        }
+
+        .nominee-radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .nominee-radio-option {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px;
+            background: var(--color-bg-primary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nominee-radio-option.subtle-option {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            padding: 10px 14px;
+        }
+
+        .radio-input {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+            appearance: none;
+            position: relative;
+        }
+
+        .radio-input:checked {
+            border-color: var(--color-blue);
+        }
+
+        .radio-input:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: var(--color-blue);
+            border-radius: 50%;
+        }
+
+        .radio-label {
+            flex: 1;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .radio-label-text {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        .radio-label-text.subtle-text {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .nominee-cards-container {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nominee-card {
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px solid var(--color-green);
+            border-radius: var(--radius-md);
+        }
+
+        .nominee-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nominee-card-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .nominee-initials {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .nominee-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .nominee-card-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .nominee-card-relationship {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .nominee-card-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nominee-allocation-badge {
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid var(--color-green);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-green);
+        }
+
+        .nominee-card-edit-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            color: var(--color-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nominee-card-edit-btn:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .nominee-card-edit-btn .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        /* ==================== NOMINEE OVERLAY ==================== */
+
+        .nominee-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: none;
+        }
+
+        .nominee-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .nominee-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .drag-handle {
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .drag-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 999px;
+        }
+
+        .nominee-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-bg-primary);
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s;
+        }
+
+        .nominee-close-btn:hover {
+            background: var(--color-border);
+        }
+
+        .modal-header {
+            padding: 20px 20px 12px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .nominee-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nominee-form-item {
+            padding: 20px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+        }
+
+        .nominee-form-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .nominee-form-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .nominee-remove-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nominee-remove-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .nominee-remove-btn .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .allocation-warning {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(251, 146, 60, 0.1);
+            border: 1px solid #fb923c;
+            border-radius: var(--radius-md);
+            color: #ea580c;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .allocation-warning .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .continue-section {
+            padding: 16px 24px 32px;
+            background: white;
+            border-top: 1px solid var(--color-border);
+            flex-shrink: 0;
+        }
+
+        /* ==================== OTP OVERLAY STYLES ==================== */
+
+        .otp-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: none;
+        }
+
+        .otp-overlay-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .otp-overlay-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            max-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 101;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .otp-drag-handle {
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .otp-drag-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 999px;
+        }
+
+        .otp-modal-header {
+            padding: 0 24px 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .otp-modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .otp-modal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .otp-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 24px;
+            scrollbar-width: none;
+        }
+
+        .otp-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .otp-input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: 24px 0;
+        }
+
+        .otp-input-container {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .otp-input {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .otp-input.filled {
+            border-color: var(--color-green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .otp-timer {
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .otp-resend-link {
+            color: var(--color-blue);
+            font-weight: 600;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .otp-continue-section {
+            padding: 16px 24px 32px;
+            background: white;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .otp-continue-btn {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            border: none;
+            background: var(--color-blue);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .otp-continue-btn.enabled {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .otp-continue-btn.enabled:active {
+            transform: scale(0.96);
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.4);
+        }
+
+        /* ==================== LOADING STATE ==================== */
+
+        .loading-container {
+            display: none;
+            text-align: center;
+            padding: 32px 20px;
+        }
+
+        .loading-container.show {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--color-border);
+            border-top-color: var(--color-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .loading-subtext {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- iPhone Toggle Button -->
+    <button class="frame-toggle-btn" onclick="toggleFrameMode()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        </svg>
+        <span id="frameToggleText">Normal View</span>
+    </button>
+
+    <div class="iphone-frame">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+            <div class="mobile-container">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="status-icons">
+                        <span>📶</span>
+                        <span>📡</span>
+                        <span>🔋</span>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="header">
+                    <button class="close-button" onclick="goToHome()">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </button>
+                    <h1 class="header-title">Investor Details</h1>
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <div class="kyc-container">
+                        <p class="subtitle-text">Help us understand your investment profile better</p>
+
+                        <div id="investorForm">
+                            <!-- Question 1: Occupation -->
+                            <div class="input-group">
+                                <label class="input-label" for="occupation">1. What is your occupation?</label>
+                                <select id="occupation" class="text-input" onchange="validateForm()">
+                                    <option value="" selected disabled>Select your occupation</option>
+                                    <option value="private-job">Private Job</option>
+                                    <option value="business">Business</option>
+                                    <option value="shopkeeper">Shopkeeper</option>
+                                    <option value="freelancer">Freelancer</option>
+                                    <option value="professional">Professional</option>
+                                    <option value="student">Student</option>
+                                    <option value="homemaker">Home-maker/Housewife</option>
+                                    <option value="retired">Retired</option>
+                                    <option value="govt-service">Govt Service</option>
+                                    <option value="psu">Public Sector Service</option>
+                                    <option value="agriculture">Agriculture</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+
+                            <!-- Question 2: Monthly Income -->
+                            <div class="input-group">
+                                <label class="input-label" for="monthlyIncome">2. What's your in-hand monthly income?</label>
+                                <div class="amount-input-wrapper">
+                                    <span class="currency-symbol">₹</span>
+                                    <input
+                                        type="tel"
+                                        id="monthlyIncome"
+                                        class="text-input amount-input"
+                                        placeholder="50,000"
+                                        oninput="validateForm();"
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- Question 3: Source of Funds -->
+                            <div class="input-group">
+                                <label class="input-label" for="sourceOfFunds">3. What is your primary source of funds?</label>
+                                <select id="sourceOfFunds" class="text-input" onchange="validateForm()">
+                                    <option value="" selected disabled>Select source of funds</option>
+                                    <option value="salary">Salary</option>
+                                    <option value="business-income">Business Income</option>
+                                    <option value="rent">Rent</option>
+                                    <option value="property">Property Sale</option>
+                                    <option value="gift">Gift</option>
+                                    <option value="royalty">Royalty</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+
+                            <!-- Nominee Selection Section -->
+                            <div class="nominee-section">
+                                <label class="input-label">4. Nominee Details</label>
+
+                                <!-- Radio Options -->
+                                <div class="nominee-radio-group">
+                                    <div class="nominee-radio-option">
+                                        <input type="radio" id="nomineeLater" name="nomineeChoice" value="later" class="radio-input" checked onchange="handleNomineeChoice()">
+                                        <label for="nomineeLater" class="radio-label">
+                                            <span class="radio-label-text">I will add a nominee later</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="nominee-radio-option subtle-option">
+                                        <input type="radio" id="nomineeNow" name="nomineeChoice" value="now" class="radio-input" onchange="handleNomineeChoice()">
+                                        <label for="nomineeNow" class="radio-label">
+                                            <span class="radio-label-text subtle-text">I want to add a nominee right now</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Nominee Cards Container (shown when nominees are added) -->
+                                <div id="nomineeCardsContainer" class="nominee-cards-container" style="display: none;">
+                                    <!-- Nominees will be rendered here dynamically -->
+                                </div>
+                            </div>
+
+                            <!-- PEP Declaration Checkbox -->
+                            <div class="checkbox-group">
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" id="pepDeclaration" class="checkbox-input" onchange="validateForm()">
+                                    <label for="pepDeclaration" class="checkbox-label">
+                                        I declare that I am not a Politically Exposed Person (PEP), nor am I a family member or known close associate of a PEP, as defined under the Prevention of Money Laundering Act, 2002 and applicable regulations.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button class="btn-primary" id="submitBtn" disabled onclick="submitForm()">
+                                Submit
+                            </button>
+                        </div>
+
+                        <div id="loadingState" class="loading-container">
+                            <div class="loading-spinner"></div>
+                            <div class="loading-text">Submitting Details...</div>
+                            <div class="loading-subtext">Please wait while we process your information</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="iphone-home-indicator"></div>
+    </div>
+
+    <!-- Nominee Details Overlay -->
+    <div class="nominee-overlay" id="nomineeOverlay">
+        <div class="nominee-backdrop" onclick="closeNomineeOverlay()"></div>
+
+        <div class="nominee-modal">
+            <!-- Drag Handle -->
+            <div class="drag-handle">
+                <div class="drag-bar"></div>
+            </div>
+
+            <!-- Close Button -->
+            <button class="nominee-close-btn" onclick="closeNomineeOverlay()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 class="modal-title">Add Nominee Details</h2>
+                <p class="modal-subtitle">Add one or more nominees who will receive your investments in case of unforeseen circumstances</p>
+            </div>
+
+            <!-- Scrollable Form Content -->
+            <div class="nominee-content">
+                <!-- Nominee Form (dynamic, will be repeated for multiple nominees) -->
+                <div id="nomineeFormsContainer">
+                    <!-- First nominee form -->
+                    <div class="nominee-form-item" id="nomineeForm0">
+                        <div class="nominee-form-header">
+                            <h3 class="nominee-form-title">Nominee 1</h3>
+                            <button class="nominee-remove-btn" onclick="removeNominee(0)" style="display: none;">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Full Name</label>
+                            <input type="text" class="text-input" id="nomineeName0" placeholder="Enter nominee's full name">
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Relationship</label>
+                            <select class="text-input" id="nomineeRelationship0">
+                                <option value="" disabled selected>Select relationship</option>
+                                <option value="parent">Parent</option>
+                                <option value="spouse">Spouse</option>
+                                <option value="sibling">Sibling</option>
+                                <option value="child">Child</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">PAN Number</label>
+                            <input type="text" class="text-input" id="nomineePan0" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                        </div>
+
+                        <div class="input-group allocation-field" style="display: none;">
+                            <label class="input-label">Allocation %</label>
+                            <input type="number" class="text-input" id="nomineeAllocation0" placeholder="100" min="1" max="100" value="100">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Another Nominee Button -->
+                <button class="btn-secondary" id="addAnotherNomineeBtn" onclick="addAnotherNomineeForm()" style="margin-top: 16px;">
+                    <span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+                    <span>Add Another Nominee</span>
+                </button>
+
+                <!-- Allocation Warning -->
+                <div id="allocationWarning" class="allocation-warning" style="display: none;">
+                    <span class="material-symbols-outlined">info</span>
+                    <span>Total allocation must equal 100%</span>
+                </div>
+            </div>
+
+            <!-- Fixed Action Buttons -->
+            <div class="continue-section">
+                <button class="btn-primary" id="saveNomineesBtn" onclick="saveNominees()">
+                    <span>Save Nominees</span>
+                </button>
+
+                <button class="btn-text-only" onclick="closeNomineeOverlay()">
+                    <span>Cancel</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- iPhone Toggle JS -->
+    <script src="assets/js/iphone-toggle.js"></script>
+
+    <script>
+        // Data storage
+        let investorData = {
+            occupation: null,
+            monthlyIncome: null,
+            sourceOfFunds: null,
+            nominees: [],
+            pepDeclaration: false
+        };
+
+        // Nominee management
+        let nomineeCount = 1;
+
+        // ==================== FORM VALIDATION ====================
+
+        function validateForm() {
+            const occupation = document.getElementById('occupation').value;
+            const monthlyIncome = document.getElementById('monthlyIncome').value;
+            const sourceOfFunds = document.getElementById('sourceOfFunds').value;
+            const declaration = document.getElementById('pepDeclaration').checked;
+
+            const submitBtn = document.getElementById('submitBtn');
+            const isValid = occupation && monthlyIncome && sourceOfFunds && declaration;
+            submitBtn.disabled = !isValid;
+        }
+
+        function submitForm() {
+            investorData.occupation = document.getElementById('occupation').value;
+            investorData.monthlyIncome = document.getElementById('monthlyIncome').value.replace(/,/g, '');
+            investorData.sourceOfFunds = document.getElementById('sourceOfFunds').value;
+            investorData.pepDeclaration = true;
+
+            document.getElementById('investorForm').style.display = 'none';
+            document.getElementById('loadingState').classList.add('show');
+
+            setTimeout(() => {
+                // Store data (in a real app, this would be sent to a server)
+                console.log('Investor Data:', investorData);
+
+                // Redirect to home page
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        // ==================== NAVIGATION ====================
+
+        function goToHome() {
+            if (confirm('Are you sure you want to go back? Your progress will be lost.')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // ==================== NOMINEE MANAGEMENT ====================
+
+        function handleNomineeChoice() {
+            const nomineeNowChecked = document.getElementById('nomineeNow').checked;
+
+            if (nomineeNowChecked) {
+                openNomineeOverlay();
+            }
+        }
+
+        function openNomineeOverlay() {
+            document.getElementById('nomineeOverlay').style.display = 'flex';
+            // Add animation
+            setTimeout(() => {
+                document.querySelector('.nominee-modal').style.animation = 'slideUp 0.3s ease-out';
+                document.querySelector('.nominee-backdrop').style.animation = 'fadeIn 0.3s ease-out';
+            }, 10);
+        }
+
+        function closeNomineeOverlay() {
+            document.getElementById('nomineeOverlay').style.display = 'none';
+
+            // Reset radio selection if no nominees were saved
+            if (investorData.nominees.length === 0) {
+                document.getElementById('nomineeLater').checked = true;
+            }
+        }
+
+        function addAnotherNomineeForm() {
+            nomineeCount++;
+            const container = document.getElementById('nomineeFormsContainer');
+
+            const newForm = document.createElement('div');
+            newForm.className = 'nominee-form-item';
+            newForm.id = `nomineeForm${nomineeCount - 1}`;
+            newForm.innerHTML = `
+                <div class="nominee-form-header">
+                    <h3 class="nominee-form-title">Nominee ${nomineeCount}</h3>
+                    <button class="nominee-remove-btn" onclick="removeNomineeForm(${nomineeCount - 1})">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Full Name</label>
+                    <input type="text" class="text-input" id="nomineeName${nomineeCount - 1}" placeholder="Enter nominee's full name">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Relationship</label>
+                    <select class="text-input" id="nomineeRelationship${nomineeCount - 1}">
+                        <option value="" disabled selected>Select relationship</option>
+                        <option value="parent">Parent</option>
+                        <option value="spouse">Spouse</option>
+                        <option value="sibling">Sibling</option>
+                        <option value="child">Child</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">PAN Number</label>
+                    <input type="text" class="text-input" id="nomineePan${nomineeCount - 1}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                </div>
+
+                <div class="input-group allocation-field">
+                    <label class="input-label">Allocation %</label>
+                    <input type="number" class="text-input" id="nomineeAllocation${nomineeCount - 1}" placeholder="0" min="1" max="100">
+                </div>
+            `;
+
+            container.appendChild(newForm);
+
+            // Show delete button for first nominee if more than one
+            if (nomineeCount > 1) {
+                document.querySelector('#nomineeForm0 .nominee-remove-btn').style.display = 'flex';
+            }
+
+            // Show all allocation fields when multiple nominees
+            toggleAllocationFields();
+
+            // Recalculate allocations
+            redistributeAllocations();
+        }
+
+        function removeNomineeForm(index) {
+            const form = document.getElementById(`nomineeForm${index}`);
+            if (form) {
+                form.remove();
+                nomineeCount--;
+
+                // Hide delete button if only one nominee left
+                if (nomineeCount === 1) {
+                    const firstDeleteBtn = document.querySelector('#nomineeForm0 .nominee-remove-btn');
+                    if (firstDeleteBtn) {
+                        firstDeleteBtn.style.display = 'none';
+                    }
+                }
+
+                // Renumber remaining forms
+                const forms = document.querySelectorAll('.nominee-form-item');
+                forms.forEach((form, idx) => {
+                    const title = form.querySelector('.nominee-form-title');
+                    if (title) {
+                        title.textContent = `Nominee ${idx + 1}`;
+                    }
+                });
+
+                // Toggle allocation fields visibility
+                toggleAllocationFields();
+
+                // Recalculate allocations
+                redistributeAllocations();
+            }
+        }
+
+        function toggleAllocationFields() {
+            const forms = document.querySelectorAll('.nominee-form-item');
+            const allocationFields = document.querySelectorAll('.allocation-field');
+
+            if (forms.length === 1) {
+                // Hide all allocation fields for single nominee
+                allocationFields.forEach(field => {
+                    field.style.display = 'none';
+                });
+            } else {
+                // Show all allocation fields for multiple nominees
+                allocationFields.forEach(field => {
+                    field.style.display = 'block';
+                });
+            }
+        }
+
+        function redistributeAllocations() {
+            const forms = document.querySelectorAll('.nominee-form-item');
+            const count = forms.length;
+            const equalShare = Math.floor(100 / count);
+            const remainder = 100 % count;
+
+            forms.forEach((form, idx) => {
+                const allocationInput = form.querySelector(`input[id^="nomineeAllocation"]`);
+                if (allocationInput) {
+                    // Give remainder to first nominee
+                    allocationInput.value = idx === 0 ? equalShare + remainder : equalShare;
+                }
+            });
+        }
+
+        function validateNominees() {
+            const forms = document.querySelectorAll('.nominee-form-item');
+            let totalAllocation = 0;
+            let isValid = true;
+
+            const nominees = [];
+
+            forms.forEach((form, idx) => {
+                const name = document.getElementById(`nomineeName${idx}`)?.value.trim();
+                const relationship = document.getElementById(`nomineeRelationship${idx}`)?.value;
+                const pan = document.getElementById(`nomineePan${idx}`)?.value.trim().toUpperCase();
+
+                // For single nominee, allocation is always 100%
+                let allocation;
+                if (forms.length === 1) {
+                    allocation = 100;
+                } else {
+                    allocation = parseInt(document.getElementById(`nomineeAllocation${idx}`)?.value) || 0;
+                    if (allocation <= 0) {
+                        isValid = false;
+                        return;
+                    }
+                }
+
+                if (!name || !relationship || !pan) {
+                    isValid = false;
+                    return;
+                }
+
+                // Basic PAN validation
+                const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+                if (!panRegex.test(pan)) {
+                    isValid = false;
+                    return;
+                }
+
+                totalAllocation += allocation;
+
+                nominees.push({
+                    name,
+                    relationship,
+                    pan,
+                    allocation
+                });
+            });
+
+            // Check if total allocation is 100% (only for multiple nominees)
+            if (forms.length > 1 && totalAllocation !== 100) {
+                document.getElementById('allocationWarning').style.display = 'flex';
+                return false;
+            } else {
+                document.getElementById('allocationWarning').style.display = 'none';
+            }
+
+            if (!isValid) {
+                return false;
+            }
+
+            return nominees;
+        }
+
+        function saveNominees() {
+            const nominees = validateNominees();
+
+            if (!nominees) {
+                alert('Please fill all nominee details correctly and ensure allocation totals 100%');
+                return;
+            }
+
+            investorData.nominees = nominees;
+            renderNomineeCards();
+            closeNomineeOverlay();
+        }
+
+        function renderNomineeCards() {
+            const container = document.getElementById('nomineeCardsContainer');
+
+            if (investorData.nominees.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            container.innerHTML = '';
+
+            investorData.nominees.forEach((nominee, idx) => {
+                const card = document.createElement('div');
+                card.className = 'nominee-card';
+                card.innerHTML = `
+                    <div class="nominee-card-header">
+                        <div class="nominee-card-left">
+                            <div class="nominee-initials">${getInitials(nominee.name)}</div>
+                            <div class="nominee-card-info">
+                                <div class="nominee-card-name">${nominee.name}</div>
+                                <div class="nominee-card-relationship">${formatRelationship(nominee.relationship)}</div>
+                            </div>
+                        </div>
+                        <div class="nominee-card-right">
+                            <div class="nominee-allocation-badge">${nominee.allocation}%</div>
+                            <button class="nominee-card-edit-btn" onclick="editNominee(${idx})">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function editNominee(index) {
+            // Open overlay with existing data
+            openNomineeOverlay();
+
+            // Clear existing forms
+            const container = document.getElementById('nomineeFormsContainer');
+            container.innerHTML = '';
+            nomineeCount = 0;
+
+            // Recreate forms with existing data
+            investorData.nominees.forEach((nominee, idx) => {
+                if (idx === 0) {
+                    // First form already exists, just populate
+                    recreateNomineeForm(nominee, idx);
+                } else {
+                    addAnotherNomineeForm();
+                    populateNomineeForm(nominee, idx);
+                }
+            });
+        }
+
+        function recreateNomineeForm(nominee, index) {
+            nomineeCount++;
+            const container = document.getElementById('nomineeFormsContainer');
+
+            const form = document.createElement('div');
+            form.className = 'nominee-form-item';
+            form.id = `nomineeForm${index}`;
+            form.innerHTML = `
+                <div class="nominee-form-header">
+                    <h3 class="nominee-form-title">Nominee ${index + 1}</h3>
+                    <button class="nominee-remove-btn" onclick="removeNomineeForm(${index})" style="display: ${investorData.nominees.length > 1 ? 'flex' : 'none'};">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Full Name</label>
+                    <input type="text" class="text-input" id="nomineeName${index}" placeholder="Enter nominee's full name" value="${nominee.name}">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Relationship</label>
+                    <select class="text-input" id="nomineeRelationship${index}">
+                        <option value="" disabled>Select relationship</option>
+                        <option value="parent" ${nominee.relationship === 'parent' ? 'selected' : ''}>Parent</option>
+                        <option value="spouse" ${nominee.relationship === 'spouse' ? 'selected' : ''}>Spouse</option>
+                        <option value="sibling" ${nominee.relationship === 'sibling' ? 'selected' : ''}>Sibling</option>
+                        <option value="child" ${nominee.relationship === 'child' ? 'selected' : ''}>Child</option>
+                        <option value="other" ${nominee.relationship === 'other' ? 'selected' : ''}>Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">PAN Number</label>
+                    <input type="text" class="text-input" id="nomineePan${index}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;" value="${nominee.pan}">
+                </div>
+
+                <div class="input-group allocation-field" style="display: ${investorData.nominees.length > 1 ? 'block' : 'none'};">
+                    <label class="input-label">Allocation %</label>
+                    <input type="number" class="text-input" id="nomineeAllocation${index}" placeholder="100" min="1" max="100" value="${nominee.allocation}">
+                </div>
+            `;
+
+            container.appendChild(form);
+
+            // Toggle allocation fields based on count
+            toggleAllocationFields();
+        }
+
+        function populateNomineeForm(nominee, index) {
+            document.getElementById(`nomineeName${index}`).value = nominee.name;
+            document.getElementById(`nomineeRelationship${index}`).value = nominee.relationship;
+            document.getElementById(`nomineePan${index}`).value = nominee.pan;
+            document.getElementById(`nomineeAllocation${index}`).value = nominee.allocation;
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        }
+
+        function formatRelationship(relationship) {
+            return relationship.charAt(0).toUpperCase() + relationship.slice(1);
+        }
+
+        // ==================== OTP VERIFICATION ====================
+
+
+        // ==================== INITIALIZATION ====================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Investor Details page loaded');
+        });
+    </script>
+</body>
+</html>
