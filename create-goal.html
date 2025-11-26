@@ -888,8 +888,8 @@
 
         /* Fund Card */
         .balanced-fund-card {
-            background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
-            border: 1px solid var(--color-border);
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 1px solid #BFDBFE;
             border-radius: var(--radius-lg);
             padding: 20px;
         }
@@ -1011,6 +1011,83 @@
             font-size: 12px;
             color: var(--color-text-secondary);
             line-height: 1.4;
+        }
+
+        /* Fund Allocation Section */
+        .fund-allocation-section {
+            margin-top: 20px;
+        }
+
+        .allocation-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 12px;
+        }
+
+        .fund-allocation-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .allocation-item {
+            width: 100%;
+        }
+
+        .allocation-card {
+            position: relative;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            overflow: hidden;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .allocation-card-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: #10B981;        /* Green fill */
+            opacity: 0.15;
+            border-radius: var(--radius-sm);
+            transition: width 0.5s ease;
+        }
+
+        .allocation-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .allocation-left {
+            flex: 1;
+        }
+
+        .fund-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        .allocation-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .percentage {
+            font-size: 13px;
+            font-weight: 600;
+            color: #3B82F6;
         }
     </style>
     <link rel="stylesheet" href="assets/css/iphone-toggle.css">
@@ -1207,7 +1284,7 @@
                         <!-- Header -->
                         <div class="funds-header">
                             <h2 class="funds-title">Recommended Funds</h2>
-                            <p class="funds-subtitle">Based on your goal timeline</p>
+                            <p class="funds-subtitle">Based on your risk appetite and goals</p>
                         </div>
 
                         <!-- Content -->
@@ -1236,6 +1313,91 @@
         let selectedIcon = null;
         let selectedTenure = 5; // Default to 5 years
 
+        // Embedded basket and fund mapping data (from claudeJson.json and hdfc-funds-mapping.json)
+        // This approach works without a local server (no CORS issues with file:// protocol)
+        const basketsConfig = {
+            "FundRecommendationMatrix": {
+                "Medium Risk": {
+                    "<1 Year": "B2.1",
+                    "1-2 Years": "B2.2",
+                    "2-4 Years": "B2.3",
+                    "4+ Years": "B2.4"
+                }
+            },
+            "CoreBaskets": {
+                "B2.1": {
+                    "basket_name": "B2_1",
+                    "description": "Low-volatility arbitrage-focused basket.",
+                    "schemes": [
+                        { "FundRankingCategory": "ARBITRAGE", "ratio": 75 },
+                        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 25 }
+                    ]
+                },
+                "B2.2": {
+                    "basket_name": "B2_2",
+                    "description": "Low-risk hybrid basket combining stability and balanced advantage.",
+                    "schemes": [
+                        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 70 },
+                        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 30 }
+                    ]
+                },
+                "B2.3": {
+                    "basket_name": "B2_3",
+                    "description": "Diversified growth basket blending balanced advantage and large caps.",
+                    "schemes": [
+                        { "FundRankingCategory": "BALANCED_ADVANTAGE", "ratio": 55 },
+                        { "FundRankingCategory": "CONSERVATIVE_HYBRID", "ratio": 15 },
+                        { "FundRankingCategory": "LARGE_CAP", "ratio": 20 },
+                        { "FundRankingCategory": "GOLD", "ratio": 10 }
+                    ]
+                },
+                "B2.4": {
+                    "basket_name": "B2_4",
+                    "description": "Growth basket with strong large & mid-cap allocation and aggressive exposure.",
+                    "schemes": [
+                        { "FundRankingCategory": "LARGE_MID_CAP", "ratio": 75 },
+                        { "FundRankingCategory": "AGGRESSIVE_HYBRID", "ratio": 15 },
+                        { "FundRankingCategory": "GOLD", "ratio": 10 }
+                    ]
+                }
+            }
+        };
+
+        const hdfcFundsMapping = {
+            "CONSERVATIVE_HYBRID": {
+                "name": "HDFC Hybrid Debt Fund",
+                "category": "Hybrid"
+            },
+            "BALANCED_ADVANTAGE": {
+                "name": "HDFC Balanced Advantage Fund",
+                "category": "Hybrid"
+            },
+            "AGGRESSIVE_HYBRID": {
+                "name": "HDFC Hybrid Equity Fund",
+                "category": "Hybrid"
+            },
+            "LARGE_CAP": {
+                "name": "HDFC Top 100 Fund",
+                "category": "Equity"
+            },
+            "LARGE_MID_CAP": {
+                "name": "HDFC Large and Mid Cap Fund",
+                "category": "Equity"
+            },
+            "MULTICAP": {
+                "name": "HDFC Multi Cap Fund",
+                "category": "Equity"
+            },
+            "GOLD": {
+                "name": "HDFC Gold Fund",
+                "category": "Fund of Funds"
+            },
+            "ARBITRAGE": {
+                "name": "HDFC Arbitrage Fund",
+                "category": "Hybrid"
+            }
+        };
+
         // Category templates with names and icons
         const categoryTemplates = {
             'vacation': { name: 'Vacation', icon: 'flight_takeoff' },
@@ -1245,6 +1407,49 @@
             'car': { name: 'Car', icon: 'directions_car' },
             'emergency': { name: 'Emergency Fund', icon: 'health_and_safety' }
         };
+
+        /**
+         * Maps tenure slider value (1-20 years) to FundRecommendationMatrix buckets
+         * Mapping: 1 = <1 Year, 2 = 1-2 Years, 3-4 = 2-4 Years, 5+ = 4+ Years
+         */
+        function mapTenureToBucket(tenure) {
+            if (tenure === 1) return '<1 Year';
+            if (tenure === 2) return '1-2 Years';
+            if (tenure === 3 || tenure === 4) return '2-4 Years';
+            return '4+ Years'; // 5+ years
+        }
+
+        /**
+         * Returns approximate return ranges based on basket composition
+         * @param {Array} schemes - Array of {FundRankingCategory, ratio}
+         * @returns {string} - Return range (e.g., "8-10% p.a.")
+         */
+        function getApproximateReturns(schemes) {
+            // Identify dominant fund categories
+            const hasArbitrage = schemes.some(s => s.FundRankingCategory === 'ARBITRAGE');
+            const hasEquity = schemes.some(s =>
+                ['MULTICAP', 'LARGE_CAP', 'MID_CAP', 'SMALL_CAP', 'LARGE_MID_CAP'].includes(s.FundRankingCategory)
+            );
+            const hasHybrid = schemes.some(s =>
+                ['CONSERVATIVE_HYBRID', 'BALANCED_ADVANTAGE', 'AGGRESSIVE_HYBRID'].includes(s.FundRankingCategory)
+            );
+
+            // Calculate weighted equity exposure
+            let equityWeight = 0;
+            schemes.forEach(s => {
+                if (['MULTICAP', 'LARGE_CAP', 'MID_CAP', 'SMALL_CAP', 'LARGE_MID_CAP', 'AGGRESSIVE_HYBRID'].includes(s.FundRankingCategory)) {
+                    equityWeight += s.ratio;
+                }
+            });
+
+            // Return ranges based on composition
+            if (hasArbitrage && equityWeight < 30) return '7-9% p.a.';      // Low-volatility arbitrage
+            if (hasArbitrage && equityWeight < 50) return '8-11% p.a.';     // Arbitrage + hybrid
+            if (equityWeight < 30) return '8-10% p.a.';                     // Conservative hybrid dominant
+            if (equityWeight < 50) return '9-12% p.a.';                     // Balanced advantage dominant
+            if (equityWeight < 70) return '10-13% p.a.';                    // Hybrid with equity tilt
+            return '11-15% p.a.';                                           // Equity dominant
+        }
 
         // Auto-open overlay and initialize on page load
         window.addEventListener('DOMContentLoaded', function() {
@@ -1424,9 +1629,54 @@
         function generateFundRecommendations() {
             const fundsList = document.getElementById('fundsList');
 
-            // Build fund card HTML (show Balanced Returns Fund)
+            // Validation
+            if (!basketsConfig || !hdfcFundsMapping) {
+                console.error('Data not loaded yet');
+                fundsList.innerHTML = '<p style="padding: 20px; text-align: center;">Loading recommendations...</p>';
+                return;
+            }
+
+            // Get goal data from localStorage
+            const goalData = JSON.parse(localStorage.getItem('newGoal') || '{}');
+            const goalName = goalData.name || 'Your Goal';
+            const tenure = selectedTenure;
+
+            // Step 1: Map tenure to bucket
+            const bucket = mapTenureToBucket(tenure);
+            console.log(`Tenure: ${tenure} years → Bucket: ${bucket}`);
+
+            // Step 2: Get basket ID from FundRecommendationMatrix
+            const basketId = basketsConfig.FundRecommendationMatrix['Medium Risk'][bucket];
+            console.log(`Basket ID for Medium Risk + ${bucket}: ${basketId}`);
+
+            // Step 3: Get basket details from CoreBaskets
+            const basket = basketsConfig.CoreBaskets[basketId];
+            if (!basket) {
+                console.error(`Basket ${basketId} not found`);
+                return;
+            }
+            console.log('Basket details:', basket);
+
+            // Step 4: Map schemes to HDFC funds
+            const fundAllocations = basket.schemes.map(scheme => {
+                const hdfcFund = hdfcFundsMapping[scheme.FundRankingCategory];
+                return {
+                    name: hdfcFund ? hdfcFund.name : scheme.FundRankingCategory,
+                    allocation: scheme.ratio,
+                    category: hdfcFund ? hdfcFund.category : 'Unknown'
+                };
+            });
+
+            // Step 5: Calculate approximate returns
+            const returns = getApproximateReturns(basket.schemes);
+
+            // Step 6: Generate basket name (e.g., "Vacation Fund Basket")
+            const basketName = `${goalName} Basket`;
+
+            // Step 7: Build fund card HTML
             fundsList.innerHTML = `
                 <div class="balanced-fund-card">
+                    <!-- Card Header -->
                     <div class="fund-card-header">
                         <div class="fund-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
@@ -1434,10 +1684,12 @@
                             </svg>
                         </div>
                         <div class="fund-title-section">
-                            <h3 class="fund-card-title">Balanced Returns Fund</h3>
-                            <p class="fund-card-subtitle">Hybrid Fund – Dynamic Asset / Balanced Advantage</p>
+                            <h3 class="fund-card-title">${basketName}</h3>
+                            <p class="fund-card-subtitle">${basket.description}</p>
                         </div>
                     </div>
+
+                    <!-- Stats Grid -->
                     <div class="fund-stats-grid">
                         <div class="stat-item">
                             <div class="stat-icon">
@@ -1445,56 +1697,43 @@
                                     <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
                                 </svg>
                             </div>
-                            <div class="stat-info">
+                            <div class="stat-content">
+                                <span class="stat-value">${returns}</span>
                                 <span class="stat-label">Returns</span>
-                                <span class="stat-value">10–13% p.a.</span>
                             </div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#10B981">
-                                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#3B82F6">
+                                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
                                 </svg>
                             </div>
-                            <div class="stat-info">
+                            <div class="stat-content">
+                                <span class="stat-value">${tenure}+ years</span>
                                 <span class="stat-label">Duration</span>
-                                <span class="stat-value">${selectedTenure}+ years</span>
                             </div>
                         </div>
                     </div>
-                    <div class="fund-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                            </div>
-                            <div class="feature-content">
-                                <span class="feature-title">Balanced Growth + Safety</span>
-                                <span class="feature-desc">Mix of stocks & bonds for stable returns</span>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                            </div>
-                            <div class="feature-content">
-                                <span class="feature-title">Less Ups & Downs</span>
-                                <span class="feature-desc">Lower volatility than pure equity funds</span>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                            </div>
-                            <div class="feature-content">
-                                <span class="feature-title">Best For</span>
-                                <span class="feature-desc">Goals ${selectedTenure} years away with moderate risk</span>
-                            </div>
+
+                    <!-- Fund Allocation Progress Bars -->
+                    <div class="fund-allocation-section">
+                        <h4 class="allocation-title">Fund Allocation</h4>
+                        <div class="fund-allocation-container">
+                            ${fundAllocations.map(fund => `
+                                <div class="allocation-item">
+                                    <div class="allocation-card">
+                                        <div class="allocation-card-bg" style="width: ${fund.allocation}%;"></div>
+                                        <div class="allocation-content">
+                                            <div class="allocation-left">
+                                                <span class="fund-name">${fund.name}</span>
+                                            </div>
+                                            <div class="allocation-right">
+                                                <span class="percentage">${fund.allocation}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
                 </div>
@@ -1502,6 +1741,21 @@
         }
 
         function startSIP() {
+            // Store basket info in localStorage for add-funds page
+            const goalData = JSON.parse(localStorage.getItem('newGoal') || '{}');
+            const basket = getCurrentBasketData();
+
+            localStorage.setItem('selectedBasket', JSON.stringify({
+                fromGoal: true,
+                basketId: basket.basketId,
+                basketName: basket.basketName,
+                description: basket.description,
+                funds: basket.funds,
+                returns: basket.returns,
+                tenure: basket.tenure,
+                goalName: goalData.name
+            }));
+
             closeRecommendedFunds();
             setTimeout(() => {
                 window.location.href = 'add-funds.html?type=sip';
@@ -1509,15 +1763,74 @@
         }
 
         function oneTimeInvestment() {
+            // Store basket info in localStorage for add-funds page
+            const goalData = JSON.parse(localStorage.getItem('newGoal') || '{}');
+            const basket = getCurrentBasketData();
+
+            localStorage.setItem('selectedBasket', JSON.stringify({
+                fromGoal: true,
+                basketId: basket.basketId,
+                basketName: basket.basketName,
+                description: basket.description,
+                funds: basket.funds,
+                returns: basket.returns,
+                tenure: basket.tenure,
+                goalName: goalData.name
+            }));
+
             closeRecommendedFunds();
             setTimeout(() => {
                 window.location.href = 'add-funds.html?type=lumpsum';
             }, 300);
         }
 
+        // Helper function to get current basket data
+        function getCurrentBasketData() {
+            const tenure = selectedTenure;
+            const bucket = mapTenureToBucket(tenure);
+            const basketId = basketsConfig.FundRecommendationMatrix['Medium Risk'][bucket];
+            const basket = basketsConfig.CoreBaskets[basketId];
+            const goalData = JSON.parse(localStorage.getItem('newGoal') || '{}');
+
+            const fundAllocations = basket.schemes.map(scheme => {
+                const hdfcFund = hdfcFundsMapping[scheme.FundRankingCategory];
+                return {
+                    name: hdfcFund ? hdfcFund.name : scheme.FundRankingCategory,
+                    allocation: scheme.ratio,
+                    category: hdfcFund ? hdfcFund.category : 'Unknown'
+                };
+            });
+
+            return {
+                basketId: basketId,
+                basketName: `${goalData.name || 'Your Goal'} Basket`,
+                description: basket.description,
+                funds: fundAllocations,
+                returns: getApproximateReturns(basket.schemes),
+                tenure: tenure
+            };
+        }
+
         function closeRecommendedFunds() {
+            // Hide recommended funds overlay
             const overlay = document.getElementById('recommendedOverlay');
             overlay.classList.add('hidden');
+
+            // Show goal overlay again (back to first step)
+            const goalOverlay = document.getElementById('goalOverlay');
+            goalOverlay.classList.add('active');
+
+            // Clear the goal name input
+            const goalNameInput = document.getElementById('goalName');
+            if (goalNameInput) {
+                goalNameInput.value = '';
+            }
+
+            // Reset validation state
+            const createBtn = document.getElementById('createGoalBtn');
+            if (createBtn) {
+                createBtn.disabled = true;
+            }
         }
 
         // Frame toggle functionality

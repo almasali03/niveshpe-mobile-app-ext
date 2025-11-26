@@ -2645,6 +2645,11 @@
                 stateElement.classList.add('active');
             }
 
+            // Pre-fill PAN form with hardcoded data for demo
+            if (state === 'pan') {
+                prefillPanForm();
+            }
+
             currentStep = state;
 
             // Update header and progress
@@ -2756,6 +2761,20 @@
         }
 
         // ==================== PAN VERIFICATION ====================
+
+        // Hardcoded PAN data for demo flow (can be removed later)
+        function prefillPanForm() {
+            document.getElementById('panInput').value = 'ABCDE1234F';
+            document.getElementById('panNameInput').value = 'Rajat Yadav';
+            document.getElementById('fatherNameInput').value = 'Rajesh Yadav';
+            document.getElementById('dobInput').value = '1993-05-14';
+
+            // Update PAN card preview
+            updatePanCard();
+
+            // Enable verify button
+            document.getElementById('verifyPanBtn').disabled = false;
+        }
 
         function updatePanCard() {
             const panInput = document.getElementById('panInput').value.trim();

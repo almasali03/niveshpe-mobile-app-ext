@@ -8,7 +8,7 @@ const BASKETS_DATA = {
         tagline: 'A perfect balance of growth and safety',
         returns: '12.5%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '8+ months',
+        holdingPeriod: '2+ years',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.125, // For calculator
@@ -19,18 +19,18 @@ const BASKETS_DATA = {
         whyThisBasket: [
             'Balanced mix reduces big losses',
             'Better returns than only debt/FD',
-            'Withdraw anytime after 8+ months',
+            'Withdraw anytime after 2+ years',
             'Works well across market cycles'
         ],
 
-        howItWorks: 'This basket automatically spreads your money across equity (for growth), debt (for stability), gold (for protection), and index funds (for market returns). The mix adjusts based on market conditions.',
+        howItWorks: 'This basket allocates 50% to HDFC Balanced Advantage Fund for dynamic allocation, 30% to HDFC Hybrid Equity Fund for balanced growth, 10% to HDFC Top 100 Fund for large-cap stability, and 10% to HDFC Gold Fund for portfolio diversification.',
 
         // Fund allocation (for fund capsules)
         funds: [
-            { name: 'Equity Fund', allocation: 40, color: '#3B82F6' },
-            { name: 'Debt Fund', allocation: 30, color: '#10B981' },
-            { name: 'Gold Fund', allocation: 15, color: '#F59E0B' },
-            { name: 'Index Fund', allocation: 15, color: '#8B5CF6' }
+            { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 50, color: '#8B5CF6' },
+            { name: 'HDFC Hybrid Equity Fund - Growth', allocation: 30, color: '#F59E0B' },
+            { name: 'HDFC Top 100 Fund - Growth', allocation: 10, color: '#3B82F6' },
+            { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
         ]
     },
 
@@ -64,10 +64,10 @@ const BASKETS_DATA = {
     'instant-withdrawal': {
         id: 'instant-withdrawal',
         title: 'Instant Withdrawal',
-        tagline: 'Save safely, withdraw anytime instantly',
+        tagline: 'Ultra-short-term liquid basket designed for instant access to funds.',
         returns: '5.45%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '<1 month',
+        holdingPeriod: '<1 year',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.0545, // For calculator
@@ -84,17 +84,17 @@ const BASKETS_DATA = {
         howItWorks: 'This basket invests in ultra-short-term debt securities and liquid instruments that can be converted to cash within 24 hours. Your money stays safe while earning steady returns.',
 
         funds: [
-            { name: 'HDFC Overnight Fund - Growth', allocation: 100, color: '#06B6D4' }
+            { name: 'HDFC Liquid Fund - Growth', allocation: 100, color: '#06B6D4' }
         ]
     },
 
     'long-term-wealth': {
         id: 'long-term-wealth',
-        title: 'Long-Term Wealth (3+ yrs)',
-        tagline: 'Build long-term wealth. Best for 3+ years of saving',
+        title: 'Long-Term Wealth Building (4+ yrs)',
+        tagline: 'Growth-oriented basket for long-term wealth creation.',
         returns: '23.97%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '3+ years',
+        holdingPeriod: '4+ years',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.2397, // For calculator
@@ -108,21 +108,22 @@ const BASKETS_DATA = {
             'Best for long-term wealth creation'
         ],
 
-        howItWorks: 'This basket allocates 70% to Multi Cap funds for diversified equity exposure and 30% to Balanced Advantage funds for stability during market corrections.',
+        howItWorks: 'This basket allocates 75% to HDFC Large and Mid Cap Fund for diversified equity exposure, 15% to HDFC Hybrid Equity Fund for balanced growth, and 10% to HDFC Gold Fund for portfolio stability.',
 
         funds: [
-            { name: 'Multi Cap Fund (70%)', allocation: 70, color: '#EC4899' },
-            { name: 'Balanced Advantage Fund (30%)', allocation: 30, color: '#8B5CF6' }
+            { name: 'HDFC Large and Mid Cap Fund - Growth', allocation: 75, color: '#EC4899' },
+            { name: 'HDFC Hybrid Equity Fund - Growth', allocation: 15, color: '#F59E0B' },
+            { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
         ]
     },
 
     'islamic-halal-ethical': {
         id: 'islamic-halal-ethical',
         title: 'Islamic Halal & Ethical',
-        tagline: '100% Shariah-compliant, ethical & clean investing',
+        tagline: 'Ethical and Shariah-compliant investment basket for value-driven investors.',
         returns: '15.16%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '3+ years',
+        holdingPeriod: '3-5 years',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.1516,
@@ -136,10 +137,11 @@ const BASKETS_DATA = {
             'Long-term wealth creation with values'
         ],
 
-        howItWorks: 'This fund screens companies based on Islamic principles, investing only in businesses that align with Shariah guidelines while generating competitive returns.',
+        howItWorks: 'This basket combines 90% HDFC Ethical Fund for Shariah-compliant equity exposure and 10% Gold Fund for portfolio diversification and stability.',
 
         funds: [
-            { name: 'Tata Ethical Fund - Regular - Growth', allocation: 100, color: '#14B8A6' }
+            { name: 'HDFC Ethical Fund - Growth', allocation: 90, color: '#14B8A6' },
+            { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
         ]
     },
 
@@ -172,11 +174,11 @@ const BASKETS_DATA = {
 
     'mid-term-balanced': {
         id: 'mid-term-balanced',
-        title: 'Mid-Term Balanced (>2 yrs)',
-        tagline: 'Balanced growth for 2+ year saving goals',
+        title: 'Mid-Term Balanced Growth (>2 yrs)',
+        tagline: 'Balanced basket optimized for medium-term wealth growth.',
         returns: '19.86%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '2-3 years',
+        holdingPeriod: '2-4 years',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.1986,
@@ -184,24 +186,26 @@ const BASKETS_DATA = {
         whatIsThis: 'A balanced fund designed for medium-term investment horizons, combining growth potential with risk management.',
 
         whyThisBasket: [
-            'Ideal for 2-3 year goals',
+            'Ideal for 2-4 year goals',
             'Balanced risk-return profile',
             'Dynamic asset allocation',
             'Works well in various market cycles'
         ],
 
-        howItWorks: 'This basket allocates 60% to Balanced Advantage funds for flexibility and 40% to Nifty 50 index for stable growth.',
+        howItWorks: 'This basket allocates 55% to HDFC Balanced Advantage Fund for dynamic allocation, 15% to HDFC Hybrid Debt Fund for stability, 20% to HDFC Top 100 Fund for large-cap exposure, and 10% to HDFC Gold Fund for diversification.',
 
         funds: [
-            { name: 'Balanced Advantage Fund (60%)', allocation: 60, color: '#8B5CF6' },
-            { name: 'Nifty 50 Index Fund (40%)', allocation: 40, color: '#3B82F6' }
+            { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55, color: '#8B5CF6' },
+            { name: 'HDFC Hybrid Debt Fund - Growth', allocation: 15, color: '#3B82F6' },
+            { name: 'HDFC Top 100 Fund - Growth', allocation: 20, color: '#06B6D4' },
+            { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
         ]
     },
 
     'short-holding': {
         id: 'short-holding',
-        title: 'Short Holding (1 yr)',
-        tagline: 'Ideal for short-term saving (around 1 year)',
+        title: 'Short Holding Growth (1-2 yr)',
+        tagline: 'Short-term growth basket for moderate-return opportunities.',
         returns: '20.83%',
         returnsSubtitle: '1 Year Rolling Return',
         holdingPeriod: '1-2 years',
@@ -218,21 +222,21 @@ const BASKETS_DATA = {
             'Good risk-adjusted returns'
         ],
 
-        howItWorks: 'This basket allocates 80% to Balanced Advantage funds for stability and 20% to Nifty 50 for equity exposure.',
+        howItWorks: 'This basket allocates 70% to HDFC Hybrid Debt Fund for stability and capital preservation, and 30% to HDFC Balanced Advantage Fund for growth potential.',
 
         funds: [
-            { name: 'Balanced Advantage Fund (80%)', allocation: 80, color: '#8B5CF6' },
-            { name: 'Nifty 50 Index Fund (20%)', allocation: 20, color: '#3B82F6' }
+            { name: 'HDFC Hybrid Debt Fund - Growth', allocation: 70, color: '#3B82F6' },
+            { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 30, color: '#8B5CF6' }
         ]
     },
 
     'low-tenure-deposit': {
         id: 'low-tenure-deposit',
         title: 'Low-tenure deposit (<1 yr)',
-        tagline: 'Invest for short duration, Earn better than FD, withdraw anytime you need',
+        tagline: 'Very short-term parking basket for high liquidity and safety.',
         returns: '6.47%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '6-12 months',
+        holdingPeriod: '<1 year',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.0647,
@@ -240,27 +244,27 @@ const BASKETS_DATA = {
         whatIsThis: 'A short-term investment option that provides better returns than savings accounts while keeping your money accessible.',
 
         whyThisBasket: [
-            'Perfect for 6-12 month parking',
+            'Perfect for short-term parking',
             'Better than savings account',
             'Low risk profile',
             'Easy withdrawal options'
         ],
 
-        howItWorks: 'This basket combines 60% Overnight funds for liquidity and 40% Balanced Advantage for additional returns.',
+        howItWorks: 'This basket combines 75% HDFC Arbitrage Fund for stable returns with minimal market risk, and 25% HDFC Hybrid Debt Fund for additional stability and income.',
 
         funds: [
-            { name: 'Overnight Fund (60%)', allocation: 60, color: '#06B6D4' },
-            { name: 'Balanced Advantage Fund (40%)', allocation: 40, color: '#8B5CF6' }
+            { name: 'HDFC Arbitrage Fund - Growth', allocation: 75, color: '#06B6D4' },
+            { name: 'HDFC Hybrid Debt Fund - Growth', allocation: 25, color: '#3B82F6' }
         ]
     },
 
     'ideal-students': {
         id: 'ideal-students',
         title: 'Ideal for Students',
-        tagline: 'Save pocket money & learn to grow your investments',
+        tagline: 'Beginner-friendly investment basket designed for students.',
         returns: '22.38%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '3-5 years',
+        holdingPeriod: '2-4 years',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.2238,
@@ -274,21 +278,23 @@ const BASKETS_DATA = {
             'Build wealth for future goals'
         ],
 
-        howItWorks: 'This basket balances 50% in Balanced Advantage funds for stability and 50% in Large & MidCap funds for aggressive growth.',
+        howItWorks: 'This basket combines 55% HDFC Balanced Advantage Fund for dynamic allocation, 15% HDFC Hybrid Debt Fund for stability, 20% HDFC Top 100 Fund for large-cap exposure, and 10% HDFC Gold Fund for diversification.',
 
         funds: [
-            { name: 'Balanced Advantage Fund (50%)', allocation: 50, color: '#8B5CF6' },
-            { name: 'Large & MidCap Fund (50%)', allocation: 50, color: '#EC4899' }
+            { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55, color: '#8B5CF6' },
+            { name: 'HDFC Hybrid Debt Fund - Growth', allocation: 15, color: '#3B82F6' },
+            { name: 'HDFC Top 100 Fund - Growth', allocation: 20, color: '#06B6D4' },
+            { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
         ]
     },
 
     'ideal-housewives': {
         id: 'ideal-housewives',
         title: 'Ideal for Housewives',
-        tagline: 'Easy, flexible savings for household needs',
+        tagline: 'Stable and simple investment basket tailored for households.',
         returns: '20.37%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '2-3 years',
+        holdingPeriod: '3-5 years',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.2037,
@@ -302,21 +308,22 @@ const BASKETS_DATA = {
             'Medium-term wealth creation'
         ],
 
-        howItWorks: 'This basket allocates 70% to Balanced Advantage for stable growth and 30% to Nifty 50 for equity exposure.',
+        howItWorks: 'This basket allocates 75% to HDFC Large and Mid Cap Fund for diversified growth, 15% to HDFC Hybrid Equity Fund for balanced returns, and 10% to HDFC Gold Fund for stability.',
 
         funds: [
-            { name: 'Balanced Advantage Fund (70%)', allocation: 70, color: '#8B5CF6' },
-            { name: 'Nifty 50 Index Fund (30%)', allocation: 30, color: '#3B82F6' }
+            { name: 'HDFC Large and Mid Cap Fund - Growth', allocation: 75, color: '#EC4899' },
+            { name: 'HDFC Hybrid Equity Fund - Growth', allocation: 15, color: '#F59E0B' },
+            { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
         ]
     },
 
     'ideal-senior-citizens': {
         id: 'ideal-senior-citizens',
         title: 'Ideal for Senior Citizens',
-        tagline: 'Safer savings for regular income & peace of mind',
+        tagline: 'Safe income-oriented basket for senior citizens.',
         returns: '20.83%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '1-2 years',
+        holdingPeriod: '3-5 years',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.2083,
@@ -330,21 +337,22 @@ const BASKETS_DATA = {
             'Suitable for retirement corpus'
         ],
 
-        howItWorks: 'This basket allocates 80% to Balanced Advantage funds for stability and 20% to Nifty 50 for moderate growth.',
+        howItWorks: 'This basket allocates 75% to HDFC Large and Mid Cap Fund for stable growth, 15% to HDFC Hybrid Equity Fund for balanced returns, and 10% to HDFC Gold Fund for capital protection.',
 
         funds: [
-            { name: 'Balanced Advantage Fund (80%)', allocation: 80, color: '#8B5CF6' },
-            { name: 'Nifty 50 Index Fund (20%)', allocation: 20, color: '#3B82F6' }
+            { name: 'HDFC Large and Mid Cap Fund - Growth', allocation: 75, color: '#EC4899' },
+            { name: 'HDFC Hybrid Equity Fund - Growth', allocation: 15, color: '#F59E0B' },
+            { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
         ]
     },
 
     'ideal-salaried-people': {
         id: 'ideal-salaried-people',
         title: 'Ideal for Salaried People',
-        tagline: 'Auto-invest from your salary, build long-term gains',
+        tagline: 'Long-term wealth creation basket designed for salaried earners.',
         returns: '21.61%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '3-5 years',
+        holdingPeriod: '5+ years',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.2161,
@@ -358,13 +366,12 @@ const BASKETS_DATA = {
             'Perfect for long-term wealth building'
         ],
 
-        howItWorks: 'This basket combines 40% Hybrid Equity for balanced growth, 30% Multi Cap for diversification, 20% Banking & PSU Debt for stability, and 10% ELSS for tax benefits.',
+        howItWorks: 'This basket allocates 75% to HDFC Large and Mid Cap Fund for long-term growth, 15% to HDFC Hybrid Equity Fund for balanced returns, and 10% to HDFC Gold Fund for portfolio diversification.',
 
         funds: [
-            { name: 'HDFC Hybrid Equity (40%)', allocation: 40, color: '#F59E0B' },
-            { name: 'Multi Cap Fund (30%)', allocation: 30, color: '#EC4899' },
-            { name: 'Banking & PSU Debt (20%)', allocation: 20, color: '#3B82F6' },
-            { name: 'ELSS Tax Saver (10%)', allocation: 10, color: '#10B981' }
+            { name: 'HDFC Large and Mid Cap Fund - Growth', allocation: 75, color: '#EC4899' },
+            { name: 'HDFC Hybrid Equity Fund - Growth', allocation: 15, color: '#F59E0B' },
+            { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
         ]
     },
 
@@ -400,10 +407,10 @@ const BASKETS_DATA = {
     'family-goals-fund': {
         id: 'family-goals-fund',
         title: 'Family Goals Fund',
-        tagline: 'Save for marriage, education, home & family dreams',
+        tagline: 'Goal-based basket ideal for family milestones and long-term planning.',
         returns: '21.62%',
         returnsSubtitle: '1 Year Rolling Return',
-        holdingPeriod: '3-5 years',
+        holdingPeriod: '2-5 years',
         minSip: '₹100/mo',
         minLumpsum: '₹500',
         annualReturn: 0.2162,
@@ -417,10 +424,13 @@ const BASKETS_DATA = {
             'Steady growth for 3-5 year goals'
         ],
 
-        howItWorks: 'This basket uses 100% Balanced Advantage strategy that dynamically adjusts between equity and debt based on market conditions, providing optimal risk-adjusted returns for your family goals.',
+        howItWorks: 'This basket combines 55% HDFC Balanced Advantage Fund for dynamic allocation, 15% HDFC Hybrid Debt Fund for stability, 20% HDFC Top 100 Fund for large-cap exposure, and 10% HDFC Gold Fund for diversification.',
 
         funds: [
-            { name: 'HDFC Balanced Advantage (100%)', allocation: 100, color: '#8B5CF6' }
+            { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55, color: '#8B5CF6' },
+            { name: 'HDFC Hybrid Debt Fund - Growth', allocation: 15, color: '#3B82F6' },
+            { name: 'HDFC Top 100 Fund - Growth', allocation: 20, color: '#06B6D4' },
+            { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
         ]
     }
 };
