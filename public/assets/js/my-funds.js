@@ -367,47 +367,84 @@ class TabManager {
     getGoalsHTML() {
         const goals = [
             {
-                icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/></svg>',
-                name: 'Dream Home', target: '₹15,00,000', achieved: '₹5,25,000', progress: 35, status: 'On track', statusClass: 'on-track', remaining: '3.5 years'
-            },
-            {
-                icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.8C8,12.2 8.6,11.6 9.2,11.6V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,9.5V11.5H13.5V9.5C13.5,8.7 12.8,8.2 12,8.2Z"/></svg>',
-                name: 'Child Education', target: '₹25,00,000', achieved: '₹3,75,000', progress: 15, status: 'On track', statusClass: 'on-track', remaining: '8 years'
+                icon: '<img src="assets/favicon.png" alt="NiveshPe" style="width: 20px; height: 20px; object-fit: contain;">',
+                iconBg: 'background: white; padding: 6px;',
+                name: 'NiveshPe Wealth',
+                amount: '₹6,200',
+                duration: '5 years',
+                funds: [
+                    { name: 'Parag Parikh Flexi Cap' },
+                    { name: 'Axis Bluechip Fund' },
+                    { name: 'ICICI Pru Tech Fund' }
+                ]
             },
             {
                 icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5,11L6.5,6.5H17.5L19,11M17.5,16A1.5,1.5 0 0,1 16,14.5A1.5,1.5 0 0,1 17.5,13A1.5,1.5 0 0,1 19,14.5A1.5,1.5 0 0,1 17.5,16M6.5,16A1.5,1.5 0 0,1 5,14.5A1.5,1.5 0 0,1 6.5,13A1.5,1.5 0 0,1 8,14.5A1.5,1.5 0 0,1 6.5,16M18.92,6C18.72,5.42 18.16,5 17.5,5H6.5C5.84,5 5.28,5.42 5.08,6L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6Z"/></svg>',
-                name: 'New Car', target: '₹8,00,000', achieved: '₹4,80,000', progress: 60, status: 'Behind schedule', statusClass: 'behind', remaining: '1 year'
+                iconBg: '',
+                name: 'Bike Fund',
+                amount: '₹3,000',
+                duration: '2 years',
+                funds: [
+                    { name: 'Kotak Emerging Equity' }
+                ]
             }
         ];
 
-        return `
-            <div class="goals-list">
-                ${goals.map(goal => `
-                    <div class="goals-card">
-                        <div class="goals-header">
-                            <div class="goals-icon">${goal.icon}</div>
-                            <div class="goals-info">
+        let html = '<div class="goals-list">';
+
+        // Generate simple goal cards
+        goals.forEach(goal => {
+            // Render fund chips
+            const fundChipsHTML = goal.funds.map(fund =>
+                `<span class="fund-chip">${fund.name}</span>`
+            ).join('');
+
+            html += `
+                <div class="goals-card">
+                    <div class="goals-header-row">
+                        <div class="goals-name-section">
+                            <div class="goals-icon" style="${goal.iconBg}">
+                                ${goal.icon}
+                            </div>
+                            <div class="goals-info-wrapper">
                                 <div class="goals-name">${goal.name}</div>
-                                <div class="goals-target">Target: ${goal.target}</div>
+                                ${goal.duration ? `
+                                    <div class="goals-duration">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.7L16.2,16.2Z"/>
+                                        </svg>
+                                        ${goal.duration}
+                                    </div>
+                                ` : ''}
                             </div>
                         </div>
-                        <div class="goals-amounts">
-                            <div class="goals-achieved">${goal.achieved} achieved</div>
-                            <div class="goals-percentage">${goal.progress}%</div>
-                        </div>
-                        <div class="goals-progress">
-                            <div class="goals-progress-bar">
-                                <div class="goals-progress-fill ${goal.statusClass}" style="width: ${goal.progress}%;"></div>
-                            </div>
-                        </div>
-                        <div class="goals-footer">
-                            <div class="goals-status ${goal.statusClass}">${goal.status}</div>
-                            <div class="goals-timeline">${goal.remaining} remaining</div>
-                        </div>
+                        <div class="goals-amount">${goal.amount}</div>
                     </div>
-                `).join('')}
+                    ${goal.funds && goal.funds.length > 0 ? `
+                        <div class="goals-fund-chips">
+                            ${fundChipsHTML}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        });
+
+        // Add New Goal card
+        html += `
+            <div class="goals-card add-goal-card" onclick="window.location.href='create-goal.html'">
+                <div class="add-goal-content">
+                    <div class="add-goal-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                    </div>
+                    <div class="add-goal-text">Add New Goal</div>
+                </div>
             </div>
         `;
+
+        html += '</div>';
+        return html;
     }
 
     attachEventListeners() {
