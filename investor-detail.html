@@ -134,32 +134,39 @@
 
         .header {
             display: flex;
-            flex-direction: row;
+            justify-content: space-between;
             align-items: center;
+            padding: 16px 20px;
             background: white;
-            height: 58px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            padding: 0 20px;
+            border-bottom: 1px solid var(--color-border);
             flex-shrink: 0;
-            position: relative;
-            z-index: 10;
         }
 
-        .close-button {
-            background: none;
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--color-surface);
             border: none;
-            font-size: 24px;
-            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            padding: 8px;
-            margin-left: -8px;
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:active {
+            background: var(--color-border);
+            transform: scale(0.95);
         }
 
         .header-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--color-text-primary);
-            margin-left: 12px;
+            flex: 1;
+            text-align: center;
         }
 
         /* ==================== MAIN CONTENT ==================== */
@@ -339,6 +346,57 @@
 
         .btn-text-only:hover {
             background: var(--color-bg-primary);
+        }
+
+        /* ==================== AGE SELECTION ==================== */
+
+        .age-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .age-card {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .age-radio-input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .age-card-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 6px;
+            background: var(--color-bg-primary);
+            border: 1.5px solid var(--color-border);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .age-radio-input:checked + .age-card-content {
+            background: rgba(37, 99, 235, 0.08);
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+        }
+
+        .age-card-content:active {
+            transform: scale(0.98);
+        }
+
+        .age-range {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .age-radio-input:checked + .age-card-content .age-range {
+            color: var(--color-blue);
         }
 
         /* ==================== CHECKBOX ==================== */
@@ -947,10 +1005,13 @@
 
                 <!-- Header -->
                 <div class="header">
-                    <button class="close-button" onclick="goToHome()">
-                        <span class="material-symbols-outlined">arrow_back</span>
+                    <button class="back-btn" onclick="goToHome()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
+                        </svg>
                     </button>
-                    <h1 class="header-title">Investor Details</h1>
+                    <div class="header-title">Investor Details</div>
+                    <div style="width: 40px;"></div>
                 </div>
 
                 <!-- Main Content -->
@@ -959,9 +1020,40 @@
                         <p class="subtitle-text">Help us understand your investment profile better</p>
 
                         <div id="investorForm">
-                            <!-- Question 1: Occupation -->
+                            <!-- Question 1: Age -->
                             <div class="input-group">
-                                <label class="input-label" for="occupation">1. What is your occupation?</label>
+                                <label class="input-label">1. What is your age?</label>
+                                <div class="age-selection-grid">
+                                    <label class="age-card">
+                                        <input type="radio" name="age" value="18-25" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">18-25</span>
+                                        </div>
+                                    </label>
+                                    <label class="age-card">
+                                        <input type="radio" name="age" value="26-32" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">26-32</span>
+                                        </div>
+                                    </label>
+                                    <label class="age-card">
+                                        <input type="radio" name="age" value="33-50" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">33-50</span>
+                                        </div>
+                                    </label>
+                                    <label class="age-card">
+                                        <input type="radio" name="age" value="50+" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">50+</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Question 2: Occupation -->
+                            <div class="input-group">
+                                <label class="input-label" for="occupation">2. What is your occupation?</label>
                                 <select id="occupation" class="text-input" onchange="validateForm()">
                                     <option value="" selected disabled>Select your occupation</option>
                                     <option value="private-job">Private Job</option>
@@ -979,9 +1071,9 @@
                                 </select>
                             </div>
 
-                            <!-- Question 2: Monthly Income -->
+                            <!-- Question 3: Monthly Income -->
                             <div class="input-group">
-                                <label class="input-label" for="monthlyIncome">2. What's your in-hand monthly income?</label>
+                                <label class="input-label" for="monthlyIncome">3. What's your in-hand monthly income?</label>
                                 <div class="amount-input-wrapper">
                                     <span class="currency-symbol">₹</span>
                                     <input
@@ -994,9 +1086,9 @@
                                 </div>
                             </div>
 
-                            <!-- Question 3: Source of Funds -->
+                            <!-- Question 4: Source of Funds -->
                             <div class="input-group">
-                                <label class="input-label" for="sourceOfFunds">3. What is your primary source of funds?</label>
+                                <label class="input-label" for="sourceOfFunds">4. What is your primary source of funds?</label>
                                 <select id="sourceOfFunds" class="text-input" onchange="validateForm()">
                                     <option value="" selected disabled>Select source of funds</option>
                                     <option value="salary">Salary</option>
@@ -1009,11 +1101,41 @@
                                 </select>
                             </div>
 
-                            <!-- Nominee Selection Section -->
+                            <!-- Question 5: Number of Dependents -->
+                            <div class="input-group">
+                                <label class="input-label">5. How many dependents do you have?</label>
+                                <div class="age-selection-grid">
+                                    <label class="age-card">
+                                        <input type="radio" name="dependents" value="1" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">1</span>
+                                        </div>
+                                    </label>
+                                    <label class="age-card">
+                                        <input type="radio" name="dependents" value="2" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">2</span>
+                                        </div>
+                                    </label>
+                                    <label class="age-card">
+                                        <input type="radio" name="dependents" value="3" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">3</span>
+                                        </div>
+                                    </label>
+                                    <label class="age-card">
+                                        <input type="radio" name="dependents" value="4+" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">4+</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Nominee Details Section - Moved to separate page
                             <div class="nominee-section">
                                 <label class="input-label">4. Nominee Details</label>
 
-                                <!-- Radio Options -->
                                 <div class="nominee-radio-group">
                                     <div class="nominee-radio-option">
                                         <input type="radio" id="nomineeLater" name="nomineeChoice" value="later" class="radio-input" checked onchange="handleNomineeChoice()">
@@ -1030,13 +1152,12 @@
                                     </div>
                                 </div>
 
-                                <!-- Nominee Cards Container (shown when nominees are added) -->
                                 <div id="nomineeCardsContainer" class="nominee-cards-container" style="display: none;">
-                                    <!-- Nominees will be rendered here dynamically -->
                                 </div>
                             </div>
+                            -->
 
-                            <!-- PEP Declaration Checkbox -->
+                            <!-- PEP Declaration Checkbox - Commented out
                             <div class="checkbox-group">
                                 <div class="checkbox-wrapper">
                                     <input type="checkbox" id="pepDeclaration" class="checkbox-input" onchange="validateForm()">
@@ -1045,6 +1166,7 @@
                                     </label>
                                 </div>
                             </div>
+                            -->
 
                             <button class="btn-primary" id="submitBtn" disabled onclick="submitForm()">
                                 Submit
@@ -1063,34 +1185,28 @@
         <div class="iphone-home-indicator"></div>
     </div>
 
-    <!-- Nominee Details Overlay -->
+    <!-- Nominee Details Overlay - Moved to separate page
     <div class="nominee-overlay" id="nomineeOverlay">
         <div class="nominee-backdrop" onclick="closeNomineeOverlay()"></div>
 
         <div class="nominee-modal">
-            <!-- Drag Handle -->
             <div class="drag-handle">
                 <div class="drag-bar"></div>
             </div>
 
-            <!-- Close Button -->
             <button class="nominee-close-btn" onclick="closeNomineeOverlay()">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                 </svg>
             </button>
 
-            <!-- Modal Header -->
             <div class="modal-header">
                 <h2 class="modal-title">Add Nominee Details</h2>
                 <p class="modal-subtitle">Add one or more nominees who will receive your investments in case of unforeseen circumstances</p>
             </div>
 
-            <!-- Scrollable Form Content -->
             <div class="nominee-content">
-                <!-- Nominee Form (dynamic, will be repeated for multiple nominees) -->
                 <div id="nomineeFormsContainer">
-                    <!-- First nominee form -->
                     <div class="nominee-form-item" id="nomineeForm0">
                         <div class="nominee-form-header">
                             <h3 class="nominee-form-title">Nominee 1</h3>
@@ -1128,20 +1244,17 @@
                     </div>
                 </div>
 
-                <!-- Add Another Nominee Button -->
                 <button class="btn-secondary" id="addAnotherNomineeBtn" onclick="addAnotherNomineeForm()" style="margin-top: 16px;">
                     <span class="material-symbols-outlined" style="font-size: 20px;">add</span>
                     <span>Add Another Nominee</span>
                 </button>
 
-                <!-- Allocation Warning -->
                 <div id="allocationWarning" class="allocation-warning" style="display: none;">
                     <span class="material-symbols-outlined">info</span>
                     <span>Total allocation must equal 100%</span>
                 </div>
             </div>
 
-            <!-- Fixed Action Buttons -->
             <div class="continue-section">
                 <button class="btn-primary" id="saveNomineesBtn" onclick="saveNominees()">
                     <span>Save Nominees</span>
@@ -1153,6 +1266,7 @@
             </div>
         </div>
     </div>
+    -->
 
     <!-- iPhone Toggle JS -->
     <script src="assets/js/iphone-toggle.js"></script>
@@ -1160,11 +1274,13 @@
     <script>
         // Data storage
         let investorData = {
+            age: null,
             occupation: null,
             monthlyIncome: null,
             sourceOfFunds: null,
-            nominees: [],
-            pepDeclaration: false
+            dependents: null
+            // nominees: [], // Moved to separate page
+            // pepDeclaration: false // Commented out
         };
 
         // Nominee management
@@ -1173,21 +1289,29 @@
         // ==================== FORM VALIDATION ====================
 
         function validateForm() {
+            const ageRadio = document.querySelector('input[name="age"]:checked');
+            const age = ageRadio ? ageRadio.value : null;
             const occupation = document.getElementById('occupation').value;
             const monthlyIncome = document.getElementById('monthlyIncome').value;
             const sourceOfFunds = document.getElementById('sourceOfFunds').value;
-            const declaration = document.getElementById('pepDeclaration').checked;
+            const dependentsRadio = document.querySelector('input[name="dependents"]:checked');
+            const dependents = dependentsRadio ? dependentsRadio.value : null;
+            // const declaration = document.getElementById('pepDeclaration').checked; // PEP declaration commented out
 
             const submitBtn = document.getElementById('submitBtn');
-            const isValid = occupation && monthlyIncome && sourceOfFunds && declaration;
+            const isValid = age && occupation && monthlyIncome && sourceOfFunds && dependents;
             submitBtn.disabled = !isValid;
         }
 
         function submitForm() {
+            const ageRadio = document.querySelector('input[name="age"]:checked');
+            investorData.age = ageRadio ? ageRadio.value : null;
             investorData.occupation = document.getElementById('occupation').value;
             investorData.monthlyIncome = document.getElementById('monthlyIncome').value.replace(/,/g, '');
             investorData.sourceOfFunds = document.getElementById('sourceOfFunds').value;
-            investorData.pepDeclaration = true;
+            const dependentsRadio = document.querySelector('input[name="dependents"]:checked');
+            investorData.dependents = dependentsRadio ? dependentsRadio.value : null;
+            // investorData.pepDeclaration = true; // PEP declaration commented out
 
             document.getElementById('investorForm').style.display = 'none';
             document.getElementById('loadingState').classList.add('show');
