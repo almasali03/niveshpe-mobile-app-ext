@@ -692,11 +692,14 @@
         .loading-spinner {
             width: 48px;
             height: 48px;
+            min-width: 48px;
+            min-height: 48px;
             border: 4px solid var(--color-border);
             border-top-color: var(--color-blue);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin: 0 auto 20px;
+            flex-shrink: 0;
         }
 
         @keyframes spin {
@@ -1876,6 +1879,10 @@
                         </div>
                         <div class="step-indicator" id="stepIndicator3">
                             <div class="step-number">3</div>
+                            <div class="step-label">Bank</div>
+                        </div>
+                        <div class="step-indicator" id="stepIndicator4">
+                            <div class="step-number">4</div>
                             <div class="step-label">Other Details</div>
                         </div>
                     </div>
@@ -1912,6 +1919,15 @@
                                     <div class="step-item-content">
                                         <div class="step-item-text">Aadhaar via DigiLocker</div>
                                         <div class="step-item-subtext">Instant verification through government portal</div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-number">
+                                        <span class="material-symbols-outlined" style="font-size: 20px;">account_balance</span>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <div class="step-item-text">Bank Account</div>
+                                        <div class="step-item-subtext">Link your bank account for seamless transactions</div>
                                     </div>
                                 </div>
                             </div>
@@ -2235,6 +2251,126 @@
                             </div>
 
                             <div id="aadhaarContinueSection" style="display: none;">
+                                <button class="btn-primary" onclick="continueToBank()">
+                                    Continue to Add Bank
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Bank Account -->
+                    <div class="kyc-state" id="bankState">
+                        <div class="kyc-container">
+                            <h2 class="welcome-text">Bank Account Verification</h2>
+                            <p class="subtitle-text">We'll verify your account using penny drop method</p>
+
+                            <!-- Initial Form State -->
+                            <div id="bankInputForm">
+                                <div class="input-group">
+                                    <label class="input-label" for="accountNumberInput">Account Number</label>
+                                    <input type="text" id="accountNumberInput" class="text-input" placeholder="Enter your account number" maxlength="18" inputmode="numeric" oninput="validateBankForm()">
+                                </div>
+
+                                <div class="input-group">
+                                    <label class="input-label" for="ifscInput">IFSC Code</label>
+                                    <input type="text" id="ifscInput" class="text-input" placeholder="e.g., SBIN0001234" maxlength="11" oninput="validateBankForm()" style="text-transform: uppercase;">
+                                    <div class="helper-text">
+                                        Find IFSC code on your cheque or passbook
+                                    </div>
+                                </div>
+
+                                <button class="btn-primary" id="verifyBankBtn" onclick="verifyBank()" disabled>
+                                    Verify Bank Account
+                                </button>
+
+                                <div class="helper-text" style="margin-top: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">info</span>
+                                    We'll deposit ₹1 to verify your account. This will be refunded immediately.
+                                </div>
+                            </div>
+
+                            <!-- Loading State -->
+                            <div id="bankLoadingState" class="loading-container" style="display: none;">
+                                <div class="loading-spinner"></div>
+                                <div class="loading-text">Verifying Bank Account...</div>
+                                <div class="loading-subtext">Fetching account details from your bank</div>
+                            </div>
+
+                            <!-- Verified Card (Success) -->
+                            <div id="bankVerifiedCard" class="verified-card" style="display: none;">
+                                <div class="verified-header">
+                                    <div class="verified-icon">
+                                        <span class="material-symbols-outlined">check</span>
+                                    </div>
+                                    <div class="verified-title">Bank Account Verified</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Account Holder</span>
+                                    <span class="detail-value" id="holderNameDisplay">RAHUL SHARMA</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Bank Name</span>
+                                    <span class="detail-value" id="bankNameDisplay">State Bank of India</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Account Number</span>
+                                    <span class="detail-value" id="accountNumberDisplay">XXXX XXXX 1234</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">IFSC Code</span>
+                                    <span class="detail-value" id="ifscDisplay">SBIN0001234</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Branch</span>
+                                    <span class="detail-value" id="branchDisplay">Andheri East, Mumbai</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Account Type</span>
+                                    <span class="detail-value" id="accountTypeDisplay">Savings</span>
+                                </div>
+                            </div>
+
+                            <!-- Failed Card -->
+                            <div id="bankFailedCard" class="verified-card failed-card" style="display: none;">
+                                <div class="verified-header">
+                                    <div class="verified-icon failed-icon">
+                                        <span class="material-symbols-outlined">close</span>
+                                    </div>
+                                    <div class="verified-title failed-title">Bank Verification Failed</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Error</span>
+                                    <span class="detail-value">Unable to verify account. Please check your details and try again.</span>
+                                </div>
+                            </div>
+
+                            <!-- Pending Card -->
+                            <div id="bankPendingCard" class="verified-card pending-card" style="display: none;">
+                                <div class="verified-header">
+                                    <div class="verified-icon pending-icon">
+                                        <span class="material-symbols-outlined">schedule</span>
+                                    </div>
+                                    <div class="verified-title pending-title">Bank Verification Pending</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status</span>
+                                    <span class="detail-value">Verification in progress. This may take a few moments.</span>
+                                </div>
+                                <div style="margin-top: 16px; padding: 12px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 13px; color: var(--color-text-secondary);">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">info</span>
+                                    You can proceed to the next step while we verify your bank account in the background.
+                                </div>
+                            </div>
+
+                            <!-- Retry Section -->
+                            <div id="bankRetrySection" style="display: none;">
+                                <button class="btn-primary" onclick="retryBank()">
+                                    Try Again
+                                </button>
+                            </div>
+
+                            <!-- Continue Section -->
+                            <div id="bankContinueSection" style="display: none;">
                                 <button class="btn-primary" onclick="continueToFATCA()">
                                     Continue to Other Details
                                 </button>
@@ -2242,64 +2378,28 @@
                         </div>
                     </div>
 
-                    <!-- Step 3: Other Details -->
+                    <!-- Step 4: Other Details -->
                     <div class="kyc-state" id="fatcaState">
                         <div class="kyc-container">
                             <h2 class="welcome-text">Other Details</h2>
-                            <p class="subtitle-text">Help us understand your investment profile better</p>
+                            <p class="subtitle-text">Complete these details as required by SEBI compliance</p>
 
                             <div id="fatcaForm">
-                                <!-- Question 1: Occupation -->
+                                <!-- Email ID -->
                                 <div class="input-group">
-                                    <label class="input-label" for="occupation">1. What is your occupation?</label>
-                                    <select id="occupation" class="text-input" onchange="validateFATCA()">
-                                        <option value="" selected disabled>Select your occupation</option>
-                                        <option value="private-job">Private Job</option>
-                                        <option value="business">Business</option>
-                                        <option value="professional">Professional</option>
-                                        <option value="student">Student</option>
-                                        <option value="homemaker">Home-maker/Housewife</option>
-                                        <option value="retired">Retired</option>
-                                        <option value="govt-service">Govt Service</option>
-                                        <option value="psu">Public Sector Service</option>
-                                        <option value="agriculture">Agriculture</option>
-                                        <option value="others">Others</option>
-                                    </select>
-                                </div>
-
-                                <!-- Question 2: Monthly Income -->
-                                <div class="input-group">
-                                    <label class="input-label" for="monthlyIncome">2. What's your in-hand monthly income?</label>
-                                    <div class="amount-input-wrapper">
-                                        <span class="currency-symbol">₹</span>
-                                        <input
-                                            type="tel"
-                                            id="monthlyIncome"
-                                            class="text-input amount-input"
-                                            placeholder="50,000"
-                                            oninput="validateFATCA();"
-                                        >
-                                    </div>
-                                </div>
-
-                                <!-- Question 3: Source of Funds -->
-                                <div class="input-group">
-                                    <label class="input-label" for="sourceOfFunds">3. What is your primary source of funds?</label>
-                                    <select id="sourceOfFunds" class="text-input" onchange="validateFATCA()">
-                                        <option value="" selected disabled>Select source of funds</option>
-                                        <option value="salary">Salary</option>
-                                        <option value="business-income">Business Income</option>
-                                        <option value="rent">Rent</option>
-                                        <option value="property">Property Sale</option>
-                                        <option value="gift">Gift</option>
-                                        <option value="royalty">Royalty</option>
-                                        <option value="others">Others</option>
-                                    </select>
+                                    <label class="input-label" for="emailId">Email Address</label>
+                                    <input
+                                        type="email"
+                                        id="emailId"
+                                        class="text-input"
+                                        placeholder="your.email@example.com"
+                                        oninput="validateFATCA()"
+                                    >
                                 </div>
 
                                 <!-- Nominee Selection Section -->
                                 <div class="nominee-section">
-                                    <label class="input-label">4. Nominee Details</label>
+                                    <label class="input-label">Nominee Details</label>
 
                                     <!-- Radio Options -->
                                     <div class="nominee-radio-group">
@@ -2585,9 +2685,11 @@
         // Progress tracking
         const stepInfo = {
             overview: { step: 0, percentage: 0, title: 'Complete KYC' },
-            pan: { step: 1, percentage: 33, title: 'Verify PAN' },
-            aadhaar: { step: 2, percentage: 66, title: 'Verify Aadhaar' },
-            fatca: { step: 3, percentage: 100, title: 'Other Details' },
+            pan: { step: 1, percentage: 25, title: 'Verify PAN' },
+            aadhaar: { step: 2, percentage: 50, title: 'Verify Aadhaar' },
+            aadhaarVerified: { step: 2, percentage: 50, title: 'Verify Aadhaar' },
+            bank: { step: 3, percentage: 75, title: 'Add Bank Account' },
+            fatca: { step: 4, percentage: 100, title: 'Other Details' },
             success: { step: 4, percentage: 100, title: 'Success' }
         };
 
@@ -2636,6 +2738,7 @@
                 pan: 'panState',
                 aadhaar: 'aadhaarConsentState',
                 aadhaarVerified: 'aadhaarVerifiedState',
+                bank: 'bankState',
                 fatca: 'fatcaState',
                 success: 'successState'
             };
@@ -2727,7 +2830,8 @@
             const indicators = [
                 document.getElementById('stepIndicator1'),
                 document.getElementById('stepIndicator2'),
-                document.getElementById('stepIndicator3')
+                document.getElementById('stepIndicator3'),
+                document.getElementById('stepIndicator4')
             ];
 
             const currentStepNum = state === 'aadhaarVerified' ? 2 : (stepInfo[state]?.step || 0);
@@ -3038,28 +3142,170 @@
             }, 1500);
         }
 
+        function continueToBank() {
+            navigateTo('bank');
+        }
+
+        // ==================== BANK VERIFICATION ====================
+
+        // Bank data storage
+        let bankData = {
+            accountNumber: null,
+            ifsc: null,
+            holderName: null,
+            bankName: null,
+            branch: null,
+            accountType: null
+        };
+
+        // Real-time form validation
+        function validateBankForm() {
+            const accountNumber = document.getElementById('accountNumberInput').value.trim();
+            const ifsc = document.getElementById('ifscInput').value.trim().toUpperCase();
+            const verifyBtn = document.getElementById('verifyBankBtn');
+
+            // Auto-uppercase IFSC
+            document.getElementById('ifscInput').value = ifsc;
+
+            // Validate account number (9-18 digits)
+            const accountValid = /^\d{9,18}$/.test(accountNumber);
+
+            // Validate IFSC code
+            const ifscValid = /^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc);
+
+            // Enable button only if both are valid
+            verifyBtn.disabled = !(accountValid && ifscValid);
+        }
+
+        // Main verification flow
+        function verifyBank() {
+            const accountNumber = document.getElementById('accountNumberInput').value.trim();
+            const ifsc = document.getElementById('ifscInput').value.trim().toUpperCase();
+
+            // Hide form, show loading
+            document.getElementById('bankInputForm').style.display = 'none';
+            document.getElementById('bankLoadingState').style.display = 'flex';
+
+            // Simulate API call (2.5 seconds)
+            setTimeout(() => {
+                // Mock data population
+                bankData = {
+                    accountNumber: accountNumber,
+                    ifsc: ifsc,
+                    holderName: 'RAHUL SHARMA',
+                    bankName: 'State Bank of India',
+                    branch: 'Andheri East, Mumbai',
+                    accountType: 'Savings'
+                };
+
+                // Populate verified card
+                document.getElementById('holderNameDisplay').textContent = bankData.holderName;
+                document.getElementById('bankNameDisplay').textContent = bankData.bankName;
+                document.getElementById('accountNumberDisplay').textContent = maskAccountNumber(accountNumber);
+                document.getElementById('ifscDisplay').textContent = ifsc;
+                document.getElementById('branchDisplay').textContent = bankData.branch;
+                document.getElementById('accountTypeDisplay').textContent = bankData.accountType;
+
+                // Hide loading, show verified card
+                document.getElementById('bankLoadingState').style.display = 'none';
+                document.getElementById('bankVerifiedCard').style.display = 'block';
+                document.getElementById('bankContinueSection').style.display = 'block';
+
+                // Save to localStorage
+                saveBankData();
+
+                // Update progress
+                updateProgress(75);
+            }, 2500);
+        }
+
+        // Testing function to switch between states
+        function setBankState(state) {
+            const inputForm = document.getElementById('bankInputForm');
+            const loadingState = document.getElementById('bankLoadingState');
+            const verifiedCard = document.getElementById('bankVerifiedCard');
+            const failedCard = document.getElementById('bankFailedCard');
+            const pendingCard = document.getElementById('bankPendingCard');
+            const retrySection = document.getElementById('bankRetrySection');
+            const continueSection = document.getElementById('bankContinueSection');
+
+            // Hide all states
+            inputForm.style.display = 'none';
+            loadingState.style.display = 'none';
+            verifiedCard.style.display = 'none';
+            failedCard.style.display = 'none';
+            pendingCard.style.display = 'none';
+            retrySection.style.display = 'none';
+            continueSection.style.display = 'none';
+
+            if (state === 'success') {
+                verifiedCard.style.display = 'block';
+                continueSection.style.display = 'block';
+            } else if (state === 'pending') {
+                pendingCard.style.display = 'block';
+                continueSection.style.display = 'block';
+            } else if (state === 'failure') {
+                failedCard.style.display = 'block';
+                retrySection.style.display = 'block';
+            }
+        }
+
+        // Reset to initial state
+        function retryBank() {
+            document.getElementById('bankFailedCard').style.display = 'none';
+            document.getElementById('bankRetrySection').style.display = 'none';
+            document.getElementById('bankInputForm').style.display = 'block';
+
+            // Clear inputs
+            document.getElementById('accountNumberInput').value = '';
+            document.getElementById('ifscInput').value = '';
+            document.getElementById('verifyBankBtn').disabled = true;
+        }
+
+        // Helper function to mask account number
+        function maskAccountNumber(accountNum) {
+            if (!accountNum || accountNum.length < 4) return accountNum;
+            const lastFour = accountNum.slice(-4);
+            return 'XXXX XXXX ' + lastFour;
+        }
+
+        // Save bank data to localStorage
+        function saveBankData() {
+            localStorage.setItem('bankData', JSON.stringify(bankData));
+        }
+
+        // Load bank data from localStorage
+        function loadBankData() {
+            const saved = localStorage.getItem('bankData');
+            if (saved) {
+                bankData = JSON.parse(saved);
+                // Optionally pre-fill form if returning to this step
+            }
+        }
+
         function continueToFATCA() {
+            // Save data before navigation
+            saveBankData();
             navigateTo('fatca');
         }
 
         // ==================== FATCA DECLARATION ====================
 
         function validateFATCA() {
-            const occupation = document.getElementById('occupation').value;
-            const monthlyIncome = document.getElementById('monthlyIncome').value;
-            const sourceOfFunds = document.getElementById('sourceOfFunds').value;
+            const email = document.getElementById('emailId').value;
             const declaration = document.getElementById('fatcaDeclaration').checked;
 
+            // Simple email validation
+            const emailValid = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
             const submitBtn = document.getElementById('submitFatcaBtn');
-            const isValid = occupation && monthlyIncome && sourceOfFunds && declaration;
+            const isValid = emailValid && declaration;
             submitBtn.disabled = !isValid;
         }
 
         function submitFATCA() {
             kycData.fatca = {
-                occupation: document.getElementById('occupation').value,
-                monthlyIncome: document.getElementById('monthlyIncome').value.replace(/,/g, ''),
-                sourceOfFunds: document.getElementById('sourceOfFunds').value,
+                email: document.getElementById('emailId').value,
                 declared: true
             };
 
@@ -3669,6 +3915,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize from hash or start at overview
             handleHashChange();
+
+            // Load saved data
+            loadBankData();
 
             // Push initial state to prevent back button from leaving page
             history.pushState(null, null, window.location.href);
