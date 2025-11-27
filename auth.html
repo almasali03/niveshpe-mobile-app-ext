@@ -686,32 +686,41 @@
             margin-left: 0;
         }
 
-        /* OTP Input */
-        .otp-input-single {
-            width: 100%;
-            height: 64px;
-            padding: 0 16px;
-            border: 2px solid var(--color-border);
-            border-radius: var(--radius-md);
-            font-size: 32px;
-            font-weight: 700;
-            text-align: center;
-            letter-spacing: 12px;
-            color: var(--color-text-primary);
-            transition: all 0.2s ease;
-            background: white;
-            font-family: 'Courier New', monospace;
+        /* OTP Input Container */
+        .otp-input-container {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 8px;
         }
 
-        .otp-input-single:focus {
+        .otp-input {
+            width: 48px;
+            height: 56px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            background: white;
+            color: var(--color-text-primary);
+            transition: all 0.2s ease;
             outline: none;
+        }
+
+        .otp-input:focus {
             border-color: var(--color-blue);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        .otp-input-single.error {
+        .otp-input.error {
             border-color: var(--color-red);
             animation: shake 0.3s;
+        }
+
+        .otp-input:disabled {
+            background: var(--color-bg-primary);
+            cursor: not-allowed;
         }
 
         .auto-read-indicator {
@@ -986,17 +995,15 @@
                             </div>
 
                             <div class="input-group">
-                                <label class="input-label" for="otpInput">Verification Code</label>
-                                <input
-                                    type="text"
-                                    id="otpInput"
-                                    class="otp-input-single"
-                                    placeholder="••••••"
-                                    maxlength="6"
-                                    inputmode="numeric"
-                                    autocomplete="one-time-code"
-                                    oninput="handleOtpInput()"
-                                >
+                                <label class="input-label">Verification Code</label>
+                                <div class="otp-input-container">
+                                    <input type="text" class="otp-input" maxlength="1" id="otp1" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" id="otp2" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" id="otp3" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" id="otp4" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" id="otp5" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" id="otp6" inputmode="numeric">
+                                </div>
                                 <div id="autoReadIndicator" class="auto-read-indicator" style="display: none;">
                                     <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
                                     <span>Auto-read enabled</span>
@@ -1137,7 +1144,7 @@
             initWebOTP();
 
             setTimeout(() => {
-                document.getElementById('otpInput').focus();
+                otpInputs[0].focus();
             }, 100);
 
             console.log('📱 Sending OTP to:', mobileNumber);
@@ -1145,22 +1152,60 @@
 
         // ==================== OTP ====================
 
-        function handleOtpInput() {
-            const input = document.getElementById('otpInput');
-            const value = input.value.replace(/\D/g, '');
-            input.value = value;
+        const otpInputs = document.querySelectorAll('.otp-input');
 
-            hideError('otp');
-            input.classList.remove('error');
+        // Auto-focus and auto-advance OTP inputs
+        function setupOtpInputs() {
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    const value = e.target.value.replace(/\D/g, '');
+                    e.target.value = value;
 
-            if (value.length === 6) {
-                setTimeout(() => verifyOTP(), 300);
-            }
+                    hideError('otp');
+                    otpInputs.forEach(inp => inp.classList.remove('error'));
+
+                    if (value.length === 1 && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+
+                    if (index === otpInputs.length - 1 && value.length === 1) {
+                        const otp = Array.from(otpInputs).map(inp => inp.value).join('');
+                        if (otp.length === 6) {
+                            setTimeout(() => verifyOTP(), 300);
+                        }
+                    }
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        otpInputs[index - 1].focus();
+                        otpInputs[index - 1].value = '';
+                    }
+                });
+
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text').replace(/\D/g, '');
+                    const digits = pastedData.slice(0, 6).split('');
+
+                    digits.forEach((digit, i) => {
+                        if (otpInputs[i]) {
+                            otpInputs[i].value = digit;
+                        }
+                    });
+
+                    if (digits.length === 6) {
+                        otpInputs[5].focus();
+                        setTimeout(() => verifyOTP(), 300);
+                    } else if (digits.length > 0) {
+                        otpInputs[Math.min(digits.length, 5)].focus();
+                    }
+                });
+            });
         }
 
         function verifyOTP() {
-            const input = document.getElementById('otpInput');
-            const enteredOTP = input.value;
+            const enteredOTP = Array.from(otpInputs).map(input => input.value).join('');
 
             if (enteredOTP.length !== 6) return;
 
@@ -1175,15 +1220,19 @@
 
                 if (otpAttempts >= MAX_ATTEMPTS) {
                     showError('otp', 'Maximum attempts reached. Please request a new code.');
-                    input.value = '';
-                    input.classList.add('error');
+                    otpInputs.forEach(input => {
+                        input.value = '';
+                        input.classList.add('error');
+                    });
                     otpAttempts = 0;
                 } else {
                     const attemptsLeft = MAX_ATTEMPTS - otpAttempts;
                     showError('otp', `Invalid code. ${attemptsLeft} attempt${attemptsLeft > 1 ? 's' : ''} remaining.`);
-                    input.value = '';
-                    input.classList.add('error');
-                    input.focus();
+                    otpInputs.forEach(input => {
+                        input.value = '';
+                        input.classList.add('error');
+                    });
+                    otpInputs[0].focus();
                 }
             }
         }
@@ -1191,9 +1240,10 @@
         function resendOTP() {
             otpAttempts = 0;
 
-            const input = document.getElementById('otpInput');
-            input.value = '';
-            input.classList.remove('error');
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('error');
+            });
             hideError('otp');
 
             timeRemaining = RESEND_TIMER;
@@ -1202,7 +1252,7 @@
             startResendTimer();
 
             initWebOTP();
-            input.focus();
+            otpInputs[0].focus();
 
             console.log('🔄 Resending OTP to:', mobileNumber);
         }
@@ -1214,7 +1264,9 @@
             }
             otpAttempts = 0;
             hideError('otp');
-            document.getElementById('otpInput').value = '';
+            otpInputs.forEach(input => {
+                input.value = '';
+            });
 
             switchState('phone');
             document.getElementById('mobileInput').focus();
@@ -1252,7 +1304,12 @@
                     });
 
                     if (credential && credential.code) {
-                        document.getElementById('otpInput').value = credential.code;
+                        const digits = credential.code.slice(0, 6).split('');
+                        digits.forEach((digit, i) => {
+                            if (otpInputs[i]) {
+                                otpInputs[i].value = digit;
+                            }
+                        });
                         setTimeout(() => verifyOTP(), 500);
                     }
                 } catch (error) {
@@ -1340,6 +1397,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize with phone state - header replaced with brand header
             // Old header references removed
+            setupOtpInputs();
         });
 
         // Touch swipe for carousel
