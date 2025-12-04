@@ -2310,20 +2310,24 @@
                 document.getElementById('basketTitle').textContent = selectedFund.name;
                 document.getElementById('basketDescription').textContent = selectedFund.category || '';
 
-                // Update basket returns if available
+                // Update basket returns - display 3Y returns
                 const basketReturns = document.getElementById('basketReturns');
-                if (basketReturns && selectedFund.returns && selectedFund.returns['3Y']) {
-                    basketReturns.innerHTML = `
-                        <div class="basket-returns-label">3Y RETURNS</div>
-                        <div class="basket-returns-value">${selectedFund.returns['3Y'].value}</div>
-                    `;
+                if (basketReturns) {
+                    if (selectedFund.returns && selectedFund.returns['3Y']) {
+                        basketReturns.innerHTML = `
+                            <div class="basket-returns-label">3Y RETURNS</div>
+                            <div class="basket-returns-value">${selectedFund.returns['3Y'].value}</div>
+                        `;
+                        basketReturns.style.display = 'block';
+                    } else {
+                        console.log('No returns data found for fund:', selectedFund);
+                    }
                 }
 
                 // Display only this fund in the basket
                 const basketFundsContainer = document.getElementById('basketFunds');
                 basketFundsContainer.innerHTML = `
                     <div class="funds-capsules-section">
-                        <div class="funds-section-header">Fund Details</div>
                         <div class="fund-capsules-container">
                             <div class="fund-capsule">
                                 <span class="fund-name-text">${selectedFund.name}</span>
