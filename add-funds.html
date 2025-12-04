@@ -2310,6 +2310,15 @@
                 document.getElementById('basketTitle').textContent = selectedFund.name;
                 document.getElementById('basketDescription').textContent = selectedFund.category || '';
 
+                // Update basket returns if available
+                const basketReturns = document.getElementById('basketReturns');
+                if (basketReturns && selectedFund.returns && selectedFund.returns['3Y']) {
+                    basketReturns.innerHTML = `
+                        <div class="basket-returns-label">3Y RETURNS</div>
+                        <div class="basket-returns-value">${selectedFund.returns['3Y'].value}</div>
+                    `;
+                }
+
                 // Display only this fund in the basket
                 const basketFundsContainer = document.getElementById('basketFunds');
                 basketFundsContainer.innerHTML = `
@@ -2320,6 +2329,15 @@
                                 <span class="fund-name-text">${selectedFund.name}</span>
                                 <span class="capsule-percentage">100%</span>
                             </div>
+                        </div>
+                        <!-- Choose Another Fund CTA -->
+                        <div class="customize-link-container" style="margin-top: 12px; text-align: center;">
+                            <button class="customize-link" onclick="openCustomizationOverlay()">
+                                <span>Choose another fund</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 `;
