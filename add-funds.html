@@ -2305,6 +2305,30 @@
                 if (fundTitle) {
                     fundTitle.textContent = selectedFund.name;
                 }
+
+                // Update basket card to show only this specific fund
+                document.getElementById('basketTitle').textContent = selectedFund.name;
+                document.getElementById('basketDescription').textContent = selectedFund.category || '';
+
+                // Display only this fund in the basket
+                const basketFundsContainer = document.getElementById('basketFunds');
+                basketFundsContainer.innerHTML = `
+                    <div class="funds-capsules-section">
+                        <div class="funds-section-header">Fund Details</div>
+                        <div class="fund-capsules-container">
+                            <div class="fund-capsule">
+                                <span class="fund-name-text">${selectedFund.name}</span>
+                                <span class="capsule-percentage">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Add class to basket card to show heading
+                const basketCard = document.querySelector('.basket-card');
+                if (basketCard) {
+                    basketCard.classList.add('basket-card-with-goal');
+                }
             }
 
             // Load goal from localStorage (if coming from create-goal page)
