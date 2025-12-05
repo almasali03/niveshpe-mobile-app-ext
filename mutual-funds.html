@@ -1050,6 +1050,345 @@
             color: #9CA3AF;
             font-weight: 300;
         }
+
+        /* Custom Basket Lead Gen Card */
+        .custom-basket-card {
+            background: white;
+            border: 2px solid #8B5CF6;
+            border-radius: 16px;
+            padding: 0;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .custom-basket-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+        }
+
+        .custom-basket-badge {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .custom-basket-badge .material-symbols-outlined {
+            font-size: 16px;
+        }
+
+        .custom-basket-content {
+            padding: 20px;
+        }
+
+        .custom-basket-header {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .custom-basket-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .custom-basket-icon .material-symbols-outlined {
+            font-size: 32px;
+            color: #8B5CF6;
+        }
+
+        .custom-basket-text {
+            flex: 1;
+        }
+
+        .custom-basket-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1F2937;
+            margin: 0 0 4px 0;
+            line-height: 1.3;
+        }
+
+        .custom-basket-subtitle {
+            font-size: 14px;
+            color: #6B7280;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .custom-basket-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .benefit-item .material-symbols-outlined {
+            font-size: 20px;
+            color: #8B5CF6;
+        }
+
+        .custom-basket-cta {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .custom-basket-cta:active {
+            transform: scale(0.98);
+        }
+
+        .custom-card-tap-indicator {
+            position: absolute;
+            top: 50%;
+            right: 16px;
+            transform: translateY(-50%);
+            font-size: 28px;
+            color: #8B5CF6;
+            opacity: 0.3;
+            font-weight: 300;
+        }
+
+        /* Overlay Styles for Custom Basket Form */
+        .investor-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            animation: fadeIn 0.3s ease-out;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .investor-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .profile-page {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            max-height: 85vh;
+            display: none;
+            flex-direction: column;
+            z-index: 101;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .profile-page.active {
+            display: flex;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .profile-drag-handle {
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-drag-bar {
+            width: 40px;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 9999px;
+        }
+
+        .profile-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 9999px;
+            background: #F8F9FA;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .profile-close-btn:active {
+            background: #E5E7EB;
+            transform: scale(0.95);
+        }
+
+        .profile-modal-header {
+            padding: 0 20px 16px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .profile-modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 4px;
+        }
+
+        .profile-modal-subtitle {
+            font-size: 14px;
+            color: #6B7280;
+            margin: 0;
+        }
+
+        .profile-content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px;
+            scrollbar-width: none;
+        }
+
+        .profile-content-area::-webkit-scrollbar {
+            display: none;
+        }
+
+        .profile-continue-section {
+            padding: 16px 20px 24px;
+            background: white;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .profile-continue-btn {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .profile-continue-btn.enabled {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .profile-continue-btn.enabled:active {
+            transform: scale(0.96);
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.4);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 15px;
+            color: #1F2937;
+            transition: all 0.2s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9CA3AF;
+        }
+
+        .form-input[type="number"]::-webkit-inner-spin-button,
+        .form-input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .form-input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 80px;
+            line-height: 1.5;
+        }
     </style>
     <link rel="stylesheet" href="assets/css/iphone-toggle.css">
 </head>
@@ -1918,6 +2257,57 @@
                                 </div>
                             </div>
 
+                            <!-- Custom Basket Lead Gen Card -->
+                            <div class="custom-basket-card section-spacing"
+                                 data-filter="all short-term mid-term long-term"
+                                 onclick="openCustomBasketForm()">
+
+                                <!-- Premium Badge -->
+                                <div class="custom-basket-badge">
+                                    <span class="material-symbols-outlined">stars</span>
+                                    <span>Personalized Service</span>
+                                </div>
+
+                                <!-- Card Content -->
+                                <div class="custom-basket-content">
+                                    <!-- Icon + Title Section -->
+                                    <div class="custom-basket-header">
+                                        <div class="custom-basket-icon">
+                                            <span class="material-symbols-outlined">psychology</span>
+                                        </div>
+                                        <div class="custom-basket-text">
+                                            <h3 class="custom-basket-title">Can't Find the Right Basket?</h3>
+                                            <p class="custom-basket-subtitle">Talk to our experts for a personalized portfolio</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Value Props -->
+                                    <div class="custom-basket-benefits">
+                                        <div class="benefit-item">
+                                            <span class="material-symbols-outlined">verified</span>
+                                            <span>SEBI certified advisors</span>
+                                        </div>
+                                        <div class="benefit-item">
+                                            <span class="material-symbols-outlined">timer</span>
+                                            <span>15-min consultation</span>
+                                        </div>
+                                        <div class="benefit-item">
+                                            <span class="material-symbols-outlined">workspace_premium</span>
+                                            <span>Custom basket creation</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- CTA Button -->
+                                    <button class="custom-basket-cta" onclick="event.stopPropagation(); openCustomBasketForm()">
+                                        <span>Get Free Consultation</span>
+                                        <span class="material-symbols-outlined">arrow_forward</span>
+                                    </button>
+                                </div>
+
+                                <!-- Tap Indicator -->
+                                <div class="custom-card-tap-indicator">›</div>
+                            </div>
+
                             <!-- CTA to All Funds -->
                             <div class="section-spacing" style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
                                 <button class="btn-secondary" onclick="showTab('all-funds')" style="display: inline-flex; align-items: center; gap: 8px;">
@@ -2513,6 +2903,136 @@
                     </a>
                 </nav>
             </div>
+
+            <!-- Custom Basket Form Overlay -->
+            <div id="customBasketOverlay" class="investor-overlay hidden" onclick="closeCustomBasketForm()">
+                <!-- Modal Container -->
+                <div id="customBasketModal" class="profile-page" onclick="event.stopPropagation()">
+
+                    <!-- Drag Handle -->
+                    <div class="profile-drag-handle">
+                        <div class="profile-drag-bar"></div>
+                    </div>
+
+                    <!-- Close Button -->
+                    <button class="profile-close-btn" onclick="closeCustomBasketForm()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Modal Header -->
+                    <div class="profile-modal-header">
+                        <h2 class="profile-modal-title">Get Your Custom Basket</h2>
+                        <p class="profile-modal-subtitle">Our SEBI certified advisors will create a personalized portfolio for you</p>
+                    </div>
+
+                    <!-- Content Area with Form -->
+                    <div class="profile-content-area">
+                        <form id="customBasketForm">
+                            <!-- Investment Amount -->
+                            <div class="form-group">
+                                <label class="form-label">Investment Amount *</label>
+                                <input
+                                    type="number"
+                                    id="customBasketAmount"
+                                    class="form-input"
+                                    placeholder="Enter amount (₹)"
+                                    required
+                                    min="100"
+                                />
+                            </div>
+
+                            <!-- Preferred Call Timing -->
+                            <div class="form-group">
+                                <label class="form-label">Preferred Call Timing *</label>
+                                <select id="customBasketTiming" class="form-input" required>
+                                    <option value="" disabled selected>Select your preferred time</option>
+                                    <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                                    <option value="Afternoon (12 PM - 5 PM)">Afternoon (12 PM - 5 PM)</option>
+                                    <option value="Evening (5 PM - 9 PM)">Evening (5 PM - 9 PM)</option>
+                                </select>
+                            </div>
+
+                            <!-- Message (Optional) -->
+                            <div class="form-group">
+                                <label class="form-label">Message (Optional)</label>
+                                <textarea
+                                    id="customBasketMessage"
+                                    class="form-input"
+                                    placeholder="Tell us about your investment goals..."
+                                    rows="4"
+                                    style="resize: vertical; min-height: 80px;"
+                                ></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Continue Section -->
+                    <div class="profile-continue-section">
+                        <button class="profile-continue-btn" id="customBasketSubmitBtn"
+                                onclick="submitCustomBasketForm(event)"
+                                style="opacity: 0.5; pointer-events: none;">
+                            <span>Request Consultation</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Success Screen -->
+                <div id="customBasketSuccessScreen" class="profile-page hidden" onclick="event.stopPropagation()">
+                    <!-- Drag Handle -->
+                    <div class="profile-drag-handle">
+                        <div class="profile-drag-bar"></div>
+                    </div>
+
+                    <!-- Close Button -->
+                    <button class="profile-close-btn" onclick="closeCustomBasketForm()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Success Content -->
+                    <div class="profile-content-area" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px;">
+                        <!-- Success Icon -->
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #34D399 0%, #10B981 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+
+                        <!-- Success Title -->
+                        <h2 style="font-size: 24px; font-weight: 700; color: #1F2937; margin-bottom: 12px;">Request Submitted!</h2>
+
+                        <!-- Success Message -->
+                        <p style="font-size: 15px; color: #6B7280; line-height: 1.6; margin-bottom: 32px; max-width: 300px;">
+                            Our advisor will call you soon to discuss your custom basket
+                        </p>
+
+                        <!-- Details Card -->
+                        <div style="width: 100%; background: #F8F9FA; border-radius: 12px; padding: 16px; margin-bottom: 32px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                <span style="color: #6B7280; font-size: 14px;">Investment Amount</span>
+                                <span id="successCustomAmount" style="color: #1F2937; font-weight: 600; font-size: 14px;">₹0</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #6B7280; font-size: 14px;">Preferred Timing</span>
+                                <span id="successCustomTiming" style="color: #1F2937; font-weight: 600; font-size: 14px;">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Done Button -->
+                    <div class="profile-continue-section">
+                        <button class="profile-continue-btn" onclick="closeCustomBasketForm()" style="opacity: 1; pointer-events: auto;">
+                            <span>Back to Baskets</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- iPhone Home Indicator -->
@@ -2901,6 +3421,122 @@
                 });
             }
         });
+
+        // ==================== CUSTOM BASKET FORM OVERLAY ====================
+
+        function openCustomBasketForm() {
+            const overlay = document.getElementById('customBasketOverlay');
+            const modal = document.getElementById('customBasketModal');
+
+            if (!overlay || !modal) return;
+
+            // Show overlay and modal
+            overlay.classList.remove('hidden');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Add event listeners for form validation
+            const amount = document.getElementById('customBasketAmount');
+            const timing = document.getElementById('customBasketTiming');
+
+            if (amount && timing) {
+                amount.addEventListener('input', checkCustomBasketFormValid);
+                timing.addEventListener('change', checkCustomBasketFormValid);
+            }
+        }
+
+        function closeCustomBasketForm() {
+            const overlay = document.getElementById('customBasketOverlay');
+            const formModal = document.getElementById('customBasketModal');
+            const successScreen = document.getElementById('customBasketSuccessScreen');
+
+            if (!overlay) return;
+
+            // Hide overlay and all modals
+            overlay.classList.add('hidden');
+            if (formModal) formModal.classList.remove('active');
+            if (successScreen) {
+                successScreen.classList.remove('active');
+                successScreen.classList.add('hidden');
+            }
+            document.body.style.overflow = '';
+
+            // Reset form
+            const form = document.getElementById('customBasketForm');
+            if (form) form.reset();
+
+            const submitBtn = document.getElementById('customBasketSubmitBtn');
+            if (submitBtn) {
+                submitBtn.style.opacity = '0.5';
+                submitBtn.style.pointerEvents = 'none';
+            }
+        }
+
+        function checkCustomBasketFormValid() {
+            const amount = document.getElementById('customBasketAmount');
+            const timing = document.getElementById('customBasketTiming');
+            const submitBtn = document.getElementById('customBasketSubmitBtn');
+
+            if (!amount || !timing || !submitBtn) return;
+
+            const isValid = amount.value &&
+                           amount.value >= 100 &&
+                           timing.value;
+
+            if (isValid) {
+                submitBtn.style.opacity = '1';
+                submitBtn.style.pointerEvents = 'auto';
+            } else {
+                submitBtn.style.opacity = '0.5';
+                submitBtn.style.pointerEvents = 'none';
+            }
+        }
+
+        function submitCustomBasketForm(e) {
+            if (e) e.preventDefault();
+
+            const amount = document.getElementById('customBasketAmount');
+            const timing = document.getElementById('customBasketTiming');
+            const message = document.getElementById('customBasketMessage');
+
+            if (!amount || !timing) return;
+
+            // Validate before submitting
+            if (!amount.value || amount.value < 100 || !timing.value) {
+                return;
+            }
+
+            // Log form data (in production, this would send to backend)
+            console.log('Custom Basket Form Submitted:', {
+                investmentAmount: amount.value,
+                callTiming: timing.value,
+                message: message ? message.value : '',
+                source: 'custom-basket-card',
+                page: 'mutual-funds'
+            });
+
+            // Hide form modal and show success screen
+            const formModal = document.getElementById('customBasketModal');
+            const successScreen = document.getElementById('customBasketSuccessScreen');
+
+            if (!formModal || !successScreen) return;
+
+            // Update success screen with submitted data
+            const successAmount = document.getElementById('successCustomAmount');
+            const successTiming = document.getElementById('successCustomTiming');
+
+            if (successAmount) {
+                successAmount.textContent = '₹' + parseInt(amount.value).toLocaleString('en-IN');
+            }
+            if (successTiming) {
+                successTiming.textContent = timing.value;
+            }
+
+            // Transition between screens
+            formModal.classList.remove('active');
+            successScreen.classList.remove('hidden');
+            successScreen.classList.add('active');
+        }
     </script>
     <script src="assets/js/iphone-toggle.js"></script>
 </body>
