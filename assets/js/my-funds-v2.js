@@ -710,6 +710,23 @@ function hideSkeletons() {
 function initializeHoldingsV2() {
     if (typeof fundsDataV2 === 'undefined') {
         console.error('fundsDataV2 not loaded');
+
+        // Hide skeletons and show error message
+        hideSkeletons();
+        const holdingsList = document.getElementById('holdingsList');
+        if (holdingsList) {
+            holdingsList.innerHTML = `
+                <div style="text-align: center; padding: 40px 20px; color: #6B7280;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin: 0 auto 16px;">
+                        <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                        <line x1="12" y1="8" x2="12" y2="12" stroke-width="2"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2"/>
+                    </svg>
+                    <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Unable to load holdings</p>
+                    <p style="font-size: 14px;">Please refresh the page to try again</p>
+                </div>
+            `;
+        }
         return;
     }
 
@@ -942,6 +959,9 @@ if (window.location.hash && document.readyState === 'loading') {
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded - starting initialization');
+    console.log('fundsDataV2 available:', typeof fundsDataV2 !== 'undefined');
+
     // Initialize DOM cache
     initDOM();
 
@@ -960,6 +980,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.performanceMonitor.init();
 
     // Initialize V2 features
+    console.log('About to initialize holdings...');
     initializeHoldingsV2();
 
     // Add animation styles
