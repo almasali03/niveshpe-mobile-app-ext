@@ -827,10 +827,64 @@ function hideSkeletons() {
     if (sortSection) sortSection.style.display = 'block';
 }
 
+// Fallback data for when fundsDataV2 is not loaded (e.g., file:// protocol)
+const fundsDataV2Fallback = {
+    'hdfc-mid-cap': {
+        name: 'HDFC Mid Cap Fund',
+        fundType: 'Equity • Mid Cap',
+        lockIn: 'No lock-in',
+        isLocked: false,
+        holdings: {
+            currentValue: 95000,
+            investedAmount: 70000,
+            absoluteGain: 25000,
+            percentageGain: 35.7
+        }
+    },
+    'hdfc-small-cap': {
+        name: 'HDFC Small Cap Fund',
+        fundType: 'Equity • Small Cap',
+        lockIn: 'No lock-in',
+        isLocked: false,
+        holdings: {
+            currentValue: 71250,
+            investedAmount: 53000,
+            absoluteGain: 18250,
+            percentageGain: 34.4
+        }
+    },
+    'hdfc-balanced-advantage': {
+        name: 'HDFC Balanced Advantage Fund',
+        fundType: 'Hybrid • Balanced Advantage',
+        lockIn: 'No lock-in',
+        isLocked: false,
+        holdings: {
+            currentValue: 35625,
+            investedAmount: 28800,
+            absoluteGain: 6825,
+            percentageGain: 23.7
+        }
+    },
+    'hdfc-liquid-fund': {
+        name: 'HDFC Liquid Fund',
+        fundType: 'Debt • Liquid',
+        lockIn: 'No lock-in',
+        isLocked: false,
+        holdings: {
+            currentValue: 35625,
+            investedAmount: 33000,
+            absoluteGain: 2625,
+            percentageGain: 8.0
+        }
+    }
+};
+
 function initializeHoldingsV2() {
+    // Use external data if available, otherwise use fallback
+    const dataSource = (typeof fundsDataV2 !== 'undefined') ? fundsDataV2 : fundsDataV2Fallback;
+
     if (typeof fundsDataV2 === 'undefined') {
-        console.error('fundsDataV2 not loaded');
-        return;
+        console.warn('fundsDataV2 not loaded, using fallback data');
     }
 
     // Show skeletons first
@@ -838,9 +892,9 @@ function initializeHoldingsV2() {
 
     // Simulate data loading (800ms delay)
     setTimeout(() => {
-        // Convert fundsDataV2 object to array
-        holdingsData = Object.keys(fundsDataV2).map(key => {
-            const fund = fundsDataV2[key];
+        // Convert data source object to array
+        holdingsData = Object.keys(dataSource).map(key => {
+            const fund = dataSource[key];
             return {
                 id: key,
                 name: fund.name,
