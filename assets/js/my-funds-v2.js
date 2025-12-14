@@ -142,13 +142,7 @@ class TabManager {
         const content = document.getElementById(`${tabName}-tab`);
         if (!content) return;
 
-        // V2: Skip loading for holdings tab (already initialized by initializeHoldingsV2)
-        if (tabName === 'holdings') {
-            content.dataset.loaded = 'true';
-            return;
-        }
-
-        // Show skeleton loaders initially for other tabs
+        // Show skeleton loaders initially for all tabs
         if (!content.dataset.loaded) {
             this.showSkeletonLoader(content, tabName);
 
@@ -189,47 +183,121 @@ class TabManager {
     }
 
     getHoldingsHTML() {
-        return `
-            <div class="holdings-list">
-                ${this.generateHoldingsCards()}
-            </div>
-        `;
-    }
-
-    generateHoldingsCards() {
         const funds = [
-            { name: 'HDFC Liquid Fund', type: 'Debt • Liquid', amount: '₹45,200', returns: '+12.3%', allocation: 15.8, trend: [10, 15, 12, 18, 20, 22, 25] },
-            { name: 'Axis Midcap Fund', type: 'Equity • Mid Cap', amount: '₹1,20,000', returns: '+42.1%', allocation: 42.1, trend: [20, 25, 30, 28, 35, 40, 42] },
-            { name: 'SBI Small Cap Fund', type: 'Equity • Small Cap', amount: '₹75,680', returns: '+38.5%', allocation: 26.5, trend: [15, 20, 18, 25, 30, 35, 38] },
-            { name: 'ICICI Prudential ELSS', type: 'Equity • Tax Saver', amount: '₹44,540', returns: '+28.7%', allocation: 15.6, locked: 'Mar 2025', trend: [12, 15, 18, 20, 22, 25, 28] }
+            {
+                id: 'hdfc-mid-cap',
+                name: 'HDFC Mid Cap Fund',
+                type: 'Equity • Mid Cap',
+                lockIn: 'No lock-in',
+                current: 95000,
+                invested: 70000,
+                returns: 35.7
+            },
+            {
+                id: 'hdfc-small-cap',
+                name: 'HDFC Small Cap Fund',
+                type: 'Equity • Small Cap',
+                lockIn: 'No lock-in',
+                current: 71250,
+                invested: 53000,
+                returns: 34.4
+            },
+            {
+                id: 'hdfc-balanced-advantage',
+                name: 'HDFC Balanced Advantage Fund',
+                type: 'Hybrid • Balanced Advantage',
+                lockIn: 'No lock-in',
+                current: 35625,
+                invested: 28800,
+                returns: 23.7
+            },
+            {
+                id: 'hdfc-liquid-fund',
+                name: 'HDFC Liquid Fund',
+                type: 'Debt • Liquid',
+                lockIn: 'No lock-in',
+                current: 35625,
+                invested: 33000,
+                returns: 8.0
+            }
         ];
 
-        return funds.map(fund => `
-            <div class="holdings-card">
-                <div class="holdings-header">
-                    <div class="holdings-name">${fund.name}</div>
-                    <div class="holdings-amount">${fund.amount}</div>
+        return `
+            <!-- Asset Allocation Overview -->
+            <div class="asset-allocation-section">
+                <div class="allocation-header">
+                    <h3 class="allocation-title">Asset Allocation</h3>
+                    <a href="portfolio-allocation.html" class="view-all-link">View ›</a>
                 </div>
-                <div class="holdings-details">
-                    <div class="holdings-info">${fund.type} • ${fund.locked || 'No lock-in'}</div>
-                    <div class="holdings-returns">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M7 14l5-5 5 5z"/>
-                        </svg>
-                        <span>${fund.returns}</span>
+                <div class="asset-allocation-grid">
+                    <div class="asset-item">
+                        <div class="asset-percentage equity-color">70%</div>
+                        <div class="asset-label">Equity</div>
                     </div>
-                </div>
-                <div class="holdings-allocation">
-                    <div class="holdings-allocation-header">
-                        <span class="holdings-allocation-label">Portfolio allocation</span>
-                        <span class="holdings-allocation-value">${fund.allocation}%</span>
+                    <div class="asset-item">
+                        <div class="asset-percentage debt-color">15%</div>
+                        <div class="asset-label">Debt</div>
                     </div>
-                    <div class="holdings-progress-bar">
-                        <div class="holdings-progress-fill" style="width: ${fund.allocation}%;"></div>
+                    <div class="asset-item">
+                        <div class="asset-percentage commodity-color">0%</div>
+                        <div class="asset-label">Commodity</div>
+                    </div>
+                    <div class="asset-item">
+                        <div class="asset-percentage others-color">15%</div>
+                        <div class="asset-label">Others</div>
                     </div>
                 </div>
             </div>
-        `).join('');
+
+            <!-- Sort & Filter Controls -->
+            <div class="sort-filter-section">
+                <div class="sort-control">
+                    <label for="sortSelect">Sort by:</label>
+                    <select id="sortSelect" class="sort-dropdown">
+                        <option value="current-value">Current Value</option>
+                        <option value="returns">Returns %</option>
+                        <option value="invested">Invested Amount</option>
+                        <option value="alphabetical">Alphabetical</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Holdings List -->
+            <div class="holdings-list">
+                ${funds.map(fund => {
+                    const isPositive = fund.returns >= 0;
+                    const signSymbol = isPositive ? '+' : '';
+
+                    return `
+                        <div class="holdings-card" onclick="window.location.href='fund-detail.html?fund=${fund.id}'">
+                            <div class="holdings-header">
+                                <div class="holdings-name">${fund.name}</div>
+                                <svg class="holdings-arrow" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <div class="holdings-type">
+                                ${fund.type} • ${fund.lockIn}
+                            </div>
+                            <div class="holdings-investment-row">
+                                <div class="investment-item">
+                                    <span class="investment-label">Current</span>
+                                    <span class="investment-value">₹${fund.current.toLocaleString('en-IN')}</span>
+                                </div>
+                                <div class="investment-item">
+                                    <span class="investment-label">Invested</span>
+                                    <span class="investment-value">₹${fund.invested.toLocaleString('en-IN')}</span>
+                                </div>
+                                <div class="investment-item">
+                                    <span class="investment-label">Returns</span>
+                                    <span class="investment-value ${isPositive ? 'positive' : 'negative'}">${signSymbol}${fund.returns}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
     }
 
     generateSparklinePoints(data) {
@@ -676,285 +744,7 @@ class PerformanceMonitor {
 }
 
 // ===== V2 ENHANCEMENTS =====
-
-// Holdings data and sorting
-let holdingsData = [];
-let currentSort = 'current-value';  // Default sort
-
-// Initialize holdings from fundsDataV2
-// Skeleton loader utilities
-function showSkeletons() {
-    const assetSkeleton = document.getElementById('asset-allocation-skeleton');
-    const holdingsSkeleton = document.getElementById('holdings-skeleton-container');
-    const assetSection = document.getElementById('asset-allocation-section');
-    const sortSection = document.querySelector('.sort-filter-section');
-
-    if (assetSkeleton) assetSkeleton.style.display = 'block';
-    if (holdingsSkeleton) holdingsSkeleton.style.display = 'block';
-    if (assetSection) assetSection.style.display = 'none';
-    if (sortSection) sortSection.style.display = 'none';
-}
-
-function hideSkeletons() {
-    const assetSkeleton = document.getElementById('asset-allocation-skeleton');
-    const holdingsSkeleton = document.getElementById('holdings-skeleton-container');
-    const assetSection = document.getElementById('asset-allocation-section');
-    const sortSection = document.querySelector('.sort-filter-section');
-
-    if (assetSkeleton) assetSkeleton.style.display = 'none';
-    if (holdingsSkeleton) holdingsSkeleton.style.display = 'none';
-    if (assetSection) assetSection.style.display = 'block';
-    if (sortSection) sortSection.style.display = 'block';
-}
-
-function initializeHoldingsV2() {
-    if (typeof fundsDataV2 === 'undefined') {
-        console.error('fundsDataV2 not loaded');
-
-        // Hide skeletons and show error message
-        hideSkeletons();
-        const holdingsList = document.getElementById('holdingsList');
-        if (holdingsList) {
-            holdingsList.innerHTML = `
-                <div style="text-align: center; padding: 40px 20px; color: #6B7280;">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin: 0 auto 16px;">
-                        <circle cx="12" cy="12" r="10" stroke-width="2"/>
-                        <line x1="12" y1="8" x2="12" y2="12" stroke-width="2"/>
-                        <line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2"/>
-                    </svg>
-                    <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Unable to load holdings</p>
-                    <p style="font-size: 14px;">Please refresh the page to try again</p>
-                </div>
-            `;
-        }
-        return;
-    }
-
-    // Show skeletons first
-    showSkeletons();
-
-    // Simulate data loading (800ms delay)
-    setTimeout(() => {
-        console.log('Loading holdings data from fundsDataV2...');
-        console.log('fundsDataV2 keys:', Object.keys(fundsDataV2));
-
-        // Convert fundsDataV2 object to array
-        holdingsData = Object.keys(fundsDataV2).map(key => {
-            const fund = fundsDataV2[key];
-            return {
-                id: key,
-                name: fund.name,
-                fundType: fund.fundType,
-                lockIn: fund.lockIn,
-                isLocked: fund.isLocked || false,
-                lockInDate: fund.lockInDate || null,
-                currentValue: fund.holdings.currentValue,
-                investedAmount: fund.holdings.investedAmount,
-                absoluteGain: fund.holdings.absoluteGain,
-                percentageGain: fund.holdings.percentageGain
-            };
-        });
-
-        console.log('Holdings data loaded:', holdingsData.length, 'funds');
-
-        // Sort by default (Current Value - High to Low)
-        sortHoldings(currentSort);
-
-        // Hide skeletons and show actual content
-        hideSkeletons();
-
-        console.log('Holdings rendered successfully');
-
-        // Mark holdings tab as loaded to prevent regeneration
-        const holdingsTab = document.getElementById('holdings-tab');
-        if (holdingsTab) {
-            holdingsTab.dataset.loaded = 'true';
-        }
-    }, 800);
-}
-
-// Generate holdings card HTML
-function generateHoldingsCard(fund) {
-    const isPositive = fund.absoluteGain >= 0;
-    const gainClass = isPositive ? 'positive' : 'negative';
-    const arrowPath = isPositive ? 'M7 14l5-5 5 5z' : 'M7 10l5 5 5-5z';
-    const signSymbol = isPositive ? '+' : '';
-
-    return `
-        <div class="holdings-card" onclick="navigateToFundDetail('${fund.id}')">
-            <button class="actions-menu-btn" onclick="toggleActionsMenu('${fund.id}', event)" aria-label="Quick actions">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <circle cx="12" cy="5" r="2"/>
-                    <circle cx="12" cy="12" r="2"/>
-                    <circle cx="12" cy="19" r="2"/>
-                </svg>
-            </button>
-            <div class="actions-dropdown" id="actions-menu-${fund.id}" style="display: none;">
-                <div class="actions-menu-item" onclick="handleBuyMore('${fund.id}', event)">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
-                    </svg>
-                    <span>Buy More</span>
-                </div>
-                <div class="actions-menu-item" onclick="handleRedeem('${fund.id}', event)">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/>
-                    </svg>
-                    <span>Redeem</span>
-                </div>
-            </div>
-            <div class="holdings-header">
-                <div class="holdings-name">${fund.name}</div>
-                <svg class="holdings-arrow" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                </svg>
-            </div>
-
-            <div class="holdings-type">
-                ${fund.fundType} • ${fund.lockIn}
-            </div>
-
-            <div class="holdings-investment-row">
-                <div class="investment-item">
-                    <span class="investment-label">Current</span>
-                    <span class="investment-value">₹${fund.currentValue.toLocaleString('en-IN')}</span>
-                </div>
-                <div class="investment-item">
-                    <span class="investment-label">Invested</span>
-                    <span class="investment-value">₹${fund.investedAmount.toLocaleString('en-IN')}</span>
-                </div>
-                <div class="investment-item">
-                    <span class="investment-label">Returns</span>
-                    <span class="investment-value ${gainClass}">${signSymbol}${fund.percentageGain}%</span>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Render holdings list
-function renderHoldings() {
-    const holdingsList = document.getElementById('holdingsList');
-    if (!holdingsList) {
-        console.error('holdingsList element not found!');
-        return;
-    }
-
-    console.log('Rendering', holdingsData.length, 'holdings cards');
-    holdingsList.innerHTML = holdingsData.map(fund => generateHoldingsCard(fund)).join('');
-    console.log('Holdings cards inserted into DOM');
-}
-
-// Sort holdings
-function sortHoldings(sortBy) {
-    currentSort = sortBy;
-
-    switch(sortBy) {
-        case 'current-value':
-            holdingsData.sort((a, b) => b.currentValue - a.currentValue);
-            break;
-        case 'returns':
-            holdingsData.sort((a, b) => b.percentageGain - a.percentageGain);
-            break;
-        case 'invested':
-            holdingsData.sort((a, b) => b.investedAmount - a.investedAmount);
-            break;
-        case 'alphabetical':
-            holdingsData.sort((a, b) => a.name.localeCompare(b.name));
-            break;
-        default:
-            holdingsData.sort((a, b) => b.currentValue - a.currentValue);
-    }
-
-    renderHoldings();
-}
-
-// Navigate to fund detail page
-function navigateToFundDetail(fundId) {
-    // Haptic feedback
-    if (navigator.vibrate) {
-        navigator.vibrate(5);
-    }
-
-    // Navigate to fund-detail.html with fund parameter
-    window.location.href = `fund-detail.html?fund=${fundId}`;
-}
-
-// Quick Actions Menu Functions
-function toggleActionsMenu(fundId, event) {
-    event.stopPropagation(); // Prevent card click
-
-    const menu = document.getElementById(`actions-menu-${fundId}`);
-    const allMenus = document.querySelectorAll('.actions-dropdown');
-
-    // Close all other menus
-    allMenus.forEach(m => {
-        if (m.id !== `actions-menu-${fundId}`) {
-            m.style.display = 'none';
-        }
-    });
-
-    // Toggle current menu
-    if (menu) {
-        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-    }
-}
-
-// Close menus when clicking outside
-document.addEventListener('click', (event) => {
-    if (!event.target.closest('.actions-menu-btn') && !event.target.closest('.actions-dropdown')) {
-        const allMenus = document.querySelectorAll('.actions-dropdown');
-        allMenus.forEach(menu => menu.style.display = 'none');
-    }
-});
-
-// Action handlers
-function handleBuyMore(fundId, event) {
-    event.stopPropagation(); // Prevent card click
-
-    // Close menu
-    const menu = document.getElementById(`actions-menu-${fundId}`);
-    if (menu) menu.style.display = 'none';
-
-    // Haptic feedback
-    if (navigator.vibrate) {
-        navigator.vibrate(10);
-    }
-
-    // TODO: Implement Buy More functionality
-    console.log(`Buy More action for fund: ${fundId}`);
-    alert(`Buy More: ${fundId}\n\nThis would open the investment screen.`);
-}
-
-function handleRedeem(fundId, event) {
-    event.stopPropagation(); // Prevent card click
-
-    // Close menu
-    const menu = document.getElementById(`actions-menu-${fundId}`);
-    if (menu) menu.style.display = 'none';
-
-    // Haptic feedback
-    if (navigator.vibrate) {
-        navigator.vibrate(10);
-    }
-
-    // TODO: Implement Redeem functionality
-    console.log(`Redeem action for fund: ${fundId}`);
-    alert(`Redeem: ${fundId}\n\nThis would open the redemption screen.`);
-}
-
-function handleViewDetails(fundId, event) {
-    event.stopPropagation(); // Prevent card click
-
-    // Close menu
-    const menu = document.getElementById(`actions-menu-${fundId}`);
-    if (menu) menu.style.display = 'none';
-
-    // Navigate to fund detail
-    navigateToFundDetail(fundId);
-}
-
-// Chart functionality removed - now handled in portfolio-allocation.html
+// (Holdings now use hardcoded data like SIPs and Goals - no external dependencies)
 
 // Immediately disable scroll restoration and reset scroll position BEFORE any rendering
 if ('scrollRestoration' in history) {
@@ -971,8 +761,7 @@ if (window.location.hash && document.readyState === 'loading') {
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded - starting initialization');
-    console.log('fundsDataV2 available:', typeof fundsDataV2 !== 'undefined');
+    console.log('My Funds v2 - initializing...');
 
     // Initialize DOM cache
     initDOM();
@@ -990,10 +779,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.pullToRefresh.init();
     window.touchFeedback.init();
     window.performanceMonitor.init();
-
-    // Initialize V2 features
-    console.log('About to initialize holdings...');
-    initializeHoldingsV2();
 
     // Add animation styles
     const style = document.createElement('style');
