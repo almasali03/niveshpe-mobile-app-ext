@@ -892,22 +892,24 @@ function initializeHoldingsV2() {
 
     // Simulate data loading (800ms delay)
     setTimeout(() => {
-        // Convert data source object to array
-        holdingsData = Object.keys(dataSource).map(key => {
-            const fund = dataSource[key];
-            return {
-                id: key,
-                name: fund.name,
-                fundType: fund.fundType,
-                lockIn: fund.lockIn,
-                isLocked: fund.isLocked || false,
-                lockInDate: fund.lockInDate || null,
-                currentValue: fund.holdings.currentValue,
-                investedAmount: fund.holdings.investedAmount,
-                absoluteGain: fund.holdings.absoluteGain,
-                percentageGain: fund.holdings.percentageGain
-            };
-        });
+        // Convert data source object to array (filter out funds without holdings)
+        holdingsData = Object.keys(dataSource)
+            .filter(key => dataSource[key].holdings) // Only include funds with holdings data
+            .map(key => {
+                const fund = dataSource[key];
+                return {
+                    id: key,
+                    name: fund.name,
+                    fundType: fund.fundType,
+                    lockIn: fund.lockIn,
+                    isLocked: fund.isLocked || false,
+                    lockInDate: fund.lockInDate || null,
+                    currentValue: fund.holdings.currentValue,
+                    investedAmount: fund.holdings.investedAmount,
+                    absoluteGain: fund.holdings.absoluteGain,
+                    percentageGain: fund.holdings.percentageGain
+                };
+            });
 
         // Sort by default (Current Value - High to Low)
         sortHoldings(currentSort);
