@@ -735,6 +735,9 @@ function initializeHoldingsV2() {
 
     // Simulate data loading (800ms delay)
     setTimeout(() => {
+        console.log('Loading holdings data from fundsDataV2...');
+        console.log('fundsDataV2 keys:', Object.keys(fundsDataV2));
+
         // Convert fundsDataV2 object to array
         holdingsData = Object.keys(fundsDataV2).map(key => {
             const fund = fundsDataV2[key];
@@ -752,11 +755,15 @@ function initializeHoldingsV2() {
             };
         });
 
+        console.log('Holdings data loaded:', holdingsData.length, 'funds');
+
         // Sort by default (Current Value - High to Low)
         sortHoldings(currentSort);
 
         // Hide skeletons and show actual content
         hideSkeletons();
+
+        console.log('Holdings rendered successfully');
 
         // Mark holdings tab as loaded to prevent regeneration
         const holdingsTab = document.getElementById('holdings-tab');
@@ -828,9 +835,14 @@ function generateHoldingsCard(fund) {
 // Render holdings list
 function renderHoldings() {
     const holdingsList = document.getElementById('holdingsList');
-    if (!holdingsList) return;
+    if (!holdingsList) {
+        console.error('holdingsList element not found!');
+        return;
+    }
 
+    console.log('Rendering', holdingsData.length, 'holdings cards');
     holdingsList.innerHTML = holdingsData.map(fund => generateHoldingsCard(fund)).join('');
+    console.log('Holdings cards inserted into DOM');
 }
 
 // Sort holdings
