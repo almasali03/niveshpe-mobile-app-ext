@@ -146,7 +146,7 @@
                             <div class="transaction-group">
                                 <div class="group-header">Today</div>
 
-                                <div class="transaction-item" data-type="sip" onclick="openTransactionDetail('sip', '1500', 'Monthly SIP: HDFC Liquid Fund', 'Today • 09:30 AM')">
+                                <div class="transaction-item" data-type="sip" onclick="openTransactionDetailWithAPI(hdfcLiquidFundSIPData)">
                                     <div class="transaction-icon credit">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                             <path d="M7 14l5-5 5 5H7z"/>
@@ -156,7 +156,7 @@
                                         <div class="transaction-title">Monthly SIP: HDFC Liquid Fund</div>
                                         <div class="transaction-subtitle">Today • 09:30 AM</div>
                                     </div>
-                                    <div class="transaction-amount credit">+₹1,500</div>
+                                    <div class="transaction-amount credit">+₹300</div>
                                 </div>
 
                                 <div class="transaction-item" data-type="dividend" onclick="openTransactionDetail('dividend', '101', 'Dividend: SBI Contra Fund', 'Today • 02:15 PM')">
@@ -370,7 +370,14 @@
             });
         });
 
-        // Function to open transaction detail page
+        // Function to open transaction detail page with API data
+        function openTransactionDetailWithAPI(apiData) {
+            // Store API data in localStorage for transaction-detail.html to read
+            localStorage.setItem('transactionDetailData', JSON.stringify(apiData));
+            window.location.href = 'transaction-detail.html';
+        }
+
+        // Function to open transaction detail page (legacy URL parameter method)
         function openTransactionDetail(type, amount, title, date) {
             const encodedTitle = encodeURIComponent(title);
             const encodedDate = encodeURIComponent(date);
@@ -383,6 +390,51 @@
                 window.location.href = `transaction-detail.html?type=${type}&amount=${amount}&title=${encodedTitle}&date=${encodedDate}`;
             }
         }
+
+        // Sample API data for HDFC Liquid Fund SIP transaction
+        const hdfcLiquidFundSIPData = {
+            "status": "SUCCESS",
+            "code": "NP000",
+            "data": {
+                "type": "sip",
+                "transaction_id": "NP251214101628GDI78A",
+                "amount": 300.0,
+                "status": "Order Placed",
+                "sip_frequency": "monthly",
+                "sip_day": 28,
+                "sip_num_installments": 120,
+                "sip_start_date": "2026-01-28",
+                "sip_end_date": "2036-01-28",
+                "created_at": "2024-12-14T10:16:28.479Z",
+                "installments": [
+                    {
+                        "installment_num": 1,
+                        "scheduled_date": "2026-01-28",
+                        "amount": 300.0,
+                        "status": "Scheduled"
+                    }
+                ],
+                "installments_summary": {
+                    "total": 120,
+                    "completed": 0,
+                    "upcoming": 1,
+                    "failed": 0
+                },
+                "timeline": {
+                    "order_placed_at": "2024-12-14T10:16:28.479Z",
+                    "payment_initiated_at": null,
+                    "units_allocated_at": null,
+                    "sip_activated_at": null
+                },
+                "fund_name": "HDFC Liquid Fund",
+                "fund_amc_name": "HDFC Asset Management Company Limited",
+                "fund_category": "Debt",
+                "fund_sub_category": "Liquid",
+                "fund_plan_name": "Direct Plan",
+                "fund_option_name": "Growth Option",
+                "folio_number": null
+            }
+        };
     </script>
     <script src="assets/js/iphone-toggle.js"></script>
 </body>

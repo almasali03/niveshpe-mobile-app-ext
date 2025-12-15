@@ -341,16 +341,33 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Get transaction data from URL parameters
+            // Try to get API payload from localStorage or URL
+            let apiData = null;
             const urlParams = new URLSearchParams(window.location.search);
-            const txnType = urlParams.get('type') || 'sip';
-            const txnAmount = urlParams.get('amount') || '1500';
-            const txnTitle = urlParams.get('title') || 'Monthly SIP: HDFC Liquid Fund';
-            const txnDate = urlParams.get('date') || 'Nov 8, 2024 • 09:30 AM';
 
+            // Check if API data is stored in localStorage
+            const storedData = localStorage.getItem('transactionDetailData');
+            if (storedData) {
+                try {
+                    apiData = JSON.parse(storedData);
+                    // Clear after reading
+                    localStorage.removeItem('transactionDetailData');
+                } catch (e) {
+                    console.error('Error parsing transaction data:', e);
+                }
+            }
 
-            // Update page content based on transaction type
-            updateTransactionDetails(txnType, txnAmount, txnTitle, txnDate);
+            // If API data exists, use it; otherwise fall back to URL parameters
+            if (apiData && apiData.data) {
+                updateTransactionDetailsFromAPI(apiData.data);
+            } else {
+                // Fallback to old URL parameter method
+                const txnType = urlParams.get('type') || 'sip';
+                const txnAmount = urlParams.get('amount') || '1500';
+                const txnTitle = urlParams.get('title') || 'Monthly SIP: HDFC Liquid Fund';
+                const txnDate = urlParams.get('date') || 'Nov 8, 2024 • 09:30 AM';
+                updateTransactionDetails(txnType, txnAmount, txnTitle, txnDate);
+            }
 
             // Mobile touch interactions
             document.querySelectorAll('.document-item, .support-card, .status-card').forEach(item => {
@@ -367,6 +384,195 @@
                 });
             });
         });
+
+        function updateTransactionDetailsFromAPI(data) {
+            // Update transaction header
+            const fundTitle = `Monthly SIP: ${data.fund_name}`;
+            document.getElementById('transactionTitle').textContent = fundTitle;
+            document.getElementById('transactionAmount').textContent = `₹${data.amount.toLocaleString('en-IN')}`;
+
+            // Update status badge and icon
+            const statusBadge = document.getElementById('transactionStatus');
+            const statusCard = document.querySelector('.transaction-status-card');
+            const statusIcon = statusCard.querySelector('.status-icon');
+
+            // Map API status to display status
+            const statusMap = {
+                'Order Placed': { text: 'Processing', class: 'processing' },
+                'Processing': { text: 'Processing', class: 'processing' },
+                'SUCCESS': { text: 'Completed', class: 'success' },
+                'FAILED': { text: 'Failed', class: 'failed' }
+            };
+
+            const displayStatus = statusMap[data.status] || { text: data.status, class: 'processing' };
+            statusBadge.textContent = displayStatus.text;
+            statusBadge.className = `status-badge ${displayStatus.class}`;
+            statusIcon.className = `status-icon ${displayStatus.class}`;
+
+            // Update Transaction Summary
+            document.getElementById('transactionId').textContent = data.transaction_id;
+
+            // Format created_at date
+            const createdDate = new Date(data.created_at);
+            const dateStr = createdDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
+            const timeStr = createdDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+            document.getElementById('transactionDateTime').textContent = `${dateStr} • ${timeStr}`;
+
+            document.getElementById('transactionType').textContent = 'SIP Investment';
+            document.getElementById('paymentMethod').textContent = 'UPI AutoPay';
+            document.getElementById('folioNumber').textContent = data.folio_number || 'Pending';
+
+            // Update Fund Information
+            const fundCategory = `${data.fund_category} • ${data.fund_sub_category}`;
+            document.querySelector('.fund-name').textContent = `${data.fund_name} - ${data.fund_plan_name} ${data.fund_option_name}`;
+            document.querySelector('.fund-category').textContent = fundCategory;
+            document.querySelector('.fund-icon').textContent = data.fund_amc_name.split(' ')[0].toUpperCase();
+
+            // Update Investment Breakdown
+            document.getElementById('investmentAmount').textContent = `₹${data.amount.toFixed(2)}`;
+
+            // Get first installment data if available
+            const firstInstallment = data.installments && data.installments.length > 0 ? data.installments[0] : null;
+
+            if (firstInstallment && firstInstallment.nav_at_execution) {
+                document.getElementById('navValue').textContent = `₹${firstInstallment.nav_at_execution.toFixed(2)}`;
+
+                if (firstInstallment.units_allotted) {
+                    document.getElementById('unitsAllocated').textContent = `${firstInstallment.units_allotted.toFixed(4)} units`;
+                } else {
+                    document.getElementById('unitsAllocated').textContent = 'Pending';
+                }
+            } else {
+                document.getElementById('navValue').textContent = 'Pending';
+                document.getElementById('unitsAllocated').textContent = 'Pending';
+            }
+
+            document.getElementById('totalAmount').textContent = `₹${data.amount.toFixed(2)}`;
+
+            // Update SIP Details
+            document.getElementById('sipInfo').style.display = 'block';
+            const sipDetailsGrid = document.querySelector('#sipInfo .detail-grid');
+
+            // Calculate next SIP date (SIP start date + 1 month for first installment)
+            const sipStartDate = new Date(data.sip_start_date);
+            const nextSipDate = new Date(sipStartDate);
+            nextSipDate.setMonth(nextSipDate.getMonth() + 1);
+
+            sipDetailsGrid.innerHTML = `
+                <div class="detail-item">
+                    <span class="detail-label">SIP Amount</span>
+                    <span class="detail-value">₹${data.amount.toLocaleString('en-IN')}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Frequency</span>
+                    <span class="detail-value">Monthly</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Start Date</span>
+                    <span class="detail-value">${sipStartDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Total Installments</span>
+                    <span class="detail-value">${data.installments_summary.completed} of ${data.installments_summary.total}</span>
+                </div>
+            `;
+
+            // Update Timeline based on API timeline
+            updateTimelineFromAPI(data.timeline, firstInstallment);
+        }
+
+        function updateTimelineFromAPI(timeline, installment) {
+            const timelineContainer = document.querySelector('.timeline');
+            let timelineHTML = '';
+
+            // Order Placed
+            if (timeline.order_placed_at) {
+                const orderDate = new Date(timeline.order_placed_at);
+                timelineHTML += `
+                    <div class="timeline-item completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Order Placed</div>
+                            <div class="timeline-time">${orderDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })} • ${orderDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Payment Completed
+            if (timeline.payment_completed_at) {
+                const paymentDate = new Date(timeline.payment_completed_at);
+                timelineHTML += `
+                    <div class="timeline-item completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Payment Successful</div>
+                            <div class="timeline-time">${paymentDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })} • ${paymentDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                timelineHTML += `
+                    <div class="timeline-item pending">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Payment Pending</div>
+                            <div class="timeline-time">Awaiting payment confirmation</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Units Allocated (from installment timeline if available)
+            if (installment && installment.timeline && installment.timeline.units_allotted_at) {
+                const unitsDate = new Date(installment.timeline.units_allotted_at);
+                timelineHTML += `
+                    <div class="timeline-item completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Units Allocated</div>
+                            <div class="timeline-time">${unitsDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })} • ${unitsDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                timelineHTML += `
+                    <div class="timeline-item pending">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Units Allocation Pending</div>
+                            <div class="timeline-time">Processing</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // SIP Activated
+            if (timeline.sip_activated_at) {
+                const activatedDate = new Date(timeline.sip_activated_at);
+                timelineHTML += `
+                    <div class="timeline-item completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">SIP Activated</div>
+                            <div class="timeline-time">${activatedDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })} • ${activatedDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                timelineHTML += `
+                    <div class="timeline-item pending">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">SIP Activation Pending</div>
+                            <div class="timeline-time">Will be activated after payment</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            timelineContainer.innerHTML = timelineHTML;
+        }
 
         function updateTransactionDetails(type, amount, title, date) {
             // Update basic transaction info

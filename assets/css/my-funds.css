@@ -2237,6 +2237,16 @@ body {
   color: var(--color-green);
 }
 
+.status-icon.processing {
+  background: rgba(251, 146, 60, 0.15);
+  color: #F97316;
+}
+
+.status-icon.failed {
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
+}
+
 .status-title {
   font-size: 18px;
   font-weight: 700;
@@ -2262,6 +2272,16 @@ body {
 .status-badge.success {
   background: rgba(16, 185, 129, 0.15);
   color: var(--color-green);
+}
+
+.status-badge.processing {
+  background: rgba(251, 146, 60, 0.15);
+  color: #F97316;
+}
+
+.status-badge.failed {
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
 }
 
 .detail-section {
@@ -2455,6 +2475,15 @@ body {
 
 .timeline-item.completed .timeline-dot {
   background: var(--color-green);
+}
+
+.timeline-item.pending .timeline-dot {
+  background: var(--color-surface);
+  border-color: #E5E7EB;
+}
+
+.timeline-item.pending .timeline-title {
+  color: var(--color-text-secondary);
 }
 
 .timeline-content {
