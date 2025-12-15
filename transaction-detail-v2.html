@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Details - NiveshPe</title>
+
+    <!-- Meta Tags -->
+    <meta name="description" content="View detailed transaction information including NAV, units, processing status and more on NiveshPe">
+    <meta name="keywords" content="transaction details, NAV, mutual funds, SIP, investment, NiveshPe">
+    <meta name="author" content="NiveshPe">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/my-funds.css">
+    <link rel="stylesheet" href="assets/css/iphone-toggle.css">
+</head>
+<body>
+    <!-- Frame Toggle Button -->
+    <button class="frame-toggle-btn" id="frameToggleBtn" onclick="toggleFrameMode()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z"/>
+        </svg>
+        <span id="frameToggleText">Normal View</span>
+    </button>
+
+    <div class="app-container">
+        <div class="iphone-frame">
+            <!-- iPhone Notch (Dynamic Island style) -->
+            <div class="iphone-notch"></div>
+
+            <div class="iphone-screen">
+                <div class="mobile-container">
+                    <!-- Status Bar -->
+                    <div class="status-bar">
+                        <div class="status-left">
+                            <span class="time">9:41</span>
+                        </div>
+                        <div class="status-right">
+                            <span class="battery">87%</span>
+                            <div class="signal-bars">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Header -->
+                    <div class="header">
+                        <button class="back-btn" onclick="window.history.back()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
+                            </svg>
+                        </button>
+                        <div class="header-title">Transaction Details</div>
+                        <div class="header-actions">
+                            <button class="icon-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scrollable Content -->
+                    <div class="scroll-content">
+                        <div class="transaction-detail-page">
+                            <!-- Transaction Status Header -->
+                            <div class="transaction-status-card">
+                                <div class="status-icon processing" id="statusIcon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                </div>
+                                <div class="status-content">
+                                    <div class="status-title" id="transactionTitle">Monthly SIP: HDFC Liquid Fund</div>
+                                    <div class="status-amount" id="transactionAmount">₹300</div>
+                                    <div class="status-badge processing" id="transactionStatus">Processing</div>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Summary -->
+                            <div class="detail-section">
+                                <div class="section-title">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+                                        <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                    </svg>
+                                    Transaction Summary
+                                </div>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Transaction ID</span>
+                                        <span class="detail-value" id="transactionId">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Date & Time</span>
+                                        <span class="detail-value" id="transactionDateTime">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Transaction Type</span>
+                                        <span class="detail-value" id="transactionType">SIP Investment</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Status</span>
+                                        <span class="detail-value" id="statusText">-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fund Information -->
+                            <div class="detail-section">
+                                <div class="section-title">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
+                                    </svg>
+                                    Fund Information
+                                </div>
+                                <div class="fund-info-card">
+                                    <div class="fund-logo">
+                                        <div class="fund-icon" id="fundIcon">HDFC</div>
+                                    </div>
+                                    <div class="fund-details">
+                                        <div class="fund-name" id="fundName">HDFC Liquid Fund - Direct Growth</div>
+                                        <div class="fund-category" id="fundCategory">Debt • Liquid</div>
+                                        <div class="fund-amc" id="fundAMC" style="font-size: 12px; color: #6B7280; margin-top: 4px;">HDFC Asset Management Company Limited</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Investment Details -->
+                            <div class="detail-section">
+                                <div class="section-title">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+                                        <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                                    </svg>
+                                    Investment Details
+                                </div>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Amount Invested</span>
+                                        <span class="detail-value" id="investmentAmount">₹300.00</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">NAV</span>
+                                        <span class="detail-value" id="navValue">Pending</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Units Allocated</span>
+                                        <span class="detail-value highlight" id="unitsAllocated">Pending</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Folio Number</span>
+                                        <span class="detail-value" id="folioNumber">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SIP Details -->
+                            <div class="detail-section" id="sipSection">
+                                <div class="section-title">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                                    </svg>
+                                    SIP Details
+                                </div>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">SIP Amount</span>
+                                        <span class="detail-value" id="sipAmount">₹300</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Frequency</span>
+                                        <span class="detail-value" id="sipFrequency">Monthly</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">SIP Day</span>
+                                        <span class="detail-value" id="sipDay">28th of every month</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Start Date</span>
+                                        <span class="detail-value" id="sipStartDate">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">End Date</span>
+                                        <span class="detail-value" id="sipEndDate">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Total Installments</span>
+                                        <span class="detail-value" id="sipInstallments">0 of 120</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Timeline -->
+                            <div class="detail-section">
+                                <div class="section-title">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+                                        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                    </svg>
+                                    Transaction Timeline
+                                </div>
+                                <div class="timeline" id="timeline">
+                                    <!-- Timeline items will be dynamically inserted here -->
+                                </div>
+                            </div>
+
+                            <!-- Installments (if available) -->
+                            <div class="detail-section" id="installmentsSection" style="display: none;">
+                                <div class="section-title">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+                                        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                                    </svg>
+                                    Upcoming Installments
+                                </div>
+                                <div id="installmentsList"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Bottom Navigation (optional) -->
+                    <div class="bottom-nav">
+                        <button class="nav-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                            </svg>
+                            <span>Home</span>
+                        </button>
+                        <button class="nav-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                            </svg>
+                            <span>Portfolio</span>
+                        </button>
+                        <button class="nav-item active">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M13 2.05v3.03c3.39.49 6 3.39 6 6.92 0 .9-.18 1.75-.48 2.54l2.6 1.53c.56-1.24.88-2.62.88-4.07 0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V2.05c-5.06.5-9 4.76-9 9.95 0 5.52 4.47 10 9.99 10 3.31 0 6.24-1.61 8.06-4.09l-2.6-1.53C16.17 17.98 14.21 19 12 19z"/>
+                            </svg>
+                            <span>History</span>
+                        </button>
+                        <button class="nav-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            <span>Profile</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/iphone-toggle.js"></script>
+    <script>
+        // Load transaction data from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const storedData = localStorage.getItem('transactionDetailData');
+
+            if (storedData) {
+                try {
+                    const apiResponse = JSON.parse(storedData);
+                    localStorage.removeItem('transactionDetailData');
+
+                    if (apiResponse && apiResponse.data) {
+                        populateTransactionDetails(apiResponse.data);
+                    }
+                } catch (e) {
+                    console.error('Error parsing transaction data:', e);
+                }
+            }
+        });
+
+        function populateTransactionDetails(data) {
+            // Status Header
+            updateStatusHeader(data);
+
+            // Transaction Summary
+            document.getElementById('transactionId').textContent = data.transaction_id || '-';
+
+            const createdDate = new Date(data.created_at);
+            const dateStr = createdDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
+            const timeStr = createdDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+            document.getElementById('transactionDateTime').textContent = `${dateStr} • ${timeStr}`;
+            document.getElementById('transactionType').textContent = data.type.toUpperCase() + ' Investment';
+            document.getElementById('statusText').textContent = data.status;
+
+            // Fund Information
+            document.getElementById('fundName').textContent = `${data.fund_name} - ${data.fund_plan_name} ${data.fund_option_name}`;
+            document.getElementById('fundCategory').textContent = `${data.fund_category} • ${data.fund_sub_category}`;
+            document.getElementById('fundAMC').textContent = data.fund_amc_name;
+            document.getElementById('fundIcon').textContent = data.fund_amc_name.split(' ')[0].toUpperCase();
+
+            // Investment Details
+            document.getElementById('investmentAmount').textContent = `₹${data.amount.toFixed(2)}`;
+
+            const firstInstallment = data.installments && data.installments.length > 0 ? data.installments[0] : null;
+            if (firstInstallment && firstInstallment.nav_at_execution) {
+                document.getElementById('navValue').textContent = `₹${firstInstallment.nav_at_execution.toFixed(2)}`;
+            }
+
+            if (firstInstallment && firstInstallment.units_allotted) {
+                document.getElementById('unitsAllocated').textContent = `${firstInstallment.units_allotted.toFixed(4)} units`;
+            }
+
+            document.getElementById('folioNumber').textContent = data.folio_number || 'Pending';
+
+            // SIP Details (if applicable)
+            if (data.type === 'sip') {
+                document.getElementById('sipSection').style.display = 'block';
+                document.getElementById('sipAmount').textContent = `₹${data.amount.toLocaleString('en-IN')}`;
+                document.getElementById('sipFrequency').textContent = capitalizeFirst(data.sip_frequency);
+                document.getElementById('sipDay').textContent = `${data.sip_day}${getOrdinalSuffix(data.sip_day)} of every month`;
+
+                const startDate = new Date(data.sip_start_date);
+                const endDate = new Date(data.sip_end_date);
+                document.getElementById('sipStartDate').textContent = startDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
+                document.getElementById('sipEndDate').textContent = endDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
+                document.getElementById('sipInstallments').textContent = `${data.installments_summary.completed} of ${data.installments_summary.total}`;
+            }
+
+            // Timeline
+            updateTimeline(data.timeline, firstInstallment);
+
+            // Installments (show first 5 upcoming)
+            if (data.installments && data.installments.length > 0) {
+                updateInstallments(data.installments);
+            }
+        }
+
+        function updateStatusHeader(data) {
+            const statusMap = {
+                'Order Placed': { text: 'Processing', class: 'processing', icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' },
+                'Processing': { text: 'Processing', class: 'processing', icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' },
+                'SUCCESS': { text: 'Completed', class: 'success', icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' },
+                'FAILED': { text: 'Failed', class: 'failed', icon: 'M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z' }
+            };
+
+            const displayStatus = statusMap[data.status] || statusMap['Processing'];
+
+            document.getElementById('transactionTitle').textContent = `Monthly SIP: ${data.fund_name}`;
+            document.getElementById('transactionAmount').textContent = `₹${data.amount.toLocaleString('en-IN')}`;
+            document.getElementById('transactionStatus').textContent = displayStatus.text;
+            document.getElementById('transactionStatus').className = `status-badge ${displayStatus.class}`;
+            document.getElementById('statusIcon').className = `status-icon ${displayStatus.class}`;
+            document.getElementById('statusIcon').querySelector('path').setAttribute('d', displayStatus.icon);
+        }
+
+        function updateTimeline(timeline, installment) {
+            const timelineContainer = document.getElementById('timeline');
+            let timelineHTML = '';
+
+            // Order Placed
+            if (timeline.order_placed_at) {
+                const orderDate = new Date(timeline.order_placed_at);
+                timelineHTML += createTimelineItem('Order Placed', orderDate, true);
+            }
+
+            // Payment
+            if (timeline.payment_completed_at) {
+                const paymentDate = new Date(timeline.payment_completed_at);
+                timelineHTML += createTimelineItem('Payment Successful', paymentDate, true);
+            } else {
+                timelineHTML += createTimelineItem('Payment Pending', null, false, 'Awaiting payment confirmation');
+            }
+
+            // Units Allocated
+            if (installment && installment.timeline && installment.timeline.units_allotted_at) {
+                const unitsDate = new Date(installment.timeline.units_allotted_at);
+                timelineHTML += createTimelineItem('Units Allocated', unitsDate, true);
+            } else {
+                timelineHTML += createTimelineItem('Units Allocation Pending', null, false, 'Processing');
+            }
+
+            // SIP Activated
+            if (timeline.sip_activated_at) {
+                const activatedDate = new Date(timeline.sip_activated_at);
+                timelineHTML += createTimelineItem('SIP Activated', activatedDate, true);
+            } else {
+                timelineHTML += createTimelineItem('SIP Activation Pending', null, false, 'Will be activated after payment');
+            }
+
+            timelineContainer.innerHTML = timelineHTML;
+        }
+
+        function createTimelineItem(title, date, isCompleted, customTime = null) {
+            const statusClass = isCompleted ? 'completed' : 'pending';
+            let timeText = customTime;
+
+            if (date && !customTime) {
+                const dateStr = date.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
+                const timeStr = date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+                timeText = `${dateStr} • ${timeStr}`;
+            }
+
+            return `
+                <div class="timeline-item ${statusClass}">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">${title}</div>
+                        <div class="timeline-time">${timeText}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateInstallments(installments) {
+            const upcomingInstallments = installments.filter(i => i.status === 'Scheduled').slice(0, 5);
+
+            if (upcomingInstallments.length > 0) {
+                document.getElementById('installmentsSection').style.display = 'block';
+
+                let installmentsHTML = '<div class="detail-grid">';
+                upcomingInstallments.forEach(inst => {
+                    const schedDate = new Date(inst.scheduled_date);
+                    const dateStr = schedDate.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                    installmentsHTML += `
+                        <div class="detail-item">
+                            <span class="detail-label">Installment ${inst.installment_num}</span>
+                            <span class="detail-value">${dateStr} • ₹${inst.amount.toLocaleString('en-IN')}</span>
+                        </div>
+                    `;
+                });
+                installmentsHTML += '</div>';
+
+                document.getElementById('installmentsList').innerHTML = installmentsHTML;
+            }
+        }
+
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function getOrdinalSuffix(num) {
+            const j = num % 10;
+            const k = num % 100;
+            if (j === 1 && k !== 11) return 'st';
+            if (j === 2 && k !== 12) return 'nd';
+            if (j === 3 && k !== 13) return 'rd';
+            return 'th';
+        }
+    </script>
+</body>
+</html>
