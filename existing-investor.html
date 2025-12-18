@@ -1,0 +1,2545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Investment Details - NiveshPe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- iPhone Toggle CSS -->
+    <link rel="stylesheet" href="assets/css/iphone-toggle.css">
+
+    <style>
+        :root {
+            --color-bg-primary: #F5F7FA;
+            --color-blue: #2563EB;
+            --color-blue-dark: #1D4ED8;
+            --color-blue-light: #3B82F6;
+            --color-green: #10B981;
+            --color-green-light: #34D399;
+            --color-purple: #8B5CF6;
+            --color-orange: #F59E0B;
+            --color-red: #EF4444;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-text-muted: #9CA3AF;
+            --color-border: #E5E7EB;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            overflow: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(100%); opacity: 0; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* ==================== STATUS BAR ==================== */
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(245, 247, 250, 0.9);
+            font-size: 15px;
+            font-weight: 600;
+            height: 44px;
+            flex-shrink: 0;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* ==================== HEADER ==================== */
+
+        .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(245, 247, 250, 0.9);
+            height: 58px;
+            padding: 0 20px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .icon-btn .material-symbols-outlined {
+            font-size: 20px;
+            color: var(--color-text-primary);
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-left: 12px;
+        }
+
+        /* ==================== HEADER SPACER ==================== */
+
+        .header-spacer {
+            width: 40px;
+        }
+
+        /* ==================== FORM SECTIONS ==================== */
+
+        .welcome-section {
+            margin-bottom: 24px;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .form-section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 16px;
+            padding-bottom: 0;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-label .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .section-description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .checkbox-wrapper.compact {
+            padding: 12px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+        }
+
+        .checkbox-wrapper.compact .checkbox-label {
+            font-size: 14px;
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .kyc-state {
+            display: none;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        .kyc-state.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .kyc-container {
+            padding: 24px 20px;
+            background: white;
+            min-height: 100%;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .subtitle-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        /* ==================== BANK VERIFICATION CARDS ==================== */
+
+        .bank-verification-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .bank-verification-card[data-status="verified"] {
+            border-color: var(--color-green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .bank-verification-card[data-status="failed"] {
+            border-color: var(--color-red);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .bank-details {
+            flex: 1;
+        }
+
+        .bank-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .account-number {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .account-type {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+        }
+
+        .account-ifsc {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+            font-family: monospace;
+        }
+
+        .bank-action {
+            flex-shrink: 0;
+        }
+
+        .verify-btn {
+            padding: 8px 16px;
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .verify-btn:hover {
+            background: var(--color-blue-dark);
+        }
+
+        .verify-btn:active {
+            transform: scale(0.95);
+        }
+
+        .verify-loader {
+            padding: 8px 16px;
+        }
+
+        .mini-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-top-color: var(--color-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .verify-status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .verify-status.verified {
+            color: var(--color-green);
+        }
+
+        .verify-status.verified .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .verify-status.failed {
+            color: var(--color-red);
+        }
+
+        .verify-status.failed .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .retry-btn {
+            padding: 6px 12px;
+            background: transparent;
+            color: var(--color-blue);
+            border: 1px solid var(--color-blue);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        .bank-card-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .bank-card-row .bank-verification-card {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .bank-delete-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-text-muted);
+            flex-shrink: 0;
+        }
+
+        .bank-delete-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--color-red);
+        }
+
+        .bank-delete-btn .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        /* ==================== CONFIRMATION MODAL ==================== */
+
+        .confirm-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            padding-bottom: 32px;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .confirm-content {
+            padding: 16px 24px 0;
+        }
+
+        .confirm-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .confirm-icon .material-symbols-outlined {
+            font-size: 28px;
+            color: var(--color-red);
+        }
+
+        .confirm-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .confirm-message {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-confirm-cancel {
+            flex: 1;
+            height: 48px;
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-confirm-cancel:hover {
+            background: var(--color-border);
+        }
+
+        .btn-confirm-delete {
+            flex: 1;
+            height: 48px;
+            background: var(--color-red);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-confirm-delete:hover {
+            background: #dc2626;
+        }
+
+        /* ==================== BUTTONS ==================== */
+
+        .btn-primary {
+            width: 100%;
+            height: 52px;
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: scale(0.98);
+            background: var(--color-blue-dark);
+        }
+
+        .btn-primary:disabled {
+            background: var(--color-border);
+            color: var(--color-text-muted);
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            height: 52px;
+            background: white;
+            color: var(--color-blue);
+            border: 2px solid var(--color-blue);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.98);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .btn-text-link {
+            background: none;
+            border: none;
+            color: var(--color-blue);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 12px;
+            width: 100%;
+            text-align: center;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-text-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ==================== LOADING STATE ==================== */
+
+        .loading-container {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-container.show {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--color-border);
+            border-top-color: var(--color-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .loading-subtext {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* ==================== VERIFIED CARDS ==================== */
+
+        .verified-card {
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px solid var(--color-green);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+        }
+
+        .verified-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .verified-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--color-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .verified-icon .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .verified-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-green);
+        }
+
+        .verified-bank-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .verified-bank-details {
+            flex: 1;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* Pending State */
+        .verified-card.pending-card {
+            background: rgba(245, 158, 11, 0.05);
+            border-color: var(--color-orange);
+        }
+
+        .pending-icon {
+            background: var(--color-orange);
+        }
+
+        .pending-title {
+            color: var(--color-orange);
+        }
+
+        /* Failed State */
+        .verified-card.failed-card {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: var(--color-red);
+        }
+
+        .failed-icon {
+            background: var(--color-red);
+        }
+
+        .failed-title {
+            color: var(--color-red);
+        }
+
+        .status-info-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: var(--radius-sm);
+            margin-top: 12px;
+        }
+
+        .status-info-box .material-symbols-outlined {
+            color: var(--color-orange);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .status-info-box span:last-child {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ==================== ADD NEW BANK FORM ==================== */
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .text-input {
+            width: 100%;
+            height: 52px;
+            padding: 0 16px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .text-input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--color-blue);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .back-link .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        /* ==================== FATCA SECTION ==================== */
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            margin-bottom: 16px;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background: white;
+            position: relative;
+            margin-top: 2px;
+        }
+
+        .checkbox-input:checked {
+            background: var(--color-blue);
+            border-color: var(--color-blue);
+        }
+
+        .checkbox-input:checked::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Radio buttons for nominee */
+        .nominee-radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .nominee-radio-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nominee-radio-option:hover {
+            border-color: var(--color-blue-light);
+        }
+
+        .nominee-radio-option.selected {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .radio-input {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background: white;
+            position: relative;
+        }
+
+        .radio-input:checked {
+            border-color: var(--color-blue);
+        }
+
+        .radio-input:checked::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 4px;
+            width: 8px;
+            height: 8px;
+            background: var(--color-blue);
+            border-radius: 50%;
+        }
+
+        .radio-label {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+
+        .radio-label.subtle-text {
+            color: var(--color-text-secondary);
+        }
+
+        /* ==================== NOMINEE OVERLAY ==================== */
+
+        .nominee-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+
+        .nominee-overlay.show {
+            display: block;
+        }
+
+        .nominee-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .nominee-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .drag-handle {
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .drag-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 2px;
+        }
+
+        .nominee-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .modal-header {
+            padding: 0 20px 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .nominee-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .nominee-form-item {
+            padding: 16px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+        }
+
+        .nominee-form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .nominee-form-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .nominee-remove-btn {
+            background: none;
+            border: none;
+            color: var(--color-red);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* Guardian Section (for minor nominees) */
+        .guardian-section {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(245, 158, 11, 0.05);
+            border: 2px dashed var(--color-orange);
+            border-radius: var(--radius-md);
+        }
+
+        .guardian-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            color: var(--color-orange);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .guardian-header .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .guardian-section .input-group {
+            margin-bottom: 12px;
+        }
+
+        .guardian-section .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .continue-section {
+            padding: 16px 20px 24px;
+            border-top: 1px solid var(--color-border);
+            background: white;
+        }
+
+        .allocation-field {
+            display: none;
+        }
+
+        .allocation-warning {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: var(--radius-sm);
+            margin-top: 12px;
+            color: var(--color-red);
+            font-size: 13px;
+        }
+
+        /* Nominee Cards in main form */
+        .nominee-cards-container {
+            margin-top: 16px;
+        }
+
+        .nominee-card {
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px solid var(--color-green);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+        }
+
+        .nominee-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nominee-card-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nominee-initials {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .nominee-card-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .nominee-card-relationship {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .nominee-card-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nominee-allocation-badge {
+            background: var(--color-green);
+            color: white;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .nominee-card-edit-btn {
+            background: none;
+            border: none;
+            color: var(--color-blue);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* ==================== OTP OVERLAY ==================== */
+
+        .otp-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+
+        .otp-overlay.show {
+            display: block;
+        }
+
+        .otp-overlay-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .otp-overlay-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            padding: 24px 20px 32px;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .otp-header {
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .otp-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .otp-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .otp-input-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .otp-input {
+            width: 48px;
+            height: 56px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .otp-input:focus {
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .otp-input.filled {
+            border-color: var(--color-green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .resend-text {
+            text-align: center;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .resend-link {
+            color: var(--color-blue);
+            font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .otp-verify-btn {
+            width: 100%;
+            height: 52px;
+            background: var(--color-border);
+            color: var(--color-text-muted);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: not-allowed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .otp-verify-btn.enabled {
+            background: var(--color-blue);
+            color: white;
+            cursor: pointer;
+        }
+
+        /* ==================== SUCCESS STATE ==================== */
+
+        .success-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--color-green) 0%, var(--color-green-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .success-icon .material-symbols-outlined {
+            font-size: 40px;
+            color: white;
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 12px;
+        }
+
+        .success-message {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Frame Toggle Button -->
+    <button class="frame-toggle-btn" id="frameToggleBtn" onclick="toggleFrameMode()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12" y2="18"></line>
+        </svg>
+        <span id="frameToggleText">Normal View</span>
+    </button>
+
+    <div class="iphone-frame">
+        <!-- iPhone Notch (Dynamic Island style) -->
+        <div class="iphone-notch"></div>
+
+        <div class="iphone-screen">
+            <div class="mobile-container">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <div>9:41</div>
+                    <div class="status-icons">
+                        <span>•••</span>
+                        <span>📶</span>
+                        <span>🔋</span>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="header" style="justify-content: flex-start; gap: 12px;">
+                    <button class="icon-btn" onclick="goBack()">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <div class="header-title">Quick verification</div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content">
+
+                    <!-- ==================== MAIN FORM (Single Scroll View) ==================== -->
+                    <div class="kyc-state active" id="mainFormState">
+                        <div class="kyc-container">
+                            <!-- SEBI Compliance Note -->
+                            <p class="subtitle-text" style="margin-bottom: 24px;">Complete these details as per SEBI compliance</p>
+
+                            <!-- Section: Bank Account -->
+                            <div class="form-section" id="bankAccountSection">
+                                <div class="section-label">
+                                    <span class="material-symbols-outlined">account_balance</span>
+                                    Bank Account
+                                </div>
+                                <p class="section-description">Verify your bank account(s) to enable investments and withdrawals</p>
+
+                                <!-- Bank Card 1 -->
+                                <div class="bank-card-row" id="bankRow1">
+                                    <div class="bank-verification-card" id="bankCard1" data-status="unverified">
+                                        <div class="bank-details">
+                                            <div class="bank-name">State Bank of India</div>
+                                            <div class="account-number">XXXX XXXX 7890</div>
+                                            <div class="account-ifsc">IFSC: SBIN0001234</div>
+                                        </div>
+                                        <div class="bank-action">
+                                            <button class="verify-btn" onclick="verifyBankAccount('bank1')">Verify</button>
+                                            <div class="verify-loader" style="display: none;">
+                                                <div class="mini-spinner"></div>
+                                            </div>
+                                            <div class="verify-status verified" style="display: none;">
+                                                <span class="material-symbols-outlined">check_circle</span>
+                                                <span>Verified</span>
+                                            </div>
+                                            <div class="verify-status failed" style="display: none;">
+                                                <span class="material-symbols-outlined">error</span>
+                                                <span>Failed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="bank-delete-btn" onclick="deleteBankAccount('bank1')">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+
+                                <!-- Bank Card 2 -->
+                                <div class="bank-card-row" id="bankRow2">
+                                    <div class="bank-verification-card" id="bankCard2" data-status="unverified">
+                                        <div class="bank-details">
+                                            <div class="bank-name">HDFC Bank</div>
+                                            <div class="account-number">XXXX XXXX 3210</div>
+                                            <div class="account-ifsc">IFSC: HDFC0002345</div>
+                                        </div>
+                                        <div class="bank-action">
+                                            <button class="verify-btn" onclick="verifyBankAccount('bank2')">Verify</button>
+                                            <div class="verify-loader" style="display: none;">
+                                                <div class="mini-spinner"></div>
+                                            </div>
+                                            <div class="verify-status verified" style="display: none;">
+                                                <span class="material-symbols-outlined">check_circle</span>
+                                                <span>Verified</span>
+                                            </div>
+                                            <div class="verify-status failed" style="display: none;">
+                                                <span class="material-symbols-outlined">error</span>
+                                                <span>Failed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="bank-delete-btn" onclick="deleteBankAccount('bank2')">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+
+                                <!-- Add Different Account Link -->
+                                <button class="btn-text-link" onclick="openAddBankOverlay()">
+                                    <span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                                    Add a different account
+                                </button>
+                            </div>
+
+                            <!-- Section: Nominee -->
+                            <div class="form-section">
+                                <div class="section-label">
+                                    <span class="material-symbols-outlined">group</span>
+                                    Nominee
+                                </div>
+                                <p class="section-description">Who should receive your investments in case of any unforeseen event?</p>
+                                <div class="nominee-radio-group">
+                                    <div class="nominee-radio-option selected" onclick="selectNomineeOption('later')">
+                                        <input type="radio" name="nomineeChoice" id="nomineeLater" class="radio-input" checked>
+                                        <label for="nomineeLater" class="radio-label">I'll add later</label>
+                                    </div>
+                                    <div class="nominee-radio-option" onclick="selectNomineeOption('now')">
+                                        <input type="radio" name="nomineeChoice" id="nomineeNow" class="radio-input">
+                                        <label for="nomineeNow" class="radio-label">Add now</label>
+                                    </div>
+                                </div>
+                                <!-- Nominee Cards Container -->
+                                <div id="nomineeCardsContainer" class="nominee-cards-container" style="display: none;"></div>
+                            </div>
+
+                            <!-- Section: Declaration -->
+                            <div class="form-section">
+                                <div class="checkbox-wrapper" onclick="togglePepCheckbox()">
+                                    <input type="checkbox" id="pepDeclaration" class="checkbox-input" onchange="validateForm()">
+                                    <label for="pepDeclaration" class="checkbox-label">
+                                        I declare that I am not a Politically Exposed Person (PEP), nor am I a family member or close associate of a PEP, as defined under the Prevention of Money Laundering Act, 2002.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button class="btn-primary" id="submitBtn" onclick="submitVerification()" disabled>
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ==================== ADD NEW BANK FORM ==================== -->
+                    <div class="kyc-state" id="addNewBankState">
+                        <div class="kyc-container">
+                            <button class="back-link" onclick="backToMainForm()">
+                                <span class="material-symbols-outlined">arrow_back</span>
+                                Back
+                            </button>
+
+                            <h2 class="welcome-text">Add Bank Account</h2>
+                            <p class="subtitle-text">We'll verify using penny drop</p>
+
+                            <div class="input-group">
+                                <label class="input-label">Account Number</label>
+                                <input type="tel" id="accountNumberInput" class="text-input" placeholder="Enter account number" maxlength="18" oninput="validateNewBankForm()">
+                            </div>
+
+                            <div class="input-group">
+                                <label class="input-label">IFSC Code</label>
+                                <input type="text" id="ifscInput" class="text-input" placeholder="e.g., SBIN0001234" maxlength="11" oninput="validateNewBankForm()" style="text-transform: uppercase;">
+                            </div>
+
+                            <p class="helper-text">₹1 will be deposited to verify your account.</p>
+
+                            <button class="btn-primary" id="verifyNewBankBtn" onclick="verifyNewBank()" disabled>
+                                Verify Account
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ==================== LOADING STATE ==================== -->
+                    <div class="kyc-state" id="loadingState">
+                        <div class="kyc-container">
+                            <div class="loading-container show">
+                                <div class="loading-spinner"></div>
+                                <div class="loading-text">Verifying details...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== SUCCESS STATE ==================== -->
+                    <div class="kyc-state" id="successState">
+                        <div class="kyc-container">
+                            <div class="success-container">
+                                <div class="success-icon">
+                                    <span class="material-symbols-outlined">check</span>
+                                </div>
+                                <h2 class="success-title">Verification Complete!</h2>
+                                <p class="success-message">Your investment details have been verified successfully. Redirecting you to start investing...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Nominee Overlay -->
+                <div class="nominee-overlay" id="nomineeOverlay">
+                    <div class="nominee-backdrop" onclick="closeNomineeOverlay()"></div>
+                    <div class="nominee-modal">
+                        <div class="drag-handle">
+                            <div class="drag-bar"></div>
+                        </div>
+                        <button class="nominee-close-btn" onclick="closeNomineeOverlay()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </button>
+
+                        <div class="modal-header">
+                            <h2 class="modal-title">Add Nominee Details</h2>
+                            <p class="modal-subtitle">Add one or more nominees for your investments</p>
+                        </div>
+
+                        <div class="nominee-content">
+                            <div id="nomineeFormsContainer">
+                                <!-- Nominee Form 1 -->
+                                <div class="nominee-form-item" id="nomineeForm0">
+                                    <div class="nominee-form-header">
+                                        <h3 class="nominee-form-title">Nominee 1</h3>
+                                        <button class="nominee-remove-btn" onclick="removeNomineeForm(0)" style="display: none;">
+                                            <span class="material-symbols-outlined">delete</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label class="input-label">Full Name</label>
+                                        <input type="text" class="text-input" id="nomineeName0" placeholder="Enter nominee's full name">
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label class="input-label">Relationship</label>
+                                        <select class="text-input" id="nomineeRelationship0">
+                                            <option value="" disabled selected>Select relationship</option>
+                                            <option value="parent">Parent</option>
+                                            <option value="spouse">Spouse</option>
+                                            <option value="sibling">Sibling</option>
+                                            <option value="child">Child</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label class="input-label">Date of Birth</label>
+                                        <input type="date" class="text-input" id="nomineeDob0" onchange="toggleGuardianSection(0)">
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label class="input-label">PAN Number</label>
+                                        <input type="text" class="text-input" id="nomineePan0" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                                    </div>
+
+                                    <!-- Guardian Section (for minors) -->
+                                    <div class="guardian-section" id="guardianSection0" style="display: none;">
+                                        <div class="guardian-header">
+                                            <span class="material-symbols-outlined">info</span>
+                                            <span>Guardian details required (Nominee is a minor)</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-label">Guardian Name</label>
+                                            <input type="text" class="text-input" id="guardianName0" placeholder="Enter guardian's full name">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-label">Guardian Date of Birth</label>
+                                            <input type="date" class="text-input" id="guardianDob0">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-label">Guardian PAN Number</label>
+                                            <input type="text" class="text-input" id="guardianPan0" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group allocation-field" id="allocationField0">
+                                        <label class="input-label">Allocation %</label>
+                                        <input type="number" class="text-input" id="nomineeAllocation0" placeholder="100" min="1" max="100" value="100">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn-secondary" onclick="addAnotherNomineeForm()" style="margin-top: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+                                Add Another Nominee
+                            </button>
+
+                            <div id="allocationWarning" class="allocation-warning">
+                                <span class="material-symbols-outlined">info</span>
+                                <span>Total allocation must equal 100%</span>
+                            </div>
+                        </div>
+
+                        <div class="continue-section">
+                            <button class="btn-primary" onclick="saveNominees()">
+                                Save Nominees
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delete Confirmation Overlay -->
+                <div class="nominee-overlay" id="deleteConfirmOverlay">
+                    <div class="nominee-backdrop" onclick="closeDeleteConfirm()"></div>
+                    <div class="confirm-modal">
+                        <div class="drag-handle">
+                            <div class="drag-bar"></div>
+                        </div>
+                        <div class="confirm-content">
+                            <div class="confirm-icon">
+                                <span class="material-symbols-outlined">delete</span>
+                            </div>
+                            <h3 class="confirm-title">Remove bank account?</h3>
+                            <p class="confirm-message">Are you sure you want to remove this bank account? You can add it back later if needed.</p>
+                            <div class="confirm-actions">
+                                <button class="btn-confirm-cancel" onclick="closeDeleteConfirm()">Cancel</button>
+                                <button class="btn-confirm-delete" onclick="confirmDeleteBank()">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Bank Overlay -->
+                <div class="nominee-overlay" id="addBankOverlay">
+                    <div class="nominee-backdrop" onclick="closeAddBankOverlay()"></div>
+                    <div class="nominee-modal" style="max-height: 70vh;">
+                        <div class="drag-handle">
+                            <div class="drag-bar"></div>
+                        </div>
+                        <button class="nominee-close-btn" onclick="closeAddBankOverlay()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </button>
+
+                        <div class="modal-header">
+                            <h2 class="modal-title">Add Bank Account</h2>
+                            <p class="modal-subtitle">We'll verify using a penny drop (₹1 deposit)</p>
+                        </div>
+
+                        <div class="nominee-content">
+                            <div class="input-group">
+                                <label class="input-label">Account Number</label>
+                                <input type="tel" id="overlayAccountNumber" class="text-input" placeholder="Enter account number" maxlength="18" oninput="validateAddBankOverlay()">
+                            </div>
+
+                            <div class="input-group">
+                                <label class="input-label">Confirm Account Number</label>
+                                <input type="tel" id="overlayConfirmAccountNumber" class="text-input" placeholder="Re-enter account number" maxlength="18" oninput="validateAddBankOverlay()">
+                            </div>
+
+                            <div class="input-group">
+                                <label class="input-label">IFSC Code</label>
+                                <input type="text" id="overlayIfscCode" class="text-input" placeholder="e.g., SBIN0001234" maxlength="11" oninput="validateAddBankOverlay()" style="text-transform: uppercase;">
+                            </div>
+
+                            <p class="helper-text" style="margin-top: -8px;">₹1 will be deposited to verify your account. This amount is non-refundable.</p>
+                        </div>
+
+                        <div class="continue-section">
+                            <button class="btn-primary" id="addBankOverlayBtn" onclick="submitAddBankOverlay()" disabled>
+                                Verify & Add Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTP Overlay -->
+                <div class="otp-overlay" id="otpOverlay">
+                    <div class="otp-overlay-backdrop" onclick="closeOtpOverlay()"></div>
+                    <div class="otp-overlay-modal">
+                        <div class="drag-handle">
+                            <div class="drag-bar"></div>
+                        </div>
+
+                        <div class="otp-header">
+                            <h2 class="otp-title">Verify with OTP</h2>
+                            <p class="otp-subtitle">Enter the 6-digit code sent to your registered mobile</p>
+                        </div>
+
+                        <div class="otp-input-container">
+                            <input type="text" class="otp-input" id="otp1" maxlength="1" inputmode="numeric">
+                            <input type="text" class="otp-input" id="otp2" maxlength="1" inputmode="numeric">
+                            <input type="text" class="otp-input" id="otp3" maxlength="1" inputmode="numeric">
+                            <input type="text" class="otp-input" id="otp4" maxlength="1" inputmode="numeric">
+                            <input type="text" class="otp-input" id="otp5" maxlength="1" inputmode="numeric">
+                            <input type="text" class="otp-input" id="otp6" maxlength="1" inputmode="numeric">
+                        </div>
+
+                        <p class="resend-text">
+                            Didn't receive the code? <button class="resend-link" onclick="resendOtp()">Resend OTP</button>
+                        </p>
+
+                        <button class="otp-verify-btn" id="verifyOtpBtn" onclick="verifyOtp()">
+                            <span>Verify & Complete</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- iPhone Home Indicator -->
+            <div class="iphone-home-indicator"></div>
+        </div>
+    </div>
+
+    <!-- iPhone Toggle JS -->
+    <script src="assets/js/iphone-toggle.js"></script>
+
+    <script>
+        // ==================== DATA STORAGE ====================
+
+        const existingBankAccounts = [
+            {
+                id: 'bank1',
+                bankName: 'State Bank of India',
+                accountNumber: '1234567890',
+                maskedNumber: 'XXXX XXXX 7890',
+                accountType: 'Savings',
+                ifsc: 'SBIN0001234',
+                branch: 'Andheri East, Mumbai',
+                holderName: 'RAHUL SHARMA',
+                logoClass: 'sbi'
+            },
+            {
+                id: 'bank2',
+                bankName: 'HDFC Bank',
+                accountNumber: '9876543210',
+                maskedNumber: 'XXXX XXXX 3210',
+                accountType: 'Savings',
+                ifsc: 'HDFC0002345',
+                branch: 'Bandra West, Mumbai',
+                holderName: 'RAHUL SHARMA',
+                logoClass: 'hdfc'
+            }
+        ];
+
+        let verifiedBanks = []; // Banks that have been verified
+        let nominees = [];
+        let nomineeCount = 1;
+        let bankToDelete = null; // Store bank ID for deletion confirmation
+
+        // ==================== INITIALIZATION ====================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            localStorage.setItem('niveshpe_investor_type', 'existing');
+            setupOtpInputs();
+            validateForm();
+        });
+
+        // ==================== STATE MANAGEMENT ====================
+
+        function showState(stateId) {
+            // Hide all states
+            document.querySelectorAll('.kyc-state').forEach(state => {
+                state.classList.remove('active');
+            });
+
+            // Show selected state
+            document.getElementById(stateId).classList.add('active');
+        }
+
+        // ==================== BANK VERIFICATION ====================
+
+        function verifyBankAccount(bankId) {
+            // Get the card element
+            let card;
+            if (bankId.startsWith('bank_new_')) {
+                card = document.getElementById('bankCard_' + bankId);
+            } else {
+                card = document.getElementById('bankCard' + bankId.replace('bank', ''));
+            }
+
+            if (!card) return;
+
+            const verifyBtn = card.querySelector('.verify-btn');
+            const loader = card.querySelector('.verify-loader');
+            const verifiedStatus = card.querySelector('.verify-status.verified');
+            const failedStatus = card.querySelector('.verify-status.failed');
+
+            // Hide button, show loader
+            verifyBtn.style.display = 'none';
+            loader.style.display = 'block';
+
+            // Simulate verification (1.5 seconds)
+            setTimeout(() => {
+                loader.style.display = 'none';
+
+                // Bank2 fails, all others succeed
+                if (bankId === 'bank2') {
+                    card.setAttribute('data-status', 'failed');
+                    failedStatus.style.display = 'flex';
+                } else {
+                    card.setAttribute('data-status', 'verified');
+                    verifiedStatus.style.display = 'flex';
+                    verifiedBanks.push(bankId);
+                }
+
+                validateForm();
+            }, 1500);
+        }
+
+        function deleteBankAccount(bankId) {
+            // Store the bank ID and show confirmation modal
+            bankToDelete = bankId;
+            document.getElementById('deleteConfirmOverlay').classList.add('show');
+        }
+
+        function closeDeleteConfirm() {
+            document.getElementById('deleteConfirmOverlay').classList.remove('show');
+            bankToDelete = null;
+        }
+
+        function confirmDeleteBank() {
+            if (!bankToDelete) return;
+
+            // Get the row element
+            let row;
+            if (bankToDelete.startsWith('bank_new_')) {
+                row = document.getElementById('bankRow_' + bankToDelete);
+            } else {
+                row = document.getElementById('bankRow' + bankToDelete.replace('bank', ''));
+            }
+
+            if (!row) {
+                closeDeleteConfirm();
+                return;
+            }
+
+            // Remove from verifiedBanks if present
+            const index = verifiedBanks.indexOf(bankToDelete);
+            if (index > -1) {
+                verifiedBanks.splice(index, 1);
+            }
+
+            // Close modal first
+            closeDeleteConfirm();
+
+            // Animate and remove row
+            row.style.opacity = '0';
+            row.style.transform = 'translateX(-20px)';
+            row.style.transition = 'all 0.2s ease';
+
+            setTimeout(() => {
+                row.remove();
+                validateForm();
+            }, 200);
+        }
+
+        // ==================== ADD NEW BANK ====================
+
+        function showAddNewBank() {
+            showState('addNewBankState');
+        }
+
+        function backToMainForm() {
+            showState('mainFormState');
+        }
+
+        function validateNewBankForm() {
+            const accountNumber = document.getElementById('accountNumberInput').value.trim();
+            const ifsc = document.getElementById('ifscInput').value.trim().toUpperCase();
+            const btn = document.getElementById('verifyNewBankBtn');
+
+            // Auto-uppercase IFSC
+            document.getElementById('ifscInput').value = ifsc;
+
+            // Validate account number (9-18 digits)
+            const accountValid = /^\d{9,18}$/.test(accountNumber);
+
+            // Validate IFSC code
+            const ifscValid = /^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc);
+
+            btn.disabled = !(accountValid && ifscValid);
+        }
+
+        function verifyNewBank() {
+            const accountNumber = document.getElementById('accountNumberInput').value.trim();
+            const ifsc = document.getElementById('ifscInput').value.trim().toUpperCase();
+
+            // Show loading
+            showState('loadingState');
+
+            // Simulate verification
+            setTimeout(() => {
+                // Create new bank ID and add to selected
+                const newBankId = 'bank_new_' + Date.now();
+                selectedBanks.push(newBankId);
+
+                // Clear form and go back
+                document.getElementById('accountNumberInput').value = '';
+                document.getElementById('ifscInput').value = '';
+
+                showState('mainFormState');
+                validateForm();
+
+                // Show confirmation
+                alert('Bank account added successfully!');
+            }, 1500);
+        }
+
+        function maskAccountNumber(accountNum) {
+            if (!accountNum || accountNum.length < 4) return accountNum;
+            const lastFour = accountNum.slice(-4);
+            return 'XXXX XXXX ' + lastFour;
+        }
+
+        // ==================== ADD BANK OVERLAY ====================
+
+        function openAddBankOverlay() {
+            document.getElementById('addBankOverlay').classList.add('show');
+        }
+
+        function closeAddBankOverlay() {
+            document.getElementById('addBankOverlay').classList.remove('show');
+            // Clear form
+            document.getElementById('overlayAccountNumber').value = '';
+            document.getElementById('overlayConfirmAccountNumber').value = '';
+            document.getElementById('overlayIfscCode').value = '';
+            document.getElementById('addBankOverlayBtn').disabled = true;
+        }
+
+        function validateAddBankOverlay() {
+            const accountNumber = document.getElementById('overlayAccountNumber').value.trim();
+            const confirmAccountNumber = document.getElementById('overlayConfirmAccountNumber').value.trim();
+            const ifsc = document.getElementById('overlayIfscCode').value.trim().toUpperCase();
+            const btn = document.getElementById('addBankOverlayBtn');
+
+            // Auto-uppercase IFSC
+            document.getElementById('overlayIfscCode').value = ifsc;
+
+            // Validate account number (9-18 digits)
+            const accountValid = /^\d{9,18}$/.test(accountNumber);
+
+            // Confirm account number matches
+            const accountsMatch = accountNumber === confirmAccountNumber;
+
+            // Validate IFSC code
+            const ifscValid = /^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc);
+
+            btn.disabled = !(accountValid && accountsMatch && ifscValid);
+        }
+
+        function submitAddBankOverlay() {
+            const accountNumber = document.getElementById('overlayAccountNumber').value.trim();
+            const ifsc = document.getElementById('overlayIfscCode').value.trim().toUpperCase();
+            const btn = document.getElementById('addBankOverlayBtn');
+
+            // Show loading state
+            btn.textContent = 'Verifying...';
+            btn.disabled = true;
+
+            // Simulate verification
+            setTimeout(() => {
+                // Create new bank entry
+                const newBankId = 'bank_new_' + Date.now();
+                const bankCode = ifsc.substring(0, 4);
+
+                // Determine bank name from IFSC
+                let bankName = bankCode + ' Bank';
+                if (bankCode === 'SBIN') {
+                    bankName = 'State Bank of India';
+                } else if (bankCode === 'HDFC') {
+                    bankName = 'HDFC Bank';
+                } else if (bankCode === 'ICIC') {
+                    bankName = 'ICICI Bank';
+                } else if (bankCode === 'UTIB') {
+                    bankName = 'Axis Bank';
+                }
+
+                // Add to verified banks (new banks are pre-verified via penny drop)
+                verifiedBanks.push(newBankId);
+
+                // Add new bank card to the UI
+                const bankSection = document.getElementById('bankAccountSection');
+                const addButton = bankSection.querySelector('.btn-text-link');
+
+                const newRow = document.createElement('div');
+                newRow.className = 'bank-card-row';
+                newRow.id = 'bankRow_' + newBankId;
+                newRow.innerHTML = `
+                    <div class="bank-verification-card" id="bankCard_${newBankId}" data-status="verified">
+                        <div class="bank-details">
+                            <div class="bank-name">${bankName}</div>
+                            <div class="account-number">${maskAccountNumber(accountNumber)}</div>
+                            <div class="account-ifsc">IFSC: ${ifsc}</div>
+                        </div>
+                        <div class="bank-action">
+                            <div class="verify-status verified" style="display: flex;">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                <span>Verified</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="bank-delete-btn" onclick="deleteBankAccount('${newBankId}')">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                `;
+
+                bankSection.insertBefore(newRow, addButton);
+
+                // Reset button and close overlay
+                btn.textContent = 'Verify & Add Account';
+                closeAddBankOverlay();
+                validateForm();
+            }, 1500);
+        }
+
+        // ==================== FORM VALIDATION ====================
+
+        function validateForm() {
+            const hasVerifiedBank = verifiedBanks.length > 0;
+            const pepChecked = document.getElementById('pepDeclaration').checked;
+            const btn = document.getElementById('submitBtn');
+
+            btn.disabled = !(hasVerifiedBank && pepChecked);
+        }
+
+        function togglePepCheckbox() {
+            const checkbox = document.getElementById('pepDeclaration');
+            checkbox.checked = !checkbox.checked;
+            validateForm();
+        }
+
+        function submitVerification() {
+            // Show loading
+            showState('loadingState');
+
+            // Simulate verification (2 seconds)
+            setTimeout(() => {
+                // Save data
+                localStorage.setItem('niveshpe_existing_banks', JSON.stringify(verifiedBanks));
+                localStorage.setItem('niveshpe_existing_nominees', JSON.stringify(nominees));
+
+                // Show OTP overlay
+                showState('mainFormState');
+                showOtpOverlay();
+            }, 1500);
+        }
+
+        // ==================== NOMINEE AGE & GUARDIAN ====================
+
+        function calculateAge(dob) {
+            if (!dob) return null;
+            const today = new Date();
+            const birthDate = new Date(dob);
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function toggleGuardianSection(nomineeIndex) {
+            const dobInput = document.getElementById(`nomineeDob${nomineeIndex}`);
+            const guardianSection = document.getElementById(`guardianSection${nomineeIndex}`);
+            if (!dobInput || !guardianSection) return;
+
+            const dob = dobInput.value;
+            const age = calculateAge(dob);
+
+            if (age !== null && age < 18) {
+                guardianSection.style.display = 'block';
+            } else {
+                guardianSection.style.display = 'none';
+                // Clear guardian fields
+                const guardianName = document.getElementById(`guardianName${nomineeIndex}`);
+                const guardianDob = document.getElementById(`guardianDob${nomineeIndex}`);
+                const guardianPan = document.getElementById(`guardianPan${nomineeIndex}`);
+                if (guardianName) guardianName.value = '';
+                if (guardianDob) guardianDob.value = '';
+                if (guardianPan) guardianPan.value = '';
+            }
+        }
+
+        // ==================== NOMINEE SELECTION ====================
+
+        function selectNomineeOption(option) {
+            document.querySelectorAll('.nominee-radio-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            if (option === 'later') {
+                document.getElementById('nomineeLater').checked = true;
+                document.querySelector('.nominee-radio-option:first-child').classList.add('selected');
+            } else {
+                document.getElementById('nomineeNow').checked = true;
+                document.querySelector('.nominee-radio-option:last-child').classList.add('selected');
+                openNomineeOverlay();
+            }
+        }
+
+        // ==================== NOMINEE MANAGEMENT ====================
+
+        function openNomineeOverlay() {
+            document.getElementById('nomineeOverlay').classList.add('show');
+        }
+
+        function closeNomineeOverlay() {
+            document.getElementById('nomineeOverlay').classList.remove('show');
+
+            // Reset to "later" if no nominees saved
+            if (nominees.length === 0) {
+                selectNomineeOption('later');
+            }
+        }
+
+        function addAnotherNomineeForm() {
+            nomineeCount++;
+            const container = document.getElementById('nomineeFormsContainer');
+
+            const newForm = document.createElement('div');
+            newForm.className = 'nominee-form-item';
+            newForm.id = `nomineeForm${nomineeCount - 1}`;
+            newForm.innerHTML = `
+                <div class="nominee-form-header">
+                    <h3 class="nominee-form-title">Nominee ${nomineeCount}</h3>
+                    <button class="nominee-remove-btn" onclick="removeNomineeForm(${nomineeCount - 1})">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Full Name</label>
+                    <input type="text" class="text-input" id="nomineeName${nomineeCount - 1}" placeholder="Enter nominee's full name">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Relationship</label>
+                    <select class="text-input" id="nomineeRelationship${nomineeCount - 1}">
+                        <option value="" disabled selected>Select relationship</option>
+                        <option value="parent">Parent</option>
+                        <option value="spouse">Spouse</option>
+                        <option value="sibling">Sibling</option>
+                        <option value="child">Child</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Date of Birth</label>
+                    <input type="date" class="text-input" id="nomineeDob${nomineeCount - 1}" onchange="toggleGuardianSection(${nomineeCount - 1})">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">PAN Number</label>
+                    <input type="text" class="text-input" id="nomineePan${nomineeCount - 1}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                </div>
+                <!-- Guardian Section (for minors) -->
+                <div class="guardian-section" id="guardianSection${nomineeCount - 1}" style="display: none;">
+                    <div class="guardian-header">
+                        <span class="material-symbols-outlined">info</span>
+                        <span>Guardian details required (Nominee is a minor)</span>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Guardian Name</label>
+                        <input type="text" class="text-input" id="guardianName${nomineeCount - 1}" placeholder="Enter guardian's full name">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Guardian Date of Birth</label>
+                        <input type="date" class="text-input" id="guardianDob${nomineeCount - 1}">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Guardian PAN Number</label>
+                        <input type="text" class="text-input" id="guardianPan${nomineeCount - 1}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                    </div>
+                </div>
+                <div class="input-group allocation-field" id="allocationField${nomineeCount - 1}">
+                    <label class="input-label">Allocation %</label>
+                    <input type="number" class="text-input" id="nomineeAllocation${nomineeCount - 1}" placeholder="50" min="1" max="100" value="50">
+                </div>
+            `;
+
+            container.appendChild(newForm);
+
+            // Show remove button on first nominee and show allocation fields
+            if (nomineeCount > 1) {
+                document.querySelector('#nomineeForm0 .nominee-remove-btn').style.display = 'block';
+                document.querySelectorAll('.allocation-field').forEach(field => {
+                    field.style.display = 'block';
+                });
+                redistributeAllocations();
+            }
+        }
+
+        function removeNomineeForm(index) {
+            const form = document.getElementById(`nomineeForm${index}`);
+            if (form) {
+                form.remove();
+                nomineeCount--;
+
+                // Hide remove button and allocation if only one nominee
+                if (nomineeCount === 1) {
+                    const firstRemoveBtn = document.querySelector('#nomineeForm0 .nominee-remove-btn');
+                    if (firstRemoveBtn) firstRemoveBtn.style.display = 'none';
+
+                    document.querySelectorAll('.allocation-field').forEach(field => {
+                        field.style.display = 'none';
+                    });
+                }
+
+                // Renumber nominees
+                const forms = document.querySelectorAll('.nominee-form-item');
+                forms.forEach((form, idx) => {
+                    const title = form.querySelector('.nominee-form-title');
+                    if (title) title.textContent = `Nominee ${idx + 1}`;
+                });
+
+                redistributeAllocations();
+            }
+        }
+
+        function redistributeAllocations() {
+            const forms = document.querySelectorAll('.nominee-form-item');
+            const count = forms.length;
+            const equalShare = Math.floor(100 / count);
+            const remainder = 100 % count;
+
+            forms.forEach((form, idx) => {
+                const allocationInput = form.querySelector('input[id^="nomineeAllocation"]');
+                if (allocationInput) {
+                    allocationInput.value = idx === 0 ? equalShare + remainder : equalShare;
+                }
+            });
+        }
+
+        function saveNominees() {
+            const forms = document.querySelectorAll('.nominee-form-item');
+            let totalAllocation = 0;
+            let isValid = true;
+            nominees = [];
+            const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+
+            forms.forEach((form, idx) => {
+                const name = document.getElementById(`nomineeName${idx}`)?.value.trim();
+                const relationship = document.getElementById(`nomineeRelationship${idx}`)?.value;
+                const dob = document.getElementById(`nomineeDob${idx}`)?.value;
+                const pan = document.getElementById(`nomineePan${idx}`)?.value.trim().toUpperCase();
+
+                let allocation = 100;
+                if (forms.length > 1) {
+                    allocation = parseInt(document.getElementById(`nomineeAllocation${idx}`)?.value) || 0;
+                    if (allocation <= 0) {
+                        isValid = false;
+                        return;
+                    }
+                }
+
+                if (!name || !relationship || !dob || !pan) {
+                    isValid = false;
+                    return;
+                }
+
+                // PAN validation
+                if (!panRegex.test(pan)) {
+                    isValid = false;
+                    return;
+                }
+
+                // Check if nominee is minor and validate guardian details
+                const age = calculateAge(dob);
+                let guardian = null;
+
+                if (age !== null && age < 18) {
+                    const guardianName = document.getElementById(`guardianName${idx}`)?.value.trim();
+                    const guardianDob = document.getElementById(`guardianDob${idx}`)?.value;
+                    const guardianPan = document.getElementById(`guardianPan${idx}`)?.value.trim().toUpperCase();
+
+                    if (!guardianName || !guardianDob || !guardianPan) {
+                        isValid = false;
+                        return;
+                    }
+
+                    if (!panRegex.test(guardianPan)) {
+                        isValid = false;
+                        return;
+                    }
+
+                    guardian = {
+                        name: guardianName,
+                        dob: guardianDob,
+                        pan: guardianPan
+                    };
+                }
+
+                totalAllocation += allocation;
+                nominees.push({
+                    name,
+                    relationship,
+                    dob,
+                    pan,
+                    allocation,
+                    isMinor: age < 18,
+                    guardian
+                });
+            });
+
+            // Check allocation totals
+            if (forms.length > 1 && totalAllocation !== 100) {
+                document.getElementById('allocationWarning').style.display = 'flex';
+                return;
+            } else {
+                document.getElementById('allocationWarning').style.display = 'none';
+            }
+
+            if (!isValid) {
+                alert('Please fill all nominee details correctly. Ensure PAN format is valid and guardian details are provided for minor nominees.');
+                return;
+            }
+
+            renderNomineeCards();
+            closeNomineeOverlay();
+        }
+
+        function renderNomineeCards() {
+            const container = document.getElementById('nomineeCardsContainer');
+
+            if (nominees.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            container.innerHTML = '';
+
+            nominees.forEach((nominee, idx) => {
+                const card = document.createElement('div');
+                card.className = 'nominee-card';
+                card.innerHTML = `
+                    <div class="nominee-card-header">
+                        <div class="nominee-card-left">
+                            <div class="nominee-initials">${getInitials(nominee.name)}</div>
+                            <div>
+                                <div class="nominee-card-name">${nominee.name}</div>
+                                <div class="nominee-card-relationship">${formatRelationship(nominee.relationship)}</div>
+                            </div>
+                        </div>
+                        <div class="nominee-card-right">
+                            <div class="nominee-allocation-badge">${nominee.allocation}%</div>
+                            <button class="nominee-card-edit-btn" onclick="editNominees()">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        }
+
+        function formatRelationship(relationship) {
+            return relationship.charAt(0).toUpperCase() + relationship.slice(1);
+        }
+
+        function editNominees() {
+            openNomineeOverlay();
+        }
+
+        // ==================== OTP VERIFICATION ====================
+
+        function setupOtpInputs() {
+            const inputs = document.querySelectorAll('.otp-input');
+
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    const value = e.target.value.replace(/\D/g, '');
+                    e.target.value = value;
+
+                    if (value && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+
+                    if (value) {
+                        e.target.classList.add('filled');
+                    } else {
+                        e.target.classList.remove('filled');
+                    }
+
+                    checkOtpComplete();
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pasteData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+
+                    pasteData.split('').forEach((char, i) => {
+                        if (inputs[i]) {
+                            inputs[i].value = char;
+                            inputs[i].classList.add('filled');
+                        }
+                    });
+
+                    if (inputs[pasteData.length - 1]) {
+                        inputs[pasteData.length - 1].focus();
+                    }
+
+                    checkOtpComplete();
+                });
+            });
+        }
+
+        function showOtpOverlay() {
+            document.getElementById('otpOverlay').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('otp1').focus();
+            }, 300);
+        }
+
+        function closeOtpOverlay() {
+            document.getElementById('otpOverlay').classList.remove('show');
+
+            // Clear OTP inputs
+            document.querySelectorAll('.otp-input').forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+
+            document.getElementById('verifyOtpBtn').classList.remove('enabled');
+        }
+
+        function checkOtpComplete() {
+            const filledInputs = document.querySelectorAll('.otp-input.filled');
+            const btn = document.getElementById('verifyOtpBtn');
+
+            if (filledInputs.length === 6) {
+                btn.classList.add('enabled');
+            } else {
+                btn.classList.remove('enabled');
+            }
+        }
+
+        function verifyOtp() {
+            const btn = document.getElementById('verifyOtpBtn');
+            if (!btn.classList.contains('enabled')) return;
+
+            const span = btn.querySelector('span');
+            const svg = btn.querySelector('svg');
+
+            span.textContent = 'Verifying...';
+            svg.style.display = 'none';
+
+            setTimeout(() => {
+                closeOtpOverlay();
+                submitAndComplete();
+            }, 1500);
+        }
+
+        function resendOtp() {
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+            alert('OTP resent!');
+        }
+
+        // ==================== SUBMIT AND COMPLETE ====================
+
+        function submitAndComplete() {
+            // Save data to localStorage
+            localStorage.setItem('niveshpe_existing_banks', JSON.stringify(verifiedBanks));
+            localStorage.setItem('niveshpe_existing_fatca', JSON.stringify({
+                declared: true,
+                nominees: nominees
+            }));
+
+            // Show success state
+            showState('successState');
+
+            // Redirect to add-funds after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'add-funds.html?directInvest=true';
+            }, 2000);
+        }
+
+        // ==================== NAVIGATION ====================
+
+        function goBack() {
+            window.location.href = 'index-empty.html';
+        }
+    </script>
+</body>
+</html>
