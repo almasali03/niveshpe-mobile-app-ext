@@ -1305,6 +1305,156 @@
             animation: slideInUp 0.5s ease-out;
         }
 
+        /* Investor Type Selection Popup */
+        .investor-type-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .investor-type-overlay.hidden {
+            display: none;
+        }
+
+        .investor-type-modal {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 340px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .investor-type-header {
+            padding: 24px 20px 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .investor-type-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .investor-type-subtitle {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .investor-type-options {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .investor-type-option {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .investor-type-option:hover {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.03);
+        }
+
+        .investor-type-option:active {
+            transform: scale(0.98);
+        }
+
+        .investor-type-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .investor-type-icon.new {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+        }
+
+        .investor-type-icon.existing {
+            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+        }
+
+        .investor-type-icon svg {
+            color: white;
+        }
+
+        .investor-type-info {
+            flex: 1;
+        }
+
+        .investor-type-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .investor-type-desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .investor-type-arrow {
+            color: var(--color-text-muted);
+        }
+
+        .investor-type-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .investor-type-close:hover {
+            background: var(--color-border);
+        }
+
         /* Advisor Form Overlay Styles */
         .investor-overlay {
             position: absolute;
@@ -1949,7 +2099,7 @@
                     <p class="ease-text">Start investing in under 2 minutes</p>
 
                     <!-- Single prominent CTA -->
-                    <button class="btn-start-investing" onclick="event.stopPropagation(); window.location.href='kyc.html'">
+                    <button class="btn-start-investing" onclick="event.stopPropagation(); openInvestorTypePopup()">
                         Start Investing
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-left: 8px;">
                             <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
@@ -1970,7 +2120,7 @@
                     </a>
                 </div>
                 <div class="goals-scroll" id="goalsScroll">
-                    <div class="goal-card" onclick="window.location.href='kyc.html'">
+                    <div class="goal-card" onclick="openInvestorTypePopup()">
                         <div class="goal-icon" style="background: white; padding: 6px;">
                             <img src="assets/favicon.png" alt="NiveshPe" style="width: 24px; height: 24px; object-fit: contain;">
                         </div>
@@ -2161,6 +2311,59 @@
                 <span class="nav-label">Portfolio</span>
             </a>
         </nav>
+
+        <!-- Investor Type Selection Popup -->
+        <div id="investorTypeOverlay" class="investor-type-overlay hidden" onclick="closeInvestorTypePopup()">
+            <div class="investor-type-modal" onclick="event.stopPropagation()">
+                <div class="investor-type-header">
+                    <h2 class="investor-type-title">Welcome to NiveshPe</h2>
+                    <p class="investor-type-subtitle">How would you like to proceed?</p>
+                </div>
+                <div class="investor-type-options">
+                    <!-- New Investor Option -->
+                    <div class="investor-type-option" onclick="selectInvestorType('new')">
+                        <div class="investor-type-icon new">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="19" y1="8" x2="19" y2="14"></line>
+                                <line x1="22" y1="11" x2="16" y2="11"></line>
+                            </svg>
+                        </div>
+                        <div class="investor-type-info">
+                            <div class="investor-type-name">I'm a New Investor</div>
+                            <div class="investor-type-desc">Start your investment journey</div>
+                        </div>
+                        <div class="investor-type-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Existing Investor Option -->
+                    <div class="investor-type-option" onclick="selectInvestorType('existing')">
+                        <div class="investor-type-icon existing">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <div class="investor-type-info">
+                            <div class="investor-type-name">I'm an Existing Investor</div>
+                            <div class="investor-type-desc">Already investing in mutual funds</div>
+                        </div>
+                        <div class="investor-type-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Advisor Form Overlay -->
         <div id="advisorFormOverlay" class="investor-overlay hidden" onclick="closeAdvisorForm()">
@@ -2540,6 +2743,27 @@
                 });
             });
         });
+
+        // Investor Type Selection Popup Functions
+        function openInvestorTypePopup() {
+            document.getElementById('investorTypeOverlay').classList.remove('hidden');
+        }
+
+        function closeInvestorTypePopup() {
+            document.getElementById('investorTypeOverlay').classList.add('hidden');
+        }
+
+        function selectInvestorType(type) {
+            closeInvestorTypePopup();
+
+            if (type === 'new') {
+                // New investor - proceed to KYC flow
+                window.location.href = 'kyc.html';
+            } else if (type === 'existing') {
+                // Existing investor - verify investment details
+                window.location.href = 'existing-investor.html';
+            }
+        }
 
         // Function to show loan alert
         function showLoanAlert() {

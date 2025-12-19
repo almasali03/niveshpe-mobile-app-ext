@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify PAN - NiveshPe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- iPhone Toggle CSS -->
+    <link rel="stylesheet" href="assets/css/iphone-toggle.css">
+
+    <style>
+        :root {
+            --color-bg-primary: #F5F7FA;
+            --color-blue: #2563EB;
+            --color-blue-dark: #1D4ED8;
+            --color-blue-light: #3B82F6;
+            --color-green: #10B981;
+            --color-orange: #F59E0B;
+            --color-red: #EF4444;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-text-muted: #9CA3AF;
+            --color-border: #E5E7EB;
+            --color-surface: #F9FAFB;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            overflow: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            height: 44px;
+            flex-shrink: 0;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+        }
+
+        .kyc-container {
+            padding: 24px 20px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .subtitle-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        /* Input */
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .text-input {
+            width: 100%;
+            height: 56px;
+            padding: 0 16px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: 2px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .text-input.error {
+            border-color: var(--color-red);
+            animation: shake 0.3s;
+        }
+
+        .text-input.valid {
+            border-color: var(--color-green);
+        }
+
+        .text-input:disabled {
+            background: var(--color-surface);
+            cursor: not-allowed;
+        }
+
+        .text-input::placeholder {
+            color: var(--color-text-muted);
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .error-text {
+            display: none;
+            font-size: 12px;
+            color: var(--color-red);
+            margin-top: 8px;
+        }
+
+        .error-text.show {
+            display: block;
+        }
+
+        /* Button */
+        .btn-primary {
+            width: 100%;
+            height: 52px;
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: scale(0.98);
+            background: var(--color-blue-dark);
+        }
+
+        .btn-primary:disabled {
+            background: var(--color-border);
+            color: var(--color-text-muted);
+            cursor: not-allowed;
+        }
+
+        /* Info Card */
+        .info-card {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(37, 99, 235, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            border-radius: var(--radius-md);
+            margin-top: 32px;
+        }
+
+        .info-card .material-symbols-outlined {
+            color: var(--color-blue);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-text strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .info-text p {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Loading State */
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .loading-container.show {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--color-border);
+            border-top-color: var(--color-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        .loading-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .loading-subtext {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Verified Cards (matching kyc.html pattern) */
+        .verified-card {
+            display: none;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            margin-top: 24px;
+            animation: fadeIn 0.4s ease;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px solid var(--color-green);
+        }
+
+        .verified-card.show {
+            display: block;
+        }
+
+        .verified-card.pending-card {
+            background: rgba(245, 158, 11, 0.05);
+            border-color: var(--color-orange);
+        }
+
+        .verified-card.failed-card {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: var(--color-red);
+        }
+
+        .verified-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .verified-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: var(--color-green);
+        }
+
+        .verified-icon .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .verified-icon.pending-icon {
+            background: var(--color-orange);
+        }
+
+        .verified-icon.failed-icon {
+            background: var(--color-red);
+        }
+
+        .verified-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-green);
+        }
+
+        .verified-title.pending-title {
+            color: var(--color-orange);
+        }
+
+        .verified-title.failed-title {
+            color: var(--color-red);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .status-info-box {
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .status-info-box .material-symbols-outlined {
+            font-size: 16px;
+            color: var(--color-orange);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Action Buttons */
+        .action-section {
+            display: none;
+            margin-top: 24px;
+        }
+
+        .action-section.show {
+            display: block;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            height: 48px;
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 12px;
+        }
+
+        .btn-secondary:hover {
+            color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.98);
+        }
+
+        /* State Toggle Buttons */
+        .state-toggle-container {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10000;
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .state-toggle-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .state-toggle-btn:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .state-toggle-btn.active {
+            color: white;
+        }
+
+        .state-toggle-btn.success-btn.active {
+            background: var(--color-green);
+            border-color: var(--color-green);
+        }
+
+        .state-toggle-btn.pending-btn.active {
+            background: var(--color-orange);
+            border-color: var(--color-orange);
+        }
+
+        .state-toggle-btn.failure-btn.active {
+            background: var(--color-red);
+            border-color: var(--color-red);
+        }
+    </style>
+</head>
+<body>
+    <!-- iPhone Toggle Button -->
+    <button class="frame-toggle-btn" onclick="toggleFrameMode()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        </svg>
+        <span id="frameToggleText">Normal View</span>
+    </button>
+
+    <!-- PAN State Toggle Buttons -->
+    <div class="state-toggle-container" id="panStateToggleContainer">
+        <button class="state-toggle-btn success-btn active" onclick="setPanState('success')">
+            Success
+        </button>
+        <button class="state-toggle-btn pending-btn" onclick="setPanState('pending')">
+            Pending
+        </button>
+        <button class="state-toggle-btn failure-btn" onclick="setPanState('failure')">
+            Failure
+        </button>
+    </div>
+
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+            <div class="mobile-container">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="status-icons">
+                        <span>📶</span>
+                        <span>📡</span>
+                        <span>🔋</span>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="header">
+                    <div class="header-title">Verify Your PAN</div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <div class="kyc-container">
+                        <div class="welcome-text">Let's verify your identity</div>
+                        <div class="subtitle-text">Enter your PAN number to continue with your investment account setup</div>
+
+                        <!-- PAN Input Section -->
+                        <div id="panInputSection">
+                            <div class="input-group">
+                                <label class="input-label" for="panInput">PAN Number</label>
+                                <input
+                                    type="text"
+                                    id="panInput"
+                                    class="text-input"
+                                    placeholder="ABCDE1234F"
+                                    maxlength="10"
+                                    oninput="handlePanInput()"
+                                    style="text-transform: uppercase;"
+                                >
+                                <div class="error-text" id="errorText">Please enter a valid PAN (e.g., ABCDE1234F)</div>
+                            </div>
+
+                            <button class="btn-primary" id="continueBtn" disabled onclick="verifyPan()">
+                                Continue
+                            </button>
+
+                            <div class="info-card">
+                                <span class="material-symbols-outlined">info</span>
+                                <div class="info-text">
+                                    <strong>Why do we need your PAN?</strong>
+                                    <p>PAN verification is mandatory as per SEBI regulations for all mutual fund investments in India.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Loading State -->
+                        <div class="loading-container" id="loadingSection">
+                            <div class="loading-spinner"></div>
+                            <div class="loading-text">Verifying PAN...</div>
+                            <div class="loading-subtext">Please wait while we verify your details with NSDL</div>
+                        </div>
+
+                        <!-- Success Card -->
+                        <div class="verified-card" id="successCard">
+                            <div class="verified-header">
+                                <div class="verified-icon">
+                                    <span class="material-symbols-outlined">check</span>
+                                </div>
+                                <div class="verified-title">PAN Verified Successfully</div>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">PAN Number</span>
+                                <span class="detail-value" id="verifiedPan">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Name</span>
+                                <span class="detail-value" id="verifiedName">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Date of Birth</span>
+                                <span class="detail-value" id="verifiedDob">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Father's Name</span>
+                                <span class="detail-value" id="verifiedFather">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Pending Card -->
+                        <div class="verified-card pending-card" id="pendingCard">
+                            <div class="verified-header">
+                                <div class="verified-icon pending-icon">
+                                    <span class="material-symbols-outlined">schedule</span>
+                                </div>
+                                <div class="verified-title pending-title">PAN Verification Pending</div>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">PAN Number</span>
+                                <span class="detail-value" id="pendingPan">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Name</span>
+                                <span class="detail-value" id="pendingName">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Date of Birth</span>
+                                <span class="detail-value" id="pendingDob">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Father's Name</span>
+                                <span class="detail-value" id="pendingFather">-</span>
+                            </div>
+                            <div class="status-info-box">
+                                <span class="material-symbols-outlined">info</span>
+                                <span>You can proceed to the next step while we verify your PAN in the background.</span>
+                            </div>
+                        </div>
+
+                        <!-- Failed Card -->
+                        <div class="verified-card failed-card" id="failedCard">
+                            <div class="verified-header">
+                                <div class="verified-icon failed-icon">
+                                    <span class="material-symbols-outlined">close</span>
+                                </div>
+                                <div class="verified-title failed-title">PAN Verification Failed</div>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">PAN Number</span>
+                                <span class="detail-value" id="failedPan">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Error</span>
+                                <span class="detail-value">Invalid PAN details. Please check and try again.</span>
+                            </div>
+                        </div>
+
+                        <!-- Success Actions (two CTAs) -->
+                        <div class="action-section" id="successActions">
+                            <button class="btn-primary" onclick="proceedToNext()">
+                                Continue
+                            </button>
+                            <button class="btn-secondary" onclick="retryPan()">
+                                I need to update my PAN
+                            </button>
+                        </div>
+
+                        <!-- Pending Actions (single CTA) -->
+                        <div class="action-section" id="pendingActions">
+                            <button class="btn-primary" onclick="proceedToNext()">
+                                Continue
+                            </button>
+                        </div>
+
+                        <!-- Retry Button (for failure) -->
+                        <div class="action-section" id="retrySection">
+                            <button class="btn-primary" onclick="retryPan()">
+                                Try Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPan = '';
+        let currentState = 'success';
+
+        // Mock NSDL data (simulating fetched data)
+        const mockNsdlData = {
+            name: 'Rahul Kumar Sharma',
+            dob: '15 Aug 1992',
+            fatherName: 'Rajesh Kumar Sharma'
+        };
+
+        function handlePanInput() {
+            const input = document.getElementById('panInput');
+            const value = input.value.toUpperCase();
+            const continueBtn = document.getElementById('continueBtn');
+            const errorText = document.getElementById('errorText');
+
+            input.value = value;
+
+            // PAN format: [A-Z]{5}[0-9]{4}[A-Z]{1}
+            const isValid = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value);
+
+            if (value.length === 10 && !isValid) {
+                input.classList.add('error');
+                input.classList.remove('valid');
+                errorText.classList.add('show');
+                continueBtn.disabled = true;
+            } else if (isValid) {
+                input.classList.remove('error');
+                input.classList.add('valid');
+                errorText.classList.remove('show');
+                continueBtn.disabled = false;
+            } else {
+                input.classList.remove('error', 'valid');
+                errorText.classList.remove('show');
+                continueBtn.disabled = true;
+            }
+        }
+
+        function verifyPan() {
+            currentPan = document.getElementById('panInput').value.toUpperCase();
+
+            // Hide input section
+            document.getElementById('panInputSection').style.display = 'none';
+
+            // Show loading
+            document.getElementById('loadingSection').classList.add('show');
+
+            // Simulate verification (1.5s)
+            setTimeout(() => {
+                // Hide loading
+                document.getElementById('loadingSection').classList.remove('show');
+
+                // Set PAN in all status cards
+                document.getElementById('verifiedPan').textContent = currentPan;
+                document.getElementById('pendingPan').textContent = currentPan;
+                document.getElementById('failedPan').textContent = currentPan;
+
+                // Set verified details in success card
+                document.getElementById('verifiedName').textContent = mockNsdlData.name;
+                document.getElementById('verifiedDob').textContent = mockNsdlData.dob;
+                document.getElementById('verifiedFather').textContent = mockNsdlData.fatherName;
+
+                // Set verified details in pending card
+                document.getElementById('pendingName').textContent = mockNsdlData.name;
+                document.getElementById('pendingDob').textContent = mockNsdlData.dob;
+                document.getElementById('pendingFather').textContent = mockNsdlData.fatherName;
+
+                // Show success by default
+                showStatusCard('success');
+
+                // Show toggle buttons
+                document.getElementById('panStateToggleContainer').style.display = 'flex';
+            }, 1500);
+        }
+
+        function showStatusCard(state) {
+            currentState = state;
+
+            // Hide all verified cards
+            document.getElementById('successCard').classList.remove('show');
+            document.getElementById('pendingCard').classList.remove('show');
+            document.getElementById('failedCard').classList.remove('show');
+
+            // Hide all action sections
+            document.getElementById('successActions').classList.remove('show');
+            document.getElementById('pendingActions').classList.remove('show');
+            document.getElementById('retrySection').classList.remove('show');
+
+            // Show the appropriate card and action
+            if (state === 'success') {
+                document.getElementById('successCard').classList.add('show');
+                document.getElementById('successActions').classList.add('show');
+            } else if (state === 'pending') {
+                document.getElementById('pendingCard').classList.add('show');
+                document.getElementById('pendingActions').classList.add('show');
+            } else if (state === 'failure') {
+                document.getElementById('failedCard').classList.add('show');
+                document.getElementById('retrySection').classList.add('show');
+            }
+        }
+
+        function setPanState(state) {
+            // Update toggle button active states
+            document.querySelectorAll('#panStateToggleContainer .state-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            if (state === 'success') {
+                document.querySelector('.success-btn').classList.add('active');
+            } else if (state === 'pending') {
+                document.querySelector('.pending-btn').classList.add('active');
+            } else if (state === 'failure') {
+                document.querySelector('.failure-btn').classList.add('active');
+            }
+
+            showStatusCard(state);
+        }
+
+        function proceedToNext() {
+            // Save to localStorage
+            localStorage.setItem('niveshpe_pan', currentPan);
+            localStorage.setItem('niveshpe_pan_status', currentState);
+            localStorage.setItem('niveshpe_pan_name', mockNsdlData.name);
+            localStorage.setItem('niveshpe_pan_dob', mockNsdlData.dob);
+            localStorage.setItem('niveshpe_pan_father', mockNsdlData.fatherName);
+
+            // Redirect to investor details
+            window.location.href = 'investor-detail.html';
+        }
+
+        function retryPan() {
+            // Hide toggle buttons
+            document.getElementById('panStateToggleContainer').style.display = 'none';
+
+            // Hide all status cards
+            document.getElementById('successCard').classList.remove('show');
+            document.getElementById('pendingCard').classList.remove('show');
+            document.getElementById('failedCard').classList.remove('show');
+
+            // Hide action sections
+            document.getElementById('successActions').classList.remove('show');
+            document.getElementById('pendingActions').classList.remove('show');
+            document.getElementById('retrySection').classList.remove('show');
+
+            // Show input section
+            document.getElementById('panInputSection').style.display = 'block';
+
+            // Clear and focus input
+            const input = document.getElementById('panInput');
+            input.value = '';
+            input.classList.remove('valid', 'error');
+            input.focus();
+
+            // Reset continue button
+            document.getElementById('continueBtn').disabled = true;
+
+            // Reset toggle buttons
+            document.querySelector('.success-btn').classList.add('active');
+            document.querySelector('.pending-btn').classList.remove('active');
+            document.querySelector('.failure-btn').classList.remove('active');
+        }
+    </script>
+
+    <!-- iPhone Toggle JS -->
+    <script src="assets/js/iphone-toggle.js"></script>
+</body>
+</html>

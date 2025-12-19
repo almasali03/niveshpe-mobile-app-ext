@@ -285,6 +285,10 @@
             position: relative;
         }
 
+        .main-content.modal-open {
+            overflow: hidden;
+        }
+
         .kyc-state {
             display: none;
             width: 100%;
@@ -1467,8 +1471,8 @@
             left: 0;
             right: 0;
             background: white;
-            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
-            max-height: 80vh;
+            border-radius: 24px 24px 0 0;
+            max-height: 80%;
             overflow: hidden;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             z-index: 101;
@@ -1775,6 +1779,1481 @@
             from { opacity: 1; }
             to { opacity: 0; }
         }
+
+        /* ==================== SELFIE/CAMERA STYLES ==================== */
+
+        .camera-container {
+            margin-bottom: 20px;
+        }
+
+        .camera-preview {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            background: #1a1a2e;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .camera-preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+        }
+
+        .face-guide {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 240px;
+            pointer-events: none;
+        }
+
+        .face-guide svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .camera-overlay-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .captured-preview {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .captured-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .captured-status {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-green);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .captured-status .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .camera-instructions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .instruction-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .instruction-item .material-symbols-outlined {
+            font-size: 18px;
+            color: var(--color-blue);
+        }
+
+        .btn-capture {
+            width: 100%;
+            height: 56px;
+            background: linear-gradient(135deg, var(--color-blue), var(--color-blue-light));
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-capture:active {
+            transform: scale(0.98);
+        }
+
+        .btn-capture .material-symbols-outlined {
+            font-size: 24px;
+        }
+
+        .selfie-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .selfie-actions .btn-secondary-outline {
+            flex: 1;
+            height: 52px;
+            background: white;
+            color: var(--color-text-secondary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .selfie-actions .btn-secondary-outline:active {
+            background: var(--color-bg-primary);
+        }
+
+        .selfie-actions .btn-primary {
+            flex: 2;
+            margin-top: 0;
+        }
+
+        /* ==================== SIGNATURE STYLES ==================== */
+
+        .signature-container {
+            margin-bottom: 24px;
+        }
+
+        .signature-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 12px;
+        }
+
+        .signature-canvas-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: white;
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .signature-canvas-wrapper.active {
+            border-color: var(--color-blue);
+            border-style: solid;
+        }
+
+        .signature-canvas-wrapper canvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            touch-action: none;
+        }
+
+        .signature-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-text-muted);
+            pointer-events: none;
+        }
+
+        .signature-placeholder .material-symbols-outlined {
+            font-size: 32px;
+        }
+
+        .signature-placeholder span:last-child {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .signature-placeholder.hidden {
+            display: none;
+        }
+
+        .btn-clear-signature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 10px 16px;
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .btn-clear-signature:active {
+            color: var(--color-red);
+        }
+
+        .btn-clear-signature .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .signature-agreement {
+            padding: 16px;
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: var(--radius-md);
+            margin-bottom: 24px;
+        }
+
+        .signature-agreement p {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 10px;
+        }
+
+        .signature-agreement ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .signature-agreement li {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        .signature-agreement li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ==================== DOCUMENT PREVIEW CARD ==================== */
+
+        .document-preview-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .document-preview-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .document-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--color-blue), var(--color-blue-light));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .document-icon .material-symbols-outlined {
+            font-size: 24px;
+            color: white;
+        }
+
+        .document-info {
+            flex: 1;
+        }
+
+        .document-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .document-meta {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+
+        .document-summary {
+            margin-bottom: 16px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .summary-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .summary-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-green);
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+        }
+
+        .btn-view-document {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(37, 99, 235, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: var(--radius-sm);
+            color: var(--color-blue);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-view-document:active {
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-view-document .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        /* ==================== ACKNOWLEDGMENT CHECKBOX ==================== */
+
+        .acknowledgment-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .acknowledgment-checkbox input {
+            display: none;
+        }
+
+        .checkbox-custom {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--color-border);
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            margin-top: 1px;
+        }
+
+        .acknowledgment-checkbox input:checked + .checkbox-custom {
+            background: var(--color-blue);
+            border-color: var(--color-blue);
+        }
+
+        .acknowledgment-checkbox input:checked + .checkbox-custom::after {
+            content: '';
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            margin-bottom: 2px;
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ==================== AOF DOCUMENT OVERLAY ==================== */
+
+        .aof-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+
+        .aof-overlay.show {
+            display: block;
+        }
+
+        .aof-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.2s ease;
+        }
+
+        .aof-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-height: 90%;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .aof-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--color-border);
+            flex-shrink: 0;
+        }
+
+        .aof-modal-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .aof-close-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: var(--color-bg-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+        }
+
+        .aof-modal-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .aof-document {
+            font-size: 14px;
+        }
+
+        .aof-section {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .aof-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .aof-section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-blue);
+            margin-bottom: 12px;
+        }
+
+        .aof-section-title .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .aof-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 8px 0;
+            gap: 16px;
+        }
+
+        .aof-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            flex-shrink: 0;
+        }
+
+        .aof-value {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .aof-badge-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-green);
+            padding: 2px 10px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+        }
+
+        .aof-amount {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-green);
+        }
+
+        .aof-disclaimer {
+            display: flex;
+            gap: 10px;
+            padding: 14px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: var(--radius-sm);
+            margin-top: 8px;
+        }
+
+        .aof-disclaimer .material-symbols-outlined {
+            font-size: 20px;
+            color: var(--color-orange);
+            flex-shrink: 0;
+        }
+
+        .aof-disclaimer p {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .aof-modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--color-border);
+            flex-shrink: 0;
+        }
+
+        .aof-modal-footer .btn-primary {
+            margin-top: 0;
+        }
+
+        /* ==================== ACCOUNT DETAILS STEP ==================== */
+
+        .account-section {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 16px;
+        }
+
+        .section-header .material-symbols-outlined {
+            font-size: 20px;
+            color: var(--color-blue);
+        }
+
+        .empty-bank-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+        }
+
+        .empty-bank-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .empty-bank-icon .material-symbols-outlined {
+            font-size: 24px;
+            color: var(--color-blue);
+        }
+
+        .empty-bank-state p {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .kyc-bank-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .bank-card-main {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bank-logo-placeholder {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-border);
+        }
+
+        .bank-logo-placeholder .material-symbols-outlined {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+        }
+
+        .bank-card-details {
+            flex: 1;
+        }
+
+        .bank-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .bank-account-info {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .bank-account-info .separator {
+            margin: 0 4px;
+        }
+
+        .bank-verified-badge {
+            width: 28px;
+            height: 28px;
+            background: var(--color-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bank-verified-badge .material-symbols-outlined {
+            font-size: 16px;
+            color: white;
+        }
+
+        .btn-add-bank {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px;
+            background: transparent;
+            border: 1px dashed var(--color-blue);
+            border-radius: var(--radius-sm);
+            color: var(--color-blue);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-add-bank .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .nominee-option-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .nominee-option {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: var(--color-bg-primary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nominee-option.selected {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .nominee-option input {
+            display: none;
+        }
+
+        .nominee-option label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            cursor: pointer;
+        }
+
+        .kyc-nominee-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+        }
+
+        .nominee-card-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nominee-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--color-purple), #A78BFA);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nominee-info {
+            flex: 1;
+        }
+
+        .nominee-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .nominee-relation {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .nominee-allocation {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-green);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+        }
+
+        .nominee-edit-btn {
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .fatca-info-box {
+            display: flex;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+        }
+
+        .fatca-info-box .material-symbols-outlined {
+            font-size: 18px;
+            color: var(--color-blue);
+            flex-shrink: 0;
+        }
+
+        .fatca-info-box p {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .fatca-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .fatca-checkbox input {
+            display: none;
+        }
+
+        .fatca-checkbox .checkbox-custom {
+            margin-top: 0;
+        }
+
+        .fatca-checkbox .checkbox-text {
+            font-size: 13px;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+        }
+
+        /* KYC Overlay Styles */
+        .kyc-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+
+        .kyc-overlay.show {
+            display: block;
+        }
+
+        .kyc-overlay-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.2s ease;
+        }
+
+        .kyc-overlay-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            animation: slideUp 0.3s ease-out;
+            max-height: 85%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kyc-overlay-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .kyc-overlay-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .kyc-overlay-close {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: var(--color-bg-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+        }
+
+        .kyc-overlay-content {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .kyc-overlay-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .kyc-overlay-footer .btn-primary {
+            margin-top: 0;
+        }
+
+        .otp-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .otp-input-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .otp-input {
+            width: 44px;
+            height: 52px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+        }
+
+        .otp-timer {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .resend-text {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-top: 16px;
+        }
+
+        .resend-link {
+            background: none;
+            border: none;
+            color: var(--color-blue);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .section-description {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        /* Bank Verification Card */
+        .bank-verification-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .bank-verification-card[data-status="verified"] {
+            border-color: var(--color-green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .bank-verification-card[data-status="failed"] {
+            border-color: var(--color-red);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .bank-verification-card .bank-details {
+            flex: 1;
+        }
+
+        .bank-verification-card .bank-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .bank-verification-card .account-number {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .bank-verification-card .account-ifsc {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+            font-family: monospace;
+        }
+
+        .bank-action {
+            flex-shrink: 0;
+        }
+
+        .verify-btn {
+            padding: 8px 16px;
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .verify-btn:hover {
+            background: var(--color-blue-dark);
+        }
+
+        .verify-btn:active {
+            transform: scale(0.95);
+        }
+
+        .verify-loader {
+            padding: 8px 16px;
+        }
+
+        .mini-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-top-color: var(--color-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .verify-status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .verify-status.verified {
+            color: var(--color-green);
+        }
+
+        .verify-status.verified .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .verify-status.failed {
+            color: var(--color-red);
+        }
+
+        .verify-status.failed .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        /* Bank Card Row with Delete */
+        .bank-card-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .bank-card-row .bank-verification-card {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .bank-delete-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-text-muted);
+            flex-shrink: 0;
+        }
+
+        .bank-delete-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--color-red);
+        }
+
+        .bank-delete-btn .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        /* Confirmation Modal */
+        .confirm-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            padding-bottom: 32px;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .confirm-content {
+            padding: 16px 24px 0;
+        }
+
+        .confirm-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .confirm-icon .material-symbols-outlined {
+            font-size: 28px;
+            color: var(--color-red);
+        }
+
+        .confirm-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .confirm-message {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-confirm-cancel {
+            flex: 1;
+            height: 48px;
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-confirm-cancel:hover {
+            background: var(--color-border);
+        }
+
+        .btn-confirm-delete {
+            flex: 1;
+            height: 48px;
+            background: var(--color-red);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-confirm-delete:hover {
+            background: #dc2626;
+        }
+
+        /* Nominee Form Styles */
+        .nominee-form-item {
+            padding: 16px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+        }
+
+        .nominee-form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .nominee-form-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .nominee-remove-btn {
+            background: none;
+            border: none;
+            color: var(--color-red);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* Guardian Section (for minor nominees) */
+        .guardian-section {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(245, 158, 11, 0.05);
+            border: 2px dashed var(--color-orange);
+            border-radius: var(--radius-md);
+        }
+
+        .guardian-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            color: var(--color-orange);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .guardian-header .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .guardian-section .input-group {
+            margin-bottom: 12px;
+        }
+
+        .guardian-section .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .allocation-field {
+            display: none;
+        }
+
+        .allocation-warning {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: var(--radius-sm);
+            margin-top: 12px;
+            color: var(--color-red);
+            font-size: 13px;
+        }
+
+        /* Nominee Cards Container */
+        .nominee-cards-container {
+            margin-top: 16px;
+        }
+
+        .nominee-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px solid var(--color-green);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+        }
+
+        /* Checkbox Wrapper */
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox-input {
+            display: none;
+        }
+
+        .checkbox-input + .checkbox-label::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            margin-right: 12px;
+            vertical-align: middle;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-input:checked + .checkbox-label::before {
+            background: var(--color-blue);
+            border-color: var(--color-blue);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+            background-size: 14px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        /* Helper Text */
+        .helper-text {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 8px;
+        }
+
+        /* Modal Subtitle */
+        .modal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Btn Text Link */
+        .btn-text-link {
+            background: none;
+            border: none;
+            color: var(--color-blue);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 12px;
+            width: 100%;
+            text-align: center;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-text-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Btn Secondary */
+        .btn-secondary {
+            width: 100%;
+            height: 52px;
+            background: white;
+            color: var(--color-blue);
+            border: 2px solid var(--color-blue);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.98);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        /* Drag Handle */
+        .drag-handle {
+            display: flex;
+            justify-content: center;
+            padding: 12px 0 8px;
+        }
+
+        .drag-bar {
+            width: 36px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body>
@@ -1871,19 +3350,19 @@
                     <div class="step-indicators">
                         <div class="step-indicator" id="stepIndicator1">
                             <div class="step-number">1</div>
-                            <div class="step-label">PAN</div>
+                            <div class="step-label">Aadhaar</div>
                         </div>
                         <div class="step-indicator" id="stepIndicator2">
                             <div class="step-number">2</div>
-                            <div class="step-label">Aadhaar</div>
+                            <div class="step-label">Selfie</div>
                         </div>
                         <div class="step-indicator" id="stepIndicator3">
                             <div class="step-number">3</div>
-                            <div class="step-label">Bank</div>
+                            <div class="step-label">Account</div>
                         </div>
                         <div class="step-indicator" id="stepIndicator4">
                             <div class="step-number">4</div>
-                            <div class="step-label">Other Details</div>
+                            <div class="step-label">Sign</div>
                         </div>
                     </div>
                 </div>
@@ -1905,15 +3384,6 @@
                                 <div class="steps-title">What you'll need:</div>
                                 <div class="step-item">
                                     <div class="step-item-number">
-                                        <span class="material-symbols-outlined" style="font-size: 20px;">badge</span>
-                                    </div>
-                                    <div class="step-item-content">
-                                        <div class="step-item-text">PAN Card</div>
-                                        <div class="step-item-subtext">Permanent Account Number for identity verification</div>
-                                    </div>
-                                </div>
-                                <div class="step-item">
-                                    <div class="step-item-number">
                                         <span class="material-symbols-outlined" style="font-size: 20px;">fingerprint</span>
                                     </div>
                                     <div class="step-item-content">
@@ -1923,11 +3393,29 @@
                                 </div>
                                 <div class="step-item">
                                     <div class="step-item-number">
+                                        <span class="material-symbols-outlined" style="font-size: 20px;">photo_camera</span>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <div class="step-item-text">Selfie Verification</div>
+                                        <div class="step-item-subtext">Quick liveness check to confirm your identity</div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-number">
                                         <span class="material-symbols-outlined" style="font-size: 20px;">account_balance</span>
                                     </div>
                                     <div class="step-item-content">
-                                        <div class="step-item-text">Bank Account</div>
-                                        <div class="step-item-subtext">Link your bank account for seamless transactions</div>
+                                        <div class="step-item-text">Account Details</div>
+                                        <div class="step-item-subtext">Bank account, nominee & FATCA declaration</div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-number">
+                                        <span class="material-symbols-outlined" style="font-size: 20px;">draw</span>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <div class="step-item-text">Digital Signature</div>
+                                        <div class="step-item-subtext">Sign AOF form for mutual fund investments</div>
                                     </div>
                                 </div>
                             </div>
@@ -2251,15 +3739,390 @@
                             </div>
 
                             <div id="aadhaarContinueSection" style="display: none;">
-                                <button class="btn-primary" onclick="continueToBank()">
-                                    Continue to Add Bank
+                                <button class="btn-primary" onclick="continueToSelfie()">
+                                    Continue to Selfie Verification
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Step 3: Bank Account -->
-                    <div class="kyc-state" id="bankState">
+                    <!-- Step 2: Selfie/Liveness Verification -->
+                    <div class="kyc-state" id="selfieState">
+                        <div class="kyc-container">
+                            <h2 class="welcome-text">Selfie Verification</h2>
+                            <p class="subtitle-text">Take a quick selfie to verify your identity</p>
+
+                            <!-- Camera Preview -->
+                            <div class="camera-container" id="cameraContainer">
+                                <div class="camera-preview" id="cameraPreview">
+                                    <video id="selfieVideo" autoplay playsinline></video>
+                                    <div class="face-guide">
+                                        <svg viewBox="0 0 200 260" fill="none">
+                                            <ellipse cx="100" cy="115" rx="75" ry="95" stroke="white" stroke-width="3" stroke-dasharray="8 4"/>
+                                            <circle cx="100" cy="230" r="8" fill="white" opacity="0.5"/>
+                                        </svg>
+                                    </div>
+                                    <div class="camera-overlay-text">Position your face within the oval</div>
+                                </div>
+                                <canvas id="selfieCanvas" style="display: none;"></canvas>
+                            </div>
+
+                            <!-- Captured Image Preview -->
+                            <div class="captured-preview" id="capturedPreview" style="display: none;">
+                                <img id="capturedImage" src="" alt="Captured selfie">
+                                <div class="captured-status">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                    <span>Photo captured</span>
+                                </div>
+                            </div>
+
+                            <!-- Camera Instructions -->
+                            <div class="camera-instructions">
+                                <div class="instruction-item">
+                                    <span class="material-symbols-outlined">light_mode</span>
+                                    <span>Good lighting</span>
+                                </div>
+                                <div class="instruction-item">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                    <span>Face clearly visible</span>
+                                </div>
+                                <div class="instruction-item">
+                                    <span class="material-symbols-outlined">do_not_disturb</span>
+                                    <span>No glasses or masks</span>
+                                </div>
+                            </div>
+
+                            <!-- Capture Button -->
+                            <button class="btn-capture" id="captureBtn" onclick="captureSelfie()">
+                                <span class="material-symbols-outlined">photo_camera</span>
+                                <span>Capture Selfie</span>
+                            </button>
+
+                            <!-- Retake/Continue Buttons -->
+                            <div class="selfie-actions" id="selfieActions" style="display: none;">
+                                <button class="btn-secondary-outline" onclick="retakeSelfie()">
+                                    <span class="material-symbols-outlined">refresh</span>
+                                    Retake
+                                </button>
+                                <button class="btn-primary" onclick="continueToAccountDetails()">
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Account Details (Bank, Nominee, Declaration) -->
+                    <div class="kyc-state" id="accountDetailsState">
+                        <div class="kyc-container">
+                            <h2 class="welcome-text">Account Details</h2>
+                            <p class="subtitle-text">Verify your bank account and add nominee details</p>
+
+                            <!-- Section: Bank Account -->
+                            <div class="account-section">
+                                <div class="section-header">
+                                    <span class="material-symbols-outlined">account_balance</span>
+                                    Bank Account
+                                </div>
+                                <p class="section-description">Verify your bank account(s) to enable investments and withdrawals</p>
+
+                                <!-- Bank Card 1 -->
+                                <div class="bank-card-row" id="kycBankRow1">
+                                    <div class="bank-verification-card" id="kycBankCard1" data-status="unverified">
+                                        <div class="bank-details">
+                                            <div class="bank-name">State Bank of India</div>
+                                            <div class="account-number">XXXX XXXX 7890</div>
+                                            <div class="account-ifsc">IFSC: SBIN0001234</div>
+                                        </div>
+                                        <div class="bank-action">
+                                            <button class="verify-btn" onclick="verifyKycBankAccount('kycBank1')">Verify</button>
+                                            <div class="verify-loader" style="display: none;">
+                                                <div class="mini-spinner"></div>
+                                            </div>
+                                            <div class="verify-status verified" style="display: none;">
+                                                <span class="material-symbols-outlined">check_circle</span>
+                                                <span>Verified</span>
+                                            </div>
+                                            <div class="verify-status failed" style="display: none;">
+                                                <span class="material-symbols-outlined">error</span>
+                                                <span>Failed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="bank-delete-btn" onclick="deleteKycBankAccount('kycBank1')">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+
+                                <!-- Bank Card 2 -->
+                                <div class="bank-card-row" id="kycBankRow2">
+                                    <div class="bank-verification-card" id="kycBankCard2" data-status="unverified">
+                                        <div class="bank-details">
+                                            <div class="bank-name">HDFC Bank</div>
+                                            <div class="account-number">XXXX XXXX 3210</div>
+                                            <div class="account-ifsc">IFSC: HDFC0002345</div>
+                                        </div>
+                                        <div class="bank-action">
+                                            <button class="verify-btn" onclick="verifyKycBankAccount('kycBank2')">Verify</button>
+                                            <div class="verify-loader" style="display: none;">
+                                                <div class="mini-spinner"></div>
+                                            </div>
+                                            <div class="verify-status verified" style="display: none;">
+                                                <span class="material-symbols-outlined">check_circle</span>
+                                                <span>Verified</span>
+                                            </div>
+                                            <div class="verify-status failed" style="display: none;">
+                                                <span class="material-symbols-outlined">error</span>
+                                                <span>Failed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="bank-delete-btn" onclick="deleteKycBankAccount('kycBank2')">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+
+                                <!-- Add Different Account Link -->
+                                <button class="btn-text-link" onclick="openKycBankOverlay()">
+                                    <span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                                    Add a different account
+                                </button>
+                            </div>
+
+                            <!-- Section: Nominee -->
+                            <div class="account-section">
+                                <div class="section-header">
+                                    <span class="material-symbols-outlined">group</span>
+                                    Nominee
+                                </div>
+                                <p class="section-description">Who should receive your investments in case of any unforeseen event?</p>
+
+                                <div class="nominee-option-group">
+                                    <div class="nominee-option selected" onclick="selectKycNomineeOption('later')">
+                                        <input type="radio" name="kycNomineeChoice" id="kycNomineeLater" checked>
+                                        <label for="kycNomineeLater">I'll add later</label>
+                                    </div>
+                                    <div class="nominee-option" onclick="selectKycNomineeOption('now')">
+                                        <input type="radio" name="kycNomineeChoice" id="kycNomineeNow">
+                                        <label for="kycNomineeNow">Add now</label>
+                                    </div>
+                                </div>
+
+                                <!-- Nominee Cards Container -->
+                                <div id="kycNomineeCardsContainer" class="nominee-cards-container" style="display: none;"></div>
+                            </div>
+
+                            <!-- Section: Declaration -->
+                            <div class="account-section">
+                                <div class="checkbox-wrapper" onclick="toggleKycPepCheckbox()">
+                                    <input type="checkbox" id="kycPepDeclaration" class="checkbox-input" onchange="validateAccountDetails()">
+                                    <label for="kycPepDeclaration" class="checkbox-label">
+                                        I declare that I am not a Politically Exposed Person (PEP), nor am I a family member or close associate of a PEP, as defined under the Prevention of Money Laundering Act, 2002.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Continue Button -->
+                            <button class="btn-primary" id="btnContinueToSignature" onclick="verifyAndContinue()" disabled>
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Digital Signature -->
+                    <div class="kyc-state" id="signatureState">
+                        <div class="kyc-container">
+                            <h2 class="welcome-text">Digital Signature</h2>
+                            <p class="subtitle-text">Review and sign your Account Opening Form</p>
+
+                            <!-- Document Preview Card -->
+                            <div class="document-preview-card">
+                                <div class="document-preview-header">
+                                    <div class="document-icon">
+                                        <span class="material-symbols-outlined">description</span>
+                                    </div>
+                                    <div class="document-info">
+                                        <div class="document-title">Account Opening Form (AOF)</div>
+                                        <div class="document-meta">BSE StAR MF • Generated today</div>
+                                    </div>
+                                </div>
+                                <div class="document-summary">
+                                    <div class="summary-row">
+                                        <span class="summary-label">Investor Name</span>
+                                        <span class="summary-value" id="aofInvestorName">RAJAT YADAV</span>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span class="summary-label">Application Type</span>
+                                        <span class="summary-value">New Registration</span>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span class="summary-label">KYC Status</span>
+                                        <span class="summary-value summary-badge">Verified</span>
+                                    </div>
+                                </div>
+                                <button class="btn-view-document" onclick="showAOFDocument()">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                    View Full Document
+                                </button>
+                            </div>
+
+                            <!-- Signature Canvas -->
+                            <div class="signature-container">
+                                <div class="signature-label">Draw your signature below</div>
+                                <div class="signature-canvas-wrapper">
+                                    <canvas id="signatureCanvas"></canvas>
+                                    <div class="signature-placeholder" id="signaturePlaceholder">
+                                        <span class="material-symbols-outlined">draw</span>
+                                        <span>Sign here</span>
+                                    </div>
+                                </div>
+                                <button class="btn-clear-signature" onclick="clearSignature()">
+                                    <span class="material-symbols-outlined">delete</span>
+                                    Clear
+                                </button>
+                            </div>
+
+                            <!-- Acknowledgment Checkbox -->
+                            <label class="acknowledgment-checkbox">
+                                <input type="checkbox" id="aofAcknowledgment" onchange="updateSubmitButton()">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">I have reviewed the Account Opening Form and confirm all details are correct</span>
+                            </label>
+
+                            <!-- Submit Button -->
+                            <button class="btn-primary" id="submitSignatureBtn" onclick="submitKYC()" disabled>
+                                Complete KYC
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AOF Document Overlay -->
+                    <div class="aof-overlay" id="aofOverlay">
+                        <div class="aof-backdrop" onclick="hideAOFDocument()"></div>
+                        <div class="aof-modal">
+                            <div class="aof-modal-header">
+                                <h3>Account Opening Form</h3>
+                                <button class="aof-close-btn" onclick="hideAOFDocument()">
+                                    <span class="material-symbols-outlined">close</span>
+                                </button>
+                            </div>
+                            <div class="aof-modal-content">
+                                <!-- AOF Document Content -->
+                                <div class="aof-document">
+                                    <div class="aof-section">
+                                        <div class="aof-section-title">
+                                            <span class="material-symbols-outlined">account_balance</span>
+                                            Member Details
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Member</span>
+                                            <span class="aof-value">65284 - FUTUREWELL FINTECH PRIVATE LIMITED</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Member Order Ref.ID</span>
+                                            <span class="aof-value">20251210020012499936</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="aof-section">
+                                        <div class="aof-section-title">
+                                            <span class="material-symbols-outlined">person</span>
+                                            Client Details
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Name</span>
+                                            <span class="aof-value" id="aofClientName">RAJAT YADAV</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Mobile Number</span>
+                                            <span class="aof-value">+91 98765 43210</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Email Address</span>
+                                            <span class="aof-value">rajat.yadav@email.com</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">KYC Declaration</span>
+                                            <span class="aof-value aof-badge-success">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="aof-section">
+                                        <div class="aof-section-title">
+                                            <span class="material-symbols-outlined">receipt_long</span>
+                                            Order Details
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Order Type</span>
+                                            <span class="aof-value">Purchase</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Order Source</span>
+                                            <span class="aof-value">Lumpsum</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Mandate ID</span>
+                                            <span class="aof-value">500000948</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="aof-section">
+                                        <div class="aof-section-title">
+                                            <span class="material-symbols-outlined">trending_up</span>
+                                            Scheme Details
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Scheme</span>
+                                            <span class="aof-value">HDFC HYBRID EQUITY FUND - REGULAR PLAN - GROWTH</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">BSE Scheme Code</span>
+                                            <span class="aof-value">PREG</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">ISIN</span>
+                                            <span class="aof-value">INF179K01AS4</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">NAV</span>
+                                            <span class="aof-value">₹120.6770</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="aof-section">
+                                        <div class="aof-section-title">
+                                            <span class="material-symbols-outlined">payments</span>
+                                            Purchase Details
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Transaction Type</span>
+                                            <span class="aof-value">Fresh</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Transaction Mode</span>
+                                            <span class="aof-value">Physical</span>
+                                        </div>
+                                        <div class="aof-row">
+                                            <span class="aof-label">Amount</span>
+                                            <span class="aof-value aof-amount">₹100.00</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="aof-disclaimer">
+                                        <span class="material-symbols-outlined">info</span>
+                                        <p>This is a computer-generated document. By signing, you authorize NiveshPe to process mutual fund transactions on your behalf through BSE StAR MF platform.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="aof-modal-footer">
+                                <button class="btn-primary" onclick="hideAOFDocument()">
+                                    Close & Continue to Sign
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OLD Step 3: Bank Account (DEPRECATED) -->
+                    <div class="kyc-state" id="bankState" style="display: none !important;">
                         <div class="kyc-container">
                             <h2 class="welcome-text">Bank Account Verification</h2>
                             <p class="subtitle-text">We'll verify your account using penny drop method</p>
@@ -2532,7 +4395,186 @@
                         </div>
                     </div>
 
-                    <!-- KYC Skip Confirmation Overlay -->
+                </div>
+
+                <!-- ==================== ALL OVERLAYS (Outside main-content) ==================== -->
+
+                <!-- Add Bank Overlay for KYC -->
+                <div class="kyc-overlay" id="kycBankOverlay">
+                    <div class="kyc-overlay-backdrop" onclick="closeKycBankOverlay()"></div>
+                    <div class="kyc-overlay-modal">
+                        <div class="drag-handle"><div class="drag-bar"></div></div>
+                        <button class="kyc-overlay-close" onclick="closeKycBankOverlay()">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                        <div class="kyc-overlay-header" style="border-bottom: none; padding-bottom: 0;">
+                            <div>
+                                <h3>Add Bank Account</h3>
+                                <p class="modal-subtitle">We'll verify using a penny drop (₹1 deposit)</p>
+                            </div>
+                        </div>
+                        <div class="kyc-overlay-content">
+                            <div class="input-group">
+                                <label class="input-label">Account Number</label>
+                                <input type="tel" class="text-input" id="kycAccountInput" placeholder="Enter account number" maxlength="18" oninput="validateKycBankForm()">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Confirm Account Number</label>
+                                <input type="tel" class="text-input" id="kycConfirmAccountInput" placeholder="Re-enter account number" maxlength="18" oninput="validateKycBankForm()">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">IFSC Code</label>
+                                <input type="text" class="text-input" id="kycIfscInput" placeholder="e.g., SBIN0001234" maxlength="11" style="text-transform: uppercase;" oninput="validateKycBankForm()">
+                            </div>
+                            <p class="helper-text" style="margin-top: -8px;">₹1 will be deposited to verify your account. This amount is non-refundable.</p>
+                        </div>
+                        <div class="kyc-overlay-footer">
+                            <button class="btn-primary" id="btnVerifyKycBank" onclick="submitKycAddBank()" disabled>
+                                Verify & Add Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delete Bank Confirmation Overlay -->
+                <div class="kyc-overlay" id="kycDeleteBankOverlay">
+                    <div class="kyc-overlay-backdrop" onclick="closeKycDeleteConfirm()"></div>
+                    <div class="confirm-modal">
+                        <div class="drag-handle"><div class="drag-bar"></div></div>
+                        <div class="confirm-content">
+                            <div class="confirm-icon">
+                                <span class="material-symbols-outlined">delete</span>
+                            </div>
+                            <h3 class="confirm-title">Remove bank account?</h3>
+                            <p class="confirm-message">Are you sure you want to remove this bank account? You can add it back later if needed.</p>
+                            <div class="confirm-actions">
+                                <button class="btn-confirm-cancel" onclick="closeKycDeleteConfirm()">Cancel</button>
+                                <button class="btn-confirm-delete" onclick="confirmKycDeleteBank()">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Nominee Overlay for KYC -->
+                <div class="kyc-overlay" id="kycNomineeOverlay">
+                    <div class="kyc-overlay-backdrop" onclick="closeKycNomineeOverlay()"></div>
+                    <div class="kyc-overlay-modal">
+                        <div class="drag-handle"><div class="drag-bar"></div></div>
+                        <button class="kyc-overlay-close" onclick="closeKycNomineeOverlay()">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                        <div class="kyc-overlay-header" style="border-bottom: none; padding-bottom: 0;">
+                            <div>
+                                <h3>Add Nominee Details</h3>
+                                <p class="modal-subtitle">Add one or more nominees for your investments</p>
+                            </div>
+                        </div>
+                        <div class="kyc-overlay-content">
+                            <div id="kycNomineeFormsContainer">
+                                <!-- Nominee Form 1 -->
+                                <div class="nominee-form-item" id="kycNomineeForm0">
+                                    <div class="nominee-form-header">
+                                        <h3 class="nominee-form-title">Nominee 1</h3>
+                                        <button class="nominee-remove-btn" onclick="removeKycNomineeForm(0)" style="display: none;">
+                                            <span class="material-symbols-outlined">delete</span>
+                                        </button>
+                                    </div>
+                                    <div class="input-group">
+                                        <label class="input-label">Full Name</label>
+                                        <input type="text" class="text-input" id="kycNomineeName0" placeholder="Enter nominee's full name">
+                                    </div>
+                                    <div class="input-group">
+                                        <label class="input-label">Relationship</label>
+                                        <select class="text-input" id="kycNomineeRelationship0">
+                                            <option value="" disabled selected>Select relationship</option>
+                                            <option value="parent">Parent</option>
+                                            <option value="spouse">Spouse</option>
+                                            <option value="sibling">Sibling</option>
+                                            <option value="child">Child</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <label class="input-label">Date of Birth</label>
+                                        <input type="date" class="text-input" id="kycNomineeDob0" onchange="toggleKycGuardianSection(0)">
+                                    </div>
+                                    <div class="input-group">
+                                        <label class="input-label">PAN Number</label>
+                                        <input type="text" class="text-input" id="kycNomineePan0" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                                    </div>
+                                    <!-- Guardian Section (for minors) -->
+                                    <div class="guardian-section" id="kycGuardianSection0" style="display: none;">
+                                        <div class="guardian-header">
+                                            <span class="material-symbols-outlined">info</span>
+                                            <span>Guardian details required (Nominee is a minor)</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-label">Guardian Name</label>
+                                            <input type="text" class="text-input" id="kycGuardianName0" placeholder="Enter guardian's full name">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-label">Guardian Date of Birth</label>
+                                            <input type="date" class="text-input" id="kycGuardianDob0">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-label">Guardian PAN Number</label>
+                                            <input type="text" class="text-input" id="kycGuardianPan0" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group allocation-field" id="kycAllocationField0">
+                                        <label class="input-label">Allocation %</label>
+                                        <input type="number" class="text-input" id="kycNomineeAllocation0" placeholder="100" min="1" max="100" value="100">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-secondary" onclick="addAnotherKycNomineeForm()" style="margin-top: 16px;">
+                                <span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+                                Add Another Nominee
+                            </button>
+                            <div id="kycAllocationWarning" class="allocation-warning">
+                                <span class="material-symbols-outlined">info</span>
+                                <span>Total allocation must equal 100%</span>
+                            </div>
+                        </div>
+                        <div class="kyc-overlay-footer">
+                            <button class="btn-primary" onclick="saveKycNominees()">
+                                Save Nominees
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTP Verification Overlay for Account Details -->
+                <div class="kyc-overlay" id="kycOtpOverlay">
+                    <div class="kyc-overlay-backdrop"></div>
+                    <div class="kyc-overlay-modal">
+                        <div class="drag-handle"><div class="drag-bar"></div></div>
+                        <div class="kyc-overlay-header" style="border-bottom: none; padding-bottom: 0; text-align: center;">
+                            <div style="width: 100%;">
+                                <h3>Verify with OTP</h3>
+                                <p class="modal-subtitle">Enter the 6-digit code sent to your registered mobile</p>
+                            </div>
+                        </div>
+                        <div class="kyc-overlay-content" style="text-align: center;">
+                            <div class="otp-input-container">
+                                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="handleKycOtpInput(this, 0)">
+                                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="handleKycOtpInput(this, 1)">
+                                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="handleKycOtpInput(this, 2)">
+                                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="handleKycOtpInput(this, 3)">
+                                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="handleKycOtpInput(this, 4)">
+                                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="handleKycOtpInput(this, 5)">
+                            </div>
+                            <p class="resend-text">Didn't receive the code? <button class="resend-link" onclick="resendKycOtp()">Resend OTP</button></p>
+                        </div>
+                        <div class="kyc-overlay-footer">
+                            <button class="btn-primary" id="btnVerifyKycOtp" onclick="verifyKycOtp()" disabled>
+                                Verify & Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KYC Skip Confirmation Overlay -->
                     <div class="nudge-overlay" id="skipKycOverlay">
                         <div class="nudge-backdrop" onclick="hideSkipConfirmation()"></div>
 
@@ -2659,7 +4701,6 @@
                         </div>
                     </div>
 
-                </div>
             </div>
         </div>
         <div class="iphone-home-indicator"></div>
@@ -2682,14 +4723,14 @@
         // Nominee management
         let nomineeCount = 1;
 
-        // Progress tracking
+        // Progress tracking (4 steps: Aadhaar, Selfie, Account Details, Signature)
         const stepInfo = {
             overview: { step: 0, percentage: 0, title: 'Complete KYC' },
-            pan: { step: 1, percentage: 25, title: 'Verify PAN' },
-            aadhaar: { step: 2, percentage: 50, title: 'Verify Aadhaar' },
-            aadhaarVerified: { step: 2, percentage: 50, title: 'Verify Aadhaar' },
-            bank: { step: 3, percentage: 75, title: 'Add Bank Account' },
-            fatca: { step: 4, percentage: 100, title: 'Other Details' },
+            aadhaar: { step: 1, percentage: 25, title: 'Verify Aadhaar' },
+            aadhaarVerified: { step: 1, percentage: 25, title: 'Verify Aadhaar' },
+            selfie: { step: 2, percentage: 50, title: 'Selfie Verification' },
+            accountDetails: { step: 3, percentage: 75, title: 'Account Details' },
+            signature: { step: 4, percentage: 100, title: 'Digital Signature' },
             success: { step: 4, percentage: 100, title: 'Success' }
         };
 
@@ -2735,11 +4776,11 @@
             // Show current state
             const stateMap = {
                 overview: 'overviewState',
-                pan: 'panState',
                 aadhaar: 'aadhaarConsentState',
                 aadhaarVerified: 'aadhaarVerifiedState',
-                bank: 'bankState',
-                fatca: 'fatcaState',
+                selfie: 'selfieState',
+                accountDetails: 'accountDetailsState',
+                signature: 'signatureState',
                 success: 'successState'
             };
 
@@ -2793,6 +4834,24 @@
                 const shouldShowToggle = state === 'success';
                 kycToggleContainer.style.display = shouldShowToggle ? 'flex' : 'none';
             }
+
+            // Initialize camera for selfie step
+            if (state === 'selfie') {
+                // Small delay to ensure DOM is ready
+                setTimeout(() => {
+                    initCamera();
+                }, 100);
+            } else {
+                // Stop camera if navigating away from selfie
+                stopCamera();
+            }
+
+            // Initialize signature canvas
+            if (state === 'signature') {
+                setTimeout(() => {
+                    initSignatureCanvas();
+                }, 100);
+            }
         }
 
         function updateProgress(state) {
@@ -2834,7 +4893,8 @@
                 document.getElementById('stepIndicator4')
             ];
 
-            const currentStepNum = state === 'aadhaarVerified' ? 2 : (stepInfo[state]?.step || 0);
+            // Get current step number (aadhaarVerified counts as step 1)
+            const currentStepNum = state === 'aadhaarVerified' ? 1 : (stepInfo[state]?.step || 0);
 
             indicators.forEach((indicator, index) => {
                 if (indicator) {
@@ -2861,7 +4921,7 @@
         // ==================== OVERVIEW ====================
 
         function startKYC() {
-            navigateTo('pan');
+            navigateTo('aadhaar');
         }
 
         // ==================== PAN VERIFICATION ====================
@@ -3117,10 +5177,13 @@
             console.log('Redirecting to DigiLocker...');
 
             setTimeout(() => {
+                // Dummy Aadhaar data (since PAN step is removed)
                 kycData.aadhaar = {
-                    name: kycData.pan.name,
-                    address: 'Mumbai, Maharashtra, 400001',
-                    number: '5678'  // Last 4 digits
+                    name: 'RAJAT YADAV',
+                    address: '42, Lotus Heights, Andheri West, Mumbai, Maharashtra - 400053',
+                    number: '7823',  // Last 4 digits
+                    dob: '15-08-1992',
+                    gender: 'Male'
                 };
 
                 document.getElementById('aadhaarName').textContent = kycData.aadhaar.name;
@@ -3142,8 +5205,830 @@
             }, 1500);
         }
 
-        function continueToBank() {
-            navigateTo('bank');
+        function continueToSelfie() {
+            navigateTo('selfie');
+        }
+
+        // ==================== SELFIE VERIFICATION ====================
+
+        let selfieStream = null;
+        let selfieCaptured = false;
+
+        // Initialize camera when selfie state becomes active
+        function initCamera() {
+            const video = document.getElementById('selfieVideo');
+            const cameraContainer = document.getElementById('cameraContainer');
+
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: 'user',
+                        width: { ideal: 640 },
+                        height: { ideal: 480 }
+                    }
+                })
+                .then(function(stream) {
+                    selfieStream = stream;
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(error) {
+                    console.error('Camera access denied:', error);
+                    // Show fallback UI
+                    cameraContainer.innerHTML = `
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 320px; background: #f5f5f5; border-radius: 16px;">
+                            <span class="material-symbols-outlined" style="font-size: 48px; color: #9CA3AF; margin-bottom: 12px;">photo_camera</span>
+                            <p style="color: #6B7280; font-size: 14px; text-align: center;">Camera access required</p>
+                            <p style="color: #9CA3AF; font-size: 12px; text-align: center;">Please allow camera access to continue</p>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // Stop camera stream
+        function stopCamera() {
+            if (selfieStream) {
+                selfieStream.getTracks().forEach(track => track.stop());
+                selfieStream = null;
+            }
+        }
+
+        // Capture selfie
+        function captureSelfie() {
+            const video = document.getElementById('selfieVideo');
+            const canvas = document.getElementById('selfieCanvas');
+            const capturedPreview = document.getElementById('capturedPreview');
+            const capturedImage = document.getElementById('capturedImage');
+            const cameraContainer = document.getElementById('cameraContainer');
+            const captureBtn = document.getElementById('captureBtn');
+            const selfieActions = document.getElementById('selfieActions');
+
+            // Set canvas size to match video
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 480;
+
+            // Draw video frame to canvas (mirror it)
+            const ctx = canvas.getContext('2d');
+            ctx.save();
+            ctx.scale(-1, 1);
+            ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
+            ctx.restore();
+
+            // Convert to image
+            const imageData = canvas.toDataURL('image/jpeg', 0.8);
+            capturedImage.src = imageData;
+
+            // Stop camera stream
+            stopCamera();
+
+            // Hide camera, show captured preview
+            cameraContainer.style.display = 'none';
+            capturedPreview.style.display = 'block';
+            captureBtn.style.display = 'none';
+            selfieActions.style.display = 'flex';
+
+            selfieCaptured = true;
+            completedSteps.push('selfie');
+        }
+
+        // Retake selfie
+        function retakeSelfie() {
+            const capturedPreview = document.getElementById('capturedPreview');
+            const cameraContainer = document.getElementById('cameraContainer');
+            const captureBtn = document.getElementById('captureBtn');
+            const selfieActions = document.getElementById('selfieActions');
+
+            // Reset camera preview HTML if it was replaced with error message
+            cameraContainer.innerHTML = `
+                <div class="camera-preview" id="cameraPreview">
+                    <video id="selfieVideo" autoplay playsinline></video>
+                    <div class="face-guide">
+                        <svg viewBox="0 0 200 260" fill="none">
+                            <ellipse cx="100" cy="115" rx="75" ry="95" stroke="white" stroke-width="3" stroke-dasharray="8 4"/>
+                            <circle cx="100" cy="230" r="8" fill="white" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <div class="camera-overlay-text">Position your face within the oval</div>
+                </div>
+                <canvas id="selfieCanvas" style="display: none;"></canvas>
+            `;
+
+            // Show camera, hide captured preview
+            cameraContainer.style.display = 'block';
+            capturedPreview.style.display = 'none';
+            captureBtn.style.display = 'flex';
+            selfieActions.style.display = 'none';
+
+            selfieCaptured = false;
+
+            // Restart camera
+            initCamera();
+        }
+
+        // Continue to account details step (after selfie)
+        function continueToAccountDetails() {
+            stopCamera();
+            navigateTo('accountDetails');
+        }
+
+        // Continue to signature step (after account details)
+        function continueToSignature() {
+            navigateTo('signature');
+        }
+
+        // ==================== ACCOUNT DETAILS (KYC Step 3) ====================
+
+        let kycVerifiedBanks = [];
+        let kycBankToDelete = null;
+        let kycNominees = [];
+        let kycNomineeFormCount = 1;
+        let kycOtpTimer = null;
+
+        // ==================== BANK VERIFICATION ====================
+
+        function verifyKycBankAccount(bankId) {
+            const cardId = bankId === 'kycBank1' ? 'kycBankCard1' : 'kycBankCard2';
+            const card = document.getElementById(cardId);
+
+            if (!card) return;
+
+            const verifyBtn = card.querySelector('.verify-btn');
+            const loader = card.querySelector('.verify-loader');
+            const verifiedStatus = card.querySelector('.verify-status.verified');
+            const failedStatus = card.querySelector('.verify-status.failed');
+
+            // Hide button, show loader
+            verifyBtn.style.display = 'none';
+            loader.style.display = 'block';
+
+            // Simulate verification (1.5 seconds)
+            setTimeout(() => {
+                loader.style.display = 'none';
+
+                // Bank2 fails, Bank1 succeeds
+                if (bankId === 'kycBank2') {
+                    card.setAttribute('data-status', 'failed');
+                    failedStatus.style.display = 'flex';
+                } else {
+                    card.setAttribute('data-status', 'verified');
+                    verifiedStatus.style.display = 'flex';
+                    kycVerifiedBanks.push(bankId);
+                }
+
+                validateAccountDetails();
+            }, 1500);
+        }
+
+        function deleteKycBankAccount(bankId) {
+            kycBankToDelete = bankId;
+            document.getElementById('kycDeleteBankOverlay').classList.add('show');
+            document.querySelector('.main-content').classList.add('modal-open');
+        }
+
+        function closeKycDeleteConfirm() {
+            document.getElementById('kycDeleteBankOverlay').classList.remove('show');
+            document.querySelector('.main-content').classList.remove('modal-open');
+            kycBankToDelete = null;
+        }
+
+        function confirmKycDeleteBank() {
+            if (!kycBankToDelete) return;
+
+            let rowId;
+            if (kycBankToDelete === 'kycBank1') {
+                rowId = 'kycBankRow1';
+            } else if (kycBankToDelete === 'kycBank2') {
+                rowId = 'kycBankRow2';
+            } else {
+                // For dynamically added banks
+                rowId = 'kycBankRow_' + kycBankToDelete;
+            }
+            const row = document.getElementById(rowId);
+
+            if (!row) {
+                closeKycDeleteConfirm();
+                return;
+            }
+
+            // Remove from verified banks if present
+            const index = kycVerifiedBanks.indexOf(kycBankToDelete);
+            if (index > -1) {
+                kycVerifiedBanks.splice(index, 1);
+            }
+
+            // Close modal first
+            closeKycDeleteConfirm();
+
+            // Animate and remove row
+            row.style.opacity = '0';
+            row.style.transform = 'translateX(-20px)';
+            row.style.transition = 'all 0.2s ease';
+
+            setTimeout(() => {
+                row.remove();
+                validateAccountDetails();
+            }, 200);
+        }
+
+        // ==================== ADD BANK OVERLAY ====================
+
+        function openKycBankOverlay() {
+            document.getElementById('kycBankOverlay').classList.add('show');
+            document.querySelector('.main-content').classList.add('modal-open');
+        }
+
+        function closeKycBankOverlay() {
+            document.getElementById('kycBankOverlay').classList.remove('show');
+            document.querySelector('.main-content').classList.remove('modal-open');
+            // Clear form
+            document.getElementById('kycAccountInput').value = '';
+            document.getElementById('kycConfirmAccountInput').value = '';
+            document.getElementById('kycIfscInput').value = '';
+            document.getElementById('btnVerifyKycBank').disabled = true;
+        }
+
+        function validateKycBankForm() {
+            const accountNumber = document.getElementById('kycAccountInput').value.trim();
+            const confirmAccountNumber = document.getElementById('kycConfirmAccountInput').value.trim();
+            const ifsc = document.getElementById('kycIfscInput').value.trim().toUpperCase();
+            const btn = document.getElementById('btnVerifyKycBank');
+
+            // Auto-uppercase IFSC
+            document.getElementById('kycIfscInput').value = ifsc;
+
+            // Validate account number (9-18 digits)
+            const accountValid = /^\d{9,18}$/.test(accountNumber);
+
+            // Confirm account number matches
+            const accountsMatch = accountNumber === confirmAccountNumber;
+
+            // Validate IFSC code
+            const ifscValid = /^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc);
+
+            btn.disabled = !(accountValid && accountsMatch && ifscValid);
+        }
+
+        function submitKycAddBank() {
+            const accountNumber = document.getElementById('kycAccountInput').value.trim();
+            const ifsc = document.getElementById('kycIfscInput').value.trim().toUpperCase();
+            const btn = document.getElementById('btnVerifyKycBank');
+
+            // Show loading state
+            btn.textContent = 'Verifying...';
+            btn.disabled = true;
+
+            // Simulate verification
+            setTimeout(() => {
+                // Create new bank entry
+                const newBankId = 'kycBank_new_' + Date.now();
+                const bankCode = ifsc.substring(0, 4);
+
+                // Determine bank name from IFSC
+                let bankName = bankCode + ' Bank';
+                if (bankCode === 'SBIN') bankName = 'State Bank of India';
+                else if (bankCode === 'HDFC') bankName = 'HDFC Bank';
+                else if (bankCode === 'ICIC') bankName = 'ICICI Bank';
+                else if (bankCode === 'UTIB') bankName = 'Axis Bank';
+
+                // Add to verified banks (new banks are pre-verified via penny drop)
+                kycVerifiedBanks.push(newBankId);
+
+                // Find the section and add button
+                const section = document.querySelector('#accountDetailsState .account-section');
+                const addButton = section.querySelector('.btn-text-link');
+
+                // Mask account number
+                const maskedAccount = 'XXXX XXXX ' + accountNumber.slice(-4);
+
+                const newRow = document.createElement('div');
+                newRow.className = 'bank-card-row';
+                newRow.id = 'kycBankRow_' + newBankId;
+                newRow.innerHTML = `
+                    <div class="bank-verification-card" id="kycBankCard_${newBankId}" data-status="verified">
+                        <div class="bank-details">
+                            <div class="bank-name">${bankName}</div>
+                            <div class="account-number">${maskedAccount}</div>
+                            <div class="account-ifsc">IFSC: ${ifsc}</div>
+                        </div>
+                        <div class="bank-action">
+                            <div class="verify-status verified" style="display: flex;">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                <span>Verified</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="bank-delete-btn" onclick="deleteKycBankAccount('${newBankId}')">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                `;
+
+                section.insertBefore(newRow, addButton);
+
+                // Reset button and close overlay
+                btn.textContent = 'Verify & Add Account';
+                closeKycBankOverlay();
+                validateAccountDetails();
+            }, 1500);
+        }
+
+        // ==================== NOMINEE FUNCTIONS ====================
+
+        function selectKycNomineeOption(option) {
+            const optionElements = document.querySelectorAll('#accountDetailsState .nominee-option');
+            optionElements.forEach(opt => opt.classList.remove('selected'));
+
+            if (option === 'later') {
+                document.getElementById('kycNomineeLater').checked = true;
+                optionElements[0].classList.add('selected');
+            } else {
+                document.getElementById('kycNomineeNow').checked = true;
+                optionElements[1].classList.add('selected');
+                openKycNomineeOverlay();
+            }
+        }
+
+        function openKycNomineeOverlay() {
+            document.getElementById('kycNomineeOverlay').classList.add('show');
+            document.querySelector('.main-content').classList.add('modal-open');
+        }
+
+        function closeKycNomineeOverlay() {
+            document.getElementById('kycNomineeOverlay').classList.remove('show');
+            document.querySelector('.main-content').classList.remove('modal-open');
+            if (kycNominees.length === 0) {
+                selectKycNomineeOption('later');
+            }
+        }
+
+        function toggleKycGuardianSection(index) {
+            const dob = document.getElementById(`kycNomineeDob${index}`)?.value;
+            const guardianSection = document.getElementById(`kycGuardianSection${index}`);
+
+            if (!dob || !guardianSection) return;
+
+            const age = calculateKycAge(dob);
+            guardianSection.style.display = (age !== null && age < 18) ? 'block' : 'none';
+        }
+
+        function calculateKycAge(dobString) {
+            if (!dobString) return null;
+            const dob = new Date(dobString);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function addAnotherKycNomineeForm() {
+            const container = document.getElementById('kycNomineeFormsContainer');
+            const newIndex = kycNomineeFormCount;
+            kycNomineeFormCount++;
+
+            // Show allocation fields for all forms
+            document.querySelectorAll('#kycNomineeFormsContainer .allocation-field').forEach(field => {
+                field.style.display = 'block';
+            });
+
+            // Show remove buttons on all existing forms
+            document.querySelectorAll('#kycNomineeFormsContainer .nominee-remove-btn').forEach(btn => {
+                btn.style.display = 'block';
+            });
+
+            const formHtml = `
+                <div class="nominee-form-item" id="kycNomineeForm${newIndex}">
+                    <div class="nominee-form-header">
+                        <h3 class="nominee-form-title">Nominee ${newIndex + 1}</h3>
+                        <button class="nominee-remove-btn" onclick="removeKycNomineeForm(${newIndex})">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Full Name</label>
+                        <input type="text" class="text-input" id="kycNomineeName${newIndex}" placeholder="Enter nominee's full name">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Relationship</label>
+                        <select class="text-input" id="kycNomineeRelationship${newIndex}">
+                            <option value="" disabled selected>Select relationship</option>
+                            <option value="parent">Parent</option>
+                            <option value="spouse">Spouse</option>
+                            <option value="sibling">Sibling</option>
+                            <option value="child">Child</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Date of Birth</label>
+                        <input type="date" class="text-input" id="kycNomineeDob${newIndex}" onchange="toggleKycGuardianSection(${newIndex})">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">PAN Number</label>
+                        <input type="text" class="text-input" id="kycNomineePan${newIndex}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                    </div>
+                    <div class="guardian-section" id="kycGuardianSection${newIndex}" style="display: none;">
+                        <div class="guardian-header">
+                            <span class="material-symbols-outlined">info</span>
+                            <span>Guardian details required (Nominee is a minor)</span>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Guardian Name</label>
+                            <input type="text" class="text-input" id="kycGuardianName${newIndex}" placeholder="Enter guardian's full name">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Guardian Date of Birth</label>
+                            <input type="date" class="text-input" id="kycGuardianDob${newIndex}">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Guardian PAN Number</label>
+                            <input type="text" class="text-input" id="kycGuardianPan${newIndex}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                        </div>
+                    </div>
+                    <div class="input-group allocation-field" id="kycAllocationField${newIndex}">
+                        <label class="input-label">Allocation %</label>
+                        <input type="number" class="text-input" id="kycNomineeAllocation${newIndex}" placeholder="50" min="1" max="100">
+                    </div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', formHtml);
+        }
+
+        function removeKycNomineeForm(index) {
+            const form = document.getElementById(`kycNomineeForm${index}`);
+            if (form) {
+                form.remove();
+            }
+
+            // Update remaining form titles
+            const forms = document.querySelectorAll('#kycNomineeFormsContainer .nominee-form-item');
+            forms.forEach((form, idx) => {
+                form.querySelector('.nominee-form-title').textContent = `Nominee ${idx + 1}`;
+            });
+
+            // If only one form left, hide allocation and remove button
+            if (forms.length === 1) {
+                forms[0].querySelector('.allocation-field').style.display = 'none';
+                forms[0].querySelector('.nominee-remove-btn').style.display = 'none';
+            }
+        }
+
+        function saveKycNominees() {
+            const forms = document.querySelectorAll('#kycNomineeFormsContainer .nominee-form-item');
+            let totalAllocation = 0;
+            let isValid = true;
+            kycNominees = [];
+            const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+
+            forms.forEach((form, idx) => {
+                const formIndex = form.id.replace('kycNomineeForm', '');
+                const name = document.getElementById(`kycNomineeName${formIndex}`)?.value.trim();
+                const relationship = document.getElementById(`kycNomineeRelationship${formIndex}`)?.value;
+                const dob = document.getElementById(`kycNomineeDob${formIndex}`)?.value;
+                const pan = document.getElementById(`kycNomineePan${formIndex}`)?.value.trim().toUpperCase();
+
+                let allocation = 100;
+                if (forms.length > 1) {
+                    allocation = parseInt(document.getElementById(`kycNomineeAllocation${formIndex}`)?.value) || 0;
+                    if (allocation <= 0) {
+                        isValid = false;
+                        return;
+                    }
+                }
+
+                if (!name || !relationship || !dob || !pan) {
+                    isValid = false;
+                    return;
+                }
+
+                if (!panRegex.test(pan)) {
+                    isValid = false;
+                    return;
+                }
+
+                // Check if nominee is minor and validate guardian details
+                const age = calculateKycAge(dob);
+                let guardian = null;
+
+                if (age !== null && age < 18) {
+                    const guardianName = document.getElementById(`kycGuardianName${formIndex}`)?.value.trim();
+                    const guardianDob = document.getElementById(`kycGuardianDob${formIndex}`)?.value;
+                    const guardianPan = document.getElementById(`kycGuardianPan${formIndex}`)?.value.trim().toUpperCase();
+
+                    if (!guardianName || !guardianDob || !guardianPan) {
+                        isValid = false;
+                        return;
+                    }
+
+                    if (!panRegex.test(guardianPan)) {
+                        isValid = false;
+                        return;
+                    }
+
+                    guardian = { name: guardianName, dob: guardianDob, pan: guardianPan };
+                }
+
+                totalAllocation += allocation;
+                kycNominees.push({ name, relationship, dob, pan, allocation, isMinor: age < 18, guardian });
+            });
+
+            // Check allocation totals
+            if (forms.length > 1 && totalAllocation !== 100) {
+                document.getElementById('kycAllocationWarning').style.display = 'flex';
+                return;
+            } else {
+                document.getElementById('kycAllocationWarning').style.display = 'none';
+            }
+
+            if (!isValid) {
+                alert('Please fill all nominee details correctly.');
+                return;
+            }
+
+            renderKycNomineeCards();
+            closeKycNomineeOverlay();
+        }
+
+        function renderKycNomineeCards() {
+            const container = document.getElementById('kycNomineeCardsContainer');
+
+            if (kycNominees.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            container.innerHTML = '';
+
+            const relationshipLabels = {
+                parent: 'Parent', spouse: 'Spouse', sibling: 'Sibling',
+                child: 'Child', other: 'Other'
+            };
+
+            kycNominees.forEach((nominee, idx) => {
+                const initials = nominee.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+                const card = document.createElement('div');
+                card.className = 'nominee-card';
+                card.innerHTML = `
+                    <div class="nominee-avatar">${initials}</div>
+                    <div class="nominee-info">
+                        <div class="nominee-name">${nominee.name}</div>
+                        <div class="nominee-relation">${relationshipLabels[nominee.relationship] || nominee.relationship}${kycNominees.length > 1 ? ' • ' + nominee.allocation + '%' : ''}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // ==================== PEP CHECKBOX ====================
+
+        function toggleKycPepCheckbox() {
+            const checkbox = document.getElementById('kycPepDeclaration');
+            checkbox.checked = !checkbox.checked;
+            validateAccountDetails();
+        }
+
+        // ==================== FORM VALIDATION ====================
+
+        function validateAccountDetails() {
+            const pepChecked = document.getElementById('kycPepDeclaration').checked;
+            const hasVerifiedBank = kycVerifiedBanks.length > 0;
+
+            const isValid = hasVerifiedBank && pepChecked;
+            document.getElementById('btnContinueToSignature').disabled = !isValid;
+        }
+
+        function verifyAndContinue() {
+            // Open OTP overlay
+            document.getElementById('kycOtpOverlay').classList.add('show');
+            document.querySelector('.main-content').classList.add('modal-open');
+            startKycOtpTimer();
+        }
+
+        // ==================== OTP FUNCTIONS ====================
+
+        function startKycOtpTimer() {
+            let seconds = 30;
+            const timerEl = document.querySelector('#kycOtpOverlay .resend-text');
+            if (timerEl) {
+                timerEl.innerHTML = `Didn't receive the code? Resend in <strong>${seconds}s</strong>`;
+            }
+
+            if (kycOtpTimer) clearInterval(kycOtpTimer);
+
+            kycOtpTimer = setInterval(() => {
+                seconds--;
+                if (timerEl) {
+                    if (seconds > 0) {
+                        timerEl.innerHTML = `Didn't receive the code? Resend in <strong>${seconds}s</strong>`;
+                    } else {
+                        timerEl.innerHTML = `Didn't receive the code? <button class="resend-link" onclick="resendKycOtp()">Resend OTP</button>`;
+                        clearInterval(kycOtpTimer);
+                    }
+                }
+            }, 1000);
+        }
+
+        function resendKycOtp() {
+            startKycOtpTimer();
+        }
+
+        function handleKycOtpInput(input, index) {
+            // Only allow numbers
+            input.value = input.value.replace(/[^0-9]/g, '');
+
+            // Move to next input
+            if (input.value && index < 5) {
+                const inputs = document.querySelectorAll('#kycOtpOverlay .otp-input');
+                inputs[index + 1].focus();
+            }
+
+            // Check if all inputs filled
+            const inputs = document.querySelectorAll('#kycOtpOverlay .otp-input');
+            const allFilled = Array.from(inputs).every(inp => inp.value.length === 1);
+            document.getElementById('btnVerifyKycOtp').disabled = !allFilled;
+        }
+
+        function closeKycOtpOverlay() {
+            document.getElementById('kycOtpOverlay').classList.remove('show');
+            document.querySelector('.main-content').classList.remove('modal-open');
+            if (kycOtpTimer) clearInterval(kycOtpTimer);
+
+            // Clear OTP inputs
+            document.querySelectorAll('#kycOtpOverlay .otp-input').forEach(input => input.value = '');
+            document.getElementById('btnVerifyKycOtp').disabled = true;
+        }
+
+        function verifyKycOtp() {
+            const btn = document.getElementById('btnVerifyKycOtp');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner" style="width: 20px; height: 20px;"></span>';
+
+            // Simulate OTP verification
+            setTimeout(() => {
+                closeKycOtpOverlay();
+                completedSteps.push('accountDetails');
+                navigateTo('signature');
+
+                // Reset button
+                btn.disabled = false;
+                btn.textContent = 'Verify & Continue';
+            }, 1500);
+        }
+
+        // ==================== SIGNATURE ====================
+
+        let signatureCanvas = null;
+        let signatureCtx = null;
+        let isDrawing = false;
+        let hasSignature = false;
+
+        // Initialize signature canvas
+        function initSignatureCanvas() {
+            signatureCanvas = document.getElementById('signatureCanvas');
+            if (!signatureCanvas) return;
+
+            signatureCtx = signatureCanvas.getContext('2d');
+            const wrapper = signatureCanvas.parentElement;
+
+            // Set actual canvas dimensions
+            const rect = wrapper.getBoundingClientRect();
+            signatureCanvas.width = rect.width;
+            signatureCanvas.height = rect.height;
+
+            // Set drawing style
+            signatureCtx.strokeStyle = '#1F2937';
+            signatureCtx.lineWidth = 2.5;
+            signatureCtx.lineCap = 'round';
+            signatureCtx.lineJoin = 'round';
+
+            // Mouse events
+            signatureCanvas.addEventListener('mousedown', startDrawing);
+            signatureCanvas.addEventListener('mousemove', draw);
+            signatureCanvas.addEventListener('mouseup', stopDrawing);
+            signatureCanvas.addEventListener('mouseout', stopDrawing);
+
+            // Touch events
+            signatureCanvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+            signatureCanvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+            signatureCanvas.addEventListener('touchend', stopDrawing);
+        }
+
+        function getMousePos(e) {
+            const rect = signatureCanvas.getBoundingClientRect();
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function getTouchPos(e) {
+            const rect = signatureCanvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            return {
+                x: touch.clientX - rect.left,
+                y: touch.clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getMousePos(e);
+            signatureCtx.beginPath();
+            signatureCtx.moveTo(pos.x, pos.y);
+
+            // Hide placeholder, activate wrapper
+            document.getElementById('signaturePlaceholder').classList.add('hidden');
+            document.querySelector('.signature-canvas-wrapper').classList.add('active');
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            isDrawing = true;
+            const pos = getTouchPos(e);
+            signatureCtx.beginPath();
+            signatureCtx.moveTo(pos.x, pos.y);
+
+            // Hide placeholder, activate wrapper
+            document.getElementById('signaturePlaceholder').classList.add('hidden');
+            document.querySelector('.signature-canvas-wrapper').classList.add('active');
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const pos = getMousePos(e);
+            signatureCtx.lineTo(pos.x, pos.y);
+            signatureCtx.stroke();
+            hasSignature = true;
+            updateSubmitButton();
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            if (!isDrawing) return;
+            const pos = getTouchPos(e);
+            signatureCtx.lineTo(pos.x, pos.y);
+            signatureCtx.stroke();
+            hasSignature = true;
+            updateSubmitButton();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function clearSignature() {
+            if (!signatureCanvas || !signatureCtx) return;
+
+            signatureCtx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+            hasSignature = false;
+
+            // Show placeholder, deactivate wrapper
+            document.getElementById('signaturePlaceholder').classList.remove('hidden');
+            document.querySelector('.signature-canvas-wrapper').classList.remove('active');
+
+            updateSubmitButton();
+        }
+
+        function updateSubmitButton() {
+            const submitBtn = document.getElementById('submitSignatureBtn');
+            const acknowledgmentChecked = document.getElementById('aofAcknowledgment')?.checked || false;
+            submitBtn.disabled = !(hasSignature && acknowledgmentChecked);
+        }
+
+        // AOF Document Overlay
+        function showAOFDocument() {
+            // Update the name from Aadhaar data if available
+            if (kycData.aadhaar && kycData.aadhaar.name) {
+                document.getElementById('aofInvestorName').textContent = kycData.aadhaar.name;
+                document.getElementById('aofClientName').textContent = kycData.aadhaar.name;
+            }
+            document.getElementById('aofOverlay').classList.add('show');
+            document.querySelector('.main-content').classList.add('modal-open');
+        }
+
+        function hideAOFDocument() {
+            document.getElementById('aofOverlay').classList.remove('show');
+            document.querySelector('.main-content').classList.remove('modal-open');
+        }
+
+        // Submit KYC
+        function submitKYC() {
+            const acknowledgmentChecked = document.getElementById('aofAcknowledgment')?.checked || false;
+            if (!hasSignature || !acknowledgmentChecked) return;
+
+            const submitBtn = document.getElementById('submitSignatureBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading-spinner" style="width: 20px; height: 20px; margin-right: 8px;"></span> Processing...';
+
+            // Simulate API call
+            setTimeout(() => {
+                completedSteps.push('signature');
+                navigateTo('success');
+            }, 2000);
         }
 
         // ==================== BANK VERIFICATION ====================
@@ -3374,6 +6259,7 @@
         function showSkipConfirmation() {
             const overlay = document.getElementById('skipKycOverlay');
             overlay.style.display = 'block';
+            document.querySelector('.main-content').classList.add('modal-open');
             setTimeout(() => {
                 overlay.classList.add('show');
             }, 10);
@@ -3396,6 +6282,7 @@
                 overlay.style.display = 'none';
                 modal.style.animation = '';
                 backdrop.style.animation = '';
+                document.querySelector('.main-content').classList.remove('modal-open');
             }, 300);
         }
 

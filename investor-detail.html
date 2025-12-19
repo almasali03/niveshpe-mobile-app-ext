@@ -1020,40 +1020,9 @@
                         <p class="subtitle-text">Help us understand your investment profile better</p>
 
                         <div id="investorForm">
-                            <!-- Question 1: Age -->
+                            <!-- Question 1: Occupation -->
                             <div class="input-group">
-                                <label class="input-label">1. What is your age?</label>
-                                <div class="age-selection-grid">
-                                    <label class="age-card">
-                                        <input type="radio" name="age" value="18-25" class="age-radio-input" onchange="validateForm()">
-                                        <div class="age-card-content">
-                                            <span class="age-range">18-25</span>
-                                        </div>
-                                    </label>
-                                    <label class="age-card">
-                                        <input type="radio" name="age" value="26-32" class="age-radio-input" onchange="validateForm()">
-                                        <div class="age-card-content">
-                                            <span class="age-range">26-32</span>
-                                        </div>
-                                    </label>
-                                    <label class="age-card">
-                                        <input type="radio" name="age" value="33-50" class="age-radio-input" onchange="validateForm()">
-                                        <div class="age-card-content">
-                                            <span class="age-range">33-50</span>
-                                        </div>
-                                    </label>
-                                    <label class="age-card">
-                                        <input type="radio" name="age" value="50+" class="age-radio-input" onchange="validateForm()">
-                                        <div class="age-card-content">
-                                            <span class="age-range">50+</span>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <!-- Question 2: Occupation -->
-                            <div class="input-group">
-                                <label class="input-label" for="occupation">2. What is your occupation?</label>
+                                <label class="input-label" for="occupation">1. What is your occupation?</label>
                                 <select id="occupation" class="text-input" onchange="validateForm()">
                                     <option value="" selected disabled>Select your occupation</option>
                                     <option value="private-job">Private Job</option>
@@ -1071,9 +1040,9 @@
                                 </select>
                             </div>
 
-                            <!-- Question 3: Monthly Income -->
+                            <!-- Question 2: Monthly Income -->
                             <div class="input-group">
-                                <label class="input-label" for="monthlyIncome">3. What's your in-hand monthly income?</label>
+                                <label class="input-label" for="monthlyIncome">2. What's your in-hand monthly income?</label>
                                 <div class="amount-input-wrapper">
                                     <span class="currency-symbol">₹</span>
                                     <input
@@ -1086,9 +1055,9 @@
                                 </div>
                             </div>
 
-                            <!-- Question 4: Source of Funds -->
+                            <!-- Question 3: Source of Funds -->
                             <div class="input-group">
-                                <label class="input-label" for="sourceOfFunds">4. What is your primary source of funds?</label>
+                                <label class="input-label" for="sourceOfFunds">3. What is your primary source of funds?</label>
                                 <select id="sourceOfFunds" class="text-input" onchange="validateForm()">
                                     <option value="" selected disabled>Select source of funds</option>
                                     <option value="salary">Salary</option>
@@ -1099,6 +1068,25 @@
                                     <option value="royalty">Royalty</option>
                                     <option value="others">Others</option>
                                 </select>
+                            </div>
+
+                            <!-- Question 4: Marital Status -->
+                            <div class="input-group">
+                                <label class="input-label">4. What is your marital status?</label>
+                                <div class="age-selection-grid">
+                                    <label class="age-card">
+                                        <input type="radio" name="maritalStatus" value="single" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">Single</span>
+                                        </div>
+                                    </label>
+                                    <label class="age-card">
+                                        <input type="radio" name="maritalStatus" value="married" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">Married</span>
+                                        </div>
+                                    </label>
+                                </div>
                             </div>
 
                             <!-- Question 5: Number of Dependents -->
@@ -1274,10 +1262,10 @@
     <script>
         // Data storage
         let investorData = {
-            age: null,
             occupation: null,
             monthlyIncome: null,
             sourceOfFunds: null,
+            maritalStatus: null,
             dependents: null
             // nominees: [], // Moved to separate page
             // pepDeclaration: false // Commented out
@@ -1289,26 +1277,26 @@
         // ==================== FORM VALIDATION ====================
 
         function validateForm() {
-            const ageRadio = document.querySelector('input[name="age"]:checked');
-            const age = ageRadio ? ageRadio.value : null;
             const occupation = document.getElementById('occupation').value;
             const monthlyIncome = document.getElementById('monthlyIncome').value;
             const sourceOfFunds = document.getElementById('sourceOfFunds').value;
+            const maritalStatusRadio = document.querySelector('input[name="maritalStatus"]:checked');
+            const maritalStatus = maritalStatusRadio ? maritalStatusRadio.value : null;
             const dependentsRadio = document.querySelector('input[name="dependents"]:checked');
             const dependents = dependentsRadio ? dependentsRadio.value : null;
             // const declaration = document.getElementById('pepDeclaration').checked; // PEP declaration commented out
 
             const submitBtn = document.getElementById('submitBtn');
-            const isValid = age && occupation && monthlyIncome && sourceOfFunds && dependents;
+            const isValid = occupation && monthlyIncome && sourceOfFunds && maritalStatus && dependents;
             submitBtn.disabled = !isValid;
         }
 
         function submitForm() {
-            const ageRadio = document.querySelector('input[name="age"]:checked');
-            investorData.age = ageRadio ? ageRadio.value : null;
             investorData.occupation = document.getElementById('occupation').value;
             investorData.monthlyIncome = document.getElementById('monthlyIncome').value.replace(/,/g, '');
             investorData.sourceOfFunds = document.getElementById('sourceOfFunds').value;
+            const maritalStatusRadio = document.querySelector('input[name="maritalStatus"]:checked');
+            investorData.maritalStatus = maritalStatusRadio ? maritalStatusRadio.value : null;
             const dependentsRadio = document.querySelector('input[name="dependents"]:checked');
             investorData.dependents = dependentsRadio ? dependentsRadio.value : null;
             // investorData.pepDeclaration = true; // PEP declaration commented out
