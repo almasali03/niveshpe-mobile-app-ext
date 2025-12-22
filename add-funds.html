@@ -546,7 +546,7 @@
 
         .goal-selection {
             display: flex;
-            gap: 10px;
+            gap: 6px;
             overflow-x: auto;
             padding-bottom: var(--space-xs);
             scroll-behavior: smooth;
@@ -563,16 +563,18 @@
             background: var(--color-card);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-md);
-            padding: 12px;
-            min-width: 120px;
-            max-width: 140px;
+            padding: 10px 14px;
+            height: 48px;
+            width: auto;
+            min-width: 80px;
             flex-shrink: 0;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: var(--shadow-sm);
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
         }
 
         .goal-card-compact:active {
@@ -605,28 +607,27 @@
             font-size: 13px;
             font-weight: 600;
             color: var(--color-text-primary);
-            line-height: 1.3;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+            line-height: 1;
+            white-space: nowrap;
+            text-align: center;
         }
 
         .add-goal-card {
             background: var(--color-surface);
             border: 2px dashed var(--color-border);
             border-radius: var(--radius-md);
-            padding: 12px;
-            min-width: 100px;
+            padding: 10px 14px;
+            height: 48px;
+            width: auto;
+            min-width: 80px;
             flex-shrink: 0;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 6px;
+            white-space: nowrap;
         }
 
         .add-goal-card:active {
@@ -636,21 +637,23 @@
         }
 
         .add-goal-card-icon {
-            width: 32px;
-            height: 32px;
+            width: 20px;
+            height: 20px;
             background: var(--color-green);
             border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
+            flex-shrink: 0;
         }
 
         .add-goal-card-text {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--color-green);
-            text-align: center;
+            line-height: 1;
+            white-space: nowrap;
         }
 
         .goal-scroll-indicators {
@@ -720,51 +723,6 @@
             flex: 1;
         }
 
-        /* Assign Goal Section */
-        .assign-goal-section {
-            margin: 12px 0;
-        }
-
-        .assign-goal-card {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 4px;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-        }
-
-        .assign-goal-card:active {
-            opacity: 0.6;
-        }
-
-        .assign-goal-icon {
-            display: none;
-        }
-
-        .assign-goal-content {
-            flex: initial;
-        }
-
-        .assign-goal-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--color-blue);
-        }
-
-        .assign-goal-subtitle {
-            display: none;
-        }
-
-        .assign-goal-arrow {
-            display: flex;
-            align-items: center;
-        }
-
-        .assign-goal-arrow svg {
-            color: var(--color-blue);
-            opacity: 1;
-        }
 
         /* Unified Investment Display Card */
         .investment-display-card {
@@ -791,16 +749,17 @@
         }
 
         .display-badge {
-            background: var(--color-green);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
+            background: transparent;
+            color: var(--color-green);
+            padding: 0;
+            border-radius: 0;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.2;
         }
 
         .display-content {
-            margin-bottom: 16px;
+            margin-bottom: 0;
         }
 
         /* Allocation Grid Layouts */
@@ -827,39 +786,134 @@
             margin: 0;
         }
 
-        .fund-pills-container {
+        /* Fund Capsules Section */
+        .funds-section-header {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        .fund-capsules-container {
             display: flex;
-            flex-direction: column;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 0 4px 8px 4px;
+        }
+
+        .fund-capsules-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .fund-capsule {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: 12px;
+            padding: 12px 14px;
+            min-width: fit-content;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
             gap: 8px;
         }
 
-        .fund-pill {
-            background: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 12px;
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.2s ease;
+        .fund-capsule:active {
+            background: var(--color-surface);
+            transform: scale(0.98);
         }
 
-        .fund-pill.full-allocation {
-            border: 2px solid var(--color-green);
-            background: #F0FDF4;
-        }
-
-        .pill-name {
-            font-size: 14px;
+        .fund-name-text {
+            font-size: 12px;
             font-weight: 600;
             color: var(--color-text-primary);
-            flex: 1;
         }
 
-        .pill-percentage {
-            font-size: 14px;
+        .capsule-percentage {
+            font-size: 13px;
             font-weight: 700;
             color: var(--color-blue);
+        }
+
+        /* Scroll Indicator */
+        .capsules-scroll-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .capsule-scroll-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #D1D5DB;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .capsule-scroll-dot.active {
+            background: var(--color-blue);
+        }
+
+        /* Single fund special styling */
+        .fund-pill-single {
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+            border: 2px solid var(--color-green);
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .fund-pill-single .fund-name-text {
+            font-weight: 700;
+            color: var(--color-green);
+        }
+
+        .fund-pill-single .capsule-percentage {
+            color: var(--color-green);
+            font-weight: 700;
+        }
+
+        /* Customization Link */
+        .customize-link-container {
+            margin-top: 12px;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .customize-link {
+            background: transparent;
+            border: none;
+            color: var(--color-blue);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px 4px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            line-height: 1.4;
+        }
+
+        .customize-link:hover {
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .customize-link:active {
+            transform: scale(0.98);
+        }
+
+        .customize-link svg {
+            opacity: 0.7;
+            width: 16px;
+            height: 16px;
         }
 
         /* Empty State */
@@ -919,35 +973,6 @@
             transform: scale(0.98);
         }
 
-        /* Display Actions */
-        .display-actions {
-            margin-top: 16px;
-        }
-
-        .change-selection-btn {
-            width: 100%;
-            background: transparent;
-            border: 2px dashed var(--color-blue);
-            color: var(--color-blue);
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .change-selection-btn:hover {
-            background: rgba(37, 99, 235, 0.05);
-        }
-
-        .change-selection-btn:active {
-            transform: scale(0.98);
-        }
 
         /* Legacy basket card for compatibility */
         .basket-card {
@@ -1907,53 +1932,24 @@
                             </div>
                         </div> -->
 
-                        <!-- Assign Goal Link (for direct invest) -->
-                        <div class="assign-goal-section" id="assignGoalSection" style="display: none;">
-                            <div class="assign-goal-card" onclick="window.location.href='create-goal.html'">
-                                <div class="assign-goal-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14h-3v3h-2v-3H8v-2h3v-3h2v3h3v2zm-3-7V3.5L18.5 9H13z"/>
-                                    </svg>
-                                </div>
-                                <div class="assign-goal-content">
-                                    <div class="assign-goal-title">Assign a goal</div>
-                                    <div class="assign-goal-subtitle">Create a financial goal for your investment</div>
-                                </div>
-                                <div class="assign-goal-arrow">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Goal Selection -->
                         <div class="goal-section" id="goalSection">
                             <div class="goal-selection" id="goalScroll">
                                 <!-- Goal 1: NiveshPe Wealth (Default Selected) -->
                                 <div class="goal-card-compact selected" data-goal="NiveshPe Wealth" data-tenure="5">
-                                    <div class="goal-card-icon" style="background: white; padding: 4px;">
-                                        <img src="assets/favicon.png" alt="NiveshPe" style="width: 16px; height: 16px; object-fit: contain;">
-                                    </div>
                                     <div class="goal-card-name">NiveshPe Wealth</div>
-                                    <div class="goal-card-amount">₹6,200</div>
                                 </div>
 
                                 <!-- Goal 2: Bike Fund -->
                                 <div class="goal-card-compact" data-goal="Bike Fund" data-tenure="2">
-                                    <div class="goal-card-icon">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M5,11L6.5,6.5H17.5L19,11M17.5,16A1.5,1.5 0 0,1 16,14.5A1.5,1.5 0 0,1 17.5,13A1.5,1.5 0 0,1 19,14.5A1.5,1.5 0 0,1 17.5,16M6.5,16A1.5,1.5 0 0,1 5,14.5A1.5,1.5 0 0,1 6.5,13A1.5,1.5 0 0,1 8,14.5A1.5,1.5 0 0,1 6.5,16M18.92,6C18.72,5.42 18.16,5 17.5,5H6.5C5.84,5 5.28,5.42 5.08,6L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6Z"/>
-                                        </svg>
-                                    </div>
                                     <div class="goal-card-name">Bike Fund</div>
-                                    <div class="goal-card-amount">₹3,000</div>
                                 </div>
 
                                 <!-- Add Goal Card -->
                                 <div class="add-goal-card">
                                     <div class="add-goal-card-icon">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                                         </svg>
                                     </div>
@@ -2007,15 +2003,6 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Action: Always consistent -->
-                                <div class="display-actions" id="displayActions">
-                                    <button class="change-selection-btn">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                        </svg>
-                                        <span id="actionText">Select Investment</span>
-                                    </button>
-                                </div>
                             </div>
                         </div>
 
@@ -2422,12 +2409,31 @@
             };
 
             // Check if user came from create-goal page or basket-details page
-            const selectedBasket = localStorage.getItem('selectedBasket');
+            // Priority 1: Check URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
             let fromGoal = false;
             let fromBasketDetails = false;
             let basketData = null;
 
-            if (selectedBasket) {
+            // Check for basket-details flow via URL parameter
+            const basketId = urlParams.get('id');
+            if (basketId && BASKETS_DATA[basketId]) {
+                console.log('User came from basket-details page with basket ID:', basketId);
+                fromBasketDetails = true;
+                const basketInfo = BASKETS_DATA[basketId];
+                basketData = {
+                    fromBasketDetails: true,
+                    basketName: basketInfo.name,
+                    description: basketInfo.description,
+                    funds: basketInfo.funds,
+                    returns: basketInfo.returns,
+                    holdingPeriod: basketInfo.holdingPeriod
+                };
+            }
+            
+            // Priority 2: Check localStorage (fallback for legacy flows)
+            const selectedBasket = localStorage.getItem('selectedBasket');
+            if (!fromBasketDetails && selectedBasket) {
                 try {
                     basketData = JSON.parse(selectedBasket);
                     fromGoal = basketData.fromGoal === true;
@@ -2486,21 +2492,13 @@
                 }
             }
 
-            // Check for direct invest flow
-            const urlParams = new URLSearchParams(window.location.search);
+            // Check for direct invest flow (using already declared urlParams)
             const directInvest = urlParams.get('directInvest') === 'true';
 
             if (directInvest && !fromGoal && !fromBasketDetails) {
                 console.log('Direct invest flow detected');
 
-                // Hide goal section
-                const goalSection = document.getElementById('goalSection');
-                if (goalSection) goalSection.style.display = 'none';
-
-                // Show assign goal section
-                const assignGoalSection = document.getElementById('assignGoalSection');
-                if (assignGoalSection) assignGoalSection.style.display = 'block';
-
+                // Keep goal section visible for direct invest flow
                 // Basket will be loaded after data loads (in loadDataAndRecommendations function)
             }
 
@@ -2558,9 +2556,6 @@
                         const iconSvg = getGoalIconSvg(goalData.category || 'emergency');
 
                         newGoalCard.innerHTML = `
-                            <div class="goal-card-icon">
-                                ${iconSvg}
-                            </div>
                             <div class="goal-card-name">${goalData.name}</div>
                         `;
 
@@ -2639,31 +2634,15 @@
                     if (directInvest && !fromGoal && !fromBasketDetails) {
                         console.log('Loading Balanced Returns Basket for direct invest...');
 
+                        // Get Balanced Returns basket from BASKETS_DATA
+                        const balancedReturnsData = BASKETS_DATA['balanced-returns'];
                         const balancedReturnsBasket = {
-                            basketName: 'Balanced Returns Basket',
-                            description: 'Balanced approach between stability and growth',
-                            returns: '11-14% p.a.',
-                            holdingPeriod: '2+ years',
-                            funds: []
+                            basketName: balancedReturnsData.name,
+                            description: balancedReturnsData.description,
+                            returns: balancedReturnsData.returns,
+                            holdingPeriod: balancedReturnsData.holdingPeriod,
+                            funds: balancedReturnsData.funds
                         };
-
-                        // Get Medium Risk basket from claudeJsonData
-                        if (claudeJsonData && claudeJsonData.FlagshipBaskets && claudeJsonData.FlagshipBaskets['Medium Risk']) {
-                            const mediumRiskBasket = claudeJsonData.FlagshipBaskets['Medium Risk'];
-
-                            // Convert schemes to fund allocations
-                            balancedReturnsBasket.funds = mediumRiskBasket.schemes.map(scheme => {
-                                const fundMapping = hdfcFundsMapping[scheme.FundRankingCategory];
-                                if (fundMapping) {
-                                    return {
-                                        name: fundMapping.name,
-                                        allocation: scheme.ratio,
-                                        category: fundMapping.category
-                                    };
-                                }
-                                return null;
-                            }).filter(fund => fund !== null);
-                        }
 
                         console.log('Balanced Returns Basket funds:', balancedReturnsBasket.funds);
 
@@ -2753,7 +2732,6 @@
                 const titleEl = document.getElementById('displayTitle');
                 const badgeEl = document.getElementById('displayBadge');
                 const contentEl = document.getElementById('displayContent');
-                const actionEl = document.getElementById('actionText');
                 
                 // Reset badge visibility
                 badgeEl.style.display = 'block';
@@ -2763,38 +2741,39 @@
                 
                 if (context.source === 'goal' && context.funds) {
                     // Goal-based basket
-                    titleEl.textContent = `${associatedGoal} Custom Basket`;
+                    titleEl.textContent = `${associatedGoal} Basket`;
                     badgeEl.textContent = context.returns || '12-15% p.a.';
                     contentEl.innerHTML = renderBasketTemplate(context.basketName, context.description, context.funds, associatedGoal);
-                    actionEl.textContent = 'Change Basket';
                 } else if (context.source === 'basket' && context.funds) {
-                    // Pre-selected basket (can be associated with goal)
-                    titleEl.textContent = associatedGoal ? `${context.basketName} for ${associatedGoal}` : context.basketName || 'Selected Basket';
+                    // Pre-selected basket
+                    titleEl.textContent = context.basketName || 'Selected Basket';
                     badgeEl.textContent = context.returns || '12-15% p.a.';
                     contentEl.innerHTML = renderBasketTemplate(context.basketName, context.description, context.funds, associatedGoal);
-                    actionEl.textContent = 'Change Basket';
                 } else if (context.source === 'fund' && context.fund) {
-                    // Single fund (can be associated with goal)
-                    titleEl.textContent = associatedGoal ? `${context.fund.name} for ${associatedGoal}` : context.fund.name;
+                    // Single fund
+                    titleEl.textContent = associatedGoal ? `${associatedGoal} Fund` : context.fund.name;
                     badgeEl.textContent = context.fund.category || 'Equity';
                     contentEl.innerHTML = renderSingleFundTemplate(context.fund, associatedGoal);
-                    actionEl.textContent = 'Change Fund';
                 } else if (context.basketName && context.funds) {
                     // Fallback for basket data
-                    titleEl.textContent = associatedGoal ? `${context.basketName} for ${associatedGoal}` : context.basketName || 'Selected Investment';
+                    titleEl.textContent = context.basketName || 'Selected Investment';
                     badgeEl.textContent = context.returns || '12-15% p.a.';
                     contentEl.innerHTML = renderBasketTemplate(context.basketName, context.description, context.funds, associatedGoal);
-                    actionEl.textContent = 'Change Selection';
                 } else {
-                    // Empty state (direct invest)
+                    // Empty state (direct invest) - still show expected returns
                     titleEl.textContent = 'Choose Investment';
-                    badgeEl.style.display = 'none';
+                    badgeEl.textContent = '12-15% p.a.';
+                    badgeEl.style.display = 'block';
                     contentEl.innerHTML = renderEmptyStateTemplate();
-                    actionEl.textContent = 'Select Investment';
                 }
                 
                 // Update goal context if needed
                 updateGoalContext(associatedGoal);
+                
+                // Add scroll functionality for fund capsules
+                setTimeout(() => {
+                    setupCapsuleScrolling();
+                }, 100);
             }
             
             // Update goal context display
@@ -2812,22 +2791,67 @@
                 });
             }
 
+            // Setup capsule scrolling functionality
+            function setupCapsuleScrolling() {
+                const container = document.getElementById('fundCapsulesContainer');
+                const dots = document.querySelectorAll('.capsule-scroll-dot');
+                
+                if (!container || !dots.length) return;
+                
+                // Add scroll event listener
+                container.addEventListener('scroll', () => {
+                    const scrollLeft = container.scrollLeft;
+                    const scrollWidth = container.scrollWidth - container.clientWidth;
+                    const scrollPercent = scrollLeft / scrollWidth;
+                    const activeIndex = Math.round(scrollPercent * (dots.length - 1));
+                    
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === activeIndex);
+                    });
+                });
+                
+                // Make dots clickable
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        const scrollWidth = container.scrollWidth - container.clientWidth;
+                        const targetScroll = (scrollWidth / (dots.length - 1)) * index;
+                        container.scrollTo({ left: targetScroll, behavior: 'smooth' });
+                    });
+                });
+            }
+
             // Template for basket display (multiple funds)
             function renderBasketTemplate(basketName, description, funds, goalName = null) {
+                const numFunds = funds.length;
+                const showScrollIndicator = numFunds > 3;
+                const numDots = Math.min(Math.ceil(numFunds / 3), 3);
+                
                 return `
-                    <div class="allocation-grid">
-                        <div class="allocation-summary">
-                            <h4 class="allocation-title">${basketName || 'Investment Basket'}</h4>
-                            <p class="allocation-description">${description || 'Diversified fund allocation'}${goalName ? ` • Associated with ${goalName}` : ''}</p>
-                        </div>
-                        
-                        <div class="fund-pills-container">
+                    <div class="funds-capsules-section">
+                        <div class="funds-section-header">Funds in this basket</div>
+                        <div class="fund-capsules-container" id="fundCapsulesContainer">
                             ${funds.map(fund => `
-                                <div class="fund-pill">
-                                    <span class="pill-name">${fund.name}</span>
-                                    <span class="pill-percentage">${fund.allocation}%</span>
+                                <div class="fund-capsule">
+                                    <span class="fund-name-text">${fund.name}</span>
+                                    <span class="capsule-percentage">${fund.allocation}%</span>
                                 </div>
                             `).join('')}
+                        </div>
+                        ${showScrollIndicator ? `
+                            <div class="capsules-scroll-indicator" id="capsulesScrollIndicator">
+                                ${Array.from({ length: numDots }, (_, i) =>
+                                    `<div class="capsule-scroll-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`
+                                ).join('')}
+                            </div>
+                        ` : ''}
+                        <!-- Customization Link -->
+                        <div class="customize-link-container">
+                            <button class="customize-link" onclick="openBasketSelection()">
+                                <span>Or choose your own funds</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 `;
@@ -2836,17 +2860,22 @@
             // Template for single fund display
             function renderSingleFundTemplate(fund, goalName = null) {
                 return `
-                    <div class="allocation-grid single-fund">
-                        <div class="allocation-summary">
-                            <h4 class="allocation-title">${fund.name}</h4>
-                            <p class="allocation-description">${fund.category || 'Mutual Fund'}${goalName ? ` • For ${goalName}` : ''}</p>
-                        </div>
-                        
-                        <div class="fund-pills-container">
-                            <div class="fund-pill full-allocation">
-                                <span class="pill-name">${fund.name}</span>
-                                <span class="pill-percentage">100%</span>
+                    <div class="funds-capsules-section">
+                        <div class="funds-section-header">Selected Fund</div>
+                        <div class="fund-capsules-container">
+                            <div class="fund-capsule fund-pill-single">
+                                <span class="fund-name-text">${fund.name}</span>
+                                <span class="capsule-percentage">100%</span>
                             </div>
+                        </div>
+                        <!-- Customization Link -->
+                        <div class="customize-link-container">
+                            <button class="customize-link" onclick="openFundSelection()">
+                                <span>Choose another fund</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 `;
