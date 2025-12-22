@@ -766,6 +766,190 @@
             opacity: 1;
         }
 
+        /* Unified Investment Display Card */
+        .investment-display-card {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin: 16px 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .display-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .display-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+
+        .display-badge {
+            background: var(--color-green);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .display-content {
+            margin-bottom: 16px;
+        }
+
+        /* Allocation Grid Layouts */
+        .allocation-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .allocation-summary {
+            margin-bottom: 8px;
+        }
+
+        .allocation-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0 0 4px 0;
+        }
+
+        .allocation-description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        .fund-pills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .fund-pill {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .fund-pill.full-allocation {
+            border: 2px solid var(--color-green);
+            background: #F0FDF4;
+        }
+
+        .pill-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            flex: 1;
+        }
+
+        .pill-percentage {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .empty-content {
+            margin-bottom: 20px;
+        }
+
+        .empty-icon {
+            margin-bottom: 16px;
+        }
+
+        .empty-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0 0 8px 0;
+        }
+
+        .empty-description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        .selection-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--color-blue);
+            background: #F8FAFC;
+        }
+
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Display Actions */
+        .display-actions {
+            margin-top: 16px;
+        }
+
+        .change-selection-btn {
+            width: 100%;
+            background: transparent;
+            border: 2px dashed var(--color-blue);
+            color: var(--color-blue);
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .change-selection-btn:hover {
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .change-selection-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Legacy basket card for compatibility */
         .basket-card {
             background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
             border: 1px solid #BFDBFE;
@@ -1785,18 +1969,52 @@
 
                         <!-- Fund Selection / Basket Recommendation -->
                         <div class="fund-section" id="fundSection">
-                            <div class="basket-card">
-                                <div class="basket-header">
-                                    <div class="basket-header-left">
-                                        <div class="basket-title" id="basketTitle">Recommended Basket</div>
-                                        <div class="basket-description" id="basketDescription">Loading...</div>
-                                    </div>
-                                    <div class="basket-header-right" id="basketReturns">
-                                        <!-- Returns will be populated dynamically -->
+                            <div class="investment-display-card">
+                                <!-- Header: Always shown with consistent layout -->
+                                <div class="display-header">
+                                    <div class="display-title" id="displayTitle">Choose Investment</div>
+                                    <div class="display-badge" id="displayBadge" style="display: none;">
+                                        <!-- Dynamic: Returns percentage or fund category -->
                                     </div>
                                 </div>
-                                <div class="basket-funds" id="basketFunds">
-                                    <!-- Funds will be populated dynamically -->
+                                
+                                <!-- Main Content: Adapts to show funds/baskets/selection -->
+                                <div class="display-content" id="displayContent">
+                                    <!-- Dynamic content area -->
+                                    <div class="allocation-grid empty-state">
+                                        <div class="empty-content">
+                                            <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="#3B82F6">
+                                                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                                            </svg>
+                                            <h4 class="empty-title">Choose Your Investment</h4>
+                                            <p class="empty-description">Select from expert-curated baskets or individual funds</p>
+                                        </div>
+                                        
+                                        <div class="selection-options">
+                                            <button class="option-btn" onclick="openBasketSelection()">
+                                                <span>Browse Baskets</span>
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="option-btn" onclick="openFundSelection()">
+                                                <span>Pick Individual Fund</span>
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Action: Always consistent -->
+                                <div class="display-actions" id="displayActions">
+                                    <button class="change-selection-btn">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                        </svg>
+                                        <span id="actionText">Select Investment</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -2228,9 +2446,7 @@
                         const projectionCard = document.getElementById('projectionCard');
                         if (projectionCard) projectionCard.style.display = 'none';
 
-                        // Hide goal section when coming from create-goal
-                        const goalSection = document.getElementById('goalSection');
-                        if (goalSection) goalSection.style.display = 'none';
+                        // Keep goal section visible so user can see/change goal association
 
                         // Display the selected basket immediately
                         displaySelectedBasket(basketData);
@@ -2251,9 +2467,7 @@
                         const projectionCard = document.getElementById('projectionCard');
                         if (projectionCard) projectionCard.style.display = 'none';
 
-                        // Hide goal section when coming from basket-details
-                        const goalSection = document.getElementById('goalSection');
-                        if (goalSection) goalSection.style.display = 'none';
+                        // Keep goal section visible so user can see/change goal association
 
                         // Display the selected basket immediately
                         displaySelectedBasket(basketData);
@@ -2306,51 +2520,16 @@
                     fundTitle.textContent = selectedFund.name;
                 }
 
-                // Update basket card to show only this specific fund
-                document.getElementById('basketTitle').textContent = selectedFund.name;
-                document.getElementById('basketDescription').textContent = selectedFund.category || '';
-
-                // Update basket returns - display 3Y returns
-                const basketReturns = document.getElementById('basketReturns');
-                if (basketReturns) {
-                    if (selectedFund.returns && selectedFund.returns['3Y']) {
-                        basketReturns.innerHTML = `
-                            <div class="basket-returns-label">3Y RETURNS</div>
-                            <div class="basket-returns-value">${selectedFund.returns['3Y'].value}</div>
-                        `;
-                        basketReturns.style.display = 'block';
-                    } else {
-                        console.log('No returns data found for fund:', selectedFund);
+                // Display using unified renderer
+                renderUnifiedDisplay({
+                    source: 'fund',
+                    fund: {
+                        name: selectedFund.name,
+                        category: selectedFund.category || 'Mutual Fund'
                     }
-                }
+                });
 
-                // Display only this fund in the basket
-                const basketFundsContainer = document.getElementById('basketFunds');
-                basketFundsContainer.innerHTML = `
-                    <div class="funds-capsules-section">
-                        <div class="fund-capsules-container">
-                            <div class="fund-capsule">
-                                <span class="fund-name-text">${selectedFund.name}</span>
-                                <span class="capsule-percentage">100%</span>
-                            </div>
-                        </div>
-                        <!-- Choose Another Fund CTA -->
-                        <div class="customize-link-container" style="margin-top: 12px; text-align: center;">
-                            <button class="customize-link" onclick="openCustomizationOverlay()">
-                                <span>Choose another fund</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;">
-                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                `;
-
-                // Add class to basket card to show heading
-                const basketCard = document.querySelector('.basket-card');
-                if (basketCard) {
-                    basketCard.classList.add('basket-card-with-goal');
-                }
+                // The fund display is now handled by renderUnifiedDisplay above
             }
 
             // Load goal from localStorage (if coming from create-goal page)
@@ -2500,7 +2679,13 @@
                 } catch (error) {
                     console.error('Error loading data:', error);
                     console.error('Error stack:', error.stack);
-                    document.getElementById('basketDescription').textContent = 'Unable to load recommendations: ' + error.message;
+                    // Display error in unified display
+                    renderUnifiedDisplay({
+                        source: 'error',
+                        basketName: 'Unable to Load',
+                        description: 'Error: ' + error.message,
+                        funds: []
+                    });
                 }
             }
 
@@ -2536,9 +2721,7 @@
                     return;
                 }
 
-                // Update basket header
-                document.getElementById('basketTitle').textContent = 'Recommended Portfolio';
-                document.getElementById('basketDescription').textContent = basket.description;
+                // Use unified display for basket recommendation
 
                 // Build funds array from basket schemes
                 const funds = [];
@@ -2553,158 +2736,164 @@
                     }
                 });
 
-                // Build fund capsules HTML
-                const basketFundsContainer = document.getElementById('basketFunds');
-                basketFundsContainer.innerHTML = '';
+                // Display using unified renderer
+                renderUnifiedDisplay({
+                    source: 'recommendation',
+                    basketName: 'Recommended Portfolio',
+                    description: basket.description,
+                    funds: funds,
+                    returns: getApproximateReturns(basket.schemes)
+                });
 
-                // Calculate number of scroll dots needed (show dots only if there are more than 2 funds)
-                const numFunds = funds.length;
-                const numDots = Math.min(Math.ceil(numFunds / 2), 3); // Show max 3 dots
 
-                // Add funds capsules section
-                const fundsCapsules = document.createElement('div');
-                fundsCapsules.className = 'funds-capsules-section';
-                fundsCapsules.innerHTML = `
-                    <div class="funds-section-header">Funds in this basket - Recommended by NiveshPe</div>
-                    <div class="fund-capsules-container" id="fundCapsulesContainer">
-                        ${funds.map(fund => `
-                            <div class="fund-capsule">
-                                <span class="fund-name-text">${fund.name}</span>
-                                <span class="capsule-percentage">${fund.allocation}%</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                    ${numFunds > 2 ? `
-                        <div class="capsules-scroll-indicator" id="capsulesScrollIndicator">
-                            ${Array.from({ length: numDots }, (_, i) =>
-                                `<div class="capsule-scroll-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`
-                            ).join('')}
-                        </div>
-                    ` : ''}
-                    <!-- Customization Link -->
-                    <div class="customize-link-container" style="margin-top: 12px; text-align: center;">
-                        <button class="customize-link" id="customizeLink" onclick="openCustomizationOverlay()">
-                            <span>Want to customize? Choose your own funds</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;">
-                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                            </svg>
-                        </button>
-                    </div>
-                `;
-                basketFundsContainer.appendChild(fundsCapsules);
-
-                // Add scroll event listener if there are scroll dots
-                if (numFunds > 2) {
-                    const container = document.getElementById('fundCapsulesContainer');
-                    const dots = document.querySelectorAll('.capsule-scroll-dot');
-
-                    container.addEventListener('scroll', () => {
-                        const scrollLeft = container.scrollLeft;
-                        const scrollWidth = container.scrollWidth - container.clientWidth;
-                        const scrollPercent = scrollLeft / scrollWidth;
-                        const activeIndex = Math.round(scrollPercent * (numDots - 1));
-
-                        dots.forEach((dot, index) => {
-                            dot.classList.toggle('active', index === activeIndex);
-                        });
-                    });
-
-                    // Make dots clickable
-                    dots.forEach((dot, index) => {
-                        dot.addEventListener('click', () => {
-                            const scrollAmount = (container.scrollWidth - container.clientWidth) / (numDots - 1);
-                            container.scrollTo({
-                                left: scrollAmount * index,
-                                behavior: 'smooth'
-                            });
-                        });
-                    });
-                }
             }
 
-            // Display basket selected from create-goal page
-            function displaySelectedBasket(data) {
-                // Add class to basket card to show heading when coming from create-goal
-                const basketCard = document.querySelector('.basket-card');
-                if (basketCard && data.goalName) {
-                    basketCard.classList.add('basket-card-with-goal');
+            // Unified rendering function for all scenarios
+            function renderUnifiedDisplay(context) {
+                const titleEl = document.getElementById('displayTitle');
+                const badgeEl = document.getElementById('displayBadge');
+                const contentEl = document.getElementById('displayContent');
+                const actionEl = document.getElementById('actionText');
+                
+                // Reset badge visibility
+                badgeEl.style.display = 'block';
+                
+                // Always associate with current goal (or allow goal assignment)
+                const associatedGoal = context.goalName || currentGoal || null;
+                
+                if (context.source === 'goal' && context.funds) {
+                    // Goal-based basket
+                    titleEl.textContent = `${associatedGoal} Custom Basket`;
+                    badgeEl.textContent = context.returns || '12-15% p.a.';
+                    contentEl.innerHTML = renderBasketTemplate(context.basketName, context.description, context.funds, associatedGoal);
+                    actionEl.textContent = 'Change Basket';
+                } else if (context.source === 'basket' && context.funds) {
+                    // Pre-selected basket (can be associated with goal)
+                    titleEl.textContent = associatedGoal ? `${context.basketName} for ${associatedGoal}` : context.basketName || 'Selected Basket';
+                    badgeEl.textContent = context.returns || '12-15% p.a.';
+                    contentEl.innerHTML = renderBasketTemplate(context.basketName, context.description, context.funds, associatedGoal);
+                    actionEl.textContent = 'Change Basket';
+                } else if (context.source === 'fund' && context.fund) {
+                    // Single fund (can be associated with goal)
+                    titleEl.textContent = associatedGoal ? `${context.fund.name} for ${associatedGoal}` : context.fund.name;
+                    badgeEl.textContent = context.fund.category || 'Equity';
+                    contentEl.innerHTML = renderSingleFundTemplate(context.fund, associatedGoal);
+                    actionEl.textContent = 'Change Fund';
+                } else if (context.basketName && context.funds) {
+                    // Fallback for basket data
+                    titleEl.textContent = associatedGoal ? `${context.basketName} for ${associatedGoal}` : context.basketName || 'Selected Investment';
+                    badgeEl.textContent = context.returns || '12-15% p.a.';
+                    contentEl.innerHTML = renderBasketTemplate(context.basketName, context.description, context.funds, associatedGoal);
+                    actionEl.textContent = 'Change Selection';
+                } else {
+                    // Empty state (direct invest)
+                    titleEl.textContent = 'Choose Investment';
+                    badgeEl.style.display = 'none';
+                    contentEl.innerHTML = renderEmptyStateTemplate();
+                    actionEl.textContent = 'Select Investment';
                 }
+                
+                // Update goal context if needed
+                updateGoalContext(associatedGoal);
+            }
+            
+            // Update goal context display
+            function updateGoalContext(goalName) {
+                if (!goalName) return;
+                
+                // Update the currently selected goal card if one exists
+                const goalCards = document.querySelectorAll('.goal-card-compact');
+                goalCards.forEach(card => {
+                    card.classList.remove('selected');
+                    const nameEl = card.querySelector('.goal-card-name');
+                    if (nameEl && nameEl.textContent.trim() === goalName) {
+                        card.classList.add('selected');
+                    }
+                });
+            }
 
-                // Update basket header
-                document.getElementById('basketTitle').textContent = data.basketName;
-                document.getElementById('basketDescription').textContent = data.description;
-
-                // Add expected returns to header right
-                const basketReturns = document.getElementById('basketReturns');
-                basketReturns.innerHTML = `
-                    <span class="basket-returns-label">Returns</span>
-                    <span class="basket-returns-value">${data.returns}</span>
-                `;
-
-                const basketFundsContainer = document.getElementById('basketFunds');
-                basketFundsContainer.innerHTML = '';
-
-                // Calculate number of scroll dots needed (show dots only if there are more than 2 funds)
-                const numFunds = data.funds.length;
-                const numDots = Math.min(Math.ceil(numFunds / 2), 3); // Show max 3 dots
-
-                // Add funds capsules section
-                const fundsCapsules = document.createElement('div');
-                fundsCapsules.className = 'funds-capsules-section';
-                fundsCapsules.innerHTML = `
-                    <div class="funds-section-header">Funds in this basket - Recommended by NiveshPe ${data.returns ? `<span class="returns-green">(Returns: ${data.returns})</span>` : ''}</div>
-                    <div class="fund-capsules-container" id="fundCapsulesContainer">
-                        ${data.funds.map(fund => `
-                            <div class="fund-capsule">
-                                <span class="fund-name-text">${fund.name}</span>
-                                <span class="capsule-percentage">${fund.allocation}%</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                    ${numFunds > 2 ? `
-                        <div class="capsules-scroll-indicator" id="capsulesScrollIndicator">
-                            ${Array.from({ length: numDots }, (_, i) =>
-                                `<div class="capsule-scroll-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`
-                            ).join('')}
+            // Template for basket display (multiple funds)
+            function renderBasketTemplate(basketName, description, funds, goalName = null) {
+                return `
+                    <div class="allocation-grid">
+                        <div class="allocation-summary">
+                            <h4 class="allocation-title">${basketName || 'Investment Basket'}</h4>
+                            <p class="allocation-description">${description || 'Diversified fund allocation'}${goalName ? ` • Associated with ${goalName}` : ''}</p>
                         </div>
-                    ` : ''}
-                    <!-- Customization Link -->
-                    <div class="customize-link-container" style="margin-top: 12px; text-align: center;">
-                        <button class="customize-link" id="customizeLink" onclick="openCustomizationOverlay()">
-                            <span>Want to customize? Choose your own funds</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;">
-                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                            </svg>
-                        </button>
+                        
+                        <div class="fund-pills-container">
+                            ${funds.map(fund => `
+                                <div class="fund-pill">
+                                    <span class="pill-name">${fund.name}</span>
+                                    <span class="pill-percentage">${fund.allocation}%</span>
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
                 `;
-                basketFundsContainer.appendChild(fundsCapsules);
+            }
 
-                // Add scroll event listener if there are scroll dots
-                if (numFunds > 2) {
-                    const container = document.getElementById('fundCapsulesContainer');
-                    const dots = document.querySelectorAll('.capsule-scroll-dot');
+            // Template for single fund display
+            function renderSingleFundTemplate(fund, goalName = null) {
+                return `
+                    <div class="allocation-grid single-fund">
+                        <div class="allocation-summary">
+                            <h4 class="allocation-title">${fund.name}</h4>
+                            <p class="allocation-description">${fund.category || 'Mutual Fund'}${goalName ? ` • For ${goalName}` : ''}</p>
+                        </div>
+                        
+                        <div class="fund-pills-container">
+                            <div class="fund-pill full-allocation">
+                                <span class="pill-name">${fund.name}</span>
+                                <span class="pill-percentage">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
 
-                    container.addEventListener('scroll', () => {
-                        const scrollLeft = container.scrollLeft;
-                        const scrollWidth = container.scrollWidth - container.clientWidth;
-                        const scrollPercent = scrollLeft / scrollWidth;
-                        const activeIndex = Math.round(scrollPercent * (numDots - 1));
+            // Template for empty state
+            function renderEmptyStateTemplate() {
+                return `
+                    <div class="allocation-grid empty-state">
+                        <div class="empty-content">
+                            <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="#3B82F6">
+                                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                            <h4 class="empty-title">Choose Your Investment</h4>
+                            <p class="empty-description">Select from expert-curated baskets or individual funds</p>
+                        </div>
+                        
+                        <div class="selection-options">
+                            <button class="option-btn" onclick="openBasketSelection()">
+                                <span>Browse Baskets</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </button>
+                            <button class="option-btn" onclick="openFundSelection()">
+                                <span>Pick Individual Fund</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
 
-                        dots.forEach((dot, index) => {
-                            dot.classList.toggle('active', index === activeIndex);
-                        });
-                    });
+            // Legacy function for compatibility
+            function displaySelectedBasket(data) {
+                // Use the new unified renderer
+                renderUnifiedDisplay({
+                    source: data.fromGoal ? 'goal' : (data.fromBasketDetails ? 'basket' : 'other'),
+                    basketName: data.basketName,
+                    description: data.description,
+                    funds: data.funds,
+                    returns: data.returns,
+                    goalName: data.goalName
+                });
 
-                    // Make dots clickable
-                    dots.forEach((dot, index) => {
-                        dot.addEventListener('click', () => {
-                            const scrollWidth = container.scrollWidth - container.clientWidth;
-                            const targetScroll = (scrollWidth / (numDots - 1)) * index;
-                            container.scrollTo({ left: targetScroll, behavior: 'smooth' });
-                        });
-                    });
-                }
             }
 
             // Initialize data loading (skip if coming from create-goal or basket-details)
