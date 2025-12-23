@@ -202,29 +202,6 @@
             padding-bottom: 0;
         }
 
-        .section-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--color-text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-
-        .section-label .material-symbols-outlined {
-            font-size: 18px;
-            color: var(--color-blue);
-        }
-
-        .section-description {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
 
         .checkbox-wrapper.compact {
             padding: 12px;
@@ -291,16 +268,19 @@
             margin-bottom: 12px;
             background: white;
             transition: all 0.2s ease;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .bank-verification-card[data-status="verified"] {
-            border-color: var(--color-green);
-            background: rgba(16, 185, 129, 0.05);
+        .bank-verification-card:active {
+            transform: scale(0.98);
+            opacity: 0.9;
         }
 
-        .bank-verification-card[data-status="failed"] {
-            border-color: var(--color-red);
-            background: rgba(239, 68, 68, 0.05);
+        .bank-verification-card.selected {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
         }
 
         .bank-details {
@@ -334,8 +314,61 @@
             font-family: monospace;
         }
 
-        .bank-action {
+        .bank-radio {
+            display: flex;
+            align-items: center;
             flex-shrink: 0;
+        }
+
+        .bank-radio input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--color-blue);
+            pointer-events: none; /* Prevent direct radio click, container handles selection */
+        }
+
+        .bank-radio label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        /* Empty State for Bank Accounts */
+        .bank-empty-state {
+            display: none;
+            padding: 24px 20px;
+            background: rgba(107, 114, 128, 0.05);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-md);
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .bank-empty-state.show {
+            display: block;
+        }
+
+        .bank-empty-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .bank-empty-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .bank-empty-state .btn-text-link {
+            margin: 0 auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-blue);
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .verify-btn {
@@ -819,6 +852,121 @@
 
         .back-link .material-symbols-outlined {
             font-size: 20px;
+        }
+
+        /* ==================== SECTION STYLES (FROM KYC) ==================== */
+        
+        .account-section {
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .section-header .material-symbols-outlined {
+            font-size: 24px;
+            color: var(--color-blue);
+        }
+
+        .section-description {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        /* Nominee Radio Group */
+        .nominee-radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .nominee-radio-option {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nominee-radio-option:active {
+            transform: scale(0.98);
+            background: var(--color-bg-primary);
+        }
+
+        .nominee-radio-option.selected {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .nominee-radio-option.subtle-option {
+            opacity: 0.8;
+        }
+
+        .radio-input {
+            display: none;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .radio-label::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .radio-input:checked + .radio-label::before {
+            border-color: var(--color-blue);
+            background: var(--color-blue);
+            box-shadow: inset 0 0 0 4px white;
+        }
+
+        .radio-label-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        .subtle-text {
+            color: var(--color-text-secondary);
+        }
+
+        /* Nominee Cards Container */
+        .nominee-cards-container {
+            margin-top: 16px;
+        }
+
+        .nominee-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px solid var(--color-green);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
         }
 
         /* ==================== FATCA SECTION ==================== */
@@ -1391,34 +1539,35 @@
                             <p class="subtitle-text" style="margin-bottom: 24px;">Complete these details as per SEBI compliance</p>
 
                             <!-- Section: Bank Account -->
-                            <div class="form-section" id="bankAccountSection">
-                                <div class="section-label">
+                            <div class="account-section" id="bankAccountSection">
+                                <div class="section-header">
                                     <span class="material-symbols-outlined">account_balance</span>
                                     Bank Account
                                 </div>
-                                <p class="section-description">Verify your bank account(s) to enable investments and withdrawals</p>
-
+                                <p class="section-description">Select your bank account for investments and withdrawals</p>
+                                
+                                <!-- Empty State -->
+                                <div class="bank-empty-state" id="bankEmptyState">
+                                    <div class="bank-empty-title">No Bank Accounts</div>
+                                    <div class="bank-empty-subtitle">Add a bank account to start investing</div>
+                                    <button class="btn-text-link" onclick="openAddBankOverlay()">
+                                        <span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                                        Add a bank account
+                                    </button>
+                                </div>
+                                
+                                <div id="bankAccountsList">
                                 <!-- Bank Card 1 -->
                                 <div class="bank-card-row" id="bankRow1">
-                                    <div class="bank-verification-card" id="bankCard1" data-status="unverified">
+                                    <div class="bank-verification-card" id="bankCard1" onclick="selectBankAccount('bank1')">
                                         <div class="bank-details">
                                             <div class="bank-name">State Bank of India</div>
                                             <div class="account-number">XXXX XXXX 7890</div>
                                             <div class="account-ifsc">IFSC: SBIN0001234</div>
                                         </div>
-                                        <div class="bank-action">
-                                            <button class="verify-btn" onclick="verifyBankAccount('bank1')">Verify</button>
-                                            <div class="verify-loader" style="display: none;">
-                                                <div class="mini-spinner"></div>
-                                            </div>
-                                            <div class="verify-status verified" style="display: none;">
-                                                <span class="material-symbols-outlined">check_circle</span>
-                                                <span>Verified</span>
-                                            </div>
-                                            <div class="verify-status failed" style="display: none;">
-                                                <span class="material-symbols-outlined">error</span>
-                                                <span>Failed</span>
-                                            </div>
+                                        <div class="bank-radio">
+                                            <input type="radio" name="selectedBank" id="bankRadio1" value="bank1" checked>
+                                            <label for="bankRadio1"></label>
                                         </div>
                                     </div>
                                     <button class="bank-delete-btn" onclick="deleteBankAccount('bank1')">
@@ -1428,25 +1577,15 @@
 
                                 <!-- Bank Card 2 -->
                                 <div class="bank-card-row" id="bankRow2">
-                                    <div class="bank-verification-card" id="bankCard2" data-status="unverified">
+                                    <div class="bank-verification-card" id="bankCard2" onclick="selectBankAccount('bank2')">
                                         <div class="bank-details">
                                             <div class="bank-name">HDFC Bank</div>
                                             <div class="account-number">XXXX XXXX 3210</div>
                                             <div class="account-ifsc">IFSC: HDFC0002345</div>
                                         </div>
-                                        <div class="bank-action">
-                                            <button class="verify-btn" onclick="verifyBankAccount('bank2')">Verify</button>
-                                            <div class="verify-loader" style="display: none;">
-                                                <div class="mini-spinner"></div>
-                                            </div>
-                                            <div class="verify-status verified" style="display: none;">
-                                                <span class="material-symbols-outlined">check_circle</span>
-                                                <span>Verified</span>
-                                            </div>
-                                            <div class="verify-status failed" style="display: none;">
-                                                <span class="material-symbols-outlined">error</span>
-                                                <span>Failed</span>
-                                            </div>
+                                        <div class="bank-radio">
+                                            <input type="radio" name="selectedBank" id="bankRadio2" value="bank2">
+                                            <label for="bankRadio2"></label>
                                         </div>
                                     </div>
                                     <button class="bank-delete-btn" onclick="deleteBankAccount('bank2')">
@@ -1454,6 +1593,8 @@
                                     </button>
                                 </div>
 
+                                </div>
+                                
                                 <!-- Add Different Account Link -->
                                 <button class="btn-text-link" onclick="openAddBankOverlay()">
                                     <span class="material-symbols-outlined" style="font-size: 18px;">add</span>
@@ -1462,20 +1603,24 @@
                             </div>
 
                             <!-- Section: Nominee -->
-                            <div class="form-section">
-                                <div class="section-label">
-                                    <span class="material-symbols-outlined">group</span>
-                                    Nominee
+                            <div class="account-section">
+                                <div class="section-header">
+                                    <span class="material-symbols-outlined">person</span>
+                                    Nominee Details
                                 </div>
                                 <p class="section-description">Who should receive your investments in case of any unforeseen event?</p>
                                 <div class="nominee-radio-group">
                                     <div class="nominee-radio-option selected" onclick="selectNomineeOption('later')">
                                         <input type="radio" name="nomineeChoice" id="nomineeLater" class="radio-input" checked>
-                                        <label for="nomineeLater" class="radio-label">I'll add later</label>
+                                        <label for="nomineeLater" class="radio-label">
+                                            <span class="radio-label-text">I will add a nominee later</span>
+                                        </label>
                                     </div>
-                                    <div class="nominee-radio-option" onclick="selectNomineeOption('now')">
+                                    <div class="nominee-radio-option subtle-option" onclick="selectNomineeOption('now')">
                                         <input type="radio" name="nomineeChoice" id="nomineeNow" class="radio-input">
-                                        <label for="nomineeNow" class="radio-label">Add now</label>
+                                        <label for="nomineeNow" class="radio-label">
+                                            <span class="radio-label-text subtle-text">I want to add a nominee right now</span>
+                                        </label>
                                     </div>
                                 </div>
                                 <!-- Nominee Cards Container -->
@@ -1483,7 +1628,11 @@
                             </div>
 
                             <!-- Section: Declaration -->
-                            <div class="form-section">
+                            <div class="account-section">
+                                <div class="section-header">
+                                    <span class="material-symbols-outlined">verified_user</span>
+                                    Declaration
+                                </div>
                                 <div class="checkbox-wrapper" onclick="togglePepCheckbox()">
                                     <input type="checkbox" id="pepDeclaration" class="checkbox-input" onchange="validateForm()">
                                     <label for="pepDeclaration" class="checkbox-label">
@@ -1804,6 +1953,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('niveshpe_investor_type', 'existing');
             setupOtpInputs();
+            // Check if banks exist
+            checkBankEmptyState();
+            // Select first bank if available
+            const firstBank = document.querySelector('.bank-verification-card');
+            if (firstBank) {
+                const bankId = firstBank.id.replace('bankCard', 'bank');
+                selectBankAccount(bankId);
+            }
             validateForm();
         });
 
@@ -1821,42 +1978,51 @@
 
         // ==================== BANK VERIFICATION ====================
 
-        function verifyBankAccount(bankId) {
-            // Get the card element
-            let card;
-            if (bankId.startsWith('bank_new_')) {
-                card = document.getElementById('bankCard_' + bankId);
+        function checkBankEmptyState() {
+            const banksList = document.getElementById('bankAccountsList');
+            const emptyState = document.getElementById('bankEmptyState');
+            const addButton = document.querySelector('#bankAccountSection > .btn-text-link');
+            const bankRows = banksList ? banksList.querySelectorAll('.bank-card-row') : [];
+            
+            if (bankRows.length === 0) {
+                // No banks, show empty state
+                if (emptyState) emptyState.classList.add('show');
+                if (banksList) banksList.style.display = 'none';
+                if (addButton) addButton.style.display = 'none'; // Hide duplicate add button
+                selectedBank = null;
             } else {
-                card = document.getElementById('bankCard' + bankId.replace('bank', ''));
+                // Has banks, hide empty state
+                if (emptyState) emptyState.classList.remove('show');
+                if (banksList) banksList.style.display = 'block';
+                if (addButton) addButton.style.display = 'flex'; // Show add button
             }
+        }
 
-            if (!card) return;
-
-            const verifyBtn = card.querySelector('.verify-btn');
-            const loader = card.querySelector('.verify-loader');
-            const verifiedStatus = card.querySelector('.verify-status.verified');
-            const failedStatus = card.querySelector('.verify-status.failed');
-
-            // Hide button, show loader
-            verifyBtn.style.display = 'none';
-            loader.style.display = 'block';
-
-            // Simulate verification (1.5 seconds)
-            setTimeout(() => {
-                loader.style.display = 'none';
-
-                // Bank2 fails, all others succeed
-                if (bankId === 'bank2') {
-                    card.setAttribute('data-status', 'failed');
-                    failedStatus.style.display = 'flex';
-                } else {
-                    card.setAttribute('data-status', 'verified');
-                    verifiedStatus.style.display = 'flex';
-                    verifiedBanks.push(bankId);
-                }
-
-                validateForm();
-            }, 1500);
+        function selectBankAccount(bankId) {
+            // Update selected bank variable
+            selectedBank = bankId;
+            
+            // Update radio button
+            const radio = document.querySelector(`input[value="${bankId}"]`);
+            if (radio) {
+                radio.checked = true;
+            }
+            
+            // Update visual selection
+            document.querySelectorAll('.bank-verification-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            const selectedCard = bankId.startsWith('bank_new_') 
+                ? document.getElementById('bankCard_' + bankId)
+                : document.getElementById('bankCard' + bankId.replace('bank', ''));
+            
+            if (selectedCard) {
+                selectedCard.classList.add('selected');
+            }
+            
+            validateForm();
         }
 
         function deleteBankAccount(bankId) {
@@ -1886,10 +2052,16 @@
                 return;
             }
 
-            // Remove from verifiedBanks if present
-            const index = verifiedBanks.indexOf(bankToDelete);
-            if (index > -1) {
-                verifiedBanks.splice(index, 1);
+            // If deleting selected bank, select next available
+            if (bankToDelete === selectedBank) {
+                const allBankCards = document.querySelectorAll('.bank-verification-card');
+                for (let card of allBankCards) {
+                    const cardId = card.id.replace('bankCard', 'bank');
+                    if (cardId !== bankToDelete) {
+                        selectBankAccount(cardId);
+                        break;
+                    }
+                }
             }
 
             // Close modal first
@@ -1902,6 +2074,7 @@
 
             setTimeout(() => {
                 row.remove();
+                checkBankEmptyState();
                 validateForm();
             }, 200);
         }
@@ -2027,28 +2200,23 @@
                     bankName = 'Axis Bank';
                 }
 
-                // Add to verified banks (new banks are pre-verified via penny drop)
-                verifiedBanks.push(newBankId);
-
                 // Add new bank card to the UI
+                const banksList = document.getElementById('bankAccountsList');
                 const bankSection = document.getElementById('bankAccountSection');
-                const addButton = bankSection.querySelector('.btn-text-link');
 
                 const newRow = document.createElement('div');
                 newRow.className = 'bank-card-row';
                 newRow.id = 'bankRow_' + newBankId;
                 newRow.innerHTML = `
-                    <div class="bank-verification-card" id="bankCard_${newBankId}" data-status="verified">
+                    <div class="bank-verification-card" id="bankCard_${newBankId}" onclick="selectBankAccount('${newBankId}')">
                         <div class="bank-details">
                             <div class="bank-name">${bankName}</div>
                             <div class="account-number">${maskAccountNumber(accountNumber)}</div>
                             <div class="account-ifsc">IFSC: ${ifsc}</div>
                         </div>
-                        <div class="bank-action">
-                            <div class="verify-status verified" style="display: flex;">
-                                <span class="material-symbols-outlined">check_circle</span>
-                                <span>Verified</span>
-                            </div>
+                        <div class="bank-radio">
+                            <input type="radio" name="selectedBank" id="bankRadio_${newBankId}" value="${newBankId}">
+                            <label for="bankRadio_${newBankId}"></label>
                         </div>
                     </div>
                     <button class="bank-delete-btn" onclick="deleteBankAccount('${newBankId}')">
@@ -2056,7 +2224,13 @@
                     </button>
                 `;
 
-                bankSection.insertBefore(newRow, addButton);
+                banksList.appendChild(newRow);
+                
+                // Hide empty state and show banks list
+                checkBankEmptyState();
+                
+                // Auto-select the newly added bank
+                selectBankAccount(newBankId);
 
                 // Reset button and close overlay
                 btn.textContent = 'Verify & Add Account';
@@ -2068,11 +2242,11 @@
         // ==================== FORM VALIDATION ====================
 
         function validateForm() {
-            const hasVerifiedBank = verifiedBanks.length > 0;
+            const hasSelectedBank = selectedBank !== null && selectedBank !== '';
             const pepChecked = document.getElementById('pepDeclaration').checked;
             const btn = document.getElementById('submitBtn');
 
-            btn.disabled = !(hasVerifiedBank && pepChecked);
+            btn.disabled = !(hasSelectedBank && pepChecked);
         }
 
         function togglePepCheckbox() {
@@ -2088,7 +2262,7 @@
             // Simulate verification (2 seconds)
             setTimeout(() => {
                 // Save data
-                localStorage.setItem('niveshpe_existing_banks', JSON.stringify(verifiedBanks));
+                localStorage.setItem('niveshpe_selected_bank', selectedBank);
                 localStorage.setItem('niveshpe_existing_nominees', JSON.stringify(nominees));
 
                 // Show OTP overlay
