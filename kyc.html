@@ -878,9 +878,9 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            padding: 14px;
-            background: var(--color-bg-primary);
-            border-radius: var(--radius-md);
+            padding: 12px;
+            background: var(--color-surface);
+            border-radius: var(--radius-sm);
             cursor: pointer;
         }
 
@@ -2402,7 +2402,127 @@
             border: 1px solid var(--color-border);
             border-radius: var(--radius-md);
             padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Declaration Section */
+        .declaration-section {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Bank Radio Styles */
+        .bank-radio {
+            display: flex;
+            align-items: center;
+        }
+
+        .bank-radio input[type="radio"] {
+            display: none;
+        }
+
+        .bank-radio label {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .bank-radio input[type="radio"]:checked + label {
+            border-color: var(--color-blue);
+            background: var(--color-blue);
+        }
+
+        .bank-radio input[type="radio"]:checked + label::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bank-verification-card.selected {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        /* Nominee Radio Group */
+        .nominee-radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             margin-bottom: 16px;
+        }
+
+        .nominee-radio-option {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nominee-radio-option:active {
+            transform: scale(0.98);
+            background: var(--color-bg-primary);
+        }
+
+        .nominee-radio-option.selected {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .nominee-radio-option.subtle-option {
+            opacity: 0.8;
+        }
+
+        .radio-input {
+            display: none;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .radio-label::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .radio-input:checked + .radio-label::before {
+            border-color: var(--color-blue);
+            background: var(--color-blue);
+            box-shadow: inset 0 0 0 4px white;
+        }
+
+        .radio-label-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        .subtle-text {
+            color: var(--color-text-secondary);
         }
 
         .section-header {
@@ -3823,29 +3943,19 @@
                                     <span class="material-symbols-outlined">account_balance</span>
                                     Bank Account
                                 </div>
-                                <p class="section-description">Verify your bank account(s) to enable investments and withdrawals</p>
+                                <p class="section-description">Select your bank account for investments and withdrawals</p>
 
                                 <!-- Bank Card 1 -->
                                 <div class="bank-card-row" id="kycBankRow1">
-                                    <div class="bank-verification-card" id="kycBankCard1" data-status="unverified">
+                                    <div class="bank-verification-card selected" id="kycBankCard1" onclick="selectKycBankAccount('kycBank1')">
                                         <div class="bank-details">
                                             <div class="bank-name">State Bank of India</div>
                                             <div class="account-number">XXXX XXXX 7890</div>
                                             <div class="account-ifsc">IFSC: SBIN0001234</div>
                                         </div>
-                                        <div class="bank-action">
-                                            <button class="verify-btn" onclick="verifyKycBankAccount('kycBank1')">Verify</button>
-                                            <div class="verify-loader" style="display: none;">
-                                                <div class="mini-spinner"></div>
-                                            </div>
-                                            <div class="verify-status verified" style="display: none;">
-                                                <span class="material-symbols-outlined">check_circle</span>
-                                                <span>Verified</span>
-                                            </div>
-                                            <div class="verify-status failed" style="display: none;">
-                                                <span class="material-symbols-outlined">error</span>
-                                                <span>Failed</span>
-                                            </div>
+                                        <div class="bank-radio">
+                                            <input type="radio" name="selectedKycBank" id="kycBankRadio1" value="kycBank1" checked>
+                                            <label for="kycBankRadio1"></label>
                                         </div>
                                     </div>
                                     <button class="bank-delete-btn" onclick="deleteKycBankAccount('kycBank1')">
@@ -3855,25 +3965,15 @@
 
                                 <!-- Bank Card 2 -->
                                 <div class="bank-card-row" id="kycBankRow2">
-                                    <div class="bank-verification-card" id="kycBankCard2" data-status="unverified">
+                                    <div class="bank-verification-card" id="kycBankCard2" onclick="selectKycBankAccount('kycBank2')">
                                         <div class="bank-details">
                                             <div class="bank-name">HDFC Bank</div>
                                             <div class="account-number">XXXX XXXX 3210</div>
                                             <div class="account-ifsc">IFSC: HDFC0002345</div>
                                         </div>
-                                        <div class="bank-action">
-                                            <button class="verify-btn" onclick="verifyKycBankAccount('kycBank2')">Verify</button>
-                                            <div class="verify-loader" style="display: none;">
-                                                <div class="mini-spinner"></div>
-                                            </div>
-                                            <div class="verify-status verified" style="display: none;">
-                                                <span class="material-symbols-outlined">check_circle</span>
-                                                <span>Verified</span>
-                                            </div>
-                                            <div class="verify-status failed" style="display: none;">
-                                                <span class="material-symbols-outlined">error</span>
-                                                <span>Failed</span>
-                                            </div>
+                                        <div class="bank-radio">
+                                            <input type="radio" name="selectedKycBank" id="kycBankRadio2" value="kycBank2">
+                                            <label for="kycBankRadio2"></label>
                                         </div>
                                     </div>
                                     <button class="bank-delete-btn" onclick="deleteKycBankAccount('kycBank2')">
@@ -3891,19 +3991,23 @@
                             <!-- Section: Nominee -->
                             <div class="account-section">
                                 <div class="section-header">
-                                    <span class="material-symbols-outlined">group</span>
-                                    Nominee
+                                    <span class="material-symbols-outlined">person</span>
+                                    Nominee Details
                                 </div>
                                 <p class="section-description">Who should receive your investments in case of any unforeseen event?</p>
 
-                                <div class="nominee-option-group">
-                                    <div class="nominee-option selected" onclick="selectKycNomineeOption('later')">
-                                        <input type="radio" name="kycNomineeChoice" id="kycNomineeLater" checked>
-                                        <label for="kycNomineeLater">I'll add later</label>
+                                <div class="nominee-radio-group">
+                                    <div class="nominee-radio-option selected" onclick="selectKycNomineeOption('later')">
+                                        <input type="radio" name="kycNomineeChoice" id="kycNomineeLater" class="radio-input" checked>
+                                        <label for="kycNomineeLater" class="radio-label">
+                                            <span class="radio-label-text">I will add a nominee later</span>
+                                        </label>
                                     </div>
-                                    <div class="nominee-option" onclick="selectKycNomineeOption('now')">
-                                        <input type="radio" name="kycNomineeChoice" id="kycNomineeNow">
-                                        <label for="kycNomineeNow">Add now</label>
+                                    <div class="nominee-radio-option subtle-option" onclick="selectKycNomineeOption('now')">
+                                        <input type="radio" name="kycNomineeChoice" id="kycNomineeNow" class="radio-input">
+                                        <label for="kycNomineeNow" class="radio-label">
+                                            <span class="radio-label-text subtle-text">I want to add a nominee right now</span>
+                                        </label>
                                     </div>
                                 </div>
 
@@ -3911,8 +4015,8 @@
                                 <div id="kycNomineeCardsContainer" class="nominee-cards-container" style="display: none;"></div>
                             </div>
 
-                            <!-- Section: Declaration -->
-                            <div class="account-section">
+                            <!-- Declaration (Outside Card) -->
+                            <div class="declaration-section">
                                 <div class="checkbox-wrapper" onclick="toggleKycPepCheckbox()">
                                     <input type="checkbox" id="kycPepDeclaration" class="checkbox-input" onchange="validateAccountDetails()">
                                     <label for="kycPepDeclaration" class="checkbox-label">
@@ -5534,8 +5638,25 @@
 
         // ==================== NOMINEE FUNCTIONS ====================
 
+        // Bank Account Selection Function
+        function selectKycBankAccount(bankId) {
+            // Update radio button
+            const radioId = bankId === 'kycBank1' ? 'kycBankRadio1' : 'kycBankRadio2';
+            document.getElementById(radioId).checked = true;
+            
+            // Update visual selection
+            document.querySelectorAll('.bank-verification-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            const selectedCard = bankId === 'kycBank1' ? 'kycBankCard1' : 'kycBankCard2';
+            document.getElementById(selectedCard).classList.add('selected');
+            
+            validateAccountDetails();
+        }
+
         function selectKycNomineeOption(option) {
-            const optionElements = document.querySelectorAll('#accountDetailsState .nominee-option');
+            const optionElements = document.querySelectorAll('#accountDetailsState .nominee-radio-option');
             optionElements.forEach(opt => opt.classList.remove('selected'));
 
             if (option === 'later') {
@@ -5795,9 +5916,9 @@
 
         function validateAccountDetails() {
             const pepChecked = document.getElementById('kycPepDeclaration').checked;
-            const hasVerifiedBank = kycVerifiedBanks.length > 0;
+            const hasSelectedBank = document.querySelector('input[name="selectedKycBank"]:checked') !== null;
 
-            const isValid = hasVerifiedBank && pepChecked;
+            const isValid = hasSelectedBank && pepChecked;
             document.getElementById('btnContinueToSignature').disabled = !isValid;
         }
 
