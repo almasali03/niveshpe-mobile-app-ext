@@ -1463,6 +1463,56 @@
             cursor: pointer;
         }
 
+        /* ==================== STATE TOGGLE BUTTONS ==================== */
+
+        .state-toggle-container {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10000;
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .state-toggle-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .state-toggle-btn:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .state-toggle-btn.active {
+            background: var(--color-blue);
+            border-color: var(--color-blue);
+            color: white;
+        }
+
+        .state-toggle-btn.success-btn.active {
+            background: var(--color-green);
+            border-color: var(--color-green);
+        }
+
+        .state-toggle-btn.pending-btn.active {
+            background: var(--color-orange);
+            border-color: var(--color-orange);
+        }
+
         /* ==================== TRANSITION STATE WITH COUNTDOWN ==================== */
 
         .transition-container {
@@ -1490,12 +1540,6 @@
         .transition-icon .material-symbols-outlined {
             font-size: 32px;
             color: white;
-            animation: rotate 2s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .transition-title {
@@ -1673,15 +1717,14 @@
         <span id="frameToggleText">Normal View</span>
     </button>
 
-    <!-- Verification Scenario Toggle -->
-    <div class="verification-toggle" style="position: fixed; top: 80px; right: 20px; z-index: 10000; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-        <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #333;">
-            <span>Verification Scenario:</span>
-            <select id="verificationScenario" style="padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
-                <option value="pending">Pending (Check back)</option>
-                <option value="complete">Complete (Redirect)</option>
-            </select>
-        </label>
+    <!-- Verification State Toggle -->
+    <div class="state-toggle-container" id="verificationToggleContainer" style="display: flex;">
+        <button class="state-toggle-btn pending-btn active" onclick="setVerificationScenario('pending')">
+            Pending
+        </button>
+        <button class="state-toggle-btn success-btn" onclick="setVerificationScenario('complete')">
+            Complete
+        </button>
     </div>
 
     <div class="iphone-frame">
@@ -1878,7 +1921,7 @@
                                             <circle class="countdown-circle-bg" cx="60" cy="60" r="54"></circle>
                                             <circle class="countdown-circle-progress" cx="60" cy="60" r="54"></circle>
                                         </svg>
-                                        <div class="countdown-number" id="countdownNumber">5</div>
+                                        <div class="countdown-number" id="countdownNumber">10</div>
                                     </div>
                                 </div>
                                 
@@ -2911,9 +2954,14 @@
             showState('transitionState');
             
             // Start countdown
-            let countdown = 5;
+            let countdown = 10;
             const countdownEl = document.getElementById('countdownNumber');
             const progressCircle = document.querySelector('.countdown-circle-progress');
+            
+            // Update initial number
+            if (countdownEl) {
+                countdownEl.textContent = countdown;
+            }
             
             // Set initial progress
             const circumference = 2 * Math.PI * 54; // 339.292
@@ -2928,17 +2976,17 @@
                 }
                 
                 // Update progress circle
-                const progress = (5 - countdown) / 5;
+                const progress = (10 - countdown) / 10;
                 const offset = circumference * progress;
                 progressCircle.style.strokeDashoffset = offset;
                 
                 if (countdown === 0) {
                     clearInterval(countdownInterval);
                     
-                    // Check selected scenario
-                    const scenario = document.getElementById('verificationScenario').value;
+                    // Check selected scenario based on active toggle button
+                    const isComplete = document.querySelector('.state-toggle-btn.success-btn').classList.contains('active');
                     
-                    if (scenario === 'complete') {
+                    if (isComplete) {
                         // Show success and redirect
                         submitAndComplete();
                     } else {
@@ -2947,6 +2995,18 @@
                     }
                 }
             }, 1000);
+        }
+
+        // Toggle button functions
+        function setVerificationScenario(scenario) {
+            const buttons = document.querySelectorAll('#verificationToggleContainer .state-toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (scenario === 'complete') {
+                document.querySelector('.state-toggle-btn.success-btn').classList.add('active');
+            } else {
+                document.querySelector('.state-toggle-btn.pending-btn').classList.add('active');
+            }
         }
 
         function showPendingState() {
