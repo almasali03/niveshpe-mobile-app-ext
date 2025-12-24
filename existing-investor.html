@@ -1463,6 +1463,162 @@
             cursor: pointer;
         }
 
+        /* ==================== TRANSITION STATE WITH COUNTDOWN ==================== */
+
+        .transition-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            min-height: 400px;
+        }
+
+        .transition-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--color-blue), var(--color-blue-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .transition-icon .material-symbols-outlined {
+            font-size: 32px;
+            color: white;
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .transition-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .transition-message {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .countdown-wrapper {
+            position: relative;
+            margin: 32px 0;
+        }
+
+        .countdown-circle {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .countdown-svg {
+            transform: rotate(-90deg);
+        }
+
+        .countdown-circle-bg {
+            fill: none;
+            stroke: var(--color-border);
+            stroke-width: 4;
+        }
+
+        .countdown-circle-progress {
+            fill: none;
+            stroke: var(--color-blue);
+            stroke-width: 4;
+            stroke-dasharray: 339.292;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+            stroke-linecap: round;
+        }
+
+        .countdown-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        .transition-subtext {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-top: 16px;
+        }
+
+        /* ==================== PENDING STATE ==================== */
+
+        .pending-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            min-height: 400px;
+        }
+
+        .pending-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--color-orange), #FBBF24);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .pending-icon .material-symbols-outlined {
+            font-size: 32px;
+            color: white;
+        }
+
+        .pending-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 12px;
+        }
+
+        .pending-message {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+            max-width: 300px;
+        }
+
+        .pending-info {
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 32px;
+        }
+
+        .pending-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--color-orange);
+        }
+
+        .pending-info-item .material-symbols-outlined {
+            font-size: 20px;
+        }
+
         /* ==================== SUCCESS STATE ==================== */
 
         .success-container {
@@ -1516,6 +1672,17 @@
         </svg>
         <span id="frameToggleText">Normal View</span>
     </button>
+
+    <!-- Verification Scenario Toggle -->
+    <div class="verification-toggle" style="position: fixed; top: 80px; right: 20px; z-index: 10000; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #333;">
+            <span>Verification Scenario:</span>
+            <select id="verificationScenario" style="padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                <option value="pending">Pending (Check back)</option>
+                <option value="complete">Complete (Redirect)</option>
+            </select>
+        </label>
+    </div>
 
     <div class="iphone-frame">
         <!-- iPhone Notch (Dynamic Island style) -->
@@ -1691,6 +1858,53 @@
                             <div class="loading-container show">
                                 <div class="loading-spinner"></div>
                                 <div class="loading-text">Verifying details...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== TRANSITION STATE ==================== -->
+                    <div class="kyc-state" id="transitionState">
+                        <div class="kyc-container">
+                            <div class="transition-container">
+                                <div class="transition-icon">
+                                    <span class="material-symbols-outlined">hourglass_empty</span>
+                                </div>
+                                <h2 class="transition-title">Processing Your Request</h2>
+                                <p class="transition-message">Please wait while we verify your details</p>
+                                
+                                <div class="countdown-wrapper">
+                                    <div class="countdown-circle">
+                                        <svg class="countdown-svg" width="120" height="120">
+                                            <circle class="countdown-circle-bg" cx="60" cy="60" r="54"></circle>
+                                            <circle class="countdown-circle-progress" cx="60" cy="60" r="54"></circle>
+                                        </svg>
+                                        <div class="countdown-number" id="countdownNumber">5</div>
+                                    </div>
+                                </div>
+                                
+                                <p class="transition-subtext">Verifying your information...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== VERIFICATION PENDING STATE ==================== -->
+                    <div class="kyc-state" id="pendingState">
+                        <div class="kyc-container">
+                            <div class="pending-container">
+                                <div class="pending-icon">
+                                    <span class="material-symbols-outlined">schedule</span>
+                                </div>
+                                <h2 class="pending-title">Verification In Progress</h2>
+                                <p class="pending-message">Your verification is being processed by our team. This typically takes 2-3 minutes.</p>
+                                <div class="pending-info">
+                                    <div class="pending-info-item">
+                                        <span class="material-symbols-outlined">info</span>
+                                        <span>Please check back in a few minutes</span>
+                                    </div>
+                                </div>
+                                <button class="btn-primary" onclick="window.location.href='index.html'">
+                                    Go to Home
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -2688,8 +2902,64 @@
 
             setTimeout(() => {
                 closeOtpOverlay();
-                submitAndComplete();
+                showTransitionScreen();
             }, 1500);
+        }
+
+        function showTransitionScreen() {
+            // Show transition state
+            showState('transitionState');
+            
+            // Start countdown
+            let countdown = 5;
+            const countdownEl = document.getElementById('countdownNumber');
+            const progressCircle = document.querySelector('.countdown-circle-progress');
+            
+            // Set initial progress
+            const circumference = 2 * Math.PI * 54; // 339.292
+            progressCircle.style.strokeDasharray = circumference;
+            progressCircle.style.strokeDashoffset = 0;
+            
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                
+                if (countdownEl) {
+                    countdownEl.textContent = countdown;
+                }
+                
+                // Update progress circle
+                const progress = (5 - countdown) / 5;
+                const offset = circumference * progress;
+                progressCircle.style.strokeDashoffset = offset;
+                
+                if (countdown === 0) {
+                    clearInterval(countdownInterval);
+                    
+                    // Check selected scenario
+                    const scenario = document.getElementById('verificationScenario').value;
+                    
+                    if (scenario === 'complete') {
+                        // Show success and redirect
+                        submitAndComplete();
+                    } else {
+                        // Show pending state
+                        showPendingState();
+                    }
+                }
+            }, 1000);
+        }
+
+        function showPendingState() {
+            // Save partial data
+            localStorage.setItem('niveshpe_verification_pending', JSON.stringify({
+                status: 'pending',
+                timestamp: new Date().toISOString(),
+                selectedBank: selectedBank,
+                nominees: nominees
+            }));
+            
+            // Show pending state
+            showState('pendingState');
         }
 
         function resendOtp() {
