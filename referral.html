@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral - NiveshPe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+            padding: 24px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        .referral-card {
+            background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+            border: 1px solid #FED7AA;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .referral-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+        }
+
+        .referral-icon svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .referral-code {
+            background: white;
+            border: 2px dashed #F97316;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: #F97316;
+            letter-spacing: 2px;
+        }
+
+        .copy-btn {
+            background: #F97316;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #EA580C;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .benefits {
+            margin-top: 32px;
+        }
+
+        .benefits h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 16px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #F8F9FA;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .benefit-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .benefit-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .benefit-text {
+            flex: 1;
+        }
+
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 4px;
+        }
+
+        .benefit-desc {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        .share-section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .share-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .share-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #E5E7EB;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .share-btn.whatsapp {
+            background: #25D366;
+            border-color: #25D366;
+        }
+
+        .share-btn.telegram {
+            background: #0088CC;
+            border-color: #0088CC;
+        }
+
+        .share-btn.twitter {
+            background: #1DA1F2;
+            border-color: #1DA1F2;
+        }
+
+        .share-btn svg {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+
+        .external-link-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+            color: white;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .external-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 0;
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Refer & Earn</h1>
+            <p>Share NiveshPe with friends and earn rewards!</p>
+        </div>
+
+        <div class="content">
+            <div class="referral-card">
+                <div class="referral-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2">
+                        <path d="M20 12V22H4V12M2 7H22L12 2L2 7Z"/>
+                        <path d="M12 22V12"/>
+                    </svg>
+                </div>
+                <h3 style="color: #EA580C; margin-bottom: 8px;">Your Referral Code</h3>
+                <div class="referral-code" id="referralCode">NVSH2024</div>
+                <button class="copy-btn" onclick="copyReferralCode()">Copy Code</button>
+            </div>
+
+            <div class="benefits">
+                <h2>How it Works</h2>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Share Your Code</div>
+                        <div class="benefit-desc">Share your unique referral code with friends</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Friends Sign Up</div>
+                        <div class="benefit-desc">When they join using your code</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1.81.45 1.61 1.67 1.61 1.16 0 1.6-.64 1.6-1.32 0-.71-.4-1.36-2.02-1.71-1.96-.43-3.45-1.33-3.45-3.31 0-1.86 1.41-2.97 3.18-3.34V4.67h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.63-1.63-1.63-1.01 0-1.46.59-1.46 1.28 0 .64.41 1.02 2.16 1.46 1.96.51 3.28 1.36 3.28 3.53.01 1.93-1.35 3.08-3.24 3.44z"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <div class="benefit-title">Earn Rewards</div>
+                        <div class="benefit-desc">Get ₹100 for each successful referral</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="share-section">
+                <div class="share-title">Share via</div>
+                <div class="share-buttons">
+                    <button class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.546 20.2A1.01 1.01 0 0 0 3.8 21.454l3.032-.892A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn telegram" onclick="shareOnTelegram()">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn twitter" onclick="shareOnTwitter()">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- External Link Button - Update the href with your actual URL -->
+            <a href="#" class="external-link-btn" id="externalLink">
+                Visit Full Referral Program →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // You can update this with your actual referral URL
+        const EXTERNAL_REFERRAL_URL = 'https://example.com/referral';
+        
+        // Set the external link
+        document.getElementById('externalLink').href = EXTERNAL_REFERRAL_URL;
+
+        // Generate a unique referral code (you can replace this with actual user's code)
+        function generateReferralCode() {
+            const userId = Math.random().toString(36).substring(2, 8).toUpperCase();
+            return 'NVSH' + userId;
+        }
+
+        // Set referral code on load
+        window.onload = function() {
+            // You can fetch the actual user's referral code here
+            // For now, using a static code
+            // document.getElementById('referralCode').textContent = generateReferralCode();
+        };
+
+        function copyReferralCode() {
+            const code = document.getElementById('referralCode').textContent;
+            navigator.clipboard.writeText(code).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = '#10B981';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#F97316';
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+
+        function shareOnWhatsApp() {
+            const code = document.getElementById('referralCode').textContent;
+            const message = `Join NiveshPe and start investing smartly! Use my referral code: ${code} to get started. Download now: ${EXTERNAL_REFERRAL_URL}`;
+            const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareOnTelegram() {
+            const code = document.getElementById('referralCode').textContent;
+            const message = `Join NiveshPe and start investing smartly! Use my referral code: ${code} to get started.`;
+            const url = `https://t.me/share/url?url=${encodeURIComponent(EXTERNAL_REFERRAL_URL)}&text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareOnTwitter() {
+            const code = document.getElementById('referralCode').textContent;
+            const message = `Start your investment journey with @NiveshPe! Use my referral code: ${code} for exclusive benefits.`;
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${encodeURIComponent(EXTERNAL_REFERRAL_URL)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>

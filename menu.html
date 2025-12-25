@@ -722,6 +722,20 @@
 
         <div class="menu-divider"></div>
 
+        <!-- Section: Referral -->
+        <div class="menu-section">
+            <div class="menu-item" onclick="openReferralPage()" style="background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%); border: 1px solid #FED7AA;">
+                <span class="material-symbols-outlined" style="color: #F97316;">card_giftcard</span>
+                <div class="menu-item-content">
+                    <div class="menu-item-label" style="color: #F97316; font-weight: 600;">Refer & Earn</div>
+                    <div class="menu-item-subtitle" style="color: #FB923C; font-size: 12px;">Share and earn rewards</div>
+                </div>
+                <span class="material-symbols-outlined" style="color: #F97316;">chevron_right</span>
+            </div>
+        </div>
+
+        <div class="menu-divider"></div>
+
         <!-- Section 2: Banking & Payments -->
         <div class="menu-section">
             <div class="menu-section-header">Banking & Payments</div>
@@ -1020,6 +1034,11 @@
                 }, 100);
             });
         });
+        // Referral page function
+        function openReferralPage() {
+            // You can update this URL with your actual referral page URL
+            window.open('referral.html', '_blank');
+        }
     </script>
     <script src="assets/js/iphone-toggle.js"></script>
 </body>
