@@ -1432,7 +1432,7 @@
             </div>
             <div class="header-actions">
                 <button onclick="openReferralPage()" style="margin-right: 8px; padding: 0; background: transparent; border: none; cursor: pointer;">
-                    <img src="assets/rewards2-bg-removed.png" alt="Claim ₹1000" style="height: 32px; width: auto;">
+                    <img src="assets/rupee-coin.png" alt="Refer & Earn" style="height: 44px; width: 44px;">
                 </button>
                 <button class="icon-btn" onclick="window.location.href='menu.html'">
                     <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1533,6 +1533,28 @@
                 <div class="goals-scroll-indicator">
                     <div class="scroll-dot active"></div>
                     <div class="scroll-dot"></div>
+                </div>
+            </div>
+
+            <!-- Referral CTA Section -->
+            <div class="referral-cta-section section-spacing" onclick="openReferralPage()" style="cursor: pointer;">
+                <div class="referral-cta-card" style="background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%); border-radius: 16px; padding: 20px; box-shadow: 0 4px 6px rgba(251, 146, 60, 0.1); border: 1px solid #FED7AA; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; opacity: 0.1;">
+                        <img src="assets/rupee-coin.png" alt="" style="width: 120px; height: 120px; transform: rotate(15deg);">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; position: relative; z-index: 1;">
+                        <img src="assets/rupee-coin.png" alt="Rewards" style="width: 56px; height: 56px;">
+                        <div style="flex: 1;">
+                            <h3 style="color: #EA580C; font-size: 18px; font-weight: 700; margin-bottom: 4px;">Earn ₹1000 Per Friend You Refer</h3>
+                            <p style="color: #FB923C; font-size: 14px; margin-bottom: 8px;">Get instant cash when your friend starts an SIP. No limits!</p>
+                            <div style="display: flex; align-items: center; gap: 4px;">
+                                <span style="color: #F97316; font-size: 14px; font-weight: 600;">Share your code now</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#F97316">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2150,8 +2172,8 @@
     <script>
         // Referral page function
         function openReferralPage() {
-            // You can update this URL with your actual referral page URL
-            window.open('referral.html', '_blank');
+            // Redirect to NiveshPe referral page
+            window.open('https://niveshpe.com/referral', '_blank');
         }
     </script>
 </body>
