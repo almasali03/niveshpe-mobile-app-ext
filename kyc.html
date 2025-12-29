@@ -92,6 +92,45 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
+        
+        @keyframes slideInFromTop {
+            from { 
+                opacity: 0; 
+                transform: translateY(-20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes rotating {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .rotating {
+            animation: rotating 1s linear infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+                transform: scale(1.02);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+                transform: scale(1);
+            }
+        }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -4029,41 +4068,10 @@
                     <div class="kyc-state" id="signatureState">
                         <div class="kyc-container">
                             <h2 class="welcome-text">Digital Signature</h2>
-                            <p class="subtitle-text">Review and sign your Account Opening Form</p>
+                            <p class="subtitle-text">Create your signature and complete the e-signing process</p>
 
-                            <!-- Document Preview Card -->
-                            <div class="document-preview-card">
-                                <div class="document-preview-header">
-                                    <div class="document-icon">
-                                        <span class="material-symbols-outlined">description</span>
-                                    </div>
-                                    <div class="document-info">
-                                        <div class="document-title">Account Opening Form (AOF)</div>
-                                        <div class="document-meta">BSE StAR MF • Generated today</div>
-                                    </div>
-                                </div>
-                                <div class="document-summary">
-                                    <div class="summary-row">
-                                        <span class="summary-label">Investor Name</span>
-                                        <span class="summary-value" id="aofInvestorName">RAJAT YADAV</span>
-                                    </div>
-                                    <div class="summary-row">
-                                        <span class="summary-label">Application Type</span>
-                                        <span class="summary-value">New Registration</span>
-                                    </div>
-                                    <div class="summary-row">
-                                        <span class="summary-label">KYC Status</span>
-                                        <span class="summary-value summary-badge">Verified</span>
-                                    </div>
-                                </div>
-                                <button class="btn-view-document" onclick="showAOFDocument()">
-                                    <span class="material-symbols-outlined">visibility</span>
-                                    View Full Document
-                                </button>
-                            </div>
-
-                            <!-- Signature Canvas -->
-                            <div class="signature-container">
+                            <!-- Signature Canvas Section (Moved to Top) -->
+                            <div class="signature-container" style="margin-bottom: 24px;">
                                 <div class="signature-label">Draw your signature below</div>
                                 <div class="signature-canvas-wrapper">
                                     <canvas id="signatureCanvas"></canvas>
@@ -4072,23 +4080,92 @@
                                         <span>Sign here</span>
                                     </div>
                                 </div>
-                                <button class="btn-clear-signature" onclick="clearSignature()">
-                                    <span class="material-symbols-outlined">delete</span>
-                                    Clear
-                                </button>
+                                <div style="display: flex; justify-content: space-between; margin-top: 12px;">
+                                    <button class="btn-clear-signature" onclick="clearSignature()">
+                                        <span class="material-symbols-outlined">delete</span>
+                                        Clear
+                                    </button>
+                                    <button class="btn-save-signature" id="saveSignatureBtn" onclick="saveSignature()" disabled style="background: #10B981; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                                        <span class="material-symbols-outlined" style="font-size: 18px;">check</span>
+                                        Save Signature
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- Acknowledgment Checkbox -->
-                            <label class="acknowledgment-checkbox">
-                                <input type="checkbox" id="aofAcknowledgment" onchange="updateSubmitButton()">
-                                <span class="checkbox-custom"></span>
-                                <span class="checkbox-label">I have reviewed the Account Opening Form and confirm all details are correct</span>
-                            </label>
+                            <!-- Saved Signature Confirmation -->
+                            <div id="signatureSavedCard" style="display: none; background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); border: 1px solid #10B981; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div style="width: 40px; height: 40px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                        <span class="material-symbols-outlined" style="color: white; font-size: 24px;">check</span>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 600; color: #065F46;">Signature Saved Successfully</div>
+                                        <div style="font-size: 13px; color: #047857; margin-top: 2px;">Your signature has been captured and saved</div>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <!-- Submit Button -->
-                            <button class="btn-primary" id="submitSignatureBtn" onclick="submitKYC()" disabled>
-                                Complete KYC
-                            </button>
+                            <!-- Document Preview Card with E-Sign -->
+                            <div class="document-preview-card" style="border: 1px solid #E5E7EB; border-radius: 12px; overflow: hidden;">
+                                <div class="document-preview-header" style="background: #F9FAFB; padding: 16px;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="document-icon" style="background: white; padding: 8px; border-radius: 8px;">
+                                            <span class="material-symbols-outlined" style="color: #2563EB;">description</span>
+                                        </div>
+                                        <div class="document-info">
+                                            <div class="document-title" style="font-weight: 600; color: #1F2937;">Account Opening Form (AOF)</div>
+                                            <div class="document-meta" style="font-size: 13px; color: #6B7280; margin-top: 2px;">BSE StAR MF • E-Sign Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- AOF Preview Details -->
+                                <div class="document-summary" style="padding: 16px; background: white;">
+                                    <div class="summary-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #F3F4F6;">
+                                        <span class="summary-label" style="color: #6B7280; font-size: 14px;">Investor Name</span>
+                                        <span class="summary-value" id="aofInvestorName" style="font-weight: 600; color: #1F2937;">RAJAT YADAV</span>
+                                    </div>
+                                    <div class="summary-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #F3F4F6;">
+                                        <span class="summary-label" style="color: #6B7280; font-size: 14px;">PAN</span>
+                                        <span class="summary-value" id="aofPAN" style="font-weight: 600; color: #1F2937;">ABCDE1234F</span>
+                                    </div>
+                                    <div class="summary-row" style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                        <span class="summary-label" style="color: #6B7280; font-size: 14px;">Aadhaar (Last 4 digits)</span>
+                                        <span class="summary-value" id="aofAadhaar" style="font-weight: 600; color: #1F2937;">XXXX XXXX 1234</span>
+                                    </div>
+                                </div>
+
+                                <!-- E-Sign Button -->
+                                <div style="padding: 16px; background: #F9FAFB; border-top: 1px solid #E5E7EB;">
+                                    <button class="btn-primary" id="eSignBtn" onclick="initiateESign()" disabled style="width: 100%; background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%); display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px;">
+                                        <span class="material-symbols-outlined">verified_user</span>
+                                        E-Sign Document
+                                    </button>
+                                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 12px; justify-content: center;">
+                                        <span class="material-symbols-outlined" style="font-size: 16px; color: #6B7280;">info</span>
+                                        <span style="font-size: 12px; color: #6B7280;">You'll be redirected to complete OTP-based e-signing</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Acknowledgment Note -->
+                            <div style="background: #FEF3C7; border: 1px solid #FCD34D; border-radius: 8px; padding: 12px; margin-top: 16px; display: flex; gap: 10px;">
+                                <span class="material-symbols-outlined" style="color: #F59E0B; font-size: 20px;">priority_high</span>
+                                <div style="font-size: 13px; color: #92400E;">
+                                    By proceeding with e-sign, you confirm that all details in the Account Opening Form are correct and authorize NiveshPe to process mutual fund transactions on your behalf.
+                                </div>
+                            </div>
+                            
+                            <!-- Submit Details Button (Shows after both steps complete) -->
+                            <div id="submitDetailsSection" style="margin-top: 24px; display: none;">
+                                <button class="btn-primary" id="submitDetailsBtn" onclick="submitKYC()" disabled style="width: 100%; background: linear-gradient(135deg, #10B981 0%, #059669 100%); display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; font-size: 16px; font-weight: 600;">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                    Submit Details
+                                </button>
+                                <div style="text-align: center; margin-top: 8px;">
+                                    <span style="font-size: 13px; color: #6B7280;">Your KYC will be completed after submission</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -5431,6 +5508,17 @@
 
         // Continue to signature step (after account details)
         function continueToSignature() {
+            // Populate AOF preview with actual user data
+            const userName = localStorage.getItem('aadhaar_name') || 'RAJAT YADAV';
+            const userPAN = localStorage.getItem('verified_pan') || 'ABCDE1234F';
+            const aadhaarLast4 = localStorage.getItem('aadhaar_last_4') || '1234';
+            
+            // Update AOF preview fields
+            document.getElementById('aofInvestorName').textContent = userName;
+            document.getElementById('aofPAN').textContent = userPAN;
+            document.getElementById('aofAadhaar').textContent = 'XXXX XXXX ' + aadhaarLast4;
+            
+            // Navigate to signature page
             navigateTo('signature');
         }
 
@@ -6103,14 +6191,151 @@
             // Show placeholder, deactivate wrapper
             document.getElementById('signaturePlaceholder').classList.remove('hidden');
             document.querySelector('.signature-canvas-wrapper').classList.remove('active');
+            
+            // Reset saved state
+            document.getElementById('signatureSavedCard').style.display = 'none';
+            document.getElementById('saveSignatureBtn').style.display = 'flex';
+            document.getElementById('saveSignatureBtn').disabled = true;
+            
+            // Re-enable canvas
+            const canvas = document.getElementById('signatureCanvas');
+            canvas.style.pointerEvents = 'auto';
+            canvas.style.opacity = '1';
+            
+            // Disable e-sign button
+            document.getElementById('eSignBtn').disabled = true;
+            document.getElementById('eSignBtn').innerHTML = '<span class="material-symbols-outlined">verified_user</span> E-Sign Document';
+            document.getElementById('eSignBtn').style.background = 'linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)';
+            
+            // Clear stored signature and e-sign status
+            localStorage.removeItem('user_signature');
+            localStorage.removeItem('esign_completed');
+            
+            // Hide submit details section
+            document.getElementById('submitDetailsSection').style.display = 'none';
+            document.getElementById('submitDetailsBtn').disabled = true;
 
             updateSubmitButton();
         }
 
         function updateSubmitButton() {
-            const submitBtn = document.getElementById('submitSignatureBtn');
-            const acknowledgmentChecked = document.getElementById('aofAcknowledgment')?.checked || false;
-            submitBtn.disabled = !(hasSignature && acknowledgmentChecked);
+            const saveBtn = document.getElementById('saveSignatureBtn');
+            const eSignBtn = document.getElementById('eSignBtn');
+            
+            // Enable save button if signature is drawn
+            if (saveBtn) {
+                saveBtn.disabled = !hasSignature;
+            }
+            
+            // Enable e-sign button only if signature is saved
+            if (eSignBtn) {
+                const signatureSaved = document.getElementById('signatureSavedCard').style.display !== 'none';
+                eSignBtn.disabled = !signatureSaved;
+            }
+        }
+
+        function saveSignature() {
+            if (!hasSignature) return;
+            
+            // Show saved confirmation card
+            document.getElementById('signatureSavedCard').style.display = 'block';
+            
+            // Disable canvas interaction
+            const canvas = document.getElementById('signatureCanvas');
+            canvas.style.pointerEvents = 'none';
+            canvas.style.opacity = '0.7';
+            
+            // Hide save button, show only clear button
+            document.getElementById('saveSignatureBtn').style.display = 'none';
+            
+            // Store signature data
+            const signatureData = signatureCanvas.toDataURL();
+            localStorage.setItem('user_signature', signatureData);
+            
+            // Enable e-sign button
+            document.getElementById('eSignBtn').disabled = false;
+            
+            // Show success animation
+            const savedCard = document.getElementById('signatureSavedCard');
+            savedCard.style.animation = 'slideInFromTop 0.3s ease-out';
+            
+            // Check if we should enable submit button (in case e-sign was already done)
+            if (localStorage.getItem('esign_completed') === 'true') {
+                document.getElementById('submitDetailsSection').style.display = 'block';
+                checkAndEnableSubmit();
+            }
+        }
+
+        function initiateESign() {
+            // Check if signature is saved
+            const signatureSaved = document.getElementById('signatureSavedCard').style.display !== 'none';
+            if (!signatureSaved) {
+                alert('Please save your signature first');
+                return;
+            }
+            
+            // Get user data for e-sign
+            const userData = {
+                name: document.getElementById('aofInvestorName').textContent,
+                pan: document.getElementById('aofPAN').textContent,
+                aadhaar_last_4: document.getElementById('aofAadhaar').textContent.split(' ').pop(),
+                signature: localStorage.getItem('user_signature'),
+                timestamp: new Date().toISOString()
+            };
+            
+            // Store data for webview
+            localStorage.setItem('esign_data', JSON.stringify(userData));
+            
+            // Show loading state
+            const eSignBtn = document.getElementById('eSignBtn');
+            eSignBtn.innerHTML = '<span class="material-symbols-outlined rotating">progress_activity</span> Redirecting...';
+            eSignBtn.disabled = true;
+            
+            // Simulate redirect to e-sign webview
+            setTimeout(() => {
+                // In real implementation, this would open a webview or redirect to e-sign service
+                console.log('Redirecting to e-sign service with data:', userData);
+                
+                // For demo, simulate successful e-sign after 2 seconds
+                setTimeout(() => {
+                    completeESign();
+                }, 2000);
+            }, 1000);
+        }
+
+        function completeESign() {
+            // Update button to show success
+            const eSignBtn = document.getElementById('eSignBtn');
+            eSignBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> E-Sign Completed';
+            eSignBtn.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
+            eSignBtn.disabled = true;
+            
+            // Mark e-sign as completed
+            localStorage.setItem('esign_completed', 'true');
+            
+            // Show submit details section
+            const submitSection = document.getElementById('submitDetailsSection');
+            submitSection.style.display = 'block';
+            submitSection.style.animation = 'fadeIn 0.5s ease-out';
+            
+            // Check if both steps are complete
+            checkAndEnableSubmit();
+        }
+        
+        function checkAndEnableSubmit() {
+            const signatureSaved = document.getElementById('signatureSavedCard').style.display !== 'none';
+            const eSignCompleted = localStorage.getItem('esign_completed') === 'true';
+            
+            const submitBtn = document.getElementById('submitDetailsBtn');
+            if (submitBtn) {
+                // Enable button only if both signature is saved and e-sign is completed
+                submitBtn.disabled = !(signatureSaved && eSignCompleted);
+                
+                if (signatureSaved && eSignCompleted) {
+                    // Add pulsing animation to draw attention
+                    submitBtn.style.animation = 'pulse 2s infinite';
+                }
+            }
         }
 
         // AOF Document Overlay
