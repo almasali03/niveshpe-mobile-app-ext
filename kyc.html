@@ -6356,16 +6356,31 @@
 
         // Submit KYC
         function submitKYC() {
-            const acknowledgmentChecked = document.getElementById('aofAcknowledgment')?.checked || false;
-            if (!hasSignature || !acknowledgmentChecked) return;
+            // Check if both steps are complete
+            const signatureSaved = document.getElementById('signatureSavedCard').style.display !== 'none';
+            const eSignCompleted = localStorage.getItem('esign_completed') === 'true';
+            
+            if (!signatureSaved || !eSignCompleted) {
+                console.log('Cannot submit: Signature saved:', signatureSaved, 'E-sign completed:', eSignCompleted);
+                return;
+            }
 
-            const submitBtn = document.getElementById('submitSignatureBtn');
+            const submitBtn = document.getElementById('submitDetailsBtn');
+            if (!submitBtn) return;
+            
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="loading-spinner" style="width: 20px; height: 20px; margin-right: 8px;"></span> Processing...';
+            submitBtn.innerHTML = '<span class="material-symbols-outlined rotating">progress_activity</span> Processing...';
 
             // Simulate API call
             setTimeout(() => {
+                // Mark KYC as complete
                 completedSteps.push('signature');
+                localStorage.setItem('kyc_completed', 'true');
+                
+                // Clear temporary data
+                localStorage.removeItem('esign_completed');
+                
+                // Navigate to success page
                 navigateTo('success');
             }, 2000);
         }
