@@ -1270,8 +1270,9 @@
             const code = input ? input.value.trim() : '';
             
             if (code.length >= 4) {
-                // Save the referral code
-                localStorage.setItem('referral_code', code);
+                // Don't persist the referral code - just keep it for this session
+                // localStorage.setItem('referral_code', code);
+                window.referralCode = code; // Store in memory only
                 
                 // Show success message briefly
                 const saveBtn = document.getElementById('saveReferralBtn');
@@ -1473,19 +1474,12 @@
                 input.value = '';
             });
             
-            // Reset referral CTA if no code saved
+            // Reset referral CTA
             const referralCTA = document.querySelector('[onclick="toggleReferralInput()"]');
-            const savedCode = localStorage.getItem('referral_code');
             if (referralCTA) {
-                if (savedCode) {
-                    referralCTA.style.color = '#10B981';
-                    referralCTA.innerHTML = `✓ Code: ${savedCode}`;
-                    referralCTA.disabled = true;
-                } else {
-                    referralCTA.style.color = '#6B7280';
-                    referralCTA.innerHTML = 'Have a referral code?';
-                    referralCTA.disabled = false;
-                }
+                referralCTA.style.color = '#6B7280';
+                referralCTA.innerHTML = 'Have a referral code?';
+                referralCTA.disabled = false;
             }
 
             switchState('phone');
@@ -1618,15 +1612,6 @@
             // Initialize with phone state - header replaced with brand header
             // Old header references removed
             setupOtpInputs();
-            
-            // Check if referral code is already saved
-            const savedCode = localStorage.getItem('referral_code');
-            const referralCTA = document.querySelector('[onclick="toggleReferralInput()"]');
-            if (savedCode && referralCTA) {
-                referralCTA.style.color = '#10B981';
-                referralCTA.innerHTML = `✓ Code: ${savedCode}`;
-                referralCTA.disabled = true;
-            }
         });
 
         // Touch swipe for carousel
