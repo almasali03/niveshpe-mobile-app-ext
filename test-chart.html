@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chart Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            height: 300px;
+        }
+        .status {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Chart.js Test</h1>
+
+    <div id="status" class="status">Initializing...</div>
+
+    <div class="chart-container">
+        <canvas id="testChart"></canvas>
+    </div>
+
+    <script>
+        console.log('=== CHART TEST START ===');
+
+        const statusEl = document.getElementById('status');
+
+        // Check if Chart.js loaded
+        if (typeof Chart === 'undefined') {
+            statusEl.innerHTML = '<span class="error">ERROR: Chart.js not loaded!</span>';
+            console.error('Chart.js not loaded');
+        } else {
+            statusEl.innerHTML = '<span class="success">✓ Chart.js loaded (version: ' + Chart.version + ')</span>';
+            console.log('Chart.js loaded, version:', Chart.version);
+        }
+
+        // Sample data
+        const chartData = {
+            '5Y': {
+                labels: ['2021', 'Jan 2021', 'Apr 2021', 'Jul 2021', 'Oct 2021', 'Jan 2022', 'Apr 2022', 'Jul 2022', 'Oct 2022', 'Jan 2023', 'Apr 2023', 'Jul 2023', 'Oct 2023', 'Jan 2024', 'Apr 2024', 'Jul 2024', 'Oct 2024', 'Jan 2025', 'Apr 2025', 'Jul 2025', 'Oct 2025', 'Dec 2025'],
+                data: [380.25, 395.40, 410.85, 425.30, 438.65, 455.20, 470.35, 485.90, 498.25, 515.40, 535.80, 548.65, 562.40, 580.25, 598.70, 615.35, 632.90, 658.45, 685.20, 715.80, 780.35, 845.32]
+            }
+        };
+
+        // Initialize chart on load
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing chart...');
+
+            const canvas = document.getElementById('testChart');
+            console.log('Canvas element:', canvas);
+            console.log('Canvas dimensions:', canvas.offsetWidth, 'x', canvas.offsetHeight);
+
+            if (!canvas) {
+                statusEl.innerHTML += '<br><span class="error">ERROR: Canvas not found!</span>';
+                console.error('Canvas not found');
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
+            const periodData = chartData['5Y'];
+
+            try {
+                const myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: periodData.labels,
+                        datasets: [{
+                            label: 'NAV',
+                            data: periodData.data,
+                            borderColor: '#2563EB',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            borderWidth: 2.5,
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: '#2563EB',
+                            pointHoverBorderColor: '#FFFFFF',
+                            pointHoverBorderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                enabled: true,
+                                callbacks: {
+                                    label: (context) => '₹' + context.parsed.y.toFixed(2)
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { display: false }
+                            },
+                            y: {
+                                grid: { color: '#F3F4F6' },
+                                ticks: {
+                                    callback: function(value) {
+                                        if (value >= 1000) return '₹' + (value / 1000).toFixed(1) + 'k';
+                                        return '₹' + value.toFixed(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                statusEl.innerHTML += '<br><span class="success">✓ Chart initialized successfully!</span>';
+                console.log('Chart created successfully:', myChart);
+
+            } catch (error) {
+                statusEl.innerHTML += '<br><span class="error">ERROR creating chart: ' + error.message + '</span>';
+                console.error('Error creating chart:', error);
+            }
+        });
+    </script>
+</body>
+</html>

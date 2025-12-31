@@ -1,0 +1,159 @@
+================================================================================
+CLEVERTAP vs AMPLITUDE FORMAT - QUICK REFERENCE GUIDE
+================================================================================
+
+🔄 KEY DIFFERENCES AT A GLANCE:
+
+1. EVENT NAMES:
+   ❌ CleverTap: "App Launch", "Sign Up Complete", "Fund Selected"
+   ✅ Amplitude: "app_launch", "sign_up_complete", "fund_selected"
+   
+   Rule: Convert to lowercase with underscores (snake_case)
+
+2. EVENT PROPERTIES:
+   ❌ CleverTap: "Fund Name", "Payment Method", "Investment Amount"
+   ✅ Amplitude: "fund_name", "payment_method", "investment_amount"
+   
+   Rule: Always use snake_case for properties
+
+3. PROPERTY VALUES:
+   ❌ CleverTap: "SIP", "Lumpsum", "UPI"
+   ✅ Amplitude: "sip", "lumpsum", "upi"
+   
+   Rule: Lowercase values preferred
+
+4. USER PROPERTIES:
+   ❌ CleverTap: "Name", "Email", "Customer Type"
+   ✅ Amplitude: "user_name", "user_email", "user_type"
+   
+   Rule: Prefix with "user_" for clarity
+
+================================================================================
+YOUR CLEVERTAP SHEET STRUCTURE vs AMPLITUDE STRUCTURE
+================================================================================
+
+YOUR CLEVERTAP SHEET:
+--------------------
+- Column: Date of Addition (tracking when events were added)
+- Column: Event (event name with spaces/title case)
+- Column: Event Property (mixed format properties)
+- Column: Description (what the event tracks)
+- Column: Android/iOS Developer Status (implementation tracking)
+- Column: Testing Status (QA tracking)
+
+AMPLITUDE SHEET STRUCTURE:
+--------------------------
+- Column: Event Category (Authentication, Investment, Portfolio, etc.)
+- Column: Event Name (snake_case format)
+- Column: Event Description (what triggers it)
+- Column: Event Properties (comma-separated list)
+- Column: Property Type (String, Integer, Float, Boolean)
+- Column: Property Description (what each property means)
+- Column: Priority (Critical, High, Medium, Low)
+- Column: Implementation Location (which screen/file)
+
+================================================================================
+PRACTICAL CONVERSION EXAMPLES FROM YOUR SHEET:
+================================================================================
+
+Example 1: App Launch Event
+----------------------------
+CleverTap Format:
+{
+  "Event": "App Launch",
+  "Properties": {
+    "Source": "Direct",
+    "Version": "1.2.0"
+  }
+}
+
+Amplitude Format:
+{
+  "event_type": "app_opened",
+  "event_properties": {
+    "launch_source": "direct",
+    "app_version": "1.2.0",
+    "session_id": "session_123"
+  }
+}
+
+Example 2: Investment Event
+---------------------------
+CleverTap Format:
+{
+  "Event": "Investment Complete",
+  "Properties": {
+    "Fund Name": "Axis Bluechip",
+    "Amount": 5000,
+    "Type": "SIP"
+  }
+}
+
+Amplitude Format:
+{
+  "event_type": "investment_completed",
+  "event_properties": {
+    "fund_name": "Axis Bluechip",
+    "amount": 5000,
+    "investment_type": "sip"
+  },
+  "revenue": 5000,
+  "productId": "sip_investment"
+}
+
+================================================================================
+WHAT STAYS THE SAME:
+================================================================================
+✅ Basic event tracking concept
+✅ User identification approach
+✅ Property data types (string, number, boolean)
+✅ Session tracking (both automatic)
+✅ Platform/device info collection
+
+================================================================================
+WHAT CHANGES:
+================================================================================
+❗ Naming convention (Title Case → snake_case)
+❗ Revenue tracking (Charged event → Revenue API)
+❗ Property structure (Nested → Flat)
+❗ Documentation format (Mixed → Separated)
+❗ Value limits (Unlimited → Max 1000 unique values per property)
+
+================================================================================
+HOW TO CREATE YOUR AMPLITUDE SHEET:
+================================================================================
+
+1. START WITH CATEGORIES:
+   - Authentication (login, OTP, KYC)
+   - Investment (fund selection, payments)
+   - Portfolio (viewing, tracking)
+   - Engagement (calculators, referrals)
+   - Errors (failures, issues)
+
+2. FOR EACH EVENT, DEFINE:
+   - Clear snake_case name
+   - When it triggers
+   - What properties to track
+   - Data types for each property
+   - Priority level
+   - Where in the app it's implemented
+
+3. KEEP SEPARATE TABS FOR:
+   - Events (main tracking)
+   - User Properties (persistent data)
+   - Revenue Events (transactions)
+   - Funnels (conversion flows)
+   - Implementation Status (dev tracking)
+
+================================================================================
+TIPS FOR YOUR TEAM:
+================================================================================
+
+1. Use our provided amplitude_tracking_plan.csv as a template
+2. Convert existing CleverTap events using the migration guide
+3. Test events in Amplitude's debug mode before going live
+4. Keep property values consistent and lowercase
+5. Use the Revenue API for all money-related events
+6. Document everything in the spreadsheet first, then implement
+
+================================================================================

@@ -746,6 +746,79 @@
             transition: all 0.2s ease;
         }
 
+        /* Referral Popup Styles */
+        .referral-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .referral-popup-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .referral-popup-content {
+            position: relative;
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .referral-popup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .referral-close-btn {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .referral-close-btn:hover {
+            color: var(--color-text-primary);
+            background: var(--color-bg-secondary);
+            border-radius: 8px;
+        }
+
+        .referral-popup-body {
+            padding: 20px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .btn-primary:active:not(:disabled) {
             transform: scale(0.98);
             background: var(--color-blue-dark);
@@ -977,8 +1050,56 @@
                                 Continue
                             </button>
 
-                            <div class="helper-text">
+                            <!-- Referral Code CTA -->
+                            <div style="text-align: center; margin-top: 16px;">
+                                <button class="btn-text" style="color: #6B7280; font-size: 14px; background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 2px;" onclick="toggleReferralInput()">
+                                    Have a referral code?
+                                </button>
+                            </div>
+
+                            <div class="helper-text" style="margin-top: 12px;">
                                 By continuing, you agree to our<br>Terms of Service & Privacy Policy
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Referral Code Popup Modal -->
+                    <div class="referral-popup-overlay" id="referralPopup" style="display: none;">
+                        <div class="referral-popup-backdrop" onclick="closeReferralPopup()"></div>
+                        <div class="referral-popup-content">
+                            <div class="referral-popup-header">
+                                <h3 style="margin: 0; font-size: 18px; font-weight: 600; color: var(--color-text-primary);">Enter Referral Code</h3>
+                                <button class="referral-close-btn" onclick="closeReferralPopup()">
+                                    <span class="material-symbols-outlined">close</span>
+                                </button>
+                            </div>
+                            
+                            <div class="referral-popup-body">
+                                <div style="margin-bottom: 20px;">
+                                    <label class="input-label" for="popupReferralCode">Referral Code</label>
+                                    <input
+                                        type="text"
+                                        id="popupReferralCode"
+                                        class="text-input"
+                                        placeholder="Enter code"
+                                        maxlength="10"
+                                        style="width: 100%; padding: 0 16px; text-transform: uppercase;"
+                                        oninput="this.value = this.value.toUpperCase(); validateReferralCode()"
+                                    >
+                                    <div style="font-size: 12px; color: #10B981; margin-top: 8px; display: flex; align-items: center; gap: 4px;">
+                                        <span class="material-symbols-outlined" style="font-size: 14px;">redeem</span>
+                                        <span>You'll get ₹500 after your first investment</span>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: flex; gap: 12px;">
+                                    <button class="btn-secondary" onclick="closeReferralPopup()" style="flex: 1; height: 44px; background: #F3F4F6; color: var(--color-text-secondary); border: none; border-radius: var(--radius-md); font-weight: 600;">
+                                        Skip
+                                    </button>
+                                    <button class="btn-primary" id="saveReferralBtn" onclick="saveReferralCode()" disabled style="flex: 1; height: 44px;">
+                                        Save Code
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1124,6 +1245,81 @@
             }
         }
 
+        // Toggle referral code input
+        let showReferralInput = false;
+        
+        function toggleReferralInput() {
+            // Show the referral popup
+            const popup = document.getElementById('referralPopup');
+            if (popup) {
+                popup.style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('popupReferralCode').focus();
+                }, 100);
+            }
+        }
+        
+        function validateReferralCode() {
+            const input = document.getElementById('popupReferralCode');
+            const saveBtn = document.getElementById('saveReferralBtn');
+            
+            // Enable save button if code is at least 4 characters
+            if (input && saveBtn) {
+                saveBtn.disabled = input.value.trim().length < 4;
+            }
+        }
+        
+        function saveReferralCode() {
+            const input = document.getElementById('popupReferralCode');
+            const code = input ? input.value.trim() : '';
+            
+            if (code.length >= 4) {
+                // Save the referral code
+                localStorage.setItem('referral_code', code);
+                
+                // Show success message briefly
+                const saveBtn = document.getElementById('saveReferralBtn');
+                if (saveBtn) {
+                    saveBtn.innerHTML = '✓ Saved';
+                    saveBtn.style.background = '#10B981';
+                }
+                
+                // Close popup after delay
+                setTimeout(() => {
+                    closeReferralPopup();
+                    
+                    // Update the CTA to show code was saved
+                    const referralCTA = document.querySelector('[onclick="toggleReferralInput()"]');
+                    if (referralCTA) {
+                        referralCTA.style.color = '#10B981';
+                        referralCTA.innerHTML = `✓ Code: ${code}`;
+                        referralCTA.disabled = true;
+                    }
+                }, 500);
+            }
+        }
+        
+        function closeReferralPopup() {
+            const popup = document.getElementById('referralPopup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+            
+            // Reset the input
+            const input = document.getElementById('popupReferralCode');
+            if (input) {
+                input.value = '';
+            }
+            
+            // Reset save button
+            const saveBtn = document.getElementById('saveReferralBtn');
+            if (saveBtn) {
+                saveBtn.innerHTML = 'Save Code';
+                saveBtn.style.background = '';
+                saveBtn.disabled = true;
+            }
+        }
+
         function sendOTP() {
             const input = document.getElementById('mobileInput');
             mobileNumber = input.value;
@@ -1138,6 +1334,7 @@
 
             const maskedNumber = `+91 ${mobileNumber.slice(0, 2)}****${mobileNumber.slice(-4)}`;
             document.getElementById('displayMobile').textContent = maskedNumber;
+
 
             switchState('otp');
             startResendTimer();
@@ -1210,10 +1407,22 @@
             if (enteredOTP.length !== 6) return;
 
             if (enteredOTP === CORRECT_OTP) {
+                // Save referral code if provided
+                const referralCodeInput = document.getElementById('referralCodeInput');
+                if (referralCodeInput && referralCodeInput.value) {
+                    const referralCode = referralCodeInput.value.toUpperCase().trim();
+                    localStorage.setItem('niveshpe_referral_code', referralCode);
+                    console.log('💰 Referral code saved:', referralCode);
+                }
+                
                 clearInterval(timerInterval);
                 if (webOtpAbortController) {
                     webOtpAbortController.abort();
                 }
+                
+                // Clear the referral input flag
+                localStorage.removeItem('show_referral_input');
+                
                 checkUserAndRedirect();
             } else {
                 otpAttempts++;
@@ -1267,6 +1476,21 @@
             otpInputs.forEach(input => {
                 input.value = '';
             });
+            
+            // Reset referral CTA if no code saved
+            const referralCTA = document.querySelector('[onclick="toggleReferralInput()"]');
+            const savedCode = localStorage.getItem('referral_code');
+            if (referralCTA) {
+                if (savedCode) {
+                    referralCTA.style.color = '#10B981';
+                    referralCTA.innerHTML = `✓ Code: ${savedCode}`;
+                    referralCTA.disabled = true;
+                } else {
+                    referralCTA.style.color = '#6B7280';
+                    referralCTA.innerHTML = 'Have a referral code?';
+                    referralCTA.disabled = false;
+                }
+            }
 
             switchState('phone');
             document.getElementById('mobileInput').focus();
@@ -1398,6 +1622,15 @@
             // Initialize with phone state - header replaced with brand header
             // Old header references removed
             setupOtpInputs();
+            
+            // Check if referral code is already saved
+            const savedCode = localStorage.getItem('referral_code');
+            const referralCTA = document.querySelector('[onclick="toggleReferralInput()"]');
+            if (savedCode && referralCTA) {
+                referralCTA.style.color = '#10B981';
+                referralCTA.innerHTML = `✓ Code: ${savedCode}`;
+                referralCTA.disabled = true;
+            }
         });
 
         // Touch swipe for carousel

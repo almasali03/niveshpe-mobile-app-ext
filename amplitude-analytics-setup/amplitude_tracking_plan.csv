@@ -1,0 +1,96 @@
+Event Category,Event Name,Event Description,Event Properties,Property Type,Property Description,Priority,Implementation Location
+Authentication,phone_number_entered,User enters phone number for login,"page_source, entry_point",String,Where user initiated login (homepage/menu/etc),Critical,auth.html
+Authentication,otp_requested,OTP sent to user's phone,"phone_number, request_time",String/Timestamp,Phone and time of request,Critical,auth.html
+Authentication,otp_verified,User successfully verifies OTP,"phone_number, attempts, verification_time",String/Integer/Timestamp,Verification details,Critical,auth.html
+Authentication,otp_failed,OTP verification failed,"phone_number, attempts, error_reason",String/Integer/String,Failure details,High,auth.html
+Authentication,email_provided,User provides email address,"email, phone_number",String,Email capture,Medium,auth-email.html
+Authentication,email_skipped,User skips email entry,"phone_number, skip_reason",String,Reason for skipping,Medium,auth-email.html
+Authentication,pan_submitted,User submits PAN for verification,"pan_masked, user_type",String,PAN verification start,Critical,pan-entry.html
+Authentication,pan_verified,PAN successfully verified,"pan_masked, name_match, existing_investor",String/Boolean,Verification success,Critical,pan-entry.html
+Authentication,pan_failed,PAN verification failed,"pan_masked, error_reason, attempts",String/String/Integer,Verification failure,High,pan-entry.html
+
+KYC,kyc_started,User begins KYC process,"user_type, pan_verified, start_page",String/Boolean/String,KYC initiation,Critical,kyc.html
+KYC,personal_details_submitted,User submits personal information,"has_nominee, income_range, occupation",Boolean/String/String,Personal info,Critical,personal-details.html
+KYC,bank_account_added,User adds bank account,"bank_name, account_type, is_primary",String/String/Boolean,Bank details,Critical,kyc.html#accountDetails
+KYC,nominee_added,User adds nominee details,"nominee_relation, allocation_percentage",String/Integer,Nominee info,High,kyc.html#nomineeDetails
+KYC,signature_uploaded,User uploads signature,"signature_method, file_size",String/Integer,Signature capture,High,kyc.html#signature
+KYC,kyc_completed,KYC process completed successfully,"completion_time, steps_completed, user_type",Timestamp/Integer/String,KYC success,Critical,kyc.html#success
+KYC,kyc_failed,KYC process failed,"failure_reason, failed_step, attempts",String/String/Integer,KYC failure,High,kyc.html
+
+Investment,fund_viewed,User views fund details,"fund_name, fund_category, fund_returns, view_source",String/String/Float/String,Fund discovery,High,mutual-funds.html
+Investment,fund_searched,User searches for funds,"search_query, results_count, filter_applied",String/Integer/String,Fund search,Medium,mutual-funds.html
+Investment,fund_selected,User selects fund for investment,"fund_name, fund_category, expected_returns",String/String/Float,Fund selection,Critical,fund-detail.html
+Investment,investment_amount_entered,User enters investment amount,"amount, investment_type, fund_name",Float/String/String,Amount entry,Critical,add-funds.html
+Investment,sip_selected,User chooses SIP investment,"sip_amount, sip_frequency, fund_name",Float/String/String,SIP selection,Critical,add-funds.html
+Investment,lumpsum_selected,User chooses lumpsum investment,"lumpsum_amount, fund_name",Float/String,Lumpsum selection,Critical,add-funds.html
+Investment,payment_method_selected,User selects payment method,"payment_method, fund_name, amount",String/String/Float,Payment selection,Critical,upi-autopay.html
+Investment,upi_autopay_initiated,UPI Autopay setup started,"upi_app, amount, frequency",String/Float/String,Autopay start,High,upi-autopay.html
+Investment,upi_autopay_completed,UPI Autopay successfully set up,"upi_app, amount, mandate_id",String/Float/String,Autopay success,Critical,autopay-success.html
+Investment,investment_completed,Investment successfully completed,"fund_name, amount, investment_type, payment_method",String/Float/String/String,Investment success,Critical,payment-success.html
+Investment,investment_failed,Investment failed,"fund_name, amount, failure_reason, payment_method",String/Float/String/String,Investment failure,High,payment-failed.html
+
+Portfolio,portfolio_viewed,User views portfolio,"total_value, total_invested, total_returns, returns_percentage",Float/Float/Float/Float,Portfolio view,High,my-funds.html
+Portfolio,portfolio_details_expanded,User expands portfolio details,"section_expanded, fund_name",String/String,Detail view,Medium,my-funds.html
+Portfolio,returns_viewed,User views returns details,"returns_amount, returns_percentage, time_period",Float/Float/String,Returns analysis,Medium,my-funds.html
+Portfolio,fund_performance_viewed,User views individual fund performance,"fund_name, returns, invested_amount, current_value",String/Float/Float/Float,Fund analysis,Medium,fund-detail.html
+Portfolio,transaction_history_viewed,User views transaction history,"filter_applied, date_range, transaction_count",String/String/Integer,History view,Medium,transactions.html
+
+Goals,goal_creation_started,User starts creating goal,"goal_source, page_source",String/String,Goal initiation,High,create-goal.html
+Goals,goal_created,User successfully creates goal,"goal_name, goal_type, target_amount, target_date, monthly_investment",String/String/Float/Date/Float,Goal creation,Critical,create-goal.html
+Goals,goal_viewed,User views goal details,"goal_name, progress_percentage, remaining_amount",String/Float/Float,Goal tracking,Medium,goal-detail.html
+Goals,goal_edited,User edits goal,"goal_name, field_edited, old_value, new_value",String/String/String/String,Goal modification,Medium,goal-detail.html
+Goals,goal_deleted,User deletes goal,"goal_name, goal_progress, reason",String/Float/String,Goal deletion,Medium,goal-detail.html
+Goals,goal_investment_added,Investment added to goal,"goal_name, amount, fund_name",String/Float/String,Goal funding,High,goal-detail.html
+
+Withdrawal,withdrawal_initiated,User starts withdrawal process,"source_page, total_balance",String/Float,Withdrawal start,High,withdraw-funds-step1-overlay.html
+Withdrawal,withdrawal_amount_entered,User enters withdrawal amount,"amount, withdrawal_type, fund_name",Float/String/String,Amount selection,High,withdraw-funds-step2-v2.html
+Withdrawal,withdrawal_confirmed,User confirms withdrawal,"amount, fund_name, bank_account",Float/String/String,Withdrawal confirmation,Critical,withdraw-funds-step3.html
+Withdrawal,withdrawal_completed,Withdrawal successfully processed,"amount, fund_name, processing_time",Float/String/Integer,Withdrawal success,Critical,withdraw-funds-success.html
+Withdrawal,withdrawal_cancelled,User cancels withdrawal,"amount, cancellation_stage, reason",Float/String/String,Withdrawal cancel,Medium,withdraw-funds-*.html
+
+Engagement,calculator_used,User uses investment calculator,"calculator_type, input_amount, calculated_result",String/Float/Float,Tool usage,Medium,calculators/*.html
+Engagement,referral_clicked,User clicks on referral CTA,"cta_location, page_source",String/String,Referral interest,High,index.html/menu.html
+Engagement,referral_code_shared,User shares referral code,"share_method, page_source",String/String,Referral sharing,High,referral.html
+Engagement,support_contacted,User contacts support,"contact_method, issue_category, page_source",String/String/String,Support request,Medium,menu.html
+Engagement,faq_viewed,User views FAQ,"faq_category, question_viewed",String/String,Help usage,Low,support.html
+Engagement,app_rated,User rates the app,"rating, feedback_text, page_source",Integer/String/String,App feedback,Medium,menu.html
+Engagement,notification_clicked,User clicks on notification,"notification_type, notification_content",String/String,Notification engagement,Medium,Various
+Engagement,menu_opened,User opens navigation menu,"page_source, session_time",String/Integer,Navigation,Low,All pages
+Engagement,search_performed,User performs search,"search_query, search_type, results_count",String/String/Integer,Search usage,Medium,mutual-funds.html
+
+Session,session_started,New session begins,"session_source, device_type, referrer",String/String/String,Session tracking,High,All pages
+Session,session_ended,Session ends,"session_duration, pages_viewed, actions_count",Integer/Integer/Integer,Session tracking,High,All pages
+Session,app_opened,App opened/launched,"launch_source, time_since_last_open",String/Integer,App launch,High,index.html
+Session,app_backgrounded,App goes to background,"session_duration, last_page",Integer/String,App state,Low,All pages
+
+Revenue,revenue_generated,Revenue event for investments,"amount, product_type, payment_method",Float/String/String,Revenue tracking,Critical,payment-success.html
+Revenue,revenue_lost,Lost revenue from failures,"amount, failure_reason, product_type",Float/String/String,Revenue loss,High,payment-failed.html
+
+Errors,error_occurred,Application error occurred,"error_type, error_message, page_source, stack_trace",String/String/String/String,Error tracking,High,All pages
+Errors,api_error,API call failed,"endpoint, error_code, error_message",String/Integer/String,API failures,High,All pages
+Errors,payment_error,Payment processing error,"payment_method, error_code, amount",String/String/Float,Payment failures,Critical,Payment pages
+
+User Properties,user_id,Unique user identifier,phone_number,String,Primary identifier,Critical,Set after OTP
+User Properties,user_type,Type of investor,new/existing,String,User classification,Critical,Set after PAN
+User Properties,kyc_status,KYC completion status,pending/completed/failed,String,Compliance status,Critical,Update on KYC changes
+User Properties,total_invested,Total amount invested,Numeric value,Float,Investment tracking,High,Update on investment
+User Properties,portfolio_value,Current portfolio value,Numeric value,Float,Portfolio tracking,High,Update daily
+User Properties,active_sips,Number of active SIPs,Count,Integer,SIP tracking,Medium,Update on SIP changes
+User Properties,goals_count,Number of goals created,Count,Integer,Goal tracking,Medium,Update on goal changes
+User Properties,risk_profile,User's risk profile,conservative/moderate/aggressive,String,Risk assessment,Medium,Set after assessment
+User Properties,preferred_payment,Preferred payment method,UPI/NetBanking/Debit,String,Payment preference,Low,Update on payment
+User Properties,referral_code,User's referral code,Alphanumeric code,String,Referral tracking,Medium,Set on account creation
+User Properties,signup_date,Date of registration,ISO Date,Date,Cohort analysis,High,Set on signup
+User Properties,first_investment_date,Date of first investment,ISO Date,Date,Activation tracking,High,Set on first investment
+User Properties,last_active_date,Last activity date,ISO Date,Date,Engagement tracking,Medium,Update on activity
+User Properties,app_version,App version being used,Version string,String,Version tracking,Low,Update on app launch
+User Properties,device_type,Type of device,iOS/Android/Web,String,Device tracking,Medium,Set on first launch
+
+Implementation Notes,SDK Setup,Add Amplitude SDK to all HTML files in <head> section,,,,Critical,All HTML files
+Implementation Notes,Initialize,Initialize with API key on page load,,,,Critical,All HTML files
+Implementation Notes,User ID,Set user ID after OTP verification using phone number,,,,Critical,auth.html
+Implementation Notes,Session Management,Track session start/end using localStorage,,,,High,All pages
+Implementation Notes,Error Handling,Wrap all tracking calls in try-catch,,,,High,All tracking points
+Implementation Notes,Testing,Use separate API keys for dev/staging/production,,,,Critical,Configuration
+Implementation Notes,Privacy,Never send full PAN or sensitive bank details,,,,Critical,All tracking points
+Implementation Notes,Debugging,Enable verbose logging in development environment,,,,Medium,Development only

@@ -1,0 +1,42 @@
+Category,Aspect,CleverTap Format,Amplitude Format,Key Difference,Migration Notes
+Event Naming,Convention,"Title Case with spaces (e.g., ""App Launch"", ""Sign Up Complete"")","snake_case lowercase (e.g., ""app_launch"", ""sign_up_complete"")","CleverTap uses human-readable format, Amplitude uses programmatic format","Convert all spaces to underscores, make lowercase"
+Event Naming,Pattern,"Noun-based (e.g., ""Purchase"", ""Login"")","Verb-noun pattern (e.g., ""completed_purchase"", ""user_login"")","Amplitude prefers action-oriented naming","Add action verbs to event names"
+Event Properties,Format,"Can use Title Case or camelCase (e.g., ""Fund Name"", ""paymentMethod"")","Always snake_case (e.g., ""fund_name"", ""payment_method"")","Consistent snake_case in Amplitude","Convert all properties to snake_case"
+Event Properties,Structure,"Nested objects allowed { ""Product"": { ""Name"": ""Fund A"", ""Price"": 5000 } }","Flat structure preferred { ""product_name"": ""Fund A"", ""product_price"": 5000 }","Amplitude prefers flat JSON for better querying","Flatten nested objects"
+Event Properties,Limits,No strict limits on unique values,"Max 1000 unique values per property","Amplitude has stricter limits","Group similar values or use ranges"
+User Properties,Naming,"Profile properties (e.g., ""Name"", ""Email"", ""Customer Type"")","User properties with prefix (e.g., ""user_name"", ""user_email"", ""user_type"")","Optional but recommended to prefix with user_","Add user_ prefix for clarity"
+User Properties,Update Method,"clevertap.profile.push({ ""Name"": ""John"" })","amplitude.setUserProperties({ ""user_name"": ""John"" })","Different API methods","Use setUserProperties method"
+User Identification,Method,"clevertap.onUserLogin.push({ ""Site"": { ""Identity"": phoneNumber }})","amplitude.setUserId(phoneNumber)","Different identification methods","Use setUserId with unique identifier"
+Revenue Tracking,Implementation,"clevertap.event.push(""Charged"", { ""Amount"": 5000, ""Payment mode"": ""UPI"" })","amplitude.logRevenue(5000, ""sip_investment"", { ""payment_method"": ""upi"" })","Dedicated Revenue API in Amplitude","Use Revenue API for all transactions"
+Revenue Tracking,Properties,"Part of Charged event properties","Separate revenue object with price, quantity, productId","More structured revenue tracking","Create Revenue objects"
+Session Tracking,Handling,Automatic session management,"Automatic by default, can add custom session_id","Both support automatic sessions","Usually no change needed"
+Event Structure,Testing Status,"Includes testing columns (Android/iOS testing status)","Separate from event definition","CleverTap mixes documentation with events","Keep testing status separate"
+Documentation,Format,"Mixed with implementation status in same sheet","Clean separation of events and implementation","Amplitude prefers cleaner documentation","Create separate implementation tracking"
+Data Types,Supported,"String, Number, Date, Boolean","String, Number, Boolean, Array, Object","Similar but Amplitude has explicit array/object support","Map data types appropriately"
+Event Categories,Organization,"Module-based (Sign In/Sign Up Module)","Category field (Authentication, Investment, etc.)","More structured categorization in Amplitude","Group events by functional area"
+Property Values,Format,"Can use mixed case (""SIP"", ""Lumpsum"")","Lowercase preferred (""sip"", ""lumpsum"")","Amplitude prefers lowercase values","Convert values to lowercase"
+Timestamps,Handling,"Automatic with event","Automatic, can override with timestamp property","Both handle automatically","Usually no change needed"
+Error Events,Naming,"Error or Failure events","error_occurred pattern","More consistent error naming in Amplitude","Standardize error event names"
+Platform Properties,Collection,"Manual platform properties","Automatic device/platform enrichment","Amplitude auto-collects more data","Remove manual platform tracking"
+Marketing Attribution,UTM Parameters,"Manual tracking","Automatic UTM parameter tracking","Amplitude has built-in UTM support","Enable includeUtm in config"
+
+Sample Event Conversion Examples,,,,,
+CleverTap Event,Amplitude Event,Notes,,,
+"""App Launch""",app_opened,"Changed to verb-based naming",,,
+"""Sign Up Complete""",sign_up_completed,"Converted to snake_case",,,
+"""Fund Selected""",fund_selected,"Already good, just lowercase",,,
+"""Investment - SIP Started""",sip_started,"Simplified naming",,,
+"""KYC Verification Success""",kyc_completed,"Simplified and actionable",,,
+"""Payment Failed""",payment_failed,"Convert to snake_case",,,
+"""Goal Created""",goal_created,"Good as is",,,
+"""User Profile Updated""",profile_updated,"Simplified naming",,,
+
+Sample Property Conversion,,,,,
+CleverTap Property,Amplitude Property,Notes,,,
+"""Fund Name""",fund_name,"Convert to snake_case",,,
+"""Investment Amount""",amount,"Simplified",,,
+"""Payment Mode""",payment_method,"More descriptive",,,
+"""User Type""",user_type,"Good as is",,,
+"""KYC Status""",kyc_status,"Convert to snake_case",,,
+"""Portfolio Value""",portfolio_value,"Convert to snake_case",,,
+"""SIP Amount""",sip_amount,"Convert to snake_case",,,

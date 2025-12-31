@@ -1,0 +1,86 @@
+{
+  "Rankings": {
+    "LARGE_CAP": {
+      "RANK_1": { "AMC": "Nippon", "SchemeCode": "" },
+      "RANK_2": { "AMC": "ICICI", "SchemeCode": "" },
+      "RANK_3": { "AMC": "HDFC", "SchemeCode": "" },
+      "RANK_4": { "Rank": 4, "AMC": "Kotak", "SchemeCode": "" },
+      "RANK_5": { "Rank": 5, "AMC": "Tata", "SchemeCode": "" }
+    },
+
+    "LARGE_MID_CAP": {
+      "RANK_1": { "AMC": "ICICI", "SchemeCode": "" },
+      "RANK_2": { "AMC": "Nippon", "SchemeCode": "" },
+      "RANK_3": { "AMC": "HDFC", "SchemeCode": "" },
+      "RANK_4": { "AMC": "Kotak", "SchemeCode": "" }
+    },
+
+    "ELSS": {
+      "RANK_1": { "AMC": "SBI", "SchemeCode": "" },
+      "RANK_2": { "AMC": "ICICI", "SchemeCode": "" }
+    },
+
+    "LIQUID": {
+      "RANK_1": { "AMC": "ICICI", "SchemeCode": "" },
+      "RANK_2": { "AMC": "Nippon", "SchemeCode": "" },
+      "RANK_3": { "AMC": "HDFC", "SchemeCode": "" },
+      "RANK_4": { "AMC": "Tata", "SchemeCode": "" }
+    },
+
+    "ARBITRAGE": {
+      "RANK_1": { "AMC": "Kotak", "SchemeCode": "" },
+      "RANK_2": { "AMC": "SBI", "SchemeCode": "" },
+      "RANK_3": { "AMC": "HDFC", "SchemeCode": "" },
+      "RANK_4": { "AMC": "ICICI", "SchemeCode": "" },
+      "RANK_5": { "AMC": "Tata", "SchemeCode": "" }
+    },
+
+    "CONSERVATIVE_HYBRID": {
+      "RANK_1": { "AMC": "SBI", "SchemeCode": "SBIN001" },
+      "RANK_2": { "AMC": "Kotak", "SchemeCode": "" },
+      "RANK_3": { "AMC": "HDFC", "SchemeCode": "" },
+      "RANK_4": { "AMC": "Nippon", "SchemeCode": "" }
+    },
+
+    "AGGRESSIVE_HYBRID": {
+      "RANK_1": { "AMC": "ICICI", "SchemeCode": "" },
+      "RANK_2": { "AMC": "Nippon", "SchemeCode": "" },
+      "RANK_3": { "AMC": "Kotak", "SchemeCode": "" },
+      "RANK_4": { "AMC": "SBI", "SchemeCode": "" }
+    },
+
+    "BALANCED_ADVANTAGE": {
+      "RANK_1": { "AMC": "HDFC", "SchemeCode": "" },
+      "RANK_2": { "AMC": "SBI", "SchemeCode": "" },
+      "RANK_3": { "AMC": "ICICI", "SchemeCode": "" },
+      "RANK_4": { "AMC": "Nippon", "SchemeCode": "" },
+      "RANK_5": { "AMC": "Kotak", "SchemeCode": "" }
+    },
+
+    "MULTICAP": {
+      "RANK_1": { "AMC": "Kotak", "SchemeCode": "" },
+      "RANK_2": { "AMC": "Nippon", "SchemeCode": "" },
+      "RANK_3": { "AMC": "HDFC", "SchemeCode": "" },
+      "RANK_4": { "AMC": "ICICI", "SchemeCode": "" },
+      "RANK_5": { "AMC": "SBI", "SchemeCode": "" }
+    },
+
+    "FLEXICAP": {
+      "RANK_1": { "AMC": "HDFC", "SchemeCode": "" },
+      "RANK_2": { "AMC": "Parag Parikh", "SchemeCode": "" },
+      "RANK_3": { "AMC": "ICICI", "SchemeCode": "" },
+      "RANK_4": { "AMC": "Kotak", "SchemeCode": "" },
+      "RANK_5": { "AMC": "Tata", "SchemeCode": "" }
+    },
+    "GOLD": {
+      "RANK_1": { "AMC": "ICICI", "SchemeCode": "" },
+      "RANK_2": { "AMC": "SBI", "SchemeCode": "" },
+      "RANK_3": { "AMC": "HDFC", "SchemeCode": "" },
+      "RANK_4": { "AMC": "Nippon", "SchemeCode": "" },
+      "RANK_5": { "AMC": "Kotak", "SchemeCode": "" }
+    },
+    "ETHICAL": {
+      "RANK_1": { "AMC": "Tata", "SchemeCode": "" }
+    }
+  }
+}

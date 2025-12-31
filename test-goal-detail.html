@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Goal Detail</title>
+</head>
+<body>
+    <h1>Test Goal Detail Page</h1>
+    <p>Click the links below to test different goal configurations:</p>
+    
+    <ul>
+        <li><a href="goal-detail.html?name=Dream%20Vacation&category=vacation&tenure=3&icon=flight_takeoff">3-Year Vacation Goal</a></li>
+        <li><a href="goal-detail.html?name=New%20Home&category=home&tenure=5&icon=home">5-Year Home Goal</a></li>
+        <li><a href="goal-detail.html?name=Child%20Education&category=education&tenure=8&icon=school">8-Year Education Goal</a></li>
+        <li><a href="goal-detail.html?name=Emergency%20Fund&category=emergency&tenure=1&icon=security">1-Year Emergency Fund</a></li>
+        <li><a href="goal-detail.html?name=Custom%20Goal&category=custom&tenure=2&icon=flag">2-Year Custom Goal</a></li>
+    </ul>
+    
+    <h2>Expected Data Display:</h2>
+    <ul>
+        <li><strong>Goal Name:</strong> From URL parameter</li>
+        <li><strong>Holding Period:</strong> From URL parameter (tenure)</li>
+        <li><strong>Risk Level:</strong> Fixed as "Medium Risk"</li>
+        <li><strong>Category:</strong> From URL parameter</li>
+        <li><strong>Expected Returns:</strong> Calculated from fund allocation</li>
+        <li><strong>Fund Allocation:</strong> Based on tenure and risk level</li>
+    </ul>
+</body>
+</html>
