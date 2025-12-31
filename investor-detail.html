@@ -1094,6 +1094,12 @@
                                 <label class="input-label">5. How many dependents do you have?</label>
                                 <div class="age-selection-grid">
                                     <label class="age-card">
+                                        <input type="radio" name="dependents" value="0" class="age-radio-input" onchange="validateForm()">
+                                        <div class="age-card-content">
+                                            <span class="age-range">0</span>
+                                        </div>
+                                    </label>
+                                    <label class="age-card">
                                         <input type="radio" name="dependents" value="1" class="age-radio-input" onchange="validateForm()">
                                         <div class="age-card-content">
                                             <span class="age-range">1</span>
@@ -1106,15 +1112,9 @@
                                         </div>
                                     </label>
                                     <label class="age-card">
-                                        <input type="radio" name="dependents" value="3" class="age-radio-input" onchange="validateForm()">
+                                        <input type="radio" name="dependents" value="3+" class="age-radio-input" onchange="validateForm()">
                                         <div class="age-card-content">
-                                            <span class="age-range">3</span>
-                                        </div>
-                                    </label>
-                                    <label class="age-card">
-                                        <input type="radio" name="dependents" value="4+" class="age-radio-input" onchange="validateForm()">
-                                        <div class="age-card-content">
-                                            <span class="age-range">4+</span>
+                                            <span class="age-range">3+</span>
                                         </div>
                                     </label>
                                 </div>
