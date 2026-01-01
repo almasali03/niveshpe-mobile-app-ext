@@ -2108,7 +2108,7 @@
         }
 
         .notification-container.has-notifications {
-            height: 92px;
+            height: 100px;
             padding: 12px 16px;
         }
 
@@ -2118,10 +2118,8 @@
             top: 12px;
             left: 16px;
             right: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 12px;
+            min-height: 80px;
+            padding: 12px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             animation: slideDown 0.3s ease-out;
@@ -2183,61 +2181,71 @@
             color: white;
         }
 
+        /* Notification wrapper for new layout */
+        .notification-wrapper {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+
         /* Notification Icon */
         .notification-icon {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: rgba(255, 255, 255, 0.25);
             border-radius: 10px;
             flex-shrink: 0;
+            margin-top: 2px;
         }
 
         .notification-icon span {
-            font-size: 22px;
+            font-size: 20px;
             color: white;
             font-variation-settings: 'FILL' 1;
+            margin-top: 8px;
+        }
+
+        /* Notification Body contains content and actions */
+        .notification-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
         }
 
         /* Notification Content */
         .notification-content {
-            flex: 1;
             display: flex;
             flex-direction: column;
             gap: 2px;
-            min-width: 0;
         }
 
         .notification-title {
             font-size: 14px;
             font-weight: 600;
-            line-height: 1.2;
+            line-height: 1.3;
             color: white;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .notification-description {
             font-size: 12px;
             font-weight: 400;
             opacity: 0.9;
-            line-height: 1.3;
+            line-height: 1.4;
             color: white;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
 
-        /* Notification Actions */
+        /* Notification Actions - moved to bottom right */
         .notification-actions {
             display: flex;
             align-items: center;
             gap: 6px;
-            flex-shrink: 0;
+            align-self: flex-end;
+            margin-top: 4px;
         }
 
         .notification-cta {
@@ -2266,27 +2274,31 @@
         }
 
         .notification-dismiss {
+            position: absolute;
+            top: 8px;
+            right: 8px;
             width: 24px;
             height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.2);
             border: none;
+            border-radius: 50%;
             color: white;
             cursor: pointer;
             transition: all 0.2s ease;
-            flex-shrink: 0;
-            opacity: 0.7;
+            opacity: 0.8;
+            z-index: 2;
         }
 
         .notification-dismiss:hover {
             opacity: 1;
-            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .notification-dismiss .material-symbols-outlined {
-            font-size: 20px;
+            font-size: 16px;
         }
 
         /* Progress Bar (for pending states) */
@@ -3421,31 +3433,35 @@
             notification.id = notificationId;
             notification.dataset.type = type;
 
-            // Build notification HTML
+            // Build notification HTML with new layout
             let notificationHTML = `
-                <div class="notification-icon">
-                    <span class="material-symbols-outlined">${notificationData.icon}</span>
-                </div>
-                <div class="notification-content">
-                    <div class="notification-title">${notificationData.title}</div>
-                    <div class="notification-description">${notificationData.description}</div>
-                </div>
-                <div class="notification-actions">
+                <button class="notification-dismiss" onclick="dismissNotification('${notificationId}')">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <div class="notification-wrapper">
+                    <div class="notification-icon">
+                        <span class="material-symbols-outlined">${notificationData.icon}</span>
+                    </div>
+                    <div class="notification-body">
+                        <div class="notification-content">
+                            <div class="notification-title">${notificationData.title}</div>
+                            <div class="notification-description">${notificationData.description}</div>
+                        </div>
             `;
 
             if (notificationData.cta) {
                 notificationHTML += `
-                    <button class="notification-cta" onclick="handleNotificationCTA('${type}')">
-                        ${notificationData.cta}
-                        <span class="material-symbols-outlined">arrow_forward</span>
-                    </button>
+                        <div class="notification-actions">
+                            <button class="notification-cta" onclick="handleNotificationCTA('${type}')">
+                                ${notificationData.cta}
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                        </div>
                 `;
             }
 
             notificationHTML += `
-                    <button class="notification-dismiss" onclick="dismissNotification('${notificationId}')">
-                        <span class="material-symbols-outlined">close</span>
-                    </button>
+                    </div>
                 </div>
             `;
 
