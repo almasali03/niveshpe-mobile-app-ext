@@ -2118,8 +2118,10 @@
             top: 12px;
             left: 16px;
             right: 16px;
-            min-height: 80px;
-            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 12px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             animation: slideDown 0.3s ease-out;
@@ -2239,61 +2241,34 @@
             color: white;
         }
 
-        /* Notification Actions - full width at bottom */
+        /* Notification Actions - moved to bottom right */
         .notification-actions {
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            gap: 6px;
+            align-self: flex-end;
+            margin-top: 4px;
         }
 
         .notification-cta {
-            background: rgba(255, 255, 255, 0.95);
-            border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            color: inherit;
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 2px;
             white-space: nowrap;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .notification-banner.success .notification-cta {
-            color: #10B981;
-        }
-
-        .notification-banner.warning .notification-cta {
-            color: #F59E0B;
-        }
-
-        .notification-banner.info .notification-cta {
-            color: #3B82F6;
-        }
-
-        .notification-banner.error .notification-cta {
-            color: #EF4444;
         }
 
         .notification-cta:hover {
-            background: white;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .notification-cta:active {
-            transform: translateY(0);
+            background: rgba(255, 255, 255, 0.35);
         }
 
         .notification-cta .material-symbols-outlined {
