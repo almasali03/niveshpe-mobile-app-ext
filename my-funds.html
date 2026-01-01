@@ -726,13 +726,10 @@
                             </div>
                         </div>
 
-                        <!-- Investment CTAs -->
+                        <!-- Investment CTA -->
                         <div class="investment-ctas">
-                            <button class="investment-primary-btn" onclick="startSIP()">
-                                Start SIP
-                            </button>
-                            <button class="investment-secondary-btn" onclick="oneTimeInvestment()">
-                                One time investment
+                            <button class="investment-primary-btn" onclick="investNow()">
+                                Invest Now
                             </button>
                         </div>
                     </div>
@@ -1257,19 +1254,11 @@
             }, 300);
         }
 
-        function startSIP() {
-            // Navigate to SIP setup flow
+        function investNow() {
+            // Navigate to investment flow
             closeInvestorProfile();
             setTimeout(() => {
-                window.location.href = 'add-funds.html?type=sip';
-            }, 300);
-        }
-
-        function oneTimeInvestment() {
-            // Navigate to one-time investment flow
-            closeInvestorProfile();
-            setTimeout(() => {
-                window.location.href = 'add-funds.html?type=lumpsum';
+                window.location.href = 'add-funds.html';
             }, 300);
         }
 

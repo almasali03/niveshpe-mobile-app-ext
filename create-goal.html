@@ -1294,10 +1294,9 @@
                             </div>
                         </div>
 
-                        <!-- CTAs -->
+                        <!-- CTA -->
                         <div class="funds-ctas">
-                            <button class="funds-btn-primary" onclick="startSIP()">Start SIP</button>
-                            <button class="funds-btn-secondary" onclick="oneTimeInvestment()">One Time</button>
+                            <button class="funds-btn-primary" onclick="investNow()">Invest Now</button>
                         </div>
                     </div>
                 </div>
@@ -1740,7 +1739,7 @@
             `;
         }
 
-        function startSIP() {
+        function investNow() {
             // Store basket info in localStorage for add-funds page
             const goalData = JSON.parse(localStorage.getItem('newGoal') || '{}');
             const basket = getCurrentBasketData();
@@ -1758,29 +1757,7 @@
 
             closeRecommendedFunds();
             setTimeout(() => {
-                window.location.href = 'add-funds.html?type=sip';
-            }, 300);
-        }
-
-        function oneTimeInvestment() {
-            // Store basket info in localStorage for add-funds page
-            const goalData = JSON.parse(localStorage.getItem('newGoal') || '{}');
-            const basket = getCurrentBasketData();
-
-            localStorage.setItem('selectedBasket', JSON.stringify({
-                fromGoal: true,
-                basketId: basket.basketId,
-                basketName: basket.basketName,
-                description: basket.description,
-                funds: basket.funds,
-                returns: basket.returns,
-                tenure: basket.tenure,
-                goalName: goalData.name
-            }));
-
-            closeRecommendedFunds();
-            setTimeout(() => {
-                window.location.href = 'add-funds.html?type=lumpsum';
+                window.location.href = 'add-funds.html';
             }, 300);
         }
 

@@ -996,10 +996,9 @@
                 </div>
             </div>
 
-            <!-- Floating CTA Buttons -->
+            <!-- Floating CTA Button -->
             <div class="floating-cta">
-                <button class="floating-btn floating-btn-primary" onclick="showInvestmentOptions('sip')">Start SIP</button>
-                <button class="floating-btn floating-btn-secondary" onclick="showInvestmentOptions('lumpsum')">One Time</button>
+                <button class="floating-btn floating-btn-primary" onclick="showInvestmentOptions()">Invest Now</button>
             </div>
         </div>
         <!-- iPhone Home Indicator -->
@@ -1062,11 +1061,11 @@
             }
         }
 
-        // Show investment options (SIP or One-time)
-        function showInvestmentOptions(type) {
-            // Navigate to add funds page with current fund slug and investment type
+        // Show investment options
+        function showInvestmentOptions() {
+            // Navigate to add funds page with current fund slug
             const fundSlug = getFundSlug();
-            window.location.href = 'add-funds.html?fund=' + fundSlug + '&type=' + type;
+            window.location.href = 'add-funds.html?fund=' + fundSlug;
         }
 
         // Select period and update returns display

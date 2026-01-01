@@ -882,6 +882,18 @@
             background: white;
             color: var(--color-blue);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 14px 24px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .btn-invest:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-invest:active {
+            transform: scale(0.98);
         }
 
         .btn-withdraw {
@@ -1516,8 +1528,7 @@
                                         </div>
                                     </div>
                                     <div class="portfolio-actions" onclick="event.stopPropagation()">
-                                        <button class="btn btn-invest" onclick="window.location.href='add-funds.html?directInvest=true'">Start SIP</button>
-                                        <button class="btn btn-withdraw" onclick="window.location.href='add-funds.html?directInvest=true'">One Time</button>
+                                        <button class="btn btn-invest" onclick="window.location.href='add-funds.html?directInvest=true'">Invest Now</button>
                                     </div>
                                 </div>
                             </div>
