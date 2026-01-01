@@ -997,16 +997,26 @@
             document.getElementById('pendingActions').classList.remove('show');
             document.getElementById('retrySection').classList.remove('show');
 
+            // Update welcome text based on state
+            const welcomeText = document.querySelector('.welcome-text');
+            const subtitleText = document.querySelector('.subtitle-text');
+            
             // Show the appropriate card and action
             if (state === 'success') {
                 document.getElementById('successCard').classList.add('show');
                 document.getElementById('successActions').classList.add('show');
+                if (welcomeText) welcomeText.textContent = 'Identity Verified Successfully';
+                if (subtitleText) subtitleText.textContent = 'Your PAN has been verified. You can proceed with your investment journey.';
             } else if (state === 'pending') {
                 document.getElementById('pendingCard').classList.add('show');
                 document.getElementById('pendingActions').classList.add('show');
+                if (welcomeText) welcomeText.textContent = 'Complete Your Profile';
+                if (subtitleText) subtitleText.textContent = 'Please provide the required details below to complete your KYC verification.';
             } else if (state === 'failure') {
                 document.getElementById('failedCard').classList.add('show');
                 document.getElementById('retrySection').classList.add('show');
+                if (welcomeText) welcomeText.textContent = 'Verification Failed';
+                if (subtitleText) subtitleText.textContent = 'We couldn\'t verify your PAN. Please check and try again.';
             }
         }
 
