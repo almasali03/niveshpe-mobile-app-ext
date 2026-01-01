@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Profile - NiveshPe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- iPhone Toggle CSS -->
+    <link rel="stylesheet" href="assets/css/iphone-toggle.css">
+
+    <style>
+        :root {
+            --color-bg-primary: #F5F7FA;
+            --color-blue: #2563EB;
+            --color-blue-dark: #1D4ED8;
+            --color-blue-light: #3B82F6;
+            --color-green: #10B981;
+            --color-orange: #F59E0B;
+            --color-red: #EF4444;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-text-muted: #9CA3AF;
+            --color-border: #E5E7EB;
+            --color-surface: #F9FAFB;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            overflow: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            height: 44px;
+            flex-shrink: 0;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+        }
+
+        .kyc-container {
+            padding: 24px 20px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .subtitle-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        /* Input */
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .text-input {
+            width: 100%;
+            height: 56px;
+            padding: 0 16px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: 2px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .text-input.error {
+            border-color: var(--color-red);
+            animation: shake 0.3s;
+        }
+
+        .text-input.valid {
+            border-color: var(--color-green);
+        }
+
+        .text-input:disabled {
+            background: var(--color-surface);
+            cursor: not-allowed;
+        }
+
+        .text-input::placeholder {
+            color: var(--color-text-muted);
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .error-text {
+            display: none;
+            font-size: 12px;
+            color: var(--color-red);
+            margin-top: 8px;
+        }
+
+        .error-text.show {
+            display: block;
+        }
+
+        /* Button */
+        .btn-primary {
+            width: 100%;
+            height: 52px;
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: scale(0.98);
+            background: var(--color-blue-dark);
+        }
+
+        .btn-primary:disabled {
+            background: var(--color-border);
+            color: var(--color-text-muted);
+            cursor: not-allowed;
+        }
+
+        /* Info Card */
+        .info-card {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(37, 99, 235, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            border-radius: var(--radius-md);
+            margin-top: 32px;
+        }
+
+        .info-card .material-symbols-outlined {
+            color: var(--color-blue);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-text strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .info-text p {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Loading State */
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .loading-container.show {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--color-border);
+            border-top-color: var(--color-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        .loading-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .loading-subtext {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Verified Cards (matching kyc.html pattern) */
+        .verified-card {
+            display: none;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            margin-top: 24px;
+            animation: fadeIn 0.4s ease;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px solid var(--color-green);
+        }
+
+        .verified-card.show {
+            display: block;
+        }
+
+        .verified-card.pending-card {
+            background: rgba(245, 158, 11, 0.05);
+            border-color: var(--color-orange);
+        }
+
+        .verified-card.failed-card {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: var(--color-red);
+        }
+
+        .verified-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .verified-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: var(--color-green);
+        }
+
+        .verified-icon .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .verified-icon.pending-icon {
+            background: var(--color-orange);
+        }
+
+        .verified-icon.failed-icon {
+            background: var(--color-red);
+        }
+
+        .verified-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-green);
+        }
+
+        .verified-title.pending-title {
+            color: var(--color-orange);
+        }
+
+        .verified-title.failed-title {
+            color: var(--color-red);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* Input fields in pending state */
+        .detail-input {
+            flex: 1;
+            max-width: 200px;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            text-align: right;
+            transition: all 0.2s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .detail-input:focus {
+            outline: none;
+            border-color: var(--color-orange);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .detail-input::placeholder {
+            color: var(--color-text-muted);
+            font-weight: 400;
+        }
+
+        .detail-input[type="date"] {
+            cursor: pointer;
+        }
+
+        .detail-input.error {
+            border-color: var(--color-red);
+            animation: shake 0.3s ease;
+        }
+
+        .detail-input.error:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .detail-row-input {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--color-border);
+            gap: 12px;
+        }
+
+        .required-indicator {
+            color: var(--color-red);
+            margin-left: 2px;
+            font-weight: 600;
+        }
+
+        /* Gender radio buttons */
+        .gender-options {
+            display: flex;
+            gap: 12px;
+            flex: 1;
+            max-width: 200px;
+            justify-content: flex-end;
+        }
+
+        .gender-radio {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .gender-radio input[type="radio"] {
+            cursor: pointer;
+            accent-color: var(--color-orange);
+        }
+
+        .gender-radio label {
+            font-size: 13px;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Address section */
+        .address-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .address-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 12px;
+        }
+
+        .detail-input.address-input {
+            text-align: left;
+        }
+
+        .detail-select {
+            flex: 1;
+            max-width: 200px;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+
+        .detail-select:focus {
+            outline: none;
+            border-color: var(--color-orange);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .detail-select.error {
+            border-color: var(--color-red);
+            animation: shake 0.3s ease;
+        }
+
+        .status-info-box {
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .status-info-box .material-symbols-outlined {
+            font-size: 16px;
+            color: var(--color-orange);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Action Buttons */
+        .action-section {
+            display: none;
+            margin-top: 24px;
+        }
+
+        .action-section.show {
+            display: block;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            height: 48px;
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 12px;
+        }
+
+        .btn-secondary:hover {
+            color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.98);
+        }
+
+        /* State Toggle Buttons */
+        .state-toggle-container {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10000;
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .state-toggle-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .state-toggle-btn:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .state-toggle-btn.active {
+            color: white;
+        }
+
+        .state-toggle-btn.success-btn.active {
+            background: var(--color-green);
+            border-color: var(--color-green);
+        }
+
+        .state-toggle-btn.pending-btn.active {
+            background: var(--color-orange);
+            border-color: var(--color-orange);
+        }
+
+        .state-toggle-btn.failure-btn.active {
+            background: var(--color-red);
+            border-color: var(--color-red);
+        }
+    </style>
+</head>
+<body>
+    <!-- iPhone Toggle Button -->
+    <button class="frame-toggle-btn" onclick="toggleFrameMode()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        </svg>
+        <span id="frameToggleText">Normal View</span>
+    </button>
+
+
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+            <div class="mobile-container">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="status-icons">
+                        <span>📶</span>
+                        <span>📡</span>
+                        <span>🔋</span>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="header">
+                    <div class="header-title">Complete Your Profile</div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <div class="kyc-container">
+                        <div class="welcome-text">Complete Your Profile</div>
+                        <div class="subtitle-text">Please provide the required details below to complete your KYC verification</div>
+
+
+                        <!-- Pending Card -->
+                        <div class="verified-card pending-card show" id="pendingCard">
+                            <div class="verified-header">
+                                <div class="verified-icon pending-icon">
+                                    <span class="material-symbols-outlined">schedule</span>
+                                </div>
+                                <div class="verified-title pending-title">PAN Verification Pending</div>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Name</span>
+                                <span class="detail-value" id="pendingName">Rahul Kumar Sharma</span>
+                            </div>
+                            <div class="detail-row-input">
+                                <span class="detail-label">Date of Birth<span class="required-indicator">*</span></span>
+                                <input type="date" class="detail-input" id="pendingDobInput" placeholder="Select date" required>
+                            </div>
+                            <div class="detail-row-input">
+                                <span class="detail-label">Father's Name<span class="required-indicator">*</span></span>
+                                <input type="text" class="detail-input" id="pendingFatherInput" placeholder="Enter father's name" required>
+                            </div>
+                            <div class="detail-row-input">
+                                <span class="detail-label">Gender<span class="required-indicator">*</span></span>
+                                <div class="gender-options">
+                                    <div class="gender-radio">
+                                        <input type="radio" id="genderMale" name="gender" value="male">
+                                        <label for="genderMale">Male</label>
+                                    </div>
+                                    <div class="gender-radio">
+                                        <input type="radio" id="genderFemale" name="gender" value="female">
+                                        <label for="genderFemale">Female</label>
+                                    </div>
+                                    <div class="gender-radio">
+                                        <input type="radio" id="genderTrans" name="gender" value="trans">
+                                        <label for="genderTrans">Trans</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Address Section -->
+                            <div class="address-section">
+                                <div class="address-title">Address Details</div>
+                                <div class="detail-row-input">
+                                    <span class="detail-label">Address Line 1<span class="required-indicator">*</span></span>
+                                    <input type="text" class="detail-input address-input" id="pendingAddress1Input" placeholder="House/Flat No, Building" required>
+                                </div>
+                                <div class="detail-row-input">
+                                    <span class="detail-label">City<span class="required-indicator">*</span></span>
+                                    <input type="text" class="detail-input address-input" id="pendingCityInput" placeholder="Enter city" required>
+                                </div>
+                                <div class="detail-row-input">
+                                    <span class="detail-label">Pincode<span class="required-indicator">*</span></span>
+                                    <input type="text" class="detail-input address-input" id="pendingPincodeInput" placeholder="6-digit pincode" maxlength="6" pattern="[0-9]{6}" required>
+                                </div>
+                                <div class="detail-row-input">
+                                    <span class="detail-label">State<span class="required-indicator">*</span></span>
+                                    <select class="detail-select" id="pendingStateSelect" required>
+                                        <option value="">Select State</option>
+                                        <option value="AN">Andaman and Nicobar Islands</option>
+                                        <option value="AP">Andhra Pradesh</option>
+                                        <option value="AR">Arunachal Pradesh</option>
+                                        <option value="AS">Assam</option>
+                                        <option value="BR">Bihar</option>
+                                        <option value="CH">Chandigarh</option>
+                                        <option value="CT">Chhattisgarh</option>
+                                        <option value="DN">Dadra and Nagar Haveli</option>
+                                        <option value="DD">Daman and Diu</option>
+                                        <option value="DL">Delhi</option>
+                                        <option value="GA">Goa</option>
+                                        <option value="GJ">Gujarat</option>
+                                        <option value="HR">Haryana</option>
+                                        <option value="HP">Himachal Pradesh</option>
+                                        <option value="JK">Jammu and Kashmir</option>
+                                        <option value="JH">Jharkhand</option>
+                                        <option value="KA">Karnataka</option>
+                                        <option value="KL">Kerala</option>
+                                        <option value="LA">Ladakh</option>
+                                        <option value="LD">Lakshadweep</option>
+                                        <option value="MP">Madhya Pradesh</option>
+                                        <option value="MH">Maharashtra</option>
+                                        <option value="MN">Manipur</option>
+                                        <option value="ML">Meghalaya</option>
+                                        <option value="MZ">Mizoram</option>
+                                        <option value="NL">Nagaland</option>
+                                        <option value="OR">Odisha</option>
+                                        <option value="PY">Puducherry</option>
+                                        <option value="PB">Punjab</option>
+                                        <option value="RJ">Rajasthan</option>
+                                        <option value="SK">Sikkim</option>
+                                        <option value="TN">Tamil Nadu</option>
+                                        <option value="TG">Telangana</option>
+                                        <option value="TR">Tripura</option>
+                                        <option value="UP">Uttar Pradesh</option>
+                                        <option value="UT">Uttarakhand</option>
+                                        <option value="WB">West Bengal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="status-info-box">
+                                <span class="material-symbols-outlined">info</span>
+                                <span>Please provide all required details to proceed. We'll verify your PAN in the background.</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Button -->
+                        <div class="action-section show">
+                            <button class="btn-primary" onclick="proceedToNext()">
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function proceedToNext() {
+            // Validate input fields
+            const dobInput = document.getElementById('pendingDobInput').value;
+            const fatherNameInput = document.getElementById('pendingFatherInput').value.trim();
+            const genderSelected = document.querySelector('input[name="gender"]:checked');
+            const address1Input = document.getElementById('pendingAddress1Input').value.trim();
+            const cityInput = document.getElementById('pendingCityInput').value.trim();
+            const pincodeInput = document.getElementById('pendingPincodeInput').value.trim();
+            const stateSelect = document.getElementById('pendingStateSelect').value;
+            
+            // Validate DOB
+            if (!dobInput) {
+                document.getElementById('pendingDobInput').classList.add('error');
+                document.getElementById('pendingDobInput').focus();
+                setTimeout(() => {
+                    document.getElementById('pendingDobInput').classList.remove('error');
+                }, 2000);
+                return;
+            }
+            
+            // Validate Father's Name
+            if (!fatherNameInput) {
+                document.getElementById('pendingFatherInput').classList.add('error');
+                document.getElementById('pendingFatherInput').focus();
+                setTimeout(() => {
+                    document.getElementById('pendingFatherInput').classList.remove('error');
+                }, 2000);
+                return;
+            }
+            
+            // Validate Gender
+            if (!genderSelected) {
+                alert('Please select your gender');
+                return;
+            }
+            
+            // Validate Address Line 1
+            if (!address1Input) {
+                document.getElementById('pendingAddress1Input').classList.add('error');
+                document.getElementById('pendingAddress1Input').focus();
+                setTimeout(() => {
+                    document.getElementById('pendingAddress1Input').classList.remove('error');
+                }, 2000);
+                return;
+            }
+            
+            // Validate City
+            if (!cityInput) {
+                document.getElementById('pendingCityInput').classList.add('error');
+                document.getElementById('pendingCityInput').focus();
+                setTimeout(() => {
+                    document.getElementById('pendingCityInput').classList.remove('error');
+                }, 2000);
+                return;
+            }
+            
+            // Validate Pincode (6 digits)
+            if (!pincodeInput || !/^\d{6}$/.test(pincodeInput)) {
+                document.getElementById('pendingPincodeInput').classList.add('error');
+                document.getElementById('pendingPincodeInput').focus();
+                setTimeout(() => {
+                    document.getElementById('pendingPincodeInput').classList.remove('error');
+                }, 2000);
+                return;
+            }
+            
+            // Validate State
+            if (!stateSelect) {
+                document.getElementById('pendingStateSelect').classList.add('error');
+                document.getElementById('pendingStateSelect').focus();
+                setTimeout(() => {
+                    document.getElementById('pendingStateSelect').classList.remove('error');
+                }, 2000);
+                return;
+            }
+            
+            // Format DOB for display
+            const dobDate = new Date(dobInput);
+            const formattedDob = dobDate.toLocaleDateString('en-IN', { 
+                day: 'numeric', 
+                month: 'short', 
+                year: 'numeric' 
+            });
+            
+            // Get state name from select option
+            const stateSelectElement = document.getElementById('pendingStateSelect');
+            const stateName = stateSelectElement.options[stateSelectElement.selectedIndex].text;
+            
+            // Save user-provided data
+            localStorage.setItem('niveshpe_pan_status', 'pending');
+            localStorage.setItem('niveshpe_pan_name', 'Rahul Kumar Sharma');
+            localStorage.setItem('niveshpe_pan_dob', formattedDob);
+            localStorage.setItem('niveshpe_pan_father', fatherNameInput);
+            localStorage.setItem('niveshpe_pan_gender', genderSelected.value);
+            localStorage.setItem('niveshpe_pan_address1', address1Input);
+            localStorage.setItem('niveshpe_pan_city', cityInput);
+            localStorage.setItem('niveshpe_pan_pincode', pincodeInput);
+            localStorage.setItem('niveshpe_pan_state', stateName);
+
+            // Redirect to investor details
+            window.location.href = 'investor-detail.html';
+        }
+
+        // Add event listeners for input fields to clear error state
+        document.addEventListener('DOMContentLoaded', () => {
+            const dobInput = document.getElementById('pendingDobInput');
+            const fatherInput = document.getElementById('pendingFatherInput');
+            const address1Input = document.getElementById('pendingAddress1Input');
+            const cityInput = document.getElementById('pendingCityInput');
+            const pincodeInput = document.getElementById('pendingPincodeInput');
+            const stateSelect = document.getElementById('pendingStateSelect');
+            
+            if (dobInput) {
+                dobInput.addEventListener('change', () => {
+                    dobInput.classList.remove('error');
+                });
+            }
+            
+            if (fatherInput) {
+                fatherInput.addEventListener('input', () => {
+                    fatherInput.classList.remove('error');
+                });
+            }
+            
+            if (address1Input) {
+                address1Input.addEventListener('input', () => {
+                    address1Input.classList.remove('error');
+                });
+            }
+            
+            if (cityInput) {
+                cityInput.addEventListener('input', () => {
+                    cityInput.classList.remove('error');
+                });
+            }
+            
+            if (pincodeInput) {
+                pincodeInput.addEventListener('input', () => {
+                    pincodeInput.classList.remove('error');
+                    // Allow only numbers
+                    pincodeInput.value = pincodeInput.value.replace(/[^0-9]/g, '');
+                });
+            }
+            
+            if (stateSelect) {
+                stateSelect.addEventListener('change', () => {
+                    stateSelect.classList.remove('error');
+                });
+            }
+        });
+    </script>
+
+    <!-- iPhone Toggle JS -->
+    <script src="assets/js/iphone-toggle.js"></script>
+</body>
+</html>
