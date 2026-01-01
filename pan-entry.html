@@ -401,6 +401,61 @@
             text-align: right;
         }
 
+        /* Input fields in pending state */
+        .detail-input {
+            flex: 1;
+            max-width: 200px;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            text-align: right;
+            transition: all 0.2s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .detail-input:focus {
+            outline: none;
+            border-color: var(--color-orange);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .detail-input::placeholder {
+            color: var(--color-text-muted);
+            font-weight: 400;
+        }
+
+        .detail-input[type="date"] {
+            cursor: pointer;
+        }
+
+        .detail-input.error {
+            border-color: var(--color-red);
+            animation: shake 0.3s ease;
+        }
+
+        .detail-input.error:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .detail-row-input {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--color-border);
+            gap: 12px;
+        }
+
+        .required-indicator {
+            color: var(--color-red);
+            margin-left: 2px;
+            font-weight: 600;
+        }
+
         .status-info-box {
             margin-top: 12px;
             padding: 12px;
@@ -631,17 +686,17 @@
                                 <span class="detail-label">Name</span>
                                 <span class="detail-value" id="pendingName">-</span>
                             </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Date of Birth</span>
-                                <span class="detail-value" id="pendingDob">-</span>
+                            <div class="detail-row-input">
+                                <span class="detail-label">Date of Birth<span class="required-indicator">*</span></span>
+                                <input type="date" class="detail-input" id="pendingDobInput" placeholder="Select date" required>
                             </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Father's Name</span>
-                                <span class="detail-value" id="pendingFather">-</span>
+                            <div class="detail-row-input">
+                                <span class="detail-label">Father's Name<span class="required-indicator">*</span></span>
+                                <input type="text" class="detail-input" id="pendingFatherInput" placeholder="Enter father's name" required>
                             </div>
                             <div class="status-info-box">
                                 <span class="material-symbols-outlined">info</span>
-                                <span>You can proceed to the next step while we verify your PAN in the background.</span>
+                                <span>Please provide the missing details to proceed. We'll verify your PAN in the background.</span>
                             </div>
                         </div>
 
@@ -757,8 +812,9 @@
 
                 // Set verified details in pending card
                 document.getElementById('pendingName').textContent = mockNsdlData.name;
-                document.getElementById('pendingDob').textContent = mockNsdlData.dob;
-                document.getElementById('pendingFather').textContent = mockNsdlData.fatherName;
+                // Leave DOB and Father's name inputs empty for user to fill
+                document.getElementById('pendingDobInput').value = '';
+                document.getElementById('pendingFatherInput').value = '';
 
                 // Show success by default
                 showStatusCard('success');
@@ -812,12 +868,51 @@
         }
 
         function proceedToNext() {
-            // Save to localStorage
-            localStorage.setItem('niveshpe_pan', currentPan);
-            localStorage.setItem('niveshpe_pan_status', currentState);
-            localStorage.setItem('niveshpe_pan_name', mockNsdlData.name);
-            localStorage.setItem('niveshpe_pan_dob', mockNsdlData.dob);
-            localStorage.setItem('niveshpe_pan_father', mockNsdlData.fatherName);
+            // For pending state, validate input fields
+            if (currentState === 'pending') {
+                const dobInput = document.getElementById('pendingDobInput').value;
+                const fatherNameInput = document.getElementById('pendingFatherInput').value.trim();
+                
+                if (!dobInput) {
+                    document.getElementById('pendingDobInput').classList.add('error');
+                    document.getElementById('pendingDobInput').focus();
+                    setTimeout(() => {
+                        document.getElementById('pendingDobInput').classList.remove('error');
+                    }, 2000);
+                    return;
+                }
+                
+                if (!fatherNameInput) {
+                    document.getElementById('pendingFatherInput').classList.add('error');
+                    document.getElementById('pendingFatherInput').focus();
+                    setTimeout(() => {
+                        document.getElementById('pendingFatherInput').classList.remove('error');
+                    }, 2000);
+                    return;
+                }
+                
+                // Format DOB for display
+                const dobDate = new Date(dobInput);
+                const formattedDob = dobDate.toLocaleDateString('en-IN', { 
+                    day: 'numeric', 
+                    month: 'short', 
+                    year: 'numeric' 
+                });
+                
+                // Save user-provided data for pending state
+                localStorage.setItem('niveshpe_pan', currentPan);
+                localStorage.setItem('niveshpe_pan_status', currentState);
+                localStorage.setItem('niveshpe_pan_name', mockNsdlData.name);
+                localStorage.setItem('niveshpe_pan_dob', formattedDob);
+                localStorage.setItem('niveshpe_pan_father', fatherNameInput);
+            } else {
+                // Save to localStorage for success state
+                localStorage.setItem('niveshpe_pan', currentPan);
+                localStorage.setItem('niveshpe_pan_status', currentState);
+                localStorage.setItem('niveshpe_pan_name', mockNsdlData.name);
+                localStorage.setItem('niveshpe_pan_dob', mockNsdlData.dob);
+                localStorage.setItem('niveshpe_pan_father', mockNsdlData.fatherName);
+            }
 
             // Redirect to investor details
             window.location.href = 'investor-detail.html';
@@ -854,6 +949,24 @@
             document.querySelector('.pending-btn').classList.remove('active');
             document.querySelector('.failure-btn').classList.remove('active');
         }
+
+        // Add event listeners for input fields to clear error state
+        document.addEventListener('DOMContentLoaded', () => {
+            const dobInput = document.getElementById('pendingDobInput');
+            const fatherInput = document.getElementById('pendingFatherInput');
+            
+            if (dobInput) {
+                dobInput.addEventListener('change', () => {
+                    dobInput.classList.remove('error');
+                });
+            }
+            
+            if (fatherInput) {
+                fatherInput.addEventListener('input', () => {
+                    fatherInput.classList.remove('error');
+                });
+            }
+        });
     </script>
 
     <!-- iPhone Toggle JS -->
