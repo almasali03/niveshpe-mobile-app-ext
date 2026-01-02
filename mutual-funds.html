@@ -1451,7 +1451,7 @@
 
                             <!-- CHANGE 5: Color changed from blue gradient to subtle green gradient -->
                             <!-- OLD: class="recommended-fund-card-blue" with blue gradient background -->
-                            <div class="recommended-fund-card-blue section-spacing" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.05) 100%); border: 2px solid rgba(16, 185, 129, 0.2); color: var(--color-text-primary); position: relative; overflow: hidden;" onclick="window.location.href='basket-details.html?id=balanced-returns'">
+                            <div class="recommended-fund-card-blue section-spacing basket-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.05) 100%); border: 2px solid rgba(16, 185, 129, 0.2); color: var(--color-text-primary); position: relative; overflow: hidden;" onclick="window.location.href='basket-details.html?id=balanced-returns'">
                                 <!-- Ribbon -->
                                 <div style="position: absolute; top: 12px; right: -25px; background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white; padding: 4px 30px; transform: rotate(45deg); font-size: 9px; font-weight: 700; z-index: 2; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Best Match</div>
                                 
@@ -3634,7 +3634,7 @@
             const name = fundName.toLowerCase();
             if (name.includes('hdfc')) return 'AMC-Fund-logo-icons/hdfc.png';
             if (name.includes('sbi')) return 'AMC-Fund-logo-icons/SBI.png';
-            if (name.includes('icici')) return 'AMC-Fund-logo-icons/icici.png';
+            if (name.includes('icici')) return 'AMC-Fund-logo-icons/ICICI.jpg';
             if (name.includes('parag parikh') || name.includes('ppfas')) return 'AMC-Fund-logo-icons/PPFAS.png';
             if (name.includes('kotak')) return 'AMC-Fund-logo-icons/kotak.jpeg';
             if (name.includes('nippon')) return 'AMC-Fund-logo-icons/nippon.png';
@@ -3653,6 +3653,15 @@
         // Hardcoded Basket Data with Correct RANK_1 AMCs
         const HARDCODED_BASKET_DATA = {
             // Based on FundRanking 2.json RANK_1 funds
+            'balanced-returns': {
+                name: 'Balanced Returns Fund',
+                funds: [
+                    { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55 },
+                    { name: 'SBI Hybrid Debt Fund - Growth', allocation: 15 },
+                    { name: 'Nippon Large Cap Fund - Growth', allocation: 20 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            },
             'np-liquid': {
                 name: 'Instant Withdrawal',
                 funds: [
