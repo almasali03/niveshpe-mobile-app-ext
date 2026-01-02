@@ -804,6 +804,17 @@
                     </div>
                 </div>
 
+                <!-- Who this is for Section (only for balanced-returns basket) -->
+                <div class="section" id="whoThisIsForSection" style="display: none;">
+                    <div class="description-card">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                            <span class="material-symbols-outlined" style="color: #10B981; font-size: 24px;">verified</span>
+                            <h3 style="font-size: 16px; font-weight: 700; color: var(--color-text-primary); margin: 0;">Who this is for?</h3>
+                        </div>
+                        <p class="description-text">For investors who want a balanced approach — some growth, some stability — without taking on too much market risk.</p>
+                    </div>
+                </div>
+
                 <!-- Detail Sections (COMMENTED OUT - will be used later)
                 <div class="section">
                     <div class="detail-card open">
@@ -978,6 +989,16 @@
             // Update description card at the bottom
             const basketDescription = document.getElementById('basketDescription');
             if (basketDescription) basketDescription.textContent = basket.howItWorks;
+
+            // Show "Who this is for" section only for balanced-returns basket
+            const whoThisIsForSection = document.getElementById('whoThisIsForSection');
+            if (whoThisIsForSection) {
+                if (basketId === 'balanced-returns') {
+                    whoThisIsForSection.style.display = 'block';
+                } else {
+                    whoThisIsForSection.style.display = 'none';
+                }
+            }
 
             // Store annual return and funds for calculator
             window.currentBasketReturn = basket.annualReturn;
