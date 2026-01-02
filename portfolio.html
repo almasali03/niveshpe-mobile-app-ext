@@ -948,6 +948,14 @@
             color: var(--color-blue);
             text-transform: uppercase;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .fund-list-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .fund-list-info {
@@ -2804,6 +2812,61 @@
                     closeOverlay(overlay.id);
                 }
             });
+        });
+    </script>
+
+    <script>
+        // Fund Icon Mapping Function (same as mutual-funds.html)
+        function getFundIcon(fundName) {
+            const name = fundName.toLowerCase();
+            if (name.includes('hdfc')) return 'AMC-Fund-logo-icons/hdfc.png';
+            if (name.includes('sbi')) return 'AMC-Fund-logo-icons/SBI.png';
+            if (name.includes('icici')) return 'AMC-Fund-logo-icons/ICICI.jpg';
+            if (name.includes('parag parikh') || name.includes('ppfas')) return 'AMC-Fund-logo-icons/PPFAS.png';
+            if (name.includes('kotak')) return 'AMC-Fund-logo-icons/kotak.jpeg';
+            if (name.includes('nippon')) return 'AMC-Fund-logo-icons/nippon.png';
+            if (name.includes('tata')) return 'AMC-Fund-logo-icons/tata.jpeg';
+            if (name.includes('mirae')) return 'AMC-Fund-logo-icons/nippon.png'; // Fallback to Nippon for now
+            if (name.includes('dsp')) return 'AMC-Fund-logo-icons/hdfc.png'; // Fallback to HDFC for now
+            if (name.includes('axis')) return 'AMC-Fund-logo-icons/hdfc.png'; // Fallback to HDFC for now
+            if (name.includes('quant')) return 'AMC-Fund-logo-icons/hdfc.png'; // Fallback to HDFC for now
+            return null; // Return null for unmapped funds
+        }
+
+        // Function to replace text logos with AMC logos
+        function replacePortfolioLogos() {
+            const fundLogos = document.querySelectorAll('.fund-list-logo');
+            fundLogos.forEach(logoDiv => {
+                // Get the fund name from the adjacent fund-list-name element
+                const fundListItem = logoDiv.closest('.fund-list-item');
+                if (fundListItem) {
+                    const fundNameElement = fundListItem.querySelector('.fund-list-name');
+                    if (fundNameElement && !logoDiv.querySelector('img')) {
+                        const fundName = fundNameElement.textContent.trim();
+                        const iconPath = getFundIcon(fundName);
+                        
+                        if (iconPath) {
+                            // Replace text with image
+                            const img = document.createElement('img');
+                            img.src = iconPath;
+                            img.alt = fundName.split(' ')[0];
+                            img.onerror = function() {
+                                // If image fails to load, keep original text
+                                this.remove();
+                            };
+                            
+                            logoDiv.innerHTML = '';
+                            logoDiv.appendChild(img);
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize portfolio logos when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure all content is loaded
+            setTimeout(replacePortfolioLogos, 100);
         });
     </script>
 

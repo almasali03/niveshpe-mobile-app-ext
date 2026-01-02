@@ -2194,6 +2194,11 @@
             color: white;
         }
 
+        .notification-banner.profile-verification {
+            background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+            color: white;
+        }
+
         /* Notification Icon */
         .notification-icon {
             display: flex;
@@ -2355,6 +2360,10 @@
         <button onclick="toggleNotification('error')" data-type="error">
             <span class="material-symbols-outlined" style="font-size: 16px;">warning</span>
             <span>Alert</span>
+        </button>
+        <button onclick="toggleNotification('profile-verification')" data-type="profile-verification">
+            <span class="material-symbols-outlined" style="font-size: 16px;">verified_user</span>
+            <span>Profile Verification</span>
         </button>
         <button class="clear-all" onclick="clearAllNotifications()">
             <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
@@ -3366,7 +3375,7 @@
         const notifications = {
             success: {
                 icon: 'check_circle',
-                title: 'Verification Complete!',
+                title: 'Profile Verification Complete!',
                 description: 'Tap to start your investment journey',
                 clickable: true,
                 action: () => window.location.href = 'mutual-funds.html',
@@ -3375,7 +3384,7 @@
             warning: {
                 icon: 'pending',
                 title: 'Complete Your Profile',
-                description: 'Tap to add PAN and complete KYC',
+                description: 'Tap to complete KYC by providing few additional details',
                 clickable: true,
                 action: () => window.location.href = 'kyc.html',
                 autoDismiss: false,
@@ -3395,6 +3404,14 @@
                 description: 'Some features may be temporarily limited',
                 clickable: false,
                 autoDismiss: false
+            },
+            'profile-verification': {
+                icon: 'verified_user',
+                title: 'Profile verification in progress',
+                description: 'We\'re verifying your profile. You\'ll be notified once complete.',
+                clickable: false,
+                autoDismiss: false,
+                hasProgress: true
             }
         };
 

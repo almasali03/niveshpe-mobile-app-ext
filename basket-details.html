@@ -583,6 +583,16 @@
             color: var(--color-text-primary);
         }
 
+        /* Fund Icon for Allocation Cards */
+        .allocation-fund-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            border-radius: 4px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
         .allocation-right {
             display: flex;
             align-items: center;
@@ -954,8 +964,254 @@
         <div class="iphone-home-indicator"></div>
     </div>
 
-    <!-- Baskets Data -->
-    <script src="baskets-data.js"></script>
+    <!-- Latest Baskets Data -->
+    <script>
+        // Hardcoded Basket Data with Correct RANK_1 AMCs (same as mutual-funds.html)
+        const HARDCODED_BASKET_DATA = {
+            // Based on FundRanking 2.json RANK_1 funds
+            'np-liquid': {
+                id: 'np-liquid',
+                title: 'Instant Withdrawal',
+                tagline: 'Alternate to FD for short-term parking. Instant withdrawal of funds',
+                returns: '7.2%',
+                returnsSubtitle: 'Expected Annual Returns',
+                holdingPeriod: '<1 year',
+                minSip: '₹100/mo',
+                minLumpsum: '₹500',
+                annualReturn: 0.072,
+                howItWorks: 'This fund invests in high-quality liquid instruments, allowing you to withdraw your money instantly.',
+                funds: [
+                    { name: 'ICICI Liquid Fund - Growth', allocation: 100, color: '#06B6D4' }
+                ]
+            },
+            'np-long-term': {
+                id: 'np-long-term',
+                title: 'Long-Term Wealth Building (Hold for 4+ yrs)',
+                tagline: 'Growth-oriented basket for long-term investments',
+                returns: '21.2%',
+                returnsSubtitle: 'Expected Annual Returns',
+                holdingPeriod: '4+ years',
+                minSip: '₹100/mo',
+                minLumpsum: '₹500',
+                annualReturn: 0.212,
+                howItWorks: 'This basket focuses on equity growth with diversification across large & mid-cap segments.',
+                funds: [
+                    { name: 'ICICI Large & Mid Cap Fund - Growth', allocation: 75, color: '#EC4899' },
+                    { name: 'ICICI Hybrid Equity Fund - Growth', allocation: 15, color: '#F59E0B' },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
+                ]
+            },
+            'np-elss': {
+                id: 'np-elss',
+                title: 'Tax Saver (ELSS)',
+                tagline: 'Invest smartly and save tax under 80C',
+                returns: '23.5%',
+                returnsSubtitle: 'Expected Annual Returns',
+                holdingPeriod: '3 year lock-in',
+                minSip: '₹500/mo',
+                minLumpsum: '₹500',
+                annualReturn: 0.235,
+                howItWorks: 'This ELSS fund invests primarily in equity markets with tax benefits under Section 80C.',
+                funds: [
+                    { name: 'SBI ELSS Tax Saver Fund - Growth', allocation: 100, color: '#10B981' }
+                ]
+            },
+            'np-ethical': {
+                id: 'np-ethical',
+                title: 'Islamic Halal & Ethical',
+                tagline: 'Ethical and Shariah-compliant investment basket',
+                returns: '15.2%',
+                returnsSubtitle: 'Expected Annual Returns',
+                holdingPeriod: '3-5 years',
+                minSip: '₹100/mo',
+                minLumpsum: '₹500',
+                annualReturn: 0.152,
+                howItWorks: 'This basket invests only in Shariah-compliant companies, avoiding interest-based businesses.',
+                funds: [
+                    { name: 'Tata Ethical Fund - Growth', allocation: 90, color: '#14B8A6' },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
+                ]
+            },
+            'np-fd-alternative': {
+                id: 'np-fd-alternative',
+                title: 'Safe & Stable – Better than FD',
+                tagline: 'Better than FD — steady growth, zero drama',
+                returns: '7.2%',
+                returnsSubtitle: 'Expected Annual Returns',
+                holdingPeriod: '1-3 years',
+                minSip: '₹100/mo',
+                minLumpsum: '₹500',
+                annualReturn: 0.072,
+                howItWorks: 'This fund uses arbitrage strategies to provide stable returns with minimal risk.',
+                funds: [
+                    { name: 'Kotak Arbitrage Fund - Growth', allocation: 100, color: '#3B82F6' }
+                ]
+            },
+            'np-mid-term': {
+                id: 'np-mid-term',
+                title: 'Mid-Term Balanced Growth (Hold for 2-4 years)',
+                tagline: 'Balanced basket optimized for medium-term wealth growth',
+                returns: '17.8%',
+                returnsSubtitle: 'Expected Annual Returns',
+                holdingPeriod: '2-4 years',
+                minSip: '₹100/mo',
+                minLumpsum: '₹500',
+                annualReturn: 0.178,
+                howItWorks: 'This basket balances growth and stability for medium-term investment horizons.',
+                funds: [
+                    { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55, color: '#8B5CF6' },
+                    { name: 'SBI Hybrid Debt Fund - Growth', allocation: 15, color: '#3B82F6' },
+                    { name: 'Nippon Large Cap Fund - Growth', allocation: 20, color: '#06B6D4' },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
+                ]
+            },
+            'balanced-returns': {
+                id: 'balanced-returns',
+                title: 'Balanced Returns Fund',
+                tagline: 'A perfect balance of growth and safety',
+                returns: '17.8%',
+                returnsSubtitle: '1 Year Rolling Return',
+                holdingPeriod: '2+ years',
+                minSip: '₹100/mo',
+                minLumpsum: '₹500',
+                annualReturn: 0.178,
+                howItWorks: 'This basket allocates funds across multiple top-rated AMCs for optimal diversification.',
+                funds: [
+                    { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55, color: '#8B5CF6' },
+                    { name: 'SBI Hybrid Debt Fund - Growth', allocation: 15, color: '#F59E0B' },
+                    { name: 'Nippon Large Cap Fund - Growth', allocation: 20, color: '#3B82F6' },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
+                ]
+            }
+        };
+        
+        // Load JSON data asynchronously
+        async function loadLatestBasketData() {
+            try {
+                const [basketResponse, fundResponse] = await Promise.all([
+                    fetch('latest_basket-2jan.json'),
+                    fetch('FundRanking 2.json')
+                ]);
+                
+                LATEST_BASKET_DATA = await basketResponse.json();
+                FUND_RANKING_DATA = await fundResponse.json();
+                
+                console.log('Loaded latest basket data successfully');
+                return true;
+            } catch (error) {
+                console.error('Failed to load latest basket data:', error);
+                return false;
+            }
+        }
+        
+        // Map fund category to actual fund name using FundRanking data
+        function getFundNameFromCategory(category) {
+            if (!FUND_RANKING_DATA || !FUND_RANKING_DATA.Rankings[category]) {
+                return category;
+            }
+            
+            const ranking = FUND_RANKING_DATA.Rankings[category];
+            const rank1Fund = ranking.RANK_1;
+            
+            if (!rank1Fund || !rank1Fund.AMC) {
+                return category;
+            }
+            
+            // Use the actual RANK_1 AMC directly
+            const amc = rank1Fund.AMC;
+            
+            // Generate fund name based on category
+            const categoryMapping = {
+                'LARGE_CAP': `${amc} Large Cap Fund - Growth`,
+                'LARGE_MID_CAP': `${amc} Large & Mid Cap Fund - Growth`,
+                'MULTICAP': `${amc} Multi Cap Fund - Growth`,
+                'BALANCED_ADVANTAGE': `${amc} Balanced Advantage Fund - Growth`,
+                'AGGRESSIVE_HYBRID': `${amc} Hybrid Equity Fund - Growth`,
+                'CONSERVATIVE_HYBRID': `${amc} Hybrid Debt Fund - Growth`,
+                'ARBITRAGE': `${amc} Arbitrage Fund - Growth`,
+                'LIQUID': `${amc} Liquid Fund - Growth`,
+                'GOLD': `${amc} Gold Fund - Growth`,
+                'SILVER': `${amc} Silver Fund - Growth`,
+                'ELSS': `${amc} ELSS Tax Saver Fund - Growth`,
+                'ETHICAL': `${amc} Ethical Fund - Growth`
+            };
+            
+            return categoryMapping[category] || `${amc} ${category} Fund - Growth`;
+        }
+        
+        // Convert new basket data format to old format for compatibility
+        function convertBasketData(basketData, basketId) {
+            if (!basketData) return null;
+            
+            let funds = [];
+            
+            // Handle dynamic baskets that reference core baskets
+            if (basketData.is_dynamic && basketData.core_basket_id) {
+                const coreBasket = LATEST_BASKET_DATA.CoreBaskets[basketData.core_basket_id];
+                if (coreBasket && coreBasket.schemes) {
+                    funds = coreBasket.schemes.map(scheme => {
+                        const fundName = getFundNameFromCategory(scheme.fund_category);
+                        return {
+                            name: fundName,
+                            allocation: scheme.allocation_percentage,
+                            color: '#8B5CF6'
+                        };
+                    });
+                }
+            }
+            // Handle baskets with direct schemes
+            else if (basketData.schemes && Array.isArray(basketData.schemes)) {
+                funds = basketData.schemes.map(scheme => {
+                    const fundName = getFundNameFromCategory(scheme.fund_category);
+                    return {
+                        name: fundName,
+                        allocation: scheme.allocation_percentage,
+                        color: '#8B5CF6'
+                    };
+                });
+            }
+            // Handle dynamic selection baskets (use default medium risk allocation)
+            else if (basketData.dynamic_selection) {
+                // For now, use a default allocation - this could be made smarter later
+                funds = [
+                    { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55, color: '#8B5CF6' },
+                    { name: 'HDFC Hybrid Debt Fund - Growth', allocation: 15, color: '#3B82F6' },
+                    { name: 'HDFC Top 100 Fund - Growth', allocation: 20, color: '#06B6D4' },
+                    { name: 'HDFC Gold Fund - Growth', allocation: 10, color: '#F59E0B' }
+                ];
+            }
+            
+            return {
+                id: basketId,
+                title: basketData.name,
+                tagline: basketData.description || 'Created by NiveshPe experts',
+                returns: '12-15%', // Default estimate
+                returnsSubtitle: 'Expected Annual Returns',
+                holdingPeriod: basketData.holding_period || '2+ years',
+                minSip: '₹100/mo',
+                minLumpsum: '₹500',
+                annualReturn: 0.13, // Default 13%
+                howItWorks: basketData.description || 'Professional portfolio allocation by NiveshPe experts.',
+                funds: funds
+            };
+        }
+        
+        // Get basket data using hardcoded data
+        function getBasketData(basketId) {
+            console.log('Looking for basket ID:', basketId);
+            
+            // Use hardcoded data
+            const basketData = HARDCODED_BASKET_DATA[basketId];
+            if (basketData) {
+                console.log('Found hardcoded basket data for:', basketId);
+                return basketData;
+            }
+            
+            // Fallback to balanced-returns if not found
+            console.log('Basket not found, using balanced-returns fallback');
+            return HARDCODED_BASKET_DATA['balanced-returns'];
+        }
+    </script>
 
     <script>
         // Get basket ID from URL parameter
@@ -1030,6 +1286,7 @@
                         <div class="allocation-card-bg" style="width: ${fund.allocation}%;"></div>
                         <div class="allocation-content">
                             <div class="allocation-left">
+                                ${getFundIconHTML(fund.name)}
                                 <span class="fund-name">${fund.name}</span>
                             </div>
                             <div class="allocation-right">
@@ -1046,7 +1303,7 @@
 
         // Load saved state
         document.addEventListener('DOMContentLoaded', function() {
-            // Populate basket data first
+            // Populate basket data using hardcoded data
             populateBasketData();
 
             calculateReturns();
@@ -1161,6 +1418,31 @@
             window.location.href = 'add-funds.html';
         }
     </script>
+    
+    <script>
+        // Fund Icon Mapping Function (same as other pages)
+        function getFundIcon(fundName) {
+            const name = fundName.toLowerCase();
+            if (name.includes('hdfc')) return 'AMC-Fund-logo-icons/hdfc.png';
+            if (name.includes('sbi')) return 'AMC-Fund-logo-icons/SBI.png';
+            if (name.includes('icici')) return 'AMC-Fund-logo-icons/ICICI.jpg';
+            if (name.includes('parag parikh') || name.includes('ppfas')) return 'AMC-Fund-logo-icons/PPFAS.png';
+            if (name.includes('kotak')) return 'AMC-Fund-logo-icons/kotak.jpeg';
+            if (name.includes('nippon')) return 'AMC-Fund-logo-icons/nippon.png';
+            if (name.includes('tata')) return 'AMC-Fund-logo-icons/tata.jpeg';
+            return null; // Return null for unmapped funds
+        }
+
+        // Function to generate fund icon HTML
+        function getFundIconHTML(fundName) {
+            const iconPath = getFundIcon(fundName);
+            if (iconPath) {
+                return `<img class="allocation-fund-icon" src="${iconPath}" alt="${fundName.split(' ')[0]}" onerror="this.style.display='none'">`;
+            }
+            return '';
+        }
+    </script>
+    
     <script src="assets/js/iphone-toggle.js"></script>
 </body>
 </html>

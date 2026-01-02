@@ -489,6 +489,16 @@
             white-space: nowrap;
         }
 
+        /* Fund Icon Styles */
+        .fund-icon {
+            width: 14px;
+            height: 14px;
+            margin-right: 6px;
+            border-radius: 3px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
         .capsule-chevron {
             font-size: 18px;
             color: rgba(255, 255, 255, 0.7);
@@ -3617,6 +3627,236 @@
             }
         });
     </script>
+
+    <script>
+        // Fund Icon Mapping Functions (moved to top for availability)
+        function getFundIcon(fundName) {
+            const name = fundName.toLowerCase();
+            if (name.includes('hdfc')) return 'AMC-Fund-logo-icons/hdfc.png';
+            if (name.includes('sbi')) return 'AMC-Fund-logo-icons/SBI.png';
+            if (name.includes('icici')) return 'AMC-Fund-logo-icons/icici.png';
+            if (name.includes('parag parikh') || name.includes('ppfas')) return 'AMC-Fund-logo-icons/PPFAS.png';
+            if (name.includes('kotak')) return 'AMC-Fund-logo-icons/kotak.jpeg';
+            if (name.includes('nippon')) return 'AMC-Fund-logo-icons/nippon.png';
+            if (name.includes('tata')) return 'AMC-Fund-logo-icons/tata.jpeg';
+            return null;
+        }
+
+        function getFundIconHTML(fundName) {
+            const iconPath = getFundIcon(fundName);
+            if (iconPath) {
+                return `<img class="fund-icon" src="${iconPath}" alt="${fundName.split(' ')[0]}" onerror="this.style.display='none'">`;
+            }
+            return '';
+        }
+        
+        // Hardcoded Basket Data with Correct RANK_1 AMCs
+        const HARDCODED_BASKET_DATA = {
+            // Based on FundRanking 2.json RANK_1 funds
+            'np-liquid': {
+                name: 'Instant Withdrawal',
+                funds: [
+                    { name: 'ICICI Liquid Fund - Growth', allocation: 100 }
+                ]
+            },
+            'np-long-term': {
+                name: 'Long-Term Wealth Building (Hold for 4+ yrs)',
+                funds: [
+                    { name: 'ICICI Large & Mid Cap Fund - Growth', allocation: 75 },
+                    { name: 'ICICI Hybrid Equity Fund - Growth', allocation: 15 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            },
+            'np-elss': {
+                name: 'Tax Saver (ELSS)',
+                funds: [
+                    { name: 'SBI ELSS Tax Saver Fund - Growth', allocation: 100 }
+                ]
+            },
+            'np-ethical': {
+                name: 'Islamic Halal & Ethical',
+                funds: [
+                    { name: 'Tata Ethical Fund - Growth', allocation: 90 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            },
+            'np-fd-alternative': {
+                name: 'Safe & Stable – Better than FD',
+                funds: [
+                    { name: 'Kotak Arbitrage Fund - Growth', allocation: 100 }
+                ]
+            },
+            'np-mid-term': {
+                name: 'Mid-Term Balanced Growth (Hold for 2-4 years)',
+                funds: [
+                    { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55 },
+                    { name: 'SBI Hybrid Debt Fund - Growth', allocation: 15 },
+                    { name: 'Nippon Large Cap Fund - Growth', allocation: 20 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            },
+            'np-short-term': {
+                name: 'Short Holding Growth (1-2 yr)',
+                funds: [
+                    { name: 'SBI Hybrid Debt Fund - Growth', allocation: 70 },
+                    { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 30 }
+                ]
+            },
+            'np-very-short-term': {
+                name: 'Low-tenure deposit (<1 yr)',
+                funds: [
+                    { name: 'Kotak Arbitrage Fund - Growth', allocation: 75 },
+                    { name: 'SBI Hybrid Debt Fund - Growth', allocation: 25 }
+                ]
+            },
+            'np-students': {
+                name: 'For Students',
+                funds: [
+                    { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55 },
+                    { name: 'SBI Hybrid Debt Fund - Growth', allocation: 15 },
+                    { name: 'Nippon Large Cap Fund - Growth', allocation: 20 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            },
+            'np-housewives': {
+                name: 'For Housewives',
+                funds: [
+                    { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55 },
+                    { name: 'SBI Hybrid Debt Fund - Growth', allocation: 15 },
+                    { name: 'Nippon Large Cap Fund - Growth', allocation: 20 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            },
+            'np-senior-citizens': {
+                name: 'For Senior Citizens',
+                funds: [
+                    { name: 'HDFC Balanced Advantage Fund - Growth', allocation: 55 },
+                    { name: 'SBI Hybrid Debt Fund - Growth', allocation: 15 },
+                    { name: 'Nippon Large Cap Fund - Growth', allocation: 20 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            },
+            'np-salaried': {
+                name: 'Ideal for Salaried People',
+                funds: [
+                    { name: 'ICICI Large & Mid Cap Fund - Growth', allocation: 75 },
+                    { name: 'ICICI Hybrid Equity Fund - Growth', allocation: 15 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            },
+            'np-precious-metal': {
+                name: 'Precious Metal(Gold & Silver)',
+                funds: [
+                    { name: 'ICICI Gold Fund - Growth', allocation: 80 },
+                    { name: 'HDFC Silver Fund - Growth', allocation: 20 }
+                ]
+            },
+            'np-future-house': {
+                name: 'Future House',
+                funds: [
+                    { name: 'Kotak Multi Cap Fund - Growth', allocation: 70 },
+                    { name: 'ICICI Hybrid Equity Fund - Growth', allocation: 20 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            },
+            'np-child-education': {
+                name: 'Child\'s Education',
+                funds: [
+                    { name: 'Kotak Multi Cap Fund - Growth', allocation: 50 },
+                    { name: 'ICICI Hybrid Equity Fund - Growth', allocation: 40 },
+                    { name: 'ICICI Gold Fund - Growth', allocation: 10 }
+                ]
+            }
+        };
+        
+        // Get fund allocations for a basket using hardcoded data
+        function getBasketFundAllocations(basketId) {
+            console.log('Getting allocations for basket:', basketId);
+            const basketData = HARDCODED_BASKET_DATA[basketId];
+            
+            if (!basketData || !basketData.funds) {
+                console.log('No hardcoded data found for:', basketId);
+                return [];
+            }
+            
+            console.log('Found funds:', basketData.funds);
+            return basketData.funds;
+        }
+        
+        // getFundIconHTML function is now defined at the top of the script
+        
+        // Update fund allocations for all baskets
+        function updateAllBasketAllocations() {
+            const basketContainers = document.querySelectorAll('.fund-capsules-container');
+            
+            basketContainers.forEach((container, index) => {
+                // Find the parent basket card to get the basket ID
+                const basketCard = container.closest('.basket-card');
+                if (!basketCard) return;
+                
+                // Extract basket ID from onclick attribute
+                const onclick = basketCard.getAttribute('onclick');
+                if (!onclick) return;
+                
+                const match = onclick.match(/basket-details\.html\?id=([^']+)/);
+                if (!match) return;
+                
+                const basketId = match[1];
+                const fundAllocations = getBasketFundAllocations(basketId);
+                
+                if (fundAllocations.length > 0) {
+                    renderBasketFundCapsules(container, fundAllocations);
+                }
+            });
+        }
+        
+        // Render fund capsules for a basket
+        function renderBasketFundCapsules(container, fundAllocations) {
+            // Get existing style from first capsule for consistency
+            const existingCapsule = container.querySelector('.fund-capsule');
+            let capsuleStyle = 'background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);';
+            let chevronColor = '#10B981';
+            
+            if (existingCapsule) {
+                capsuleStyle = existingCapsule.getAttribute('style') || capsuleStyle;
+                const existingChevron = existingCapsule.querySelector('.capsule-chevron');
+                if (existingChevron) {
+                    chevronColor = existingChevron.style.color || chevronColor;
+                }
+            }
+            
+            // Clear existing capsules
+            container.innerHTML = '';
+            
+            // Create new capsules for each fund
+            fundAllocations.forEach(fund => {
+                const fundSlug = fund.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                
+                const capsule = document.createElement('div');
+                capsule.className = 'fund-capsule clickable';
+                capsule.setAttribute('style', capsuleStyle);
+                capsule.setAttribute('onclick', `navigateToFund(event, '${fundSlug}')`);
+                
+                capsule.innerHTML = `
+                    <span class="fund-name-text" style="color: var(--color-text-primary);">
+                        ${getFundIconHTML(fund.name)}${fund.name} (${fund.allocation}%)
+                    </span>
+                    <span class="capsule-chevron" style="color: ${chevronColor};">›</span>
+                `;
+                
+                container.appendChild(capsule);
+            });
+        }
+        
+        // Initialize basket data on page load (using hardcoded data)
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, updating basket allocations with hardcoded data...');
+            updateAllBasketAllocations();
+            console.log('Basket allocations updated');
+        });
+    </script>
+
+    <!-- Fund icon functions are now defined at the top of the main basket script -->
     
     <script src="assets/js/iphone-toggle.js"></script>
 </body>
