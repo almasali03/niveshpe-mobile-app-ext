@@ -978,30 +978,6 @@
             display: inline-block;
         }
 
-        .filter-tabs {
-            display: flex;
-            gap: var(--space-xs);
-            flex-wrap: wrap;
-            padding-bottom: 4px;
-        }
-
-        .filter-tab {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-full);
-            padding: 8px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--color-text-secondary);
-            white-space: nowrap;
-            cursor: pointer;
-        }
-
-        .filter-tab.active {
-            background: var(--color-blue);
-            border-color: var(--color-blue);
-            color: white;
-        }
 
         .bottom-nav {
             background: rgba(255, 255, 255, 0.95);
@@ -1533,19 +1509,8 @@
                                 </div>
                             </div>
 
-                            <!-- Other Basket Cards -->
+                            <!-- Basket Cards -->
                             <div class="section-spacing">
-                                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--color-text-primary);">Other Baskets</h3>
-
-                                <!-- Filter Tabs -->
-                                <div class="filter-tabs" style="margin-bottom: 24px;">
-                                    <button class="filter-tab active" onclick="filterBaskets('all', this)">All Baskets</button>
-                                    <button class="filter-tab" onclick="filterBaskets('short-term', this)">Short-term</button>
-                                    <button class="filter-tab" onclick="filterBaskets('mid-term', this)">Mid-term</button>
-                                    <button class="filter-tab" onclick="filterBaskets('long-term', this)">Long-term</button>
-                                    <button class="filter-tab" onclick="filterBaskets('tax-saving', this)">Tax Saving</button>
-                                    <button class="filter-tab" onclick="filterBaskets('safe-stable', this)">Safe & Stable</button>
-                                </div>
 
                                 <!-- Instant Withdrawal Fund -->
                                 <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="short-term safe-stable" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(8, 145, 178, 0.03) 100%); border: 2px solid rgba(6, 182, 212, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=instant-withdrawal'">
@@ -3155,34 +3120,6 @@
             });
         }
 
-        // Filter baskets in "Other Baskets" section
-        function filterBaskets(filterType, element) {
-            // Get all basket cards
-            const basketCards = document.querySelectorAll('.basket-card');
-
-            // Show/hide cards based on filter
-            basketCards.forEach(card => {
-                const filters = card.getAttribute('data-filter');
-
-                if (filterType === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    // Check if the card has the selected filter
-                    if (filters && filters.includes(filterType)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
-
-            // Update active tab styling
-            const filterTabs = document.querySelectorAll('.filter-tabs .filter-tab');
-            filterTabs.forEach(tab => {
-                tab.classList.remove('active');
-            });
-            element.classList.add('active');
-        }
 
         // Accordion toggle
         function toggleAccordion(element) {
