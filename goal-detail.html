@@ -544,13 +544,24 @@
         }
 
         .transaction-icon.in-process {
-            background: rgba(251, 191, 36, 0.15);
-            color: #F59E0B;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
         }
 
         .transaction-icon.failed {
             background: rgba(239, 68, 68, 0.15);
             color: #EF4444;
+        }
+
+        /* Icon colors by transaction type - override status colors */
+        .transaction-icon.withdrawal-icon {
+            background: rgba(239, 68, 68, 0.15) !important;
+            color: #EF4444 !important;
+        }
+
+        .transaction-icon.investment-icon {
+            background: rgba(16, 185, 129, 0.15) !important;
+            color: #10B981 !important;
         }
 
         .transaction-details {
@@ -592,6 +603,11 @@
         }
 
         .transaction-status.in-process {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+        }
+
+        .transaction-status.withdrawal-processing {
             background: rgba(251, 191, 36, 0.15);
             color: #F59E0B;
         }
@@ -789,26 +805,48 @@
                 if (transaction.status === 'success') {
                     statusIcon = 'trending_up'; // Success - both SIP and Lumpsum
                 } else if (transaction.status === 'in-process') {
-                    statusIcon = 'schedule'; // Processing
+                    statusIcon = 'trending_up'; // Processing - now green trending up
                 } else if (transaction.status === 'failed') {
-                    statusIcon = 'error_outline'; // Failed
+                    // Use trending_up for investments, south for withdrawals
+                    statusIcon = isLumpsum || orderType.toLowerCase().includes('sip') ? 'trending_up' : 'south';
                 } else {
                     statusIcon = 'trending_up'; // Default
                 }
 
-                const statusText = transaction.status === 'success' ? 'Completed' : 
-                                transaction.status === 'in-process' ? 'Processing' : 
-                                transaction.status === 'failed' ? 'Failed' : transaction.status;
+                // Determine status text and badge class based on transaction type and status
+                let statusText = '';
+                let statusBadgeClass = transaction.status;
+                
+                if (transaction.status === 'success') {
+                    statusText = 'Completed';
+                } else if (transaction.status === 'in-process') {
+                    // Check if this is a withdrawal
+                    const isWithdrawal = orderType.toLowerCase().includes('withdrawal');
+                    if (isWithdrawal) {
+                        statusText = 'Processing';
+                        statusBadgeClass = 'withdrawal-processing';
+                    } else {
+                        statusText = 'Order Registered';
+                    }
+                } else if (transaction.status === 'failed') {
+                    statusText = 'Failed';
+                } else {
+                    statusText = transaction.status;
+                }
+
+                // Determine icon color class based on transaction type
+                const isWithdrawal = orderType.toLowerCase().includes('withdrawal');
+                const iconColorClass = isWithdrawal ? 'withdrawal-icon' : 'investment-icon';
 
                 transactionItem.innerHTML = `
-                    <div class="transaction-icon ${transaction.status}">
+                    <div class="transaction-icon ${transaction.status} ${iconColorClass}">
                         <span class="material-symbols-outlined">${statusIcon}</span>
                     </div>
                     <div class="transaction-details">
                         <div class="transaction-title">${orderType.replace(' Installment', '').replace(' Investment', '')}: ${transaction.fund_name}</div>
                         <div class="transaction-subtitle">
                             <span class="transaction-date">${formattedDate}</span>
-                            <span class="transaction-status ${transaction.status}">${statusText}</span>
+                            <span class="transaction-status ${statusBadgeClass}">${statusText}</span>
                         </div>
                     </div>
                     <div class="transaction-amount">+₹${transaction.amount.toLocaleString('en-IN')}</div>

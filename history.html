@@ -94,8 +94,8 @@
         }
 
         .transaction-icon.processing {
-            background: rgba(251, 146, 60, 0.15);
-            color: #F97316;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
         }
 
         .transaction-icon.failed {
@@ -106,6 +106,18 @@
         .transaction-icon.withdrawal-success {
             background: rgba(239, 68, 68, 0.15);
             color: #EF4444;
+        }
+
+        /* Icon colors by transaction type - override status colors */
+        .transaction-item[data-type="withdrawal"] .transaction-icon {
+            background: rgba(239, 68, 68, 0.15) !important;
+            color: #EF4444 !important;
+        }
+
+        .transaction-item[data-type="sip"] .transaction-icon,
+        .transaction-item[data-type="lumpsum"] .transaction-icon {
+            background: rgba(16, 185, 129, 0.15) !important;
+            color: #10B981 !important;
         }
 
         /* Enhanced transaction subtitle structure */
@@ -126,6 +138,16 @@
             font-size: 10px;
             padding: 2px 6px;
             border-radius: 8px;
+        }
+
+        .status-badge.processing {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+        }
+
+        .status-badge.withdrawal-processing {
+            background: rgba(251, 191, 36, 0.15);
+            color: #F59E0B;
         }
     </style>
 </head>
@@ -175,7 +197,7 @@
                                 <div class="filter-tags">
                                     <button class="filter-tag active" data-filter="all">All</button>
                                     <button class="filter-tag" data-filter="sip">SIPs</button>
-                                    <button class="filter-tag" data-filter="lumpsum">Lumpsum</button>
+                                    <button class="filter-tag" data-filter="lumpsum">One-time</button>
                                     <button class="filter-tag" data-filter="withdrawal">Withdrawals</button>
                                 </div>
                             </div>
@@ -188,7 +210,7 @@
                                         <span class="material-symbols-outlined">trending_up</span>
                                     </div>
                                     <div class="transaction-details">
-                                        <div class="transaction-title">Monthly SIP: HDFC Liquid Fund</div>
+                                        <div class="transaction-title">SIP: HDFC Liquid Fund</div>
                                         <div class="transaction-subtitle">
                                             <span class="transaction-date">Jan 9, 2026 • 09:30 AM</span>
                                             <span class="status-badge success">Completed</span>
@@ -197,27 +219,27 @@
                                     <div class="transaction-amount credit">+₹300</div>
                                 </div>
 
-                                <div class="transaction-item" data-type="sip" data-status="processing" onclick="openTransactionDetail('sip', '1500', 'Monthly SIP: SBI Bluechip Fund', 'Jan 8, 2026 • 10:15 AM')">
+                                <div class="transaction-item" data-type="sip" data-status="processing" onclick="openTransactionDetail('sip', '1500', 'SIP: SBI Bluechip Fund', 'Jan 8, 2026 • 10:15 AM')">
                                     <div class="transaction-icon processing">
-                                        <span class="material-symbols-outlined">schedule</span>
+                                        <span class="material-symbols-outlined">trending_up</span>
                                     </div>
                                     <div class="transaction-details">
-                                        <div class="transaction-title">Monthly SIP: SBI Bluechip Fund</div>
+                                        <div class="transaction-title">SIP: SBI Bluechip Fund</div>
                                         <div class="transaction-subtitle">
                                             <span class="transaction-date">Jan 8, 2026 • 10:15 AM</span>
-                                            <span class="status-badge processing">Processing</span>
+                                            <span class="status-badge processing">Order Registered</span>
                                         </div>
                                     </div>
                                     <div class="transaction-amount credit">+₹1,500</div>
                                 </div>
 
                                 <!-- Withdrawal Transactions -->
-                                <div class="transaction-item" data-type="withdrawal" data-status="success" onclick="openTransactionDetail('withdrawal', '1000', 'Emergency Fund Goal', 'Jan 7, 2026 • 11:45 AM')">
+                                <div class="transaction-item" data-type="withdrawal" data-status="success" onclick="openTransactionDetail('withdrawal', '1000', 'Withdrawal: Emergency Fund Goal', 'Jan 7, 2026 • 11:45 AM')">
                                     <div class="transaction-icon withdrawal-success">
                                         <span class="material-symbols-outlined">south</span>
                                     </div>
                                     <div class="transaction-details">
-                                        <div class="transaction-title">Emergency Fund Goal</div>
+                                        <div class="transaction-title">Withdrawal: Emergency Fund Goal</div>
                                         <div class="transaction-subtitle">
                                             <span class="transaction-date">Jan 7, 2026 • 11:45 AM</span>
                                             <span class="status-badge success">Completed</span>
@@ -226,27 +248,27 @@
                                     <div class="transaction-amount debit">-₹1,000</div>
                                 </div>
 
-                                <div class="transaction-item" data-type="withdrawal" data-status="processing" onclick="openTransactionDetail('withdrawal', '2500', 'Partial Withdrawal: HDFC Liquid Fund', 'Jan 6, 2026 • 02:20 PM')">
+                                <div class="transaction-item" data-type="withdrawal" data-status="processing" onclick="openTransactionDetail('withdrawal', '2500', 'Withdrawal: HDFC Liquid Fund', 'Jan 6, 2026 • 02:20 PM')">
                                     <div class="transaction-icon processing">
-                                        <span class="material-symbols-outlined">schedule</span>
+                                        <span class="material-symbols-outlined">south</span>
                                     </div>
                                     <div class="transaction-details">
-                                        <div class="transaction-title">Partial Withdrawal: HDFC Liquid Fund</div>
+                                        <div class="transaction-title">Withdrawal: HDFC Liquid Fund</div>
                                         <div class="transaction-subtitle">
                                             <span class="transaction-date">Jan 6, 2026 • 02:20 PM</span>
-                                            <span class="status-badge processing">Processing</span>
+                                            <span class="status-badge withdrawal-processing">Processing</span>
                                         </div>
                                     </div>
                                     <div class="transaction-amount debit">-₹2,500</div>
                                 </div>
 
                                 <!-- Lumpsum Transactions -->
-                                <div class="transaction-item" data-type="lumpsum" data-status="success" onclick="openTransactionDetail('lumpsum', '5000', 'One Time: Axis Midcap Fund', 'Jan 5, 2026 • 05:30 PM')">
+                                <div class="transaction-item" data-type="lumpsum" data-status="success" onclick="openTransactionDetail('lumpsum', '5000', 'One-time: Axis Midcap Fund', 'Jan 5, 2026 • 05:30 PM')">
                                     <div class="transaction-icon success">
                                         <span class="material-symbols-outlined">trending_up</span>
                                     </div>
                                     <div class="transaction-details">
-                                        <div class="transaction-title">One Time: Axis Midcap Fund</div>
+                                        <div class="transaction-title">One-time: Axis Midcap Fund</div>
                                         <div class="transaction-subtitle">
                                             <span class="transaction-date">Jan 5, 2026 • 05:30 PM</span>
                                             <span class="status-badge success">Completed</span>
@@ -255,12 +277,12 @@
                                     <div class="transaction-amount credit">+₹5,000</div>
                                 </div>
 
-                                <div class="transaction-item" data-type="lumpsum" data-status="failed" onclick="openTransactionDetail('lumpsum', '10000', 'One Time: ICICI Prudential ELSS', 'Jan 4, 2026 • 10:15 AM')">
+                                <div class="transaction-item" data-type="lumpsum" data-status="failed" onclick="openTransactionDetail('lumpsum', '10000', 'One-time: ICICI Prudential ELSS', 'Jan 4, 2026 • 10:15 AM')">
                                     <div class="transaction-icon failed">
-                                        <span class="material-symbols-outlined">error_outline</span>
+                                        <span class="material-symbols-outlined">trending_up</span>
                                     </div>
                                     <div class="transaction-details">
-                                        <div class="transaction-title">One Time: ICICI Prudential ELSS</div>
+                                        <div class="transaction-title">One-time: ICICI Prudential ELSS</div>
                                         <div class="transaction-subtitle">
                                             <span class="transaction-date">Jan 4, 2026 • 10:15 AM</span>
                                             <span class="status-badge failed">Failed</span>
@@ -269,12 +291,12 @@
                                     <div class="transaction-amount credit">+₹10,000</div>
                                 </div>
 
-                                <div class="transaction-item" data-type="sip" data-status="success" onclick="openTransactionDetail('sip', '500', 'Weekly SIP: SBI Hybrid Fund', 'Jan 3, 2026 • 12:00 PM')">
+                                <div class="transaction-item" data-type="sip" data-status="success" onclick="openTransactionDetail('sip', '500', 'SIP: SBI Hybrid Fund', 'Jan 3, 2026 • 12:00 PM')">
                                     <div class="transaction-icon success">
                                         <span class="material-symbols-outlined">trending_up</span>
                                     </div>
                                     <div class="transaction-details">
-                                        <div class="transaction-title">Weekly SIP: SBI Hybrid Fund</div>
+                                        <div class="transaction-title">SIP: SBI Hybrid Fund</div>
                                         <div class="transaction-subtitle">
                                             <span class="transaction-date">Jan 3, 2026 • 12:00 PM</span>
                                             <span class="status-badge success">Completed</span>
@@ -283,12 +305,12 @@
                                     <div class="transaction-amount credit">+₹500</div>
                                 </div>
 
-                                <div class="transaction-item" data-type="withdrawal" data-status="failed" onclick="openTransactionDetail('withdrawal', '15000', 'Full Withdrawal: Kotak Liquid Fund', 'Jan 2, 2026 • 11:30 AM')">
+                                <div class="transaction-item" data-type="withdrawal" data-status="failed" onclick="openTransactionDetail('withdrawal', '15000', 'Withdrawal: Kotak Liquid Fund', 'Jan 2, 2026 • 11:30 AM')">
                                     <div class="transaction-icon failed">
-                                        <span class="material-symbols-outlined">error_outline</span>
+                                        <span class="material-symbols-outlined">south</span>
                                     </div>
                                     <div class="transaction-details">
-                                        <div class="transaction-title">Full Withdrawal: Kotak Liquid Fund</div>
+                                        <div class="transaction-title">Withdrawal: Kotak Liquid Fund</div>
                                         <div class="transaction-subtitle">
                                             <span class="transaction-date">Jan 2, 2026 • 11:30 AM</span>
                                             <span class="status-badge failed">Failed</span>
@@ -297,12 +319,12 @@
                                     <div class="transaction-amount debit">-₹15,000</div>
                                 </div>
 
-                                <div class="transaction-item" data-type="sip" data-status="success" onclick="openTransactionDetail('sip', '3000', 'Monthly SIP: SBI Small Cap Fund', 'Dec 30, 2025 • 09:30 AM')">
+                                <div class="transaction-item" data-type="sip" data-status="success" onclick="openTransactionDetail('sip', '3000', 'SIP: SBI Small Cap Fund', 'Dec 30, 2025 • 09:30 AM')">
                                     <div class="transaction-icon success">
                                         <span class="material-symbols-outlined">trending_up</span>
                                     </div>
                                     <div class="transaction-details">
-                                        <div class="transaction-title">Monthly SIP: SBI Small Cap Fund</div>
+                                        <div class="transaction-title">SIP: SBI Small Cap Fund</div>
                                         <div class="transaction-subtitle">
                                             <span class="transaction-date">Dec 30, 2025 • 09:30 AM</span>
                                             <span class="status-badge success">Completed</span>

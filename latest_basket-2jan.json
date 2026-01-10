@@ -1,0 +1,651 @@
+{
+  "version": "2.0",
+  "last_updated": "2025-12-17",
+
+  "FlagshipBaskets": {
+    "LOW_RISK": {
+      "basket_id": "FLAGSHIP_LOW",
+      "name": "Stable Growth Basket",
+      "description": "Designed for cautious investors seeking stable returns with minimal market ups and downs. Includes 4 carefully selected funds suited to your risk profile.\nCreated by NiveshPe experts",
+      "why": ["Professionally managed portfolio", "Diversified fund selection", "Lower volatility and smoother returns", "Higher focus on capital protection", "Suitable for conservative and first-time investors"],
+      "holding_period": "2+ years",
+      "risk_level": "Low Risk",
+      "risk_score_range": {
+        "min": 25,
+        "max": 39
+      },
+      "is_default": false,
+      "is_active": true,
+      "ideal_asset_allocation": {
+        "debt": 56,
+        "equity": 34,
+        "gold": 10
+      },
+      "schemes": [
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 50 },
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 30 },
+        { "fund_category": "LARGE_CAP", "allocation_percentage": 10 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "MEDIUM_RISK": {
+      "basket_id": "FLAGSHIP_MEDIUM",
+      "name": "Balanced Growth Basket",
+      "description": "A balanced portfolio that combines steady growth with controlled risk for long-term investors. Includes 4 carefully selected funds suited to your risk profile.\nCreated by NiveshPe experts",
+      "why": ["Professionally managed portfolio", "Diversified fund selection", "Balanced mix of growth and stability", "Designed to handle market ups and downs"],
+      "holding_period": "2+ years",
+      "risk_level": "Medium Risk",
+      "risk_score_range": {
+        "min": 40,
+        "max": 60
+      },
+      "is_default": false,
+      "is_active": true,
+      "ideal_asset_allocation": {
+        "debt": 28,
+        "equity": 62,
+        "gold": 10
+      },
+      "schemes": [
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 50 },
+        { "fund_category": "AGGRESSIVE_HYBRID", "allocation_percentage": 30 },
+        { "fund_category": "LARGE_CAP", "allocation_percentage": 10 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "HIGH_RISK": {
+      "basket_id": "FLAGSHIP_HIGH",
+      "name": "High Growth Basket",
+      "description": "Built for long-term investors aiming for higher wealth creation while accepting short-term volatility. Includes 4 carefully selected funds suited to your risk profile.\nCreated by NiveshPe experts.",
+      "why": ["Professionally managed portfolio", "Diversified fund selection", "Higher equity exposure for wealth creation", "Optimised for long-term investing", "Suitable for investors comfortable with volatility"],
+      "holding_period": "3+ years",
+      "risk_level": "High Risk",
+      "risk_score_range": {
+        "min": 61,
+        "max": 85
+      },
+      "is_default": true,
+      "is_active": true,
+      "ideal_asset_allocation": {
+        "debt": 18,
+        "equity": 72,
+        "gold": 10
+      },
+      "schemes": [
+        { "fund_category": "MULTICAP", "allocation_percentage": 50 },
+        { "fund_category": "AGGRESSIVE_HYBRID", "allocation_percentage": 30 },
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 10 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "ULTRA_HIGH_RISK": {
+      "basket_id": "FLAGSHIP_ULTRA_HIGH",
+      "name": "Max Growth Basket",
+      "description": "An aggressive, equity-focused portfolio for experienced investors targeting maximum long-term growth. Includes 4 carefully selected funds suited to your risk profile.\nCreated by NiveshPe experts.",
+      "why": ["Professionally managed portfolio", "Diversified fund selection", "Aggressive growth-oriented allocation", "Maximum equity exposure across market caps", "Built for long-term, high-risk investors"],
+      "holding_period": "4+ years",
+      "risk_level": "Ultra High Risk",
+      "risk_score_range": {
+        "min": 86,
+        "max": 100
+      },
+      "is_default": false,
+      "is_active": true,
+      "ideal_asset_allocation": {
+        "debt": 8,
+        "equity": 83,
+        "gold": 10
+      },
+      "schemes": [
+        { "fund_category": "MULTICAP", "allocation_percentage": 50 },
+        { "fund_category": "LARGE_MID_CAP", "allocation_percentage": 30 },
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 10 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    }
+  },
+
+  "CoreBaskets": {
+    "B1.1": {
+      "basket_id": "B1.1",
+      "name": "Low-volatility arbitrage-focused basket",
+      "description": "Low-volatility arbitrage-focused basket.",
+      "risk_category": "Low Risk",
+      "holding_period": "<1 Year",
+      "schemes": [
+        { "fund_category": "ARBITRAGE", "allocation_percentage": 90 },
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 10 }
+      ]
+    },
+
+    "B2.1": {
+      "basket_id": "B2.1",
+      "name": "Low-volatility arbitrage-focused basket",
+      "description": "Low-volatility arbitrage-focused basket.",
+      "risk_category": "Medium Risk",
+      "holding_period": "<1 Year",
+      "schemes": [
+        { "fund_category": "ARBITRAGE", "allocation_percentage": 75 },
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 25 }
+      ]
+    },
+
+    "B3.1": {
+      "basket_id": "B3.1",
+      "name": "Low-volatility arbitrage-focused basket",
+      "description": "Low-volatility arbitrage-focused basket.",
+      "risk_category": "High Risk",
+      "holding_period": "<1 Year",
+      "schemes": [
+        { "fund_category": "ARBITRAGE", "allocation_percentage": 65 },
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 35 }
+      ]
+    },
+
+    "B4.1": {
+      "basket_id": "B4.1",
+      "name": "Low-volatility arbitrage-focused basket",
+      "description": "Low-volatility arbitrage-focused basket.",
+      "risk_category": "Ultra High Risk",
+      "holding_period": "<1 Year",
+      "schemes": [
+        { "fund_category": "ARBITRAGE", "allocation_percentage": 55 },
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 45 }
+      ]
+    },
+
+    "B1.2": {
+      "basket_id": "B1.2",
+      "name": "Low-risk hybrid basket",
+      "description": "Low-risk hybrid basket combining stability and balanced advantage.",
+      "risk_category": "Low Risk",
+      "holding_period": "1-2 Years",
+      "schemes": [
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 80 },
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 20 }
+      ]
+    },
+
+    "B2.2": {
+      "basket_id": "B2.2",
+      "name": "Low-risk hybrid basket",
+      "description": "Low-risk hybrid basket combining stability and balanced advantage.",
+      "risk_category": "Medium Risk",
+      "holding_period": "1-2 Years",
+      "schemes": [
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 70 },
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 30 }
+      ]
+    },
+
+    "B3.2": {
+      "basket_id": "B3.2",
+      "name": "Balanced hybrid basket",
+      "description": "Balanced hybrid basket with strong allocation to balanced advantage.",
+      "risk_category": "High Risk",
+      "holding_period": "1-2 Years",
+      "schemes": [
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 70 },
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 30 }
+      ]
+    },
+
+    "B4.2": {
+      "basket_id": "B4.2",
+      "name": "Balanced hybrid basket",
+      "description": "Balanced hybrid basket with dominant allocation to balanced advantage.",
+      "risk_category": "Ultra High Risk",
+      "holding_period": "1-2 Years",
+      "schemes": [
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 80 },
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 20 }
+      ]
+    },
+
+    "B1.3": {
+      "basket_id": "B1.3",
+      "name": "Diversified growth basket",
+      "description": "Diversified growth basket with balanced, conservative and large-cap exposure.",
+      "risk_category": "Low Risk",
+      "holding_period": "2-4 Years",
+      "schemes": [
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 55 },
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 20 },
+        { "fund_category": "LARGE_CAP", "allocation_percentage": 15 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "B2.3": {
+      "basket_id": "B2.3",
+      "name": "Diversified growth basket",
+      "description": "Diversified growth basket blending balanced advantage and large caps.",
+      "risk_category": "Medium Risk",
+      "holding_period": "2-4 Years",
+      "schemes": [
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 55 },
+        { "fund_category": "CONSERVATIVE_HYBRID", "allocation_percentage": 15 },
+        { "fund_category": "LARGE_CAP", "allocation_percentage": 20 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "B3.3": {
+      "basket_id": "B3.3",
+      "name": "High-growth basket",
+      "description": "High-growth basket with aggressive and multicap exposure.",
+      "risk_category": "High Risk",
+      "holding_period": "2-4 Years",
+      "schemes": [
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 45 },
+        { "fund_category": "AGGRESSIVE_HYBRID", "allocation_percentage": 20 },
+        { "fund_category": "MULTICAP", "allocation_percentage": 25 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "B4.3": {
+      "basket_id": "B4.3",
+      "name": "High-growth basket",
+      "description": "High-growth basket focused on aggressive hybrid and multicap funds.",
+      "risk_category": "Ultra High Risk",
+      "holding_period": "2-4 Years",
+      "schemes": [
+        { "fund_category": "BALANCED_ADVANTAGE", "allocation_percentage": 40 },
+        { "fund_category": "AGGRESSIVE_HYBRID", "allocation_percentage": 15 },
+        { "fund_category": "MULTICAP", "allocation_percentage": 35 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "B1.4": {
+      "basket_id": "B1.4",
+      "name": "Growth-oriented basket",
+      "description": "Growth-oriented basket led by large & mid-cap exposure.",
+      "risk_category": "Low Risk",
+      "holding_period": "4+ Years",
+      "schemes": [
+        { "fund_category": "LARGE_MID_CAP", "allocation_percentage": 70 },
+        { "fund_category": "AGGRESSIVE_HYBRID", "allocation_percentage": 20 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "B2.4": {
+      "basket_id": "B2.4",
+      "name": "Growth basket",
+      "description": "Growth basket with strong large & mid-cap allocation and aggressive exposure.",
+      "risk_category": "Medium Risk",
+      "holding_period": "4+ Years",
+      "schemes": [
+        { "fund_category": "LARGE_MID_CAP", "allocation_percentage": 75 },
+        { "fund_category": "AGGRESSIVE_HYBRID", "allocation_percentage": 15 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "B3.4": {
+      "basket_id": "B3.4",
+      "name": "High-growth multicap basket",
+      "description": "High-growth multicap basket with aggressive hybrid tilt.",
+      "risk_category": "High Risk",
+      "holding_period": "4+ Years",
+      "schemes": [
+        { "fund_category": "MULTICAP", "allocation_percentage": 50 },
+        { "fund_category": "AGGRESSIVE_HYBRID", "allocation_percentage": 40 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    "B4.4": {
+      "basket_id": "B4.4",
+      "name": "Aggressive multicap-dominant basket",
+      "description": "Aggressive multicap-dominant basket for high growth potential.",
+      "risk_category": "Ultra High Risk",
+      "holding_period": "4+ Years",
+      "schemes": [
+        { "fund_category": "MULTICAP", "allocation_percentage": 70 },
+        { "fund_category": "AGGRESSIVE_HYBRID", "allocation_percentage": 20 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    }
+  },
+
+  "RiskBasedRecommendationMatrix": {
+    "Low Risk": {
+      "0-1": "B1.1",
+      "1-2": "B1.2",
+      "2-4": "B1.3",
+      "4+": "B1.4"
+    },
+    "Medium Risk": {
+      "0-1": "B2.1",
+      "1-2": "B2.2",
+      "2-4": "B2.3",
+      "4+": "B2.4"
+    },
+    "High Risk": {
+      "0-1": "B3.1",
+      "1-2": "B3.2",
+      "2-4": "B3.3",
+      "4+": "B3.4"
+    },
+    "Ultra High Risk": {
+      "0-1": "B4.1",
+      "1-2": "B4.2",
+      "2-4": "B4.3",
+      "4+": "B4.4"
+    }
+  },
+
+  "NiveshpeBaskets": [
+    {
+      "basket_id": "NP_ETHICAL",
+      "name": "Islamic Halal & Ethical",
+      "description": "Ethical and Shariah-compliant investment basket for Islamic value-driven investors",
+      "category": "ethical",
+      "holding_period": "3-5 years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": null,
+      "schemes": [
+        { "fund_category": "ETHICAL", "allocation_percentage": 90 },
+        { "fund_category": "GOLD", "allocation_percentage": 10 }
+      ]
+    },
+
+    {
+      "basket_id": "NP_LIQUID",
+      "name": "Instant Withdrawal",
+      "description": "Alternate to FD for short-term parking. Instant withdrawal of funds",
+      "category": "liquidity",
+      "holding_period": "<1 year",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": null,
+      "schemes": [{ "fund_category": "LIQUID", "allocation_percentage": 100 }]
+    },
+
+    {
+      "basket_id": "NP_FD_ALTERNATIVE",
+      "name": "Safe & Stable – Better than FD",
+      "description": "Low-risk stable-income basket offering better-than-FD returns",
+      "category": "stable_income",
+      "holding_period": "1-3 years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": null,
+      "schemes": [{ "fund_category": "ARBITRAGE", "allocation_percentage": 100 }]
+    },
+
+    {
+      "basket_id": "NP_STUDENTS",
+      "name": "For Students",
+      "description": "Designed for students to invest their freelancing, stipend or pocket-money",
+      "category": "demographic",
+      "holding_period": "2-4 Years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": true,
+      "core_basket_id": null,
+      "schemes": null,
+      "dynamic_selection": {
+        "type": "risk_and_period_based",
+        "holding_period": "2-4 Years",
+        "use_matrix": "RiskBasedRecommendationMatrix"
+      }
+    },
+
+    {
+      "basket_id": "NP_HOUSEWIVES",
+      "name": "For Housewives",
+      "description": "Stable and simple investment basket tailored for home-makers. Focussed on decent growth and capital preservation",
+      "category": "demographic",
+      "holding_period": "3-5 years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": true,
+      "core_basket_id": null,
+      "schemes": null,
+      "dynamic_selection": {
+        "type": "risk_and_period_based",
+        "holding_period": "2-4 Years",
+        "use_matrix": "RiskBasedRecommendationMatrix"
+      }
+    },
+
+    {
+      "basket_id": "NP_SENIOR_CITIZENS",
+      "name": "For Senior Citizens",
+      "description": "Safe and stable growth basket for senior citizens. Focussed on capital preservation and moderate growth",
+      "category": "demographic",
+      "holding_period": "3-5 years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": true,
+      "core_basket_id": null,
+      "schemes": null,
+      "dynamic_selection": {
+        "type": "risk_and_period_based",
+        "holding_period": "2-4 Years",
+        "use_matrix": "RiskBasedRecommendationMatrix"
+      }
+    },
+
+    {
+      "basket_id": "NP_SALARIED",
+      "name": "Ideal for Salaried People",
+      "description": "Long-term wealth creation basket designed for salaried earners with regular income",
+      "category": "demographic",
+      "holding_period": "5+ years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": true,
+      "core_basket_id": null,
+      "schemes": null,
+      "dynamic_selection": {
+        "type": "risk_and_period_based",
+        "holding_period": "4+ Years",
+        "use_matrix": "RiskBasedRecommendationMatrix"
+      }
+    },
+
+    {
+      "basket_id": "NP_INFLUENCERS",
+      "name": "For Social Media Influencers",
+      "description": "Designed for creators with high but irregular income, focused on growth and flexibility",
+      "category": "demographic",
+      "holding_period": "2+ years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": "B4.3",
+      "schemes": null
+    },
+
+    {
+      "basket_id": "NP_FREELANCERS",
+      "name": "For Freelancers",
+      "description": "Flexible investment basket for freelancers managing irregular cash flows",
+      "category": "demographic",
+      "holding_period": "2+ years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": "B3.3",
+      "schemes": null
+    },
+
+    {
+      "basket_id": "NP_SME_OWNERS",
+      "name": "For SME Owners",
+      "description": "Balanced basket for business owners focusing on stability and long-term wealth",
+      "category": "demographic",
+      "holding_period": "2+ years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": "B3.3",
+      "schemes": null
+    },
+
+    {
+      "basket_id": "NP_FIRE",
+      "name": "Early Retirement (FIRE) Basket",
+      "description": "Aggressive growth-oriented basket for achieving financial independence early",
+      "category": "goal_based",
+      "holding_period": "5+ years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": "B4.4",
+      "schemes": null
+    },
+
+    {
+      "basket_id": "NP_CHILD_EDUCATION",
+      "name": "Child's Education",
+      "description": "Goal-based basket to build a corpus for your child's education",
+      "category": "goal_based",
+      "holding_period": "4+ years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": "B3.4",
+      "schemes": null
+    },
+
+    {
+      "basket_id": "NP_CHILD_MARRIAGE",
+      "name": "Child's Marriage",
+      "description": "Long-term planning basket for your child's marriage expenses",
+      "category": "goal_based",
+      "holding_period": "4+ years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": "B3.4",
+      "schemes": null
+    },
+
+    {
+      "basket_id": "NP_PRECIOUS_METAL",
+      "name": "Precious Metal(Gold & Silver)",
+      "description": "A gold-dominant precious metals basket balanced with silver for long-term stability.",
+      "category": "long_term",
+      "holding_period": "3-5 years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": true,
+      "core_basket_id": null,
+      "schemes": [
+        { "fund_category": "GOLD", "allocation_percentage": 80 },
+        { "fund_category": "SILVER", "allocation_percentage": 20 }
+      ]
+    },
+
+    {
+      "basket_id": "NP_FUTURE_HOUSE",
+      "name": "Future House",
+      "description": "Investment basket to help you save systematically for your dream home",
+      "category": "goal_based",
+      "holding_period": "5+ years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": "B4.4",
+      "schemes": null
+    },
+
+    {
+      "basket_id": "NP_LONG_TERM",
+      "name": "Long-Term Wealth Building (Hold for 4+ yrs)",
+      "description": "Growth-oriented basket for long-term investments. Hold for atleast 4 years for best returns",
+      "category": "wealth_building",
+      "holding_period": "4+ Years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": true,
+      "core_basket_id": null,
+      "schemes": null,
+      "dynamic_selection": {
+        "type": "risk_and_period_based",
+        "holding_period": "4+ Years",
+        "use_matrix": "RiskBasedRecommendationMatrix"
+      }
+    },
+
+    {
+      "basket_id": "NP_MID_TERM",
+      "name": "Mid-Term Balanced Growth (Hold for 2-4 years)",
+      "description": "Optimized for medium-term wealth growth. Ideal if you want to park funds for 2-4 years",
+      "category": "balanced_growth",
+      "holding_period": "2-4 Years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": true,
+      "core_basket_id": null,
+      "schemes": null,
+      "dynamic_selection": {
+        "type": "risk_and_period_based",
+        "holding_period": "2-4 Years",
+        "use_matrix": "RiskBasedRecommendationMatrix"
+      }
+    },
+
+    {
+      "basket_id": "NP_SHORT_TERM",
+      "name": "Short Holding Growth (1-2 yr)",
+      "description": "Short-term growth basket for moderate-returns. Ideal if you want to safely park funds for 1-2 years",
+      "category": "short_term_growth",
+      "holding_period": "1-2 Years",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": true,
+      "core_basket_id": null,
+      "schemes": null,
+      "dynamic_selection": {
+        "type": "risk_and_period_based",
+        "holding_period": "1-2 Years",
+        "use_matrix": "RiskBasedRecommendationMatrix"
+      }
+    },
+
+    {
+      "basket_id": "NP_VERY_SHORT_TERM",
+      "name": "Low-tenure deposit (<1 yr)",
+      "description": "Best suited for parking money for less than a year, offering high liquidity and safety",
+      "category": "very_short_term",
+      "holding_period": "<1 Year",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": true,
+      "core_basket_id": null,
+      "schemes": null,
+      "dynamic_selection": {
+        "type": "risk_and_period_based",
+        "holding_period": "<1 Year",
+        "use_matrix": "RiskBasedRecommendationMatrix"
+      }
+    },
+
+    {
+      "basket_id": "NP_ELSS",
+      "name": "Tax Saver (ELSS)",
+      "description": "Equity-linked savings basket focused on tax-efficient long-term growth",
+      "category": "tax_saving",
+      "holding_period": "3 year lock-in",
+      "is_default": false,
+      "is_active": true,
+      "is_dynamic": false,
+      "core_basket_id": null,
+      "schemes": [{ "fund_category": "ELSS", "allocation_percentage": 100 }]
+    }
+  ]
+}

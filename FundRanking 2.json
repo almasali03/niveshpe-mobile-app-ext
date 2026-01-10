@@ -1,0 +1,282 @@
+{
+  "Rankings": {
+    "LARGE_CAP": {
+      "RANK_1": {
+        "AMC": "Nippon",
+        "SchemeCode": "RLEARG-GR-I",
+        "min SIP": 100,
+        "min Lumpsum": 100,
+        "ISIN": "INF204K01562",
+        "3y_returns": 19.15
+      },
+      "RANK_2": {
+        "AMC": "ICICI",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "HDFC",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "Kotak",
+        "SchemeCode": ""
+      },
+      "RANK_5": {
+        "AMC": "Tata",
+        "SchemeCode": ""
+      }
+    },
+    "LARGE_MID_CAP": {
+      "RANK_1": {
+        "AMC": "ICICI",
+        "SchemeCode": "GROWTH-I",
+        "min SIP": 100,
+        "min Lumpsum": 5000,
+        "ISIN": "INF109K01431",
+        "3y_returns": 20.86
+      },
+      "RANK_2": {
+        "AMC": "Nippon",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "HDFC",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "Kotak",
+        "SchemeCode": ""
+      }
+    },
+    "ELSS": {
+      "RANK_1": {
+        "AMC": "SBI",
+        "SchemeCode": "018G",
+        "min SIP": 500,
+        "min Lumpsum": 500,
+        "ISIN": "INF200K01495",
+        "3y_returns": 23.49
+      },
+      "RANK_2": {
+        "AMC": "ICICI",
+        "SchemeCode": ""
+      }
+    },
+    "LIQUID": {
+      "RANK_1": {
+        "AMC": "ICICI",
+        "SchemeCode": "ICICI1565-GR",
+        "min SIP": 99,
+        "min Lumpsum": 99,
+        "ISIN": "INF109K01VQ1",
+        "3y_returns": 6.94
+      },
+      "RANK_2": {
+        "AMC": "Nippon",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "HDFC",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "Tata",
+        "SchemeCode": ""
+      }
+    },
+    "ARBITRAGE": {
+      "RANK_1": {
+        "AMC": "Kotak",
+        "SchemeCode": "K179EA-GR",
+        "min SIP": 100,
+        "min Lumpsum": 100,
+        "ISIN": "INF174K01302",
+        "3y_returns": 7.19
+      },
+      "RANK_2": {
+        "AMC": "SBI",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "HDFC",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "ICICI",
+        "SchemeCode": ""
+      },
+      "RANK_5": {
+        "AMC": "Tata",
+        "SchemeCode": ""
+      }
+    },
+    "CONSERVATIVE_HYBRID": {
+      "RANK_1": {
+        "AMC": "SBI",
+        "SchemeCode": "082G",
+        "min SIP": 500,
+        "min Lumpsum": 5000,
+        "ISIN": "INF200K01859",
+        "3y_returns": 9.82
+      },
+      "RANK_2": {
+        "AMC": "Kotak",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "HDFC",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "Nippon",
+        "SchemeCode": ""
+      }
+    },
+    "AGGRESSIVE_HYBRID": {
+      "RANK_1": {
+        "AMC": "ICICI",
+        "SchemeCode": "ICICI61-GR",
+        "min SIP": 100,
+        "min Lumpsum": 5000,
+        "ISIN": "INF109K01480",
+        "3y_returns": 19.07
+      },
+      "RANK_2": {
+        "AMC": "Nippon",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "Kotak",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "SBI",
+        "SchemeCode": ""
+      }
+    },
+    "BALANCED_ADVANTAGE": {
+      "RANK_1": {
+        "AMC": "HDFC",
+        "SchemeCode": "GFG-HDFC",
+        "min SIP": 100,
+        "min Lumpsum": 100,
+        "ISIN": "INF179K01830",
+        "3y_returns": 17.81
+      },
+      "RANK_2": {
+        "AMC": "SBI",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "ICICI",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "Nippon",
+        "SchemeCode": ""
+      },
+      "RANK_5": {
+        "AMC": "Kotak",
+        "SchemeCode": ""
+      }
+    },
+    "MULTICAP": {
+      "RANK_1": {
+        "AMC": "Kotak",
+        "SchemeCode": "KO1155-GR",
+        "min SIP": 100,
+        "min Lumpsum": 100,
+        "ISIN": "INF174KA1HS9",
+        "3y_returns": 23.39
+      },
+      "RANK_2": {
+        "AMC": "Nippon",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "HDFC",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "ICICI",
+        "SchemeCode": ""
+      },
+      "RANK_5": {
+        "AMC": "SBI",
+        "SchemeCode": ""
+      }
+    },
+    "FLEXICAP": {
+      "RANK_1": {
+        "AMC": "HDFC",
+        "SchemeCode": "02",
+        "min SIP": 100,
+        "min Lumpsum": 100,
+        "ISIN": "INF179K01608",
+        "3y_returns": 21.02
+      },
+      "RANK_2": {
+        "AMC": "Parag Parikh",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "ICICI",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "Kotak",
+        "SchemeCode": ""
+      },
+      "RANK_5": {
+        "AMC": "Tata",
+        "SchemeCode": ""
+      }
+    },
+    "GOLD": {
+      "RANK_1": {
+        "AMC": "ICICI",
+        "SchemeCode": "ICICI1815-GR",
+        "min SIP": 100,
+        "min Lumpsum": 100,
+        "ISIN": "INF109K01TK8",
+        "3y_returns": 33.94
+      },
+      "RANK_2": {
+        "AMC": "SBI",
+        "SchemeCode": ""
+      },
+      "RANK_3": {
+        "AMC": "HDFC",
+        "SchemeCode": ""
+      },
+      "RANK_4": {
+        "AMC": "Nippon",
+        "SchemeCode": ""
+      },
+      "RANK_5": {
+        "AMC": "Kotak",
+        "SchemeCode": ""
+      }
+    },
+    "SILVER": {
+      "RANK_1": {
+        "AMC": "HDFC",
+        "SchemeCode": "HDSLFRG-GR",
+        "min SIP": 100,
+        "min Lumpsum": 100,
+        "ISIN": "INF179KC1DV5",
+        "3y_returns": 47.78
+      }
+    },
+    "ETHICAL": {
+      "RANK_1": {
+        "AMC": "Tata",
+        "SchemeCode": "SSF",
+        "min SIP": 100,
+        "min Lumpsum": 5000,
+        "ISIN": "INF277K01956",
+        "3y_returns": 12.06
+      }
+    }
+  }
+}
