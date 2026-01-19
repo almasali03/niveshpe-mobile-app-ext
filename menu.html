@@ -615,6 +615,103 @@
             color: var(--color-text-muted);
         }
 
+        /* Deactivate Account Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Deactivate Account Modal */
+        .deactivate-modal {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            max-width: 380px;
+            padding: 24px 20px 32px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .deactivate-modal {
+            transform: translateY(0);
+        }
+
+        .modal-handle {
+            width: 36px;
+            height: 4px;
+            background: #D1D5DB;
+            border-radius: 2px;
+            margin: 0 auto 20px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .modal-description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: var(--font-family);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .modal-btn-secondary {
+            background: white;
+            color: var(--color-text-primary);
+            border: 2px solid var(--color-border);
+        }
+
+        .modal-btn-secondary:active {
+            background: var(--color-surface);
+            transform: scale(0.98);
+        }
+
+        .modal-btn-primary {
+            background: var(--color-blue);
+            color: white;
+        }
+
+        .modal-btn-primary:active {
+            background: var(--color-blue-dark);
+            transform: scale(0.98);
+        }
+
     </style>
     <link rel="stylesheet" href="assets/css/iphone-toggle.css">
 </head>
@@ -933,6 +1030,13 @@
 
         <!-- Danger Zone -->
         <div class="menu-danger-zone">
+            <div class="menu-danger-item" id="deactivateAccountBtn">
+                <span class="material-symbols-outlined">person_off</span>
+                <div class="menu-item-content">
+                    <div class="menu-item-label">Deactivate Account</div>
+                </div>
+                <span class="material-symbols-outlined">chevron_right</span>
+            </div>
             <div class="menu-danger-item" onclick="window.location.href='auth.html'">
                 <span class="material-symbols-outlined">logout</span>
                 <div class="menu-item-content">
@@ -955,6 +1059,21 @@
 
             <!-- iPhone Home Indicator -->
             <div class="iphone-home-indicator"></div>
+
+            <!-- Deactivate Account Modal -->
+            <div class="modal-overlay" id="deactivateModal">
+                <div class="deactivate-modal">
+                    <div class="modal-handle"></div>
+                    <h2 class="modal-title">Are you sure you want to permanently deactivate your account?</h2>
+                    <p class="modal-description">This will cancel all your SIPs and scheduled investments. You'll need to redeem your holdings separately and will lose access to your portfolio.
+
+We recommend speaking with our team before proceeding.</p>
+                    <div class="modal-buttons">
+                        <button class="modal-btn modal-btn-secondary" id="modalGoBack">Go Back</button>
+                        <button class="modal-btn modal-btn-primary" id="modalContactSupport">Contact Support</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1039,6 +1158,34 @@
             // Redirect to NiveshPe referral page
             window.open('https://niveshpe.com/referral', '_blank');
         }
+
+        // Deactivate Account Modal
+        const deactivateAccountBtn = document.getElementById('deactivateAccountBtn');
+        const deactivateModal = document.getElementById('deactivateModal');
+        const modalGoBack = document.getElementById('modalGoBack');
+        const modalContactSupport = document.getElementById('modalContactSupport');
+
+        // Open modal
+        deactivateAccountBtn.addEventListener('click', function() {
+            deactivateModal.classList.add('active');
+        });
+
+        // Close modal - Go Back button
+        modalGoBack.addEventListener('click', function() {
+            deactivateModal.classList.remove('active');
+        });
+
+        // Close modal on overlay click
+        deactivateModal.addEventListener('click', function(e) {
+            if (e.target === deactivateModal) {
+                deactivateModal.classList.remove('active');
+            }
+        });
+
+        // Contact Support button
+        modalContactSupport.addEventListener('click', function() {
+            window.location.href = 'support.html';
+        });
     </script>
     <script src="assets/js/iphone-toggle.js"></script>
 </body>
