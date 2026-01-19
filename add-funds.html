@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="funds-data.js"></script>
 
     <style>
@@ -135,6 +136,7 @@
             overflow-y: auto;
             scrollbar-width: none;
             transition: transform 0.3s ease;
+            padding-bottom: 100px; /* Account for sticky CTA height */
         }
 
         .mobile-content::-webkit-scrollbar {
@@ -732,6 +734,8 @@
             padding: 20px;
             margin: 16px 0;
             box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
         .display-header {
@@ -739,6 +743,32 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 16px;
+            cursor: pointer;
+        }
+
+        .chevron-icon {
+            color: var(--color-text-secondary);
+            transition: transform 0.3s ease;
+            margin-left: 8px;
+        }
+
+        /* Collapsible content */
+        .display-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .investment-display-card.collapsed .display-content {
+            max-height: 0;
+        }
+
+        .investment-display-card.collapsed .chevron-icon {
+            transform: rotate(-90deg);
+        }
+
+        .investment-display-card.collapsed .display-header {
+            margin-bottom: 0;
         }
 
         .display-title {
@@ -1104,7 +1134,15 @@
 
         /* CTA Button */
         .cta-section {
-            margin-bottom: var(--space-md);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 16px 20px 24px 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
         }
 
         .cta-btn {
@@ -1279,6 +1317,106 @@
 
         .detail-value.green {
             color: var(--color-green);
+        }
+
+        /* Trust Markers & Projection Styles */
+        .trust-projection {
+            background: rgba(34, 197, 94, 0.1);
+            border: none;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin: var(--space-lg) 0 var(--space-md) 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .trust-projection .trending-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(34, 197, 94, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .trust-projection .trending-icon svg {
+            width: 18px;
+            height: 18px;
+            color: #22C55E;
+        }
+
+        .trust-projection .projection-content {
+            flex: 1;
+        }
+
+        .trust-projection .projection-main-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .trust-projection .projection-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .trust-projection .projection-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: #22C55E;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .trust-projection .projection-duration {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            display: inline;
+        }
+
+        .trust-projection .projection-return {
+            font-size: 12px;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .trust-projection .projection-disclaimer {
+            font-size: 10px;
+            color: #9CA3AF;
+            margin-top: 4px;
+        }
+
+        .trust-markers {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: space-around;
+            padding: 0 var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .trust-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-align: center;
+        }
+
+        .trust-marker .material-symbols-outlined {
+            font-size: 20px;
+            color: #10B981;
+        }
+
+        .trust-marker span:last-child {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            line-height: 1.2;
         }
 
         /* Simple Keyboard Focus - No Screen Movement */
@@ -1880,7 +2018,7 @@
                         <div class="frequency-section" id="sipFrequency">
                             <div class="frequency-tabs">
                                 <button class="frequency-btn" data-frequency="daily">Daily</button>
-                                <button class="frequency-btn" data-frequency="weekly">Weekly</button>
+                                <!-- <button class="frequency-btn" data-frequency="weekly">Weekly</button> -->
                                 <button class="frequency-btn active" data-frequency="monthly">Monthly</button>
                             </div>
                             
@@ -1907,31 +2045,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Compact Expected Returns Card -->
-                        <!-- <div class="projection-card compact" id="projectionCard">
-                            <div class="projection-header">
-                                <div class="projection-title">
-                                    Expected Returns
-                                </div>
-                                <div class="time-selector">
-                                    <button class="time-btn" data-years="1">1Y</button>
-                                    <button class="time-btn" data-years="3">3Y</button>
-                                    <button class="time-btn active" data-years="5">5Y</button>
-                                </div>
-                            </div>
-
-                            <div class="projection-main compact">
-                                <div class="projection-amount" id="projectionAmount">₹ 1,56,067</div>
-                                <div class="projection-growth" id="projectionGrowth">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
-                                    </svg>
-                                    +₹31,067 (24.9%)
-                                </div>
-                            </div>
-                        </div> -->
-
 
                         <!-- Goal Selection -->
                         <div class="goal-section" id="goalSection">
@@ -1963,15 +2076,37 @@
                             </div>
                         </div>
 
+                        <!-- Returns Projection -->
+                        <div class="trust-projection" id="trustProjectionCard">
+                            <div class="trending-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                                </svg>
+                            </div>
+                            <div class="projection-content">
+                                <div class="projection-main-row">
+                                    <div class="projection-left">
+                                        <span class="projection-amount" id="trustProjectionAmount">₹3,58,967</span>
+                                        <span class="projection-duration"> in 10 years</span>
+                                    </div>
+                                    <span class="projection-return" id="trustProjectionReturn">(+124.6%*p.a.)</span>
+                                </div>
+                                <div class="projection-disclaimer">*Returns are based on past 3-year performance.</div>
+                            </div>
+                        </div>
+
                         <!-- Fund Selection / Basket Recommendation -->
                         <div class="fund-section" id="fundSection">
-                            <div class="investment-display-card">
-                                <!-- Header: Always shown with consistent layout -->
-                                <div class="display-header">
+                            <div class="investment-display-card" id="investmentDisplayCard">
+                                <!-- Header: Always shown with click functionality -->
+                                <div class="display-header" onclick="toggleFundContent()">
                                     <div class="display-title" id="displayTitle">Choose Investment</div>
                                     <div class="display-badge" id="displayBadge" style="display: none;">
                                         <!-- Dynamic: Returns percentage or fund category -->
                                     </div>
+                                    <svg class="chevron-icon" id="chevronIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M7 10l5 5 5-5z"/>
+                                    </svg>
                                 </div>
                                 
                                 <!-- Main Content: Adapts to show funds/baskets/selection -->
@@ -2003,6 +2138,22 @@
                                     </div>
                                 </div>
                                 
+                            </div>
+                        </div>
+
+                        <!-- Trust Markers -->
+                        <div class="trust-markers">
+                            <div class="trust-marker">
+                                <span class="material-symbols-outlined">lock_open</span>
+                                <span>Withdraw anytime</span>
+                            </div>
+                            <div class="trust-marker">
+                                <span class="material-symbols-outlined">verified</span>
+                                <span>SEBI regulated</span>
+                            </div>
+                            <div class="trust-marker">
+                                <span class="material-symbols-outlined">security</span>
+                                <span>100% secure</span>
                             </div>
                         </div>
 
@@ -2416,9 +2567,15 @@
             let basketData = null;
 
             // Check for basket-details flow via URL parameter
-            const basketId = urlParams.get('id');
+            let basketId = urlParams.get('id');
+            
+            // Also check for basketId parameter from mutual-funds page
+            if (!basketId) {
+                basketId = urlParams.get('basketId');
+            }
+            
             if (basketId && BASKETS_DATA[basketId]) {
-                console.log('User came from basket-details page with basket ID:', basketId);
+                console.log('User came from basket selection with basket ID:', basketId);
                 fromBasketDetails = true;
                 const basketInfo = BASKETS_DATA[basketId];
                 basketData = {
@@ -2767,6 +2924,7 @@
                     contentEl.innerHTML = renderEmptyStateTemplate();
                 }
                 
+                
                 // Update goal context if needed
                 updateGoalContext(associatedGoal);
                 
@@ -2845,14 +3003,14 @@
                             </div>
                         ` : ''}
                         <!-- Customization Link -->
-                        <div class="customize-link-container">
+                        <!-- <div class="customize-link-container">
                             <button class="customize-link" onclick="openCustomizationOverlay()">
                                 <span>Or choose your own funds</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 `;
             }
@@ -2982,6 +3140,7 @@
                     // updateQuickAmounts();
                     
                     updateProjection();
+                    updateTrustProjection();
                 });
             });
 
@@ -2999,9 +3158,9 @@
                     // Update default amounts based on frequency
                     if (currentFrequency === 'daily') {
                         currentAmount = 100;
-                    } else if (currentFrequency === 'weekly') {
+                    } /*else if (currentFrequency === 'weekly') {
                         currentAmount = 500;
-                    } else if (currentFrequency === 'monthly') {
+                    }*/ else if (currentFrequency === 'monthly') {
                         currentAmount = 5000;
                     }
                     
@@ -3012,6 +3171,7 @@
                     // updateQuickAmounts(); // Removed for cleaner UI
                     updateCTA();
                     updateProjection();
+                    updateTrustProjection();
                 });
             });
 
@@ -3023,8 +3183,8 @@
                 });
             }
 
-            // Day selection buttons (weekly)
-            document.addEventListener('click', function(e) {
+            // Day selection buttons (weekly) - Commented out as weekly option is disabled
+            /*document.addEventListener('click', function(e) {
                 if (e.target.matches('[data-day]')) {
                     document.querySelectorAll('[data-day]').forEach(b => b.classList.remove('active'));
                     e.target.classList.add('active');
@@ -3032,7 +3192,7 @@
                     updateTimingDisplay();
                     setTimeout(() => closeTimingModal(), 300);
                 }
-            });
+            });*/
 
             // Date selection buttons (monthly)
             document.addEventListener('click', function(e) {
@@ -3057,6 +3217,7 @@
                 
                 currentAmount = value;
                 updateProjection();
+                updateTrustProjection();
             });
 
             // Goal selection with scroll indicators
@@ -3160,13 +3321,13 @@
                             { amount: 200, popular: false },
                             { amount: 500, popular: false }
                         ];
-                    } else if (currentFrequency === 'weekly') {
+                    /*} else if (currentFrequency === 'weekly') {
                         amountConfig = [
                             { amount: 300, popular: false },
                             { amount: 500, popular: true },
                             { amount: 1000, popular: false },
                             { amount: 2000, popular: false }
-                        ];
+                        ];*/
                     } else if (currentFrequency === 'monthly') {
                         amountConfig = [
                             { amount: 2000, popular: false },
@@ -3227,11 +3388,11 @@
                 const daySelection = document.getElementById('daySelection');
                 const dateSelection = document.getElementById('dateSelection');
                 
-                if (type === 'weekly') {
+                /*if (type === 'weekly') {
                     modalTitle.textContent = 'Select Day of Week';
                     daySelection.style.display = 'block';
                     dateSelection.style.display = 'none';
-                } else if (type === 'monthly') {
+                } else*/ if (type === 'monthly') {
                     modalTitle.textContent = 'Select Date of Month';
                     daySelection.style.display = 'none';
                     dateSelection.style.display = 'block';
@@ -3261,7 +3422,7 @@
                 
                 if (currentFrequency === 'daily') {
                     timingDisplay.style.display = 'none';
-                } else if (currentFrequency === 'weekly') {
+                /*} else if (currentFrequency === 'weekly') {
                     timingDisplay.style.display = 'block';
                     const dayNames = {
                         'monday': 'Monday',
@@ -3273,7 +3434,7 @@
                         'sunday': 'Sunday'
                     };
                     timingLabel.textContent = 'SIP every';
-                    timingValue.textContent = dayNames[currentDay];
+                    timingValue.textContent = dayNames[currentDay];*/
                 } else if (currentFrequency === 'monthly') {
                     timingDisplay.style.display = 'block';
                     const suffix = currentDate === 1 || currentDate === 21 ? 'st' :
@@ -3306,8 +3467,8 @@
                     let investmentsPerYear;
                     if (currentFrequency === 'daily') {
                         investmentsPerYear = 365;
-                    } else if (currentFrequency === 'weekly') {
-                        investmentsPerYear = 52;
+                    /*} else if (currentFrequency === 'weekly') {
+                        investmentsPerYear = 52;*/
                     } else {
                         investmentsPerYear = 12;
                     }
@@ -3398,7 +3559,70 @@
             
             // Initialize projection
             updateProjection();
+            // Initialize trust projection
+            updateTrustProjection();
         });
+
+        // ==================== TRUST PROJECTION CALCULATION ====================
+        
+        // Calculate 10-year returns projection using same logic as basket-details
+        function updateTrustProjection() {
+            const amount = parseInt(document.getElementById('amountInput').value) || 5000;
+            const frequency = document.querySelector('.frequency-btn.active')?.dataset.frequency || 'monthly';
+            const duration = 10; // Fixed to 10 years
+            
+            // Get annual return rate and display percentage from basket data
+            let annualReturn = 0.125; // Default 12.5%
+            let displayPercentage = "12.5"; // Default display percentage
+            
+            // Try to get basket specific return if available
+            if (window.basketData && window.basketData.returns) {
+                const returnMatch = window.basketData.returns.match(/(\d+(?:\.\d+)?)/);
+                if (returnMatch) {
+                    annualReturn = parseFloat(returnMatch[1]) / 100;
+                    displayPercentage = returnMatch[1];
+                }
+            }
+
+            let totalInvestment, futureValue;
+
+            // Calculate based on investment type
+            if (currentType === 'sip') {
+                const investmentsPerYear = frequency === 'daily' ? 365 : 12; // daily or monthly
+                totalInvestment = amount * investmentsPerYear * duration;
+
+                // SIP compound interest calculation
+                const r = Math.pow(1 + annualReturn, 1/investmentsPerYear) - 1;
+                const n = investmentsPerYear * duration;
+                futureValue = amount * (((Math.pow(1 + r, n)) - 1) / r) * (1 + r);
+            } else {
+                // One-time investment
+                totalInvestment = amount;
+                futureValue = amount * Math.pow(1 + annualReturn, duration);
+            }
+
+            const profit = futureValue - totalInvestment;
+            const profitPercentage = ((profit / totalInvestment) * 100).toFixed(1);
+
+            // Update trust projection display
+            const trustProjectionAmount = document.getElementById('trustProjectionAmount');
+            const trustProjectionReturn = document.getElementById('trustProjectionReturn');
+            
+            if (trustProjectionAmount) {
+                trustProjectionAmount.textContent = '₹' + Math.round(futureValue).toLocaleString('en-IN');
+            }
+            
+            if (trustProjectionReturn) {
+                trustProjectionReturn.textContent = `(+${displayPercentage}%*p.a.)`;
+            }
+        }
+
+        // ==================== SIMPLE FUND SECTION TOGGLE ====================
+        
+        function toggleFundContent() {
+            const card = document.getElementById('investmentDisplayCard');
+            card.classList.toggle('collapsed');
+        }
 
         // ==================== CUSTOMIZATION OVERLAY FUNCTIONS ====================
 

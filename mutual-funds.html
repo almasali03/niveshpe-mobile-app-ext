@@ -1533,35 +1533,21 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);"><1 year</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #06B6D4; border: 1px solid #06B6D4; box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #06B6D4;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Instant redemption anytime</li>
-                                                    <li>No lock-in period required</li>
-                                                    <li>Better than savings account</li>
-                                                    <li>Perfect for emergency funds</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(6, 182, 212, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #06B6D4;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #06B6D4;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
-                                                </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3);" onclick="navigateToFund(event, 'hdfc-liquid-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Liquid Fund - Growth (100%)</span>
-                                                        <span class="capsule-chevron" style="color: #06B6D4;">›</span>
-                                                    </div>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3);" onclick="navigateToFund(event, 'hdfc-liquid-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Liquid Fund - Growth (100%)</span>
+                                                    <span class="capsule-chevron" style="color: #06B6D4;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #06B6D4; border: 1px solid #06B6D4; box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-liquid'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -1578,43 +1564,29 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">4+ years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #EC4899; border: 1px solid #EC4899; box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #EC4899;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Highest potential returns</li>
-                                                    <li>Invests in top-performing stocks</li>
-                                                    <li>Diversified across growth sectors</li>
-                                                    <li>Best for long-term wealth creation</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(236, 72, 153, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #EC4899;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #EC4899;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-large-mid-cap-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Large and Mid Cap Fund - Growth (75%)</span>
+                                                    <span class="capsule-chevron" style="color: #EC4899;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-large-mid-cap-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Large and Mid Cap Fund - Growth (75%)</span>
-                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund - Growth (15%)</span>
-                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
-                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund - Growth (15%)</span>
+                                                    <span class="capsule-chevron" style="color: #EC4899;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
+                                                    <span class="capsule-chevron" style="color: #EC4899;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #EC4899; border: 1px solid #EC4899; box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-long-term'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -1631,35 +1603,21 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3 year lock-in</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #10B981; border: 1px solid #10B981; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #10B981;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Save up to ₹46,800 in taxes</li>
-                                                    <li>Shortest lock-in among 80C options</li>
-                                                    <li>Equity-linked high returns</li>
-                                                    <li>Dual benefit of tax saving + wealth creation</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(16, 185, 129, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #10B981;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #10B981;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
-                                                </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'hdfc-elss-tax-saver')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC ELSS Tax saver - Growth Plan (100%)</span>
-                                                        <span class="capsule-chevron" style="color: #10B981;">›</span>
-                                                    </div>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'hdfc-elss-tax-saver')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC ELSS Tax saver - Growth Plan (100%)</span>
+                                                    <span class="capsule-chevron" style="color: #10B981;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #10B981; border: 1px solid #10B981; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-elss'">Select & Invest</button>
                                     </div>
                                 </div>
                             </div>
@@ -1678,39 +1636,25 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3-5 years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #14B8A6; border: 1px solid #14B8A6; box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #14B8A6;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>100% Shariah-compliant investments</li>
-                                                    <li>Ethical and socially responsible</li>
-                                                    <li>Diversified across halal sectors</li>
-                                                    <li>Long-term wealth creation with values</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(20, 184, 166, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #14B8A6;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #14B8A6;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3);" onclick="navigateToFund(event, 'hdfc-ethical-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Ethical Fund - Growth (90%)</span>
+                                                    <span class="capsule-chevron" style="color: #14B8A6;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3);" onclick="navigateToFund(event, 'hdfc-ethical-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Ethical Fund - Growth (90%)</span>
-                                                        <span class="capsule-chevron" style="color: #14B8A6;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
-                                                        <span class="capsule-chevron" style="color: #14B8A6;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
+                                                    <span class="capsule-chevron" style="color: #14B8A6;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #14B8A6; border: 1px solid #14B8A6; box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-ethical'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -1727,35 +1671,21 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">1-3 years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #3B82F6; border: 1px solid #3B82F6; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #3B82F6;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Better returns than FD</li>
-                                                    <li>Very low risk profile</li>
-                                                    <li>Tax-efficient compared to FDs</li>
-                                                    <li>High credit quality investments</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(59, 130, 246, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #3B82F6;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #3B82F6;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
-                                                </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-banking-psu-debt')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Banking & PSU Debt - Growth (100%)</span>
-                                                        <span class="capsule-chevron" style="color: #3B82F6;">›</span>
-                                                    </div>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-banking-psu-debt')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Banking & PSU Debt - Growth (100%)</span>
+                                                    <span class="capsule-chevron" style="color: #3B82F6;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #3B82F6; border: 1px solid #3B82F6; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-fd-alternative'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -1772,47 +1702,33 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">2-4 years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #8B5CF6; border: 1px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #8B5CF6;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Ideal for 2-4 year goals</li>
-                                                    <li>Balanced risk-return profile</li>
-                                                    <li>Dynamic asset allocation</li>
-                                                    <li>Works well in various market cycles</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(139, 92, 246, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #8B5CF6;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #8B5CF6;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-balanced-advantage-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Balanced Advantage Fund - Growth (55%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-balanced-advantage-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Balanced Advantage Fund - Growth (55%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-debt-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Debt Fund - Growth (15%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-top-100-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Top 100 Fund - Growth (20%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-debt-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Debt Fund - Growth (15%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-top-100-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Top 100 Fund - Growth (20%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #8B5CF6; border: 1px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-mid-term'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -1829,39 +1745,25 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">1-2 years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #6366F1; border: 1px solid #6366F1; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #6366F1;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Suitable for 1-2 year goals</li>
-                                                    <li>Higher allocation to stable funds</li>
-                                                    <li>Flexibility to withdraw early</li>
-                                                    <li>Good risk-adjusted returns</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(99, 102, 241, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #6366F1;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #6366F1;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-debt-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Debt Fund - Growth (70%)</span>
+                                                    <span class="capsule-chevron" style="color: #6366F1;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-debt-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Debt Fund - Growth (70%)</span>
-                                                        <span class="capsule-chevron" style="color: #6366F1;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-balanced-advantage-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Balanced Advantage Fund - Growth (30%)</span>
-                                                        <span class="capsule-chevron" style="color: #6366F1;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-balanced-advantage-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Balanced Advantage Fund - Growth (30%)</span>
+                                                    <span class="capsule-chevron" style="color: #6366F1;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #6366F1; border: 1px solid #6366F1; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-short-term'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -1878,39 +1780,25 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);"><1 year</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #0891B2; border: 1px solid #0891B2; box-shadow: 0 2px 8px rgba(8, 145, 178, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #0891B2;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Perfect for short-term parking</li>
-                                                    <li>Better than savings account</li>
-                                                    <li>Low risk profile</li>
-                                                    <li>Easy withdrawal options</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(8, 145, 178, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #0891B2;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #0891B2;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3);" onclick="navigateToFund(event, 'hdfc-arbitrage-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Arbitrage Fund - Growth (75%)</span>
+                                                    <span class="capsule-chevron" style="color: #0891B2;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3);" onclick="navigateToFund(event, 'hdfc-arbitrage-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Arbitrage Fund - Growth (75%)</span>
-                                                        <span class="capsule-chevron" style="color: #0891B2;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-debt-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Debt Fund - Growth (25%)</span>
-                                                        <span class="capsule-chevron" style="color: #0891B2;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-debt-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Debt Fund - Growth (25%)</span>
+                                                    <span class="capsule-chevron" style="color: #0891B2;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #0891B2; border: 1px solid #0891B2; box-shadow: 0 2px 8px rgba(8, 145, 178, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-very-short-term'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -1927,47 +1815,33 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">2-4 years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #EC4899; border: 1px solid #EC4899; box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #EC4899;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Start with small amounts</li>
-                                                    <li>High growth potential</li>
-                                                    <li>Learn investing early</li>
-                                                    <li>Build wealth for future goals</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(236, 72, 153, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #EC4899;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #EC4899;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-balanced-advantage-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Balanced Advantage Fund - Growth (55%)</span>
+                                                    <span class="capsule-chevron" style="color: #EC4899;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-balanced-advantage-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Balanced Advantage Fund - Growth (55%)</span>
-                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-debt-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Debt Fund - Growth (15%)</span>
-                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-top-100-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Top 100 Fund - Growth (20%)</span>
-                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
-                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-debt-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Debt Fund - Growth (15%)</span>
+                                                    <span class="capsule-chevron" style="color: #EC4899;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-top-100-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Top 100 Fund - Growth (20%)</span>
+                                                    <span class="capsule-chevron" style="color: #EC4899;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
+                                                    <span class="capsule-chevron" style="color: #EC4899;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #EC4899; border: 1px solid #EC4899; box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-students'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -1984,43 +1858,29 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3-5 years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #8B5CF6; border: 1px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #8B5CF6;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Start with small investments</li>
-                                                    <li>Build personal savings</li>
-                                                    <li>Financial independence</li>
-                                                    <li>Medium-term wealth creation</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(139, 92, 246, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #8B5CF6;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #8B5CF6;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-large-and-mid-cap-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Large and Mid Cap Fund - Growth (75%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-large-and-mid-cap-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Large and Mid Cap Fund - Growth (75%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund - Growth (15%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund - Growth (15%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #8B5CF6; border: 1px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-housewives'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -2037,43 +1897,29 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3-5 years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #6366F1; border: 1px solid #6366F1; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #6366F1;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Capital protection priority</li>
-                                                    <li>Regular return potential</li>
-                                                    <li>Low to moderate risk</li>
-                                                    <li>Suitable for retirement corpus</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(99, 102, 241, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #6366F1;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #6366F1;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-large-and-mid-cap-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Large and Mid Cap Fund - Growth (75%)</span>
+                                                    <span class="capsule-chevron" style="color: #6366F1;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-large-and-mid-cap-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Large and Mid Cap Fund - Growth (75%)</span>
-                                                        <span class="capsule-chevron" style="color: #6366F1;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund - Growth (15%)</span>
-                                                        <span class="capsule-chevron" style="color: #6366F1;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
-                                                        <span class="capsule-chevron" style="color: #6366F1;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund - Growth (15%)</span>
+                                                    <span class="capsule-chevron" style="color: #6366F1;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
+                                                    <span class="capsule-chevron" style="color: #6366F1;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #6366F1; border: 1px solid #6366F1; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-senior-citizens'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -2090,43 +1936,29 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">5+ years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #F59E0B; border: 1px solid #F59E0B; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #F59E0B;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Auto-invest from monthly salary</li>
-                                                    <li>Balanced risk across asset classes</li>
-                                                    <li>Tax saving through ELSS component</li>
-                                                    <li>Perfect for long-term wealth building</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(245, 158, 11, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #F59E0B;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #F59E0B;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-large-and-mid-cap-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Large and Mid Cap Fund - Growth (75%)</span>
+                                                    <span class="capsule-chevron" style="color: #F59E0B;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-large-and-mid-cap-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Large and Mid Cap Fund - Growth (75%)</span>
-                                                        <span class="capsule-chevron" style="color: #F59E0B;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund - Growth (15%)</span>
-                                                        <span class="capsule-chevron" style="color: #F59E0B;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
-                                                        <span class="capsule-chevron" style="color: #F59E0B;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund - Growth (15%)</span>
+                                                    <span class="capsule-chevron" style="color: #F59E0B;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
+                                                    <span class="capsule-chevron" style="color: #F59E0B;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #F59E0B; border: 1px solid #F59E0B; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-salaried'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -2146,39 +1978,25 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3-5 years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #F59E0B; border: 1px solid #F59E0B; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #F59E0B;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Hedge against inflation and market volatility</li>
-                                                    <li>Diversified precious metals exposure</li>
-                                                    <li>Long-term wealth preservation</li>
-                                                    <li>Portfolio diversification benefits</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(245, 158, 11, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #F59E0B;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #F59E0B;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund (80%)</span>
+                                                    <span class="capsule-chevron" style="color: #F59E0B;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund (80%)</span>
-                                                        <span class="capsule-chevron" style="color: #F59E0B;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-silver-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Silver Fund (20%)</span>
-                                                        <span class="capsule-chevron" style="color: #F59E0B;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-silver-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Silver Fund (20%)</span>
+                                                    <span class="capsule-chevron" style="color: #F59E0B;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #F59E0B; border: 1px solid #F59E0B; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-precious-metal'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -2195,43 +2013,29 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">5+ years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #10B981; border: 1px solid #10B981; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #10B981;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Systematic saving for home purchase</li>
-                                                    <li>Long-term wealth growth potential</li>
-                                                    <li>Inflation-beating returns</li>
-                                                    <li>Goal-based investment approach</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(16, 185, 129, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #10B981;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #10B981;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'hdfc-multicap-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Multi Cap Fund (70%)</span>
+                                                    <span class="capsule-chevron" style="color: #10B981;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'hdfc-multicap-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Multi Cap Fund (70%)</span>
-                                                        <span class="capsule-chevron" style="color: #10B981;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund (20%)</span>
-                                                        <span class="capsule-chevron" style="color: #10B981;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund (10%)</span>
-                                                        <span class="capsule-chevron" style="color: #10B981;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund - Growth (20%)</span>
+                                                    <span class="capsule-chevron" style="color: #10B981;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund - Growth (10%)</span>
+                                                    <span class="capsule-chevron" style="color: #10B981;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #10B981; border: 1px solid #10B981; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-future-house'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -2248,43 +2052,29 @@
                                             <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">4+ years</span></p>
                                         </div>
 
-                                        <button class="show-details-btn" style="background: #8B5CF6; border: 1px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
-                                        <div class="accordion-content">
-                                            <div class="detail-section">
-                                                <div class="detail-header-row">
-                                                    <span class="material-icon" style="color: #8B5CF6;">verified</span>
-                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
-                                                </div>
-                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
-                                                    <li>Long-term education corpus building</li>
-                                                    <li>Inflation protection for education costs</li>
-                                                    <li>Balanced growth with risk management</li>
-                                                    <li>Flexible investment approach</li>
-                                                </ul>
+                                        <!-- Funds in this basket section moved above Show Details -->
+                                        <div class="funds-basket-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(139, 92, 246, 0.2);">
+                                            <div class="basket-heading-row">
+                                                <span class="material-icon" style="color: #8B5CF6;">pie_chart</span>
+                                                <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
                                             </div>
-
-                                            <div class="funds-basket-section">
-                                                <div class="basket-heading-row">
-                                                    <span class="material-icon" style="color: #8B5CF6;">pie_chart</span>
-                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                            <div class="fund-capsules-container">
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-multicap-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Multi Cap Fund (50%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
                                                 </div>
-                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
-                                                <div class="fund-capsules-container">
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-multicap-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Multi Cap Fund (50%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund (40%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
-                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
-                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund (10%)</span>
-                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
-                                                    </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity Fund (40%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
+                                                </div>
+                                                <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-gold-fund')">
+                                                    <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Gold Fund (10%)</span>
+                                                    <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="show-details-btn" style="background: #8B5CF6; border: 1px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);" onclick="window.location.href='add-funds.html?basketId=np-child-education'">Select & Invest</button>
                                     </div>
                                 </div>
 
@@ -3228,60 +3018,7 @@
         }
 
 
-        // Accordion toggle
-        function toggleAccordion(element) {
-            const accordion = element.parentElement;
-            const content = element.nextElementSibling;
-            const textSpan = element.querySelector('.accordion-icon-button span');
-
-            if (content && content.className === 'accordion-content') {
-                const isOpen = content.style.maxHeight;
-
-                // Close all other open accordions first
-                const allAccordions = document.querySelectorAll('.accordion-content');
-                allAccordions.forEach(otherContent => {
-                    if (otherContent !== content && otherContent.style.maxHeight) {
-                        // Close this accordion
-                        otherContent.style.maxHeight = null;
-                        const otherAccordion = otherContent.previousElementSibling.parentElement;
-                        if (otherAccordion) {
-                            otherAccordion.classList.remove('open');
-                        }
-
-                        // Reset button text
-                        const otherButton = otherContent.previousElementSibling;
-                        const otherTextSpan = otherButton.querySelector('.accordion-icon-button span');
-                        if (otherTextSpan) {
-                            otherTextSpan.textContent = 'Show Details';
-                        } else if (otherButton.tagName === 'BUTTON') {
-                            otherButton.textContent = 'Show Details';
-                        }
-                    }
-                });
-
-                // Toggle the clicked accordion
-                content.style.maxHeight = isOpen ? null : content.scrollHeight + 'px';
-
-                // Toggle open class for chevron rotation and update text
-                if (isOpen) {
-                    accordion.classList.remove('open');
-                    // Handle different button structures
-                    if (textSpan) {
-                        textSpan.textContent = 'Show Details';
-                    } else if (element.tagName === 'BUTTON') {
-                        element.textContent = 'Show Details';
-                    }
-                } else {
-                    accordion.classList.add('open');
-                    // Handle different button structures
-                    if (textSpan) {
-                        textSpan.textContent = 'Hide Details';
-                    } else if (element.tagName === 'BUTTON') {
-                        element.textContent = 'Hide Details';
-                    }
-                }
-            }
-        }
+        // Accordion toggle function removed - no longer needed since all baskets now use direct investment flow
 
         // Navigate to fund details from capsule (prevent card click)
         function navigateToFund(event, fundSlug) {
