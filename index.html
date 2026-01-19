@@ -1218,25 +1218,32 @@
             font-size: 12px;
             color: var(--color-text-secondary);
             line-height: 1.6;
-            margin-bottom: 16px;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 1;
+            text-align: center;
         }
 
-        /* SEBI Compliant Badge */
-        .sebi-badge {
-            display: flex;
-            justify-content: center;
+        /* SEBI Compliant Badge - Used as background */
+        .trust-text-container {
+            position: relative;
+            padding: 24px 20px;
             margin: 20px 0;
         }
 
-        .sebi-badge-image {
-            width: 80px;
-            height: 80px;
-            opacity: 0.9;
-            transition: opacity 0.2s ease;
-        }
-
-        .sebi-badge-image:hover {
-            opacity: 1;
+        .trust-text-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('assets/SEBI-COMPLIANT.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 180px 180px;
+            opacity: 0.15;
+            z-index: 0;
         }
 
         .support-buttons {
@@ -1927,16 +1934,14 @@
                             <path d="M0 62H10.7838V31.9962L10.9015 32.1645L10.8476 32.1952C10.9005 32.1651 10.9015 32.1645 10.9015 32.1645L10.9049 32.1692C10.9071 32.1724 10.9104 32.1771 10.9147 32.1833C10.9235 32.1958 10.9365 32.2144 10.9537 32.239C10.9882 32.2882 11.0393 32.3612 11.106 32.4565C11.2396 32.647 11.4359 32.9267 11.6866 33.2834C12.1878 33.9966 12.9064 35.0177 13.7761 36.2484C15.5153 38.7098 17.8583 42.0101 20.2738 45.3658C22.6892 48.7216 25.177 52.1325 27.2054 54.815C28.2196 56.1563 29.1188 57.3151 29.8365 58.1938C30.1954 58.6332 30.5086 59.0021 30.768 59.2886C31.0282 59.576 31.2316 59.7777 31.3716 59.8848C31.4757 59.9645 31.6122 60.0851 31.7132 60.1594C32.4981 60.3483 33.0503 60.3197 33.4515 60.0956C33.8511 59.8724 34.0905 59.3976 34.1379 58.5477V45.2736L14.6907 18.8834C13.855 18.143 13.2026 17.5956 12.4697 17.2142C11.7379 16.8334 10.9225 16.6165 9.75969 16.5447L0 16.4304V62Z" fill="#2563EB"/>
                         </svg>
                     </div>
-                    
-                    <!-- SEBI Compliant Badge -->
-                    <div class="sebi-badge">
-                        <img src="assets/SEBI-COMPLIANT.png" alt="SEBI Compliant - AMFI Registered ARN 344035" class="sebi-badge-image">
-                    </div>
-                    
-                    <div class="trust-text" style="opacity: 0.5;">
-                        NiveshPe is a trusted mutual fund distributor registered with AMFI. 
-                        Your investments are safe and regulated by SEBI. Start your investment journey with as little as ₹100.
-                        Mutual fund investments are subject to market risks. Read all scheme related documents carefully.
+
+                    <!-- SEBI Compliant Badge as Background for Trust Text -->
+                    <div class="trust-text-container">
+                        <div class="trust-text">
+                            NiveshPe is a trusted mutual fund distributor registered with AMFI.
+                            Your investments are safe and regulated by SEBI. Start your investment journey with as little as ₹100.
+                            Mutual fund investments are subject to market risks. Read all scheme related documents carefully.
+                        </div>
                     </div>
                     <div class="trust-badge" style="margin-bottom: 16px;">
                         AMFI ARN: 123456
