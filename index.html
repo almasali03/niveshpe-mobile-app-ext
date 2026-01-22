@@ -1224,33 +1224,41 @@
             text-align: left;
         }
 
-        /* SEBI Compliant Badge - Used as background */
+        /* Trust Text Container */
         .trust-text-container {
             position: relative;
             padding: 24px 20px;
             margin: 20px 0;
         }
 
-        .trust-text-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('assets/SEBI-COMPLIANT.png');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: 180px 180px;
-            opacity: 0.15;
-            z-index: 0;
-        }
-
         .support-buttons {
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .sebi-compliance-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .sebi-badge-image {
+            width: 120px;
+            height: auto;
+            opacity: 0.85;
+        }
+
+        .amfi-arn-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-align: center;
         }
 
         .support-btn {
@@ -2188,6 +2196,12 @@
                             </svg>
                             Call
                         </a>
+                    </div>
+
+                    <!-- SEBI Compliance Section -->
+                    <div class="sebi-compliance-section">
+                        <img src="assets/SEBI-COMPLIANT.png" alt="SEBI Compliant" class="sebi-badge-image">
+                        <div class="amfi-arn-text">AMFI ARN: 123456</div>
                     </div>
                 </div>
             </div>
