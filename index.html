@@ -1254,11 +1254,22 @@
             opacity: 0.85;
         }
 
-        .amfi-arn-text {
-            font-size: 13px;
+        .compliance-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .compliance-badge {
+            font-size: 12px;
             font-weight: 600;
             color: var(--color-text-secondary);
-            text-align: center;
+            padding: 6px 12px;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .support-btn {
@@ -2201,7 +2212,11 @@
                     <!-- SEBI Compliance Section -->
                     <div class="sebi-compliance-section">
                         <img src="assets/SEBI-COMPLIANT.png" alt="SEBI Compliant" class="sebi-badge-image">
-                        <div class="amfi-arn-text">AMFI ARN: 123456</div>
+                        <div class="compliance-badges">
+                            <div class="compliance-badge">AMFI Registered</div>
+                            <div class="compliance-badge">ARN 344035</div>
+                            <div class="compliance-badge">SEBI Compliant</div>
+                        </div>
                     </div>
                 </div>
             </div>
