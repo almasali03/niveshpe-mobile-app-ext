@@ -1254,22 +1254,22 @@
             opacity: 0.85;
         }
 
-        .compliance-badges {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-
         .compliance-badge {
             font-size: 12px;
             font-weight: 600;
             color: var(--color-text-secondary);
-            padding: 6px 12px;
+            padding: 8px 16px;
             background: rgba(0, 0, 0, 0.03);
-            border-radius: 6px;
+            border-radius: 20px;
             border: 1px solid rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .compliance-separator {
+            color: rgba(0, 0, 0, 0.3);
+            font-weight: 400;
         }
 
         .support-btn {
@@ -2212,10 +2212,12 @@
                     <!-- SEBI Compliance Section -->
                     <div class="sebi-compliance-section">
                         <img src="assets/SEBI-COMPLIANT.png" alt="SEBI Compliant" class="sebi-badge-image">
-                        <div class="compliance-badges">
-                            <div class="compliance-badge">AMFI Registered</div>
-                            <div class="compliance-badge">ARN 344035</div>
-                            <div class="compliance-badge">SEBI Compliant</div>
+                        <div class="compliance-badge">
+                            <span>AMFI Registered</span>
+                            <span class="compliance-separator">|</span>
+                            <span>ARN 344035</span>
+                            <span class="compliance-separator">|</span>
+                            <span>SEBI Compliant</span>
                         </div>
                     </div>
                 </div>
