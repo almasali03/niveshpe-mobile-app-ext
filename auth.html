@@ -908,12 +908,73 @@
             color: var(--color-text-secondary);
         }
 
-        .amc-carousel-label {
-            font-size: 12px;
-            color: var(--color-text-secondary);
-            text-align: center;
+        /* Certification Strip */
+        .certification-strip {
+            padding: 12px 16px;
+            margin-bottom: 16px;
+        }
+
+        .certification-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
             margin-bottom: 12px;
-            font-weight: 500;
+        }
+
+        .certification-icon {
+            font-size: 18px;
+            color: #0284C7;
+        }
+
+        .certification-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0C4A6E;
+        }
+
+        .certification-logos {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .cert-logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cert-logo {
+            width: 80px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .cert-name {
+            font-size: 10px;
+            font-weight: 600;
+            color: #0284C7;
+        }
+
+        .amc-carousel-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .amc-carousel-icon {
+            font-size: 18px;
+            color: #0284C7;
+        }
+
+        .amc-carousel-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0C4A6E;
         }
 
         .amc-carousel {
@@ -964,13 +1025,12 @@
         }
 
         .amc-name {
-            font-size: 9px;
-            color: #7C3AED;
-            font-weight: 500;
+            font-size: 10px;
+            color: #0284C7;
+            font-weight: 600;
             text-align: center;
             max-width: 60px;
             line-height: 1.2;
-            opacity: 0.8;
         }
 
         /* Referral Code Link */
@@ -1067,13 +1127,10 @@
                 <!-- Brand Header -->
                 <div class="brand-header">
                     <h1 class="brand-logo"><span class="nivesh">Nivesh</span><span class="pe">Pe</span></h1>
-                    <p class="brand-tagline">Bharat's Must-Have Mutual Fund App</p>
 
                     <!-- SEBI Compliant Badge -->
                     <div class="sebi-badge" style="margin-top: 12px;">
-                        <div class="sebi-badge-icon">
-                            <span class="material-symbols-outlined" style="font-size: 16px;">verified</span>
-                        </div>
+                        <span class="material-symbols-outlined sebi-badge-icon">verified</span>
                         <span class="sebi-badge-text">AMFI Registered & SEBI Compliant</span>
                     </div>
                 </div>
@@ -1188,8 +1245,33 @@
 
                             <!-- Trust Markers Section -->
                             <div class="trust-markers-section">
+                                <!-- Official Regulatory Certification -->
+                                <div class="certification-strip">
+                                    <div class="certification-header">
+                                        <span class="material-symbols-outlined certification-icon">verified_user</span>
+                                        <span class="certification-title">Regulated & Certified</span>
+                                    </div>
+                                    <div class="certification-logos">
+                                        <div class="cert-logo-wrapper">
+                                            <img src="AMC-Fund-logo-icons/sebi-logo.png" alt="SEBI Compliant" class="cert-logo">
+                                            <span class="cert-name">SEBI Compliant</span>
+                                        </div>
+                                        <div class="cert-logo-wrapper">
+                                            <img src="AMC-Fund-logo-icons/AMFI-logo.svg" alt="AMFI Registered" class="cert-logo">
+                                            <span class="cert-name">AMFI Registered</span>
+                                        </div>
+                                        <div class="cert-logo-wrapper">
+                                            <img src="AMC-Fund-logo-icons/bse-startmf-logo.png" alt="BSE Certified" class="cert-logo">
+                                            <span class="cert-name">BSE Certified</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- TOP AMC Carousel -->
-                                <div class="amc-carousel-label">Partnered with Top AMCs</div>
+                                <div class="amc-carousel-label">
+                                    <span class="material-symbols-outlined amc-carousel-icon">handshake</span>
+                                    <span class="amc-carousel-title">Partnered with Top AMCs</span>
+                                </div>
                                 <div class="amc-carousel">
                                     <div class="amc-logo-wrapper">
                                         <div class="amc-logo">
@@ -1320,8 +1402,33 @@
 
                             <!-- Trust Markers Section -->
                             <div class="trust-markers-section">
+                                <!-- Official Regulatory Certification -->
+                                <div class="certification-strip">
+                                    <div class="certification-header">
+                                        <span class="material-symbols-outlined certification-icon">verified_user</span>
+                                        <span class="certification-title">Regulated & Certified</span>
+                                    </div>
+                                    <div class="certification-logos">
+                                        <div class="cert-logo-wrapper">
+                                            <img src="AMC-Fund-logo-icons/sebi-logo.png" alt="SEBI Compliant" class="cert-logo">
+                                            <span class="cert-name">SEBI Compliant</span>
+                                        </div>
+                                        <div class="cert-logo-wrapper">
+                                            <img src="AMC-Fund-logo-icons/AMFI-logo.svg" alt="AMFI Registered" class="cert-logo">
+                                            <span class="cert-name">AMFI Registered</span>
+                                        </div>
+                                        <div class="cert-logo-wrapper">
+                                            <img src="AMC-Fund-logo-icons/bse-startmf-logo.png" alt="BSE Certified" class="cert-logo">
+                                            <span class="cert-name">BSE Certified</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- TOP AMC Carousel -->
-                                <div class="amc-carousel-label">Partnered with Top AMCs</div>
+                                <div class="amc-carousel-label">
+                                    <span class="material-symbols-outlined amc-carousel-icon">handshake</span>
+                                    <span class="amc-carousel-title">Partnered with Top AMCs</span>
+                                </div>
                                 <div class="amc-carousel">
                                     <div class="amc-logo-wrapper">
                                         <div class="amc-logo">
