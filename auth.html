@@ -930,8 +930,16 @@
             display: none;
         }
 
-        .amc-logo {
+        .amc-logo-wrapper {
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            scroll-snap-align: start;
+        }
+
+        .amc-logo {
             width: 56px;
             height: 56px;
             background: white;
@@ -941,7 +949,6 @@
             align-items: center;
             justify-content: center;
             padding: 8px;
-            scroll-snap-align: start;
             transition: all 0.2s ease;
         }
 
@@ -954,6 +961,16 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+
+        .amc-name {
+            font-size: 9px;
+            color: #7C3AED;
+            font-weight: 500;
+            text-align: center;
+            max-width: 60px;
+            line-height: 1.2;
+            opacity: 0.8;
         }
 
         /* Referral Code Link */
@@ -1174,26 +1191,47 @@
                                 <!-- TOP AMC Carousel -->
                                 <div class="amc-carousel-label">Partnered with Top AMCs</div>
                                 <div class="amc-carousel">
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/hdfc.png" alt="HDFC Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/hdfc.png" alt="HDFC Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">HDFC</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/ICICI.png" alt="ICICI Prudential">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/ICICI.png" alt="ICICI Prudential">
+                                        </div>
+                                        <div class="amc-name">ICICI Pru</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/SBI.png" alt="SBI Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/SBI.png" alt="SBI Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">SBI</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/kotak.jpeg" alt="Kotak Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/kotak.jpeg" alt="Kotak Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">Kotak</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/nippon.png" alt="Nippon India">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/nippon.png" alt="Nippon India">
+                                        </div>
+                                        <div class="amc-name">Nippon</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/tata.jpeg" alt="Tata Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/tata.jpeg" alt="Tata Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">Tata</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/PPFAS.png" alt="PPFAS Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/PPFAS.png" alt="PPFAS Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">PPFAS</div>
                                     </div>
                                 </div>
                             </div>
@@ -1285,26 +1323,47 @@
                                 <!-- TOP AMC Carousel -->
                                 <div class="amc-carousel-label">Partnered with Top AMCs</div>
                                 <div class="amc-carousel">
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/hdfc.png" alt="HDFC Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/hdfc.png" alt="HDFC Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">HDFC</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/ICICI.png" alt="ICICI Prudential">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/ICICI.png" alt="ICICI Prudential">
+                                        </div>
+                                        <div class="amc-name">ICICI Pru</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/SBI.png" alt="SBI Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/SBI.png" alt="SBI Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">SBI</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/kotak.jpeg" alt="Kotak Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/kotak.jpeg" alt="Kotak Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">Kotak</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/nippon.png" alt="Nippon India">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/nippon.png" alt="Nippon India">
+                                        </div>
+                                        <div class="amc-name">Nippon</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/tata.jpeg" alt="Tata Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/tata.jpeg" alt="Tata Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">Tata</div>
                                     </div>
-                                    <div class="amc-logo">
-                                        <img src="AMC-Fund-logo-icons/PPFAS.png" alt="PPFAS Mutual Fund">
+                                    <div class="amc-logo-wrapper">
+                                        <div class="amc-logo">
+                                            <img src="AMC-Fund-logo-icons/PPFAS.png" alt="PPFAS Mutual Fund">
+                                        </div>
+                                        <div class="amc-name">PPFAS</div>
                                     </div>
                                 </div>
                             </div>

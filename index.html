@@ -269,7 +269,7 @@
         .hero-card {
             background: var(--gradient-hero);
             border-radius: var(--radius-2xl);
-            padding: var(--space-xl);
+            padding: var(--space-lg);
             color: white;
             box-shadow: var(--shadow-xl);
             position: relative;
@@ -292,7 +292,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-md);
         }
 
         .hero-label {
@@ -341,7 +341,7 @@
             font-size: 36px;
             font-weight: 800;
             line-height: 1;
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-md);
             letter-spacing: -0.02em;
             position: relative;
             display: flex;
@@ -374,8 +374,8 @@
         .balance-details {
             display: flex;
             flex-direction: column;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-xl);
+            gap: var(--space-xs);
+            margin-bottom: var(--space-lg);
         }
 
         .balance-item {
@@ -1742,6 +1742,258 @@
             opacity: 0.7;
         }
 
+        /* Trust Strip - Full Width Edge-to-Edge */
+        .trust-strip {
+            background: linear-gradient(135deg, #EFF6FF 0%, #E0F2FE 100%);
+            border-top: 1px solid #BAE6FD;
+            border-bottom: 1px solid #BAE6FD;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            /* Negative margins to break out of container padding for true edge-to-edge */
+            margin-left: calc(-1 * var(--space-lg));
+            margin-right: calc(-1 * var(--space-lg));
+            /* No border-radius for authoritative edge-to-edge look */
+        }
+
+        .trust-strip-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trust-shield-icon {
+            font-size: 18px;
+            color: #0284C7;
+            flex-shrink: 0;
+        }
+
+        .trust-strip-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0C4A6E;
+            line-height: 1.2;
+        }
+
+        .trust-strip-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .trust-badge-btn {
+            padding: 7px 12px;
+            background: white;
+            border: 1.5px solid #7DD3FC;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 10px;
+            font-weight: 600;
+            color: #0C4A6E;
+        }
+
+        .trust-badge-btn:hover {
+            background: #F0F9FF;
+            border-color: #0284C7;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+        }
+
+        .trust-badge-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* AMC Carousel Styles - Edge-to-Edge Strip */
+        .amc-strip {
+            background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+            border-top: 1px solid #DDD6FE;
+            border-bottom: 1px solid #DDD6FE;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            /* Negative margins to break out of container padding for true edge-to-edge */
+            margin-left: calc(-1 * var(--space-lg));
+            margin-right: calc(-1 * var(--space-lg));
+            /* No border-radius for authoritative edge-to-edge look */
+        }
+
+        .amc-strip-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .amc-strip-icon {
+            font-size: 18px;
+            color: #7C3AED;
+        }
+
+        .amc-strip-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #5B21B6;
+            letter-spacing: -0.01em;
+        }
+
+        .amc-carousel-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            text-align: center;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .amc-carousel {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding: 8px 4px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .amc-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .amc-logo-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            scroll-snap-align: start;
+        }
+
+        .amc-logo {
+            width: 56px;
+            height: 56px;
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .amc-logo:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .amc-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .amc-name {
+            font-size: 9px;
+            color: #7C3AED;
+            font-weight: 500;
+            text-align: center;
+            max-width: 60px;
+            line-height: 1.2;
+            opacity: 0.8;
+        }
+
+        /* Certificate Modal Styles */
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .certificate-modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .certificate-close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s ease;
+        }
+
+        .certificate-close-btn:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .certificate-close-btn .material-symbols-outlined {
+            font-size: 24px;
+            color: #1F2937;
+        }
+
+        .certificate-title {
+            padding: 20px 20px 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1F2937;
+            margin: 0;
+        }
+
+        .certificate-image-container {
+            padding: 0 20px 20px;
+        }
+
+        .certificate-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Responsive */
         @media (max-width: 380px) {
             .calculator-banner {
@@ -1789,6 +2041,34 @@
             }
             .banner-disclaimer {
                 font-size: 9px;
+            }
+            .trust-strip {
+                padding: 10px 12px;
+            }
+            .trust-shield-icon {
+                font-size: 16px;
+            }
+            .trust-strip-title {
+                font-size: 12px;
+            }
+            .trust-strip-buttons {
+                gap: 6px;
+            }
+            .trust-badge-btn {
+                padding: 6px 10px;
+                font-size: 9px;
+            }
+            .amc-strip {
+                padding: 10px 12px;
+            }
+            .amc-strip-icon {
+                font-size: 16px;
+            }
+            .amc-strip-title {
+                font-size: 12px;
+            }
+            .amc-name {
+                font-size: 8px;
             }
         }
     </style>
@@ -1899,10 +2179,8 @@
                 <!-- Content Section (Full Width Overlay) -->
                 <div class="banner-content">
                     <h3 class="banner-title">
-                        <span class="banner-title-icon material-symbols-outlined">
-                            ads_click
-                        </span>
-                        Become a lakhpati
+                        <img src="assets/Growing-bro.png" alt="Growth" class="banner-title-icon" style="width: 32px; height: 32px; object-fit: contain;">
+                        Become a Lakhpati!
                     </h3>
                     <div class="banner-input-row">
                         <span class="input-label">Invest</span>
@@ -1936,7 +2214,71 @@
                 </div>
             </div>
 
-            <!-- My Goals Section with Fixed Scrolling (Direct after Hero) -->
+            <!-- Trust Strip (BSE & AMFI Certificates) - Edge-to-Edge -->
+            <div class="trust-strip">
+                <div class="trust-strip-header">
+                    <span class="material-symbols-outlined trust-shield-icon">verified_user</span>
+                    <span class="trust-strip-title">Secured & Regulated</span>
+                </div>
+                <div class="trust-strip-buttons">
+                    <button class="trust-badge-btn" onclick="openCertificate('bse')">View BSE Certificate</button>
+                    <button class="trust-badge-btn" onclick="openCertificate('amfi')">View AMFI Certificate</button>
+                </div>
+            </div>
+
+            <!-- Enhanced Investment Advisor Section -->
+            <div class="section-spacing">
+                <!-- Enhanced Investment Advisor Card -->
+                <div class="custom-advisor-card" onclick="openAdvisorForm()">
+
+                    <!-- Premium Badge -->
+                    <div class="custom-advisor-badge">
+                        <span class="material-symbols-outlined">stars</span>
+                        <span>Expert Guidance</span>
+                    </div>
+
+                    <!-- Card Content -->
+                    <div class="custom-advisor-content">
+                        <!-- Icon + Title Section -->
+                        <div class="custom-advisor-header">
+                            <div class="custom-advisor-icon">
+                                <span class="material-symbols-outlined">psychology</span>
+                            </div>
+                            <div class="custom-advisor-text">
+                                <h3 class="custom-advisor-title">Connect with our mutual fund expert</h3>
+                                <p class="custom-advisor-subtitle">Talk to our experts for a personalised investment plan</p>
+                            </div>
+                        </div>
+
+                        <!-- Value Props -->
+                        <div class="custom-advisor-benefits">
+                            <div class="advisor-benefit-item">
+                                <span class="material-symbols-outlined">verified</span>
+                                <span>NiveshPe's expert advisors</span>
+                            </div>
+                            <div class="advisor-benefit-item">
+                                <span class="material-symbols-outlined">target</span>
+                                <span>Personalised investment planning</span>
+                            </div>
+                            <div class="advisor-benefit-item">
+                                <span class="material-symbols-outlined">currency_rupee</span>
+                                <span>Zero charges</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <button class="custom-advisor-cta" onclick="event.stopPropagation(); openAdvisorForm()">
+                            <span>Get Free Consultation</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+
+                    <!-- Tap Indicator -->
+                    <div class="custom-card-tap-indicator">›</div>
+                </div>
+            </div>
+
+            <!-- My Goals Section with Fixed Scrolling -->
             <div class="goals-container section-spacing">
                 <div class="section-header">
                     <h2 class="section-title">My Goals</h2>
@@ -1981,55 +2323,55 @@
                 </div>
             </div>
 
-            <!-- Enhanced Investment Advisor Section -->
-            <div class="section-spacing">
-                <!-- Enhanced Investment Advisor Card -->
-                <div class="custom-advisor-card" onclick="openAdvisorForm()">
-                    
-                    <!-- Premium Badge -->
-                    <div class="custom-advisor-badge">
-                        <span class="material-symbols-outlined">stars</span>
-                        <span>Expert Guidance</span>
-                    </div>
-                    
-                    <!-- Card Content -->
-                    <div class="custom-advisor-content">
-                        <!-- Icon + Title Section -->
-                        <div class="custom-advisor-header">
-                            <div class="custom-advisor-icon">
-                                <span class="material-symbols-outlined">psychology</span>
-                            </div>
-                            <div class="custom-advisor-text">
-                                <h3 class="custom-advisor-title">Connect with our mutual fund expert</h3>
-                                <p class="custom-advisor-subtitle">Talk to our experts for a personalised investment plan</p>
-                            </div>
+            <!-- AMC Logo Carousel - Edge-to-Edge -->
+            <div class="amc-strip">
+                <div class="amc-strip-header">
+                    <span class="material-symbols-outlined amc-strip-icon">handshake</span>
+                    <span class="amc-strip-title">Partnered with Top AMCs</span>
+                </div>
+                <div class="amc-carousel">
+                    <div class="amc-logo-wrapper">
+                        <div class="amc-logo">
+                            <img src="AMC-Fund-logo-icons/hdfc.png" alt="HDFC Mutual Fund">
                         </div>
-                        
-                        <!-- Value Props -->
-                        <div class="custom-advisor-benefits">
-                            <div class="advisor-benefit-item">
-                                <span class="material-symbols-outlined">verified</span>
-                                <span>NiveshPe's expert advisors</span>
-                            </div>
-                            <div class="advisor-benefit-item">
-                                <span class="material-symbols-outlined">target</span>
-                                <span>Personalised investment planning</span>
-                            </div>
-                            <div class="advisor-benefit-item">
-                                <span class="material-symbols-outlined">currency_rupee</span>
-                                <span>Zero charges</span>
-                            </div>
-                        </div>
-                        
-                        <!-- CTA Button -->
-                        <button class="custom-advisor-cta" onclick="event.stopPropagation(); openAdvisorForm()">
-                            <span>Get Free Consultation</span>
-                            <span class="material-symbols-outlined">arrow_forward</span>
-                        </button>
+                        <div class="amc-name">HDFC</div>
                     </div>
-                    
-                    <!-- Tap Indicator -->
-                    <div class="custom-card-tap-indicator">›</div>
+                    <div class="amc-logo-wrapper">
+                        <div class="amc-logo">
+                            <img src="AMC-Fund-logo-icons/ICICI.png" alt="ICICI Prudential">
+                        </div>
+                        <div class="amc-name">ICICI Pru</div>
+                    </div>
+                    <div class="amc-logo-wrapper">
+                        <div class="amc-logo">
+                            <img src="AMC-Fund-logo-icons/SBI.png" alt="SBI Mutual Fund">
+                        </div>
+                        <div class="amc-name">SBI</div>
+                    </div>
+                    <div class="amc-logo-wrapper">
+                        <div class="amc-logo">
+                            <img src="AMC-Fund-logo-icons/kotak.jpeg" alt="Kotak Mutual Fund">
+                        </div>
+                        <div class="amc-name">Kotak</div>
+                    </div>
+                    <div class="amc-logo-wrapper">
+                        <div class="amc-logo">
+                            <img src="AMC-Fund-logo-icons/nippon.png" alt="Nippon India">
+                        </div>
+                        <div class="amc-name">Nippon</div>
+                    </div>
+                    <div class="amc-logo-wrapper">
+                        <div class="amc-logo">
+                            <img src="AMC-Fund-logo-icons/tata.jpeg" alt="Tata Mutual Fund">
+                        </div>
+                        <div class="amc-name">Tata</div>
+                    </div>
+                    <div class="amc-logo-wrapper">
+                        <div class="amc-logo">
+                            <img src="AMC-Fund-logo-icons/PPFAS.png" alt="PPFAS Mutual Fund">
+                        </div>
+                        <div class="amc-name">PPFAS</div>
+                    </div>
                 </div>
             </div>
 
@@ -2721,6 +3063,50 @@
                 calculateNudgeReturn();
             }
         });
+
+        // Certificate Modal Functions
+        function openCertificate(type) {
+            const modal = document.getElementById('certificateModal');
+            const img = document.getElementById('certificateImage');
+            const title = document.getElementById('certificateTitle');
+
+            if (type === 'bse') {
+                img.src = 'certificates/BSE-certificate-image.jpg';
+                title.textContent = 'BSE Certificate of Registration';
+            } else if (type === 'amfi') {
+                img.src = 'certificates/ARN-certificate-image.png';
+                title.textContent = 'AMFI ARN Certificate';
+            }
+
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertificate() {
+            const modal = document.getElementById('certificateModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCertificate();
+            }
+        });
     </script>
+
+    <!-- Certificate Modal (PIP Mode) -->
+    <div id="certificateModal" class="certificate-modal" onclick="closeCertificate()">
+        <div class="certificate-modal-content" onclick="event.stopPropagation()">
+            <button class="certificate-close-btn" onclick="closeCertificate()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 id="certificateTitle" class="certificate-title"></h3>
+            <div class="certificate-image-container">
+                <img id="certificateImage" class="certificate-image" alt="Certificate">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
