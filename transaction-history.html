@@ -822,6 +822,593 @@
             margin-top: 12px;
             cursor: pointer;
         }
+
+        /* Tabs System */
+        .tabs-container {
+            background: white;
+            border-top: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            margin-top: -1px;
+        }
+
+        .tabs-nav {
+            display: flex;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 16px 0;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--color-blue);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--color-blue);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            min-height: 300px;
+            background: var(--color-bg-primary);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SIP Summary Section */
+        .sip-summary-section {
+            background: white;
+            padding: 12px;
+            margin-bottom: 16px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .sip-summary-header {
+            margin-bottom: 12px;
+        }
+
+        .sip-summary-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+
+        .sip-summary-grid-amounts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 16px;
+            padding: 8px 0 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .sip-summary-grid-counts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding: 12px 0 4px 0;
+        }
+
+        .sip-summary-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .sip-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--color-green);
+        }
+
+        .sip-label {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Filter Container */
+        .filter-container {
+            margin-bottom: 16px;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .filter-chips::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-chip {
+            flex-shrink: 0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1.5px solid var(--color-border);
+            background: white;
+            color: var(--color-text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip.active {
+            background: var(--color-blue);
+            border-color: var(--color-blue);
+            color: white;
+        }
+
+        /* SIP Cards */
+        .sip-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sip-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            border: 1px solid var(--color-border);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .sip-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .sip-status {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 8px;
+            height: 8px;
+            background: var(--color-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .sip-card.skipped {
+            opacity: 0.85;
+            border-color: rgba(245, 158, 11, 0.2);
+            background: linear-gradient(to bottom, rgba(245, 158, 11, 0.02), white);
+        }
+
+        .sip-card.skipped .sip-status {
+            background: var(--color-orange);
+            animation: none;
+        }
+
+        .sip-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .sip-frequency {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-bottom: 12px;
+        }
+
+        .sip-next {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .sip-next svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .sip-funds {
+            padding-top: 12px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .sip-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .sip-action-btn {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--color-surface);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sip-action-btn:active {
+            background: var(--color-border);
+            transform: scale(0.95);
+        }
+
+        /* Modal System */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-container {
+            background: white;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            width: 100%;
+            max-width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .modal-container.modal-sm {
+            max-height: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+        }
+
+        .modal-content {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .modal-message {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--color-text-secondary);
+            margin: 0;
+            text-align: center;
+        }
+
+        .modal-message.modal-warning {
+            color: var(--color-text-primary);
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+            padding: 20px;
+            border-top: 1px solid var(--color-border);
+            position: sticky;
+            bottom: 0;
+            background: white;
+        }
+
+        .modal-btn-primary,
+        .modal-btn-secondary,
+        .modal-btn-warning,
+        .modal-btn-danger {
+            flex: 1;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .modal-btn-primary {
+            background: var(--color-blue);
+            color: white;
+        }
+
+        .modal-btn-secondary {
+            background: white;
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .modal-btn-warning {
+            background: var(--color-orange);
+            color: white;
+        }
+
+        .modal-btn-danger {
+            background: var(--color-red);
+            color: white;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            color: var(--color-text-primary);
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* OTP Verification Modal */
+        .otp-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1100;
+            display: none;
+        }
+
+        .otp-overlay.show {
+            display: flex;
+        }
+
+        .otp-overlay-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .otp-overlay-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            padding: 0 0 20px 0;
+            animation: slideUp 0.3s ease;
+        }
+
+        .otp-drag-handle {
+            padding: 12px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .otp-drag-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 2px;
+        }
+
+        .otp-modal-header {
+            padding: 20px;
+        }
+
+        .otp-modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .otp-modal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .otp-content {
+            padding: 0 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .otp-input-section {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .otp-input-container {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 56px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+        }
+
+        .otp-input.filled {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .otp-timer {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .otp-resend-link {
+            background: none;
+            border: none;
+            color: var(--color-blue);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 13px;
+        }
+
+        .otp-continue-section {
+            padding: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .otp-continue-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--color-border);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        .otp-continue-btn.enabled {
+            background: var(--color-blue);
+            pointer-events: auto;
+        }
+
+        .otp-continue-btn.enabled:active {
+            transform: scale(0.98);
+        }
     </style>
 </head>
 <body>
@@ -872,6 +1459,16 @@
 
                 <!-- Scrollable Content -->
                 <div class="scroll-content">
+                    <!-- Tabs Section -->
+                    <div class="tabs-container">
+                        <div class="tabs-nav">
+                            <button class="tab-btn active" data-tab="transactions">Transactions</button>
+                            <button class="tab-btn" data-tab="sips">Active SIPs</button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content: Transactions -->
+                    <div id="transactions-tab" class="tab-content active">
                     <!-- NiveshPro Banner -->
                     <div class="niveshpro-banner" id="niveshproBanner">
                         <button class="banner-close" onclick="document.getElementById('niveshproBanner').style.display='none'">×</button>
@@ -1395,6 +1992,45 @@
                             </div>
                         </div>
                     </div>
+                    </div>
+                    <!-- End Transactions Tab -->
+
+                    <!-- Tab Content: Active SIPs -->
+                    <div id="sips-tab" class="tab-content">
+                        <!-- SIP Summary Card -->
+                        <div class="sip-summary-section">
+                            <div class="sip-summary-header">
+                                <h3 class="sip-summary-title">SIP Overview</h3>
+                            </div>
+
+                            <!-- Row 1: Frequency Amounts -->
+                            <div class="sip-summary-grid-amounts" id="sipSummaryAmounts">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+
+                            <!-- Row 2: Counts -->
+                            <div class="sip-summary-grid-counts" id="sipSummaryCounts">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- SIP Filter Chips -->
+                        <div class="filter-container">
+                            <div class="filter-chips">
+                                <button class="filter-chip active" data-filter="all">All</button>
+                                <button class="filter-chip" data-filter="monthly">Monthly</button>
+                                <button class="filter-chip" data-filter="weekly">Weekly</button>
+                                <button class="filter-chip" data-filter="daily">Daily</button>
+                                <button class="filter-chip" data-filter="skipped">Skipped</button>
+                            </div>
+                        </div>
+
+                        <!-- SIP Cards List -->
+                        <div class="sip-list" id="sipList">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <!-- End Active SIPs Tab -->
                 </div>
 
                 <!-- Enhanced Bottom Navigation -->
@@ -1437,11 +2073,149 @@
                 </div>
             </div>
         </div>
+
+        <!-- Edit SIP Modal -->
+        <div id="editSIPModal" class="modal-overlay">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h3 class="modal-title">Edit SIP</h3>
+                    <button class="modal-close" onclick="closeEditSIPModal()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-content">
+                    <form id="editSIPForm">
+                        <div class="form-group">
+                            <label class="form-label">Amount</label>
+                            <input type="number" id="sipAmount" class="form-input" placeholder="Enter amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Date</label>
+                            <input type="text" id="sipDate" class="form-input" placeholder="Select date" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn-secondary" onclick="closeEditSIPModal()">Cancel</button>
+                    <button class="modal-btn-primary" onclick="saveEditSIP()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skip Next SIP Confirmation Modal -->
+        <div id="skipSIPModal" class="modal-overlay">
+            <div class="modal-container modal-sm">
+                <div class="modal-header">
+                    <h3 class="modal-title">Skip Next Installment</h3>
+                </div>
+                <div class="modal-content">
+                    <p class="modal-message">Skip the SIP installment scheduled for <strong id="skipDateDisplay"></strong>? Your SIP will automatically resume with the following installment.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn-secondary" onclick="closeSkipSIPModal()">Cancel</button>
+                    <button class="modal-btn-warning" onclick="confirmSkipSIP()">Skip</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cancel SIP Confirmation Modal -->
+        <div id="cancelSIPModal" class="modal-overlay">
+            <div class="modal-container modal-sm">
+                <div class="modal-header">
+                    <h3 class="modal-title">Stop SIP</h3>
+                </div>
+                <div class="modal-content">
+                    <p class="modal-message modal-warning">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="#F59E0B" style="margin: 0 auto 16px; display: block;">
+                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                        Are you sure you want to stop this SIP? This action cannot be undone and you'll need to create a new SIP to continue.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn-secondary" onclick="closeCancelSIPModal()">Cancel</button>
+                    <button class="modal-btn-danger" onclick="confirmCancelSIP()">Stop SIP</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Details Modal -->
+        <div id="viewDetailsModal" class="modal-overlay">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h3 class="modal-title">SIP Details</h3>
+                    <button class="modal-close" onclick="closeViewDetailsModal()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-content" id="sipDetailsContent">
+                    <!-- Content will be populated dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn-primary" onclick="closeViewDetailsModal()">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- OTP Verification Modal -->
+        <div class="otp-overlay" id="otpOverlay">
+            <!-- Backdrop -->
+            <div class="otp-overlay-backdrop" onclick="closeOTPModal()"></div>
+
+            <!-- Modal -->
+            <div class="otp-overlay-modal">
+                <!-- Drag Handle -->
+                <div class="otp-drag-handle">
+                    <div class="otp-drag-bar"></div>
+                </div>
+
+                <!-- Modal Header -->
+                <div class="otp-modal-header">
+                    <h2 class="otp-modal-title">Verify with OTP</h2>
+                    <p class="otp-modal-subtitle" id="otpSubtitle">Enter the 4-digit code sent to your registered mobile</p>
+                </div>
+
+                <!-- Content -->
+                <div class="otp-content">
+                    <div class="otp-input-section">
+                        <div class="otp-input-container">
+                            <input type="text" class="otp-input" maxlength="1" id="otp1" inputmode="numeric">
+                            <input type="text" class="otp-input" maxlength="1" id="otp2" inputmode="numeric">
+                            <input type="text" class="otp-input" maxlength="1" id="otp3" inputmode="numeric">
+                            <input type="text" class="otp-input" maxlength="1" id="otp4" inputmode="numeric">
+                        </div>
+
+                        <div class="otp-timer">
+                            Didn't receive code? <button class="otp-resend-link" onclick="resendOTP()">Resend OTP</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Continue Button -->
+                <div class="otp-continue-section">
+                    <button class="otp-continue-btn" id="verifyOtpBtn" onclick="verifyOTP()">
+                        <span>Verify & Continue</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- iPhone Home Indicator -->
         <div class="iphone-home-indicator"></div>
     </div>
 
+    <!-- Load SIPs Data -->
+    <script src="funds-data.js"></script>
+
     <script>
+        // ===== Original Portfolio Functions =====
         function toggleBreakdown(itemId) {
             const item = document.getElementById(itemId);
             item.classList.toggle('expanded');
@@ -1471,6 +2245,528 @@
                 visibilityIcon.textContent = 'visibility';
             }
         }
+
+        // ===== Tab Management =====
+        let currentTab = 0;
+        let sipDataLoaded = false;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabBtns.forEach((btn, index) => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    // Add active class to clicked button and corresponding content
+                    this.classList.add('active');
+                    tabContents[index].classList.add('active');
+
+                    // Load SIP data when Active SIPs tab is activated
+                    if (this.dataset.tab === 'sips' && !sipDataLoaded) {
+                        loadSIPData();
+                        sipDataLoaded = true;
+                    }
+                });
+            });
+
+            // Initialize filter chips
+            const filterChips = document.querySelectorAll('.filter-chip');
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    filterSIPs(this.dataset.filter);
+                });
+            });
+
+            // Initialize OTP inputs
+            initializeOTPInputs();
+        });
+
+        // ===== SIP Functions =====
+        function loadSIPData() {
+            calculateSIPSummary();
+            renderSIPCards();
+        }
+
+        function calculateSIPSummary() {
+            let monthly = 0, weekly = 0, daily = 0;
+            let activeSIPs = 0;
+            let totalFunds = new Set();
+
+            sipsData.forEach(sip => {
+                if (sip.status === 'active') {
+                    activeSIPs++;
+                    switch(sip.frequency) {
+                        case 'monthly':
+                            monthly += sip.amount;
+                            break;
+                        case 'weekly':
+                            weekly += sip.amount;
+                            break;
+                        case 'daily':
+                            daily += sip.amount;
+                            break;
+                    }
+                }
+                sip.funds.forEach(fund => totalFunds.add(fund.id));
+            });
+
+            // Update amounts
+            const amountsContainer = document.getElementById('sipSummaryAmounts');
+            let amountsHTML = '';
+            if (monthly > 0) {
+                amountsHTML += `
+                    <div class="sip-summary-item">
+                        <div class="sip-value">₹${monthly.toLocaleString('en-IN')}</div>
+                        <div class="sip-label">Monthly</div>
+                    </div>
+                `;
+            }
+            if (weekly > 0) {
+                amountsHTML += `
+                    <div class="sip-summary-item">
+                        <div class="sip-value">₹${weekly.toLocaleString('en-IN')}</div>
+                        <div class="sip-label">Weekly</div>
+                    </div>
+                `;
+            }
+            if (daily > 0) {
+                amountsHTML += `
+                    <div class="sip-summary-item">
+                        <div class="sip-value">₹${daily.toLocaleString('en-IN')}</div>
+                        <div class="sip-label">Daily</div>
+                    </div>
+                `;
+            }
+            amountsContainer.innerHTML = amountsHTML;
+
+            // Update counts
+            const countsContainer = document.getElementById('sipSummaryCounts');
+            countsContainer.innerHTML = `
+                <div class="sip-summary-item">
+                    <div class="sip-value">${activeSIPs}</div>
+                    <div class="sip-label">Active SIPs</div>
+                </div>
+                <div class="sip-summary-item">
+                    <div class="sip-value">${totalFunds.size}</div>
+                    <div class="sip-label">Funds</div>
+                </div>
+            `;
+        }
+
+        function renderSIPCards() {
+            const sipList = document.getElementById('sipList');
+            sipList.innerHTML = sipsData.map(sip => {
+                const isSkipped = sip.status === 'skipped';
+                const statusText = isSkipped ? ' • Skipped' : '';
+
+                const fundsText = sip.funds.length === 1
+                    ? `Investing in ${sip.funds[0].name}`
+                    : `Investing in ${sip.funds.length} funds: ${sip.funds.map(f => f.name).join(', ')}`;
+
+                return `
+                    <div class="sip-card ${isSkipped ? 'skipped' : ''}" data-frequency="${sip.frequency}" data-status="${sip.status}">
+                        <div class="sip-status"></div>
+                        <div class="sip-amount">₹${sip.amount.toLocaleString('en-IN')}</div>
+                        <div class="sip-frequency">${sip.frequency.charAt(0).toUpperCase() + sip.frequency.slice(1)} SIP${statusText}</div>
+                        <div class="sip-next">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                            </svg>
+                            ${sip.nextDebitFull}
+                        </div>
+                        <div class="sip-funds">${fundsText}</div>
+                        <div class="sip-actions">
+                            <button class="sip-action-btn" onclick="event.stopPropagation(); editSIP('${sip.id}')">Edit</button>
+                            <button class="sip-action-btn" onclick="event.stopPropagation(); ${isSkipped ? 'resumeSIP' : 'pauseSIP'}('${sip.id}')">${isSkipped ? 'Resume' : 'Pause'}</button>
+                            <button class="sip-action-btn" onclick="event.stopPropagation(); stopSIP('${sip.id}')">Stop</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterSIPs(filterType) {
+            const sipCards = document.querySelectorAll('.sip-card');
+
+            sipCards.forEach(card => {
+                const frequency = card.dataset.frequency;
+                const status = card.dataset.status;
+
+                if (filterType === 'all') {
+                    card.style.display = 'block';
+                } else if (filterType === 'skipped') {
+                    card.style.display = status === 'skipped' ? 'block' : 'none';
+                } else {
+                    card.style.display = (frequency === filterType && status === 'active') ? 'block' : 'none';
+                }
+            });
+        }
+
+        // ===== SIP Action Functions =====
+        let currentSIPId = null;
+        let pendingAction = null;
+
+        function editSIP(sipId) {
+            currentSIPId = sipId;
+            const sip = sipsData.find(s => s.id === sipId);
+            if (!sip) return;
+
+            document.getElementById('sipAmount').value = sip.amount;
+            document.getElementById('sipDate').value = sip.nextDebit;
+
+            const modal = document.getElementById('editSIPModal');
+            modal.classList.add('show');
+        }
+
+        function closeEditSIPModal() {
+            const modal = document.getElementById('editSIPModal');
+            modal.classList.remove('show');
+            currentSIPId = null;
+        }
+
+        function saveEditSIP() {
+            if (!currentSIPId) return;
+
+            const amount = parseInt(document.getElementById('sipAmount').value);
+            const date = document.getElementById('sipDate').value;
+
+            closeEditSIPModal();
+
+            pendingAction = {
+                type: 'edit',
+                sipId: currentSIPId,
+                data: { amount, date }
+            };
+
+            showOTPModal('edit');
+        }
+
+        function pauseSIP(sipId) {
+            currentSIPId = sipId;
+            const sip = sipsData.find(s => s.id === sipId);
+            if (!sip) return;
+
+            document.getElementById('skipDateDisplay').textContent = sip.nextDebit;
+
+            const modal = document.getElementById('skipSIPModal');
+            modal.classList.add('show');
+        }
+
+        function closeSkipSIPModal() {
+            const modal = document.getElementById('skipSIPModal');
+            modal.classList.remove('show');
+            currentSIPId = null;
+        }
+
+        function confirmSkipSIP() {
+            if (!currentSIPId) return;
+
+            const sip = sipsData.find(s => s.id === currentSIPId);
+            if (!sip) return;
+
+            closeSkipSIPModal();
+
+            pendingAction = {
+                type: 'skip',
+                sipId: currentSIPId,
+                data: { skipDate: sip.nextDebit }
+            };
+
+            showOTPModal('skip');
+        }
+
+        function resumeSIP(sipId) {
+            // Resume functionality
+            showToast('SIP resumed successfully');
+            const sipIndex = sipsData.findIndex(s => s.id === sipId);
+            if (sipIndex !== -1) {
+                sipsData[sipIndex].status = 'active';
+                renderSIPCards();
+                calculateSIPSummary();
+            }
+        }
+
+        function stopSIP(sipId) {
+            currentSIPId = sipId;
+            const modal = document.getElementById('cancelSIPModal');
+            modal.classList.add('show');
+        }
+
+        function closeCancelSIPModal() {
+            const modal = document.getElementById('cancelSIPModal');
+            modal.classList.remove('show');
+            currentSIPId = null;
+        }
+
+        function confirmCancelSIP() {
+            if (!currentSIPId) return;
+
+            closeCancelSIPModal();
+
+            pendingAction = {
+                type: 'stop',
+                sipId: currentSIPId,
+                data: {}
+            };
+
+            showOTPModal('stop');
+        }
+
+        function viewSIPDetails(sipId) {
+            const sip = sipsData.find(s => s.id === sipId);
+            if (!sip) return;
+
+            const detailsHTML = `
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 28px; font-weight: 700; color: #111827; margin-bottom: 4px;">
+                        ₹${sip.amount.toLocaleString('en-IN')}
+                    </div>
+                    <div style="font-size: 14px; color: #6B7280;">
+                        ${sip.frequency.charAt(0).toUpperCase() + sip.frequency.slice(1)} SIP
+                    </div>
+                </div>
+
+                <div style="background: #F9FAFB; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: #111827; margin-bottom: 12px;">SIP Information</div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #6B7280; font-size: 14px;">Status</span>
+                        <span style="color: ${sip.status === 'active' ? '#10B981' : '#F59E0B'}; font-weight: 600; font-size: 14px;">
+                            ${sip.status === 'active' ? 'Active' : 'Paused'}
+                        </span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #6B7280; font-size: 14px;">Frequency</span>
+                        <span style="color: #111827; font-weight: 500; font-size: 14px;">
+                            ${sip.frequency.charAt(0).toUpperCase() + sip.frequency.slice(1)}
+                        </span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #6B7280; font-size: 14px;">Next Debit</span>
+                        <span style="color: #111827; font-weight: 500; font-size: 14px;">${sip.nextDebit}</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <div style="font-size: 13px; font-weight: 600; color: #111827; margin-bottom: 8px;">Funds (${sip.funds.length})</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        ${sip.funds.map(fund => `
+                            <div style="padding: 12px; background: white; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; color: #111827;">
+                                ${fund.name}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('sipDetailsContent').innerHTML = detailsHTML;
+
+            const modal = document.getElementById('viewDetailsModal');
+            modal.classList.add('show');
+        }
+
+        function closeViewDetailsModal() {
+            const modal = document.getElementById('viewDetailsModal');
+            modal.classList.remove('show');
+        }
+
+        // ===== OTP System =====
+        function showOTPModal(actionType) {
+            const subtitle = document.getElementById('otpSubtitle');
+            if (actionType === 'edit') {
+                subtitle.textContent = 'Confirm SIP changes with the 4-digit code sent to your registered mobile';
+            } else if (actionType === 'skip') {
+                subtitle.textContent = 'Confirm skipping installment with the 4-digit code sent to your registered mobile';
+            } else if (actionType === 'stop') {
+                subtitle.textContent = 'Confirm stopping SIP with the 4-digit code sent to your registered mobile';
+            }
+
+            const modal = document.getElementById('otpOverlay');
+            modal.classList.add('show');
+
+            setTimeout(() => {
+                document.getElementById('otp1').focus();
+            }, 300);
+        }
+
+        function closeOTPModal() {
+            const modal = document.getElementById('otpOverlay');
+            modal.classList.remove('show');
+
+            // Clear all inputs
+            const otpInputs = document.querySelectorAll('.otp-input');
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+
+            // Reset verify button
+            document.getElementById('verifyOtpBtn').classList.remove('enabled');
+
+            // Clear pending action
+            pendingAction = null;
+        }
+
+        function verifyOTP() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const otpValue = Array.from(otpInputs).map(input => input.value).join('');
+
+            if (otpValue.length !== 4) return;
+
+            closeOTPModal();
+
+            // Execute pending action
+            if (!pendingAction) return;
+
+            if (pendingAction.type === 'edit') {
+                const sipIndex = sipsData.findIndex(s => s.id === pendingAction.sipId);
+                if (sipIndex !== -1) {
+                    sipsData[sipIndex].amount = pendingAction.data.amount;
+                    sipsData[sipIndex].nextDebit = pendingAction.data.date;
+                    sipsData[sipIndex].nextDebitFull = `Next debit on ${pendingAction.data.date}`;
+
+                    renderSIPCards();
+                    calculateSIPSummary();
+                    showToast('SIP updated successfully');
+                }
+            } else if (pendingAction.type === 'skip') {
+                const sipIndex = sipsData.findIndex(s => s.id === pendingAction.sipId);
+                if (sipIndex !== -1) {
+                    sipsData[sipIndex].status = 'skipped';
+                    sipsData[sipIndex].nextDebitFull = `Skipped: ${pendingAction.data.skipDate}`;
+
+                    renderSIPCards();
+                    calculateSIPSummary();
+                    showToast('SIP installment skipped successfully');
+                }
+            } else if (pendingAction.type === 'stop') {
+                const sipIndex = sipsData.findIndex(s => s.id === pendingAction.sipId);
+                if (sipIndex !== -1) {
+                    sipsData.splice(sipIndex, 1);
+
+                    renderSIPCards();
+                    calculateSIPSummary();
+                    showToast('SIP stopped successfully');
+                }
+            }
+
+            pendingAction = null;
+        }
+
+        function resendOTP() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+
+            document.getElementById('otp1').focus();
+            document.getElementById('verifyOtpBtn').classList.remove('enabled');
+            showToast('OTP sent successfully');
+        }
+
+        function showToast(message) {
+            const existingToast = document.querySelector('.toast-notification');
+            if (existingToast) existingToast.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #111827;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                z-index: 2000;
+                animation: slideUp 0.3s ease;
+            `;
+
+            const container = document.querySelector('.iphone-screen') || document.body;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideDown 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize OTP inputs
+        function initializeOTPInputs() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', function(e) {
+                    const value = e.target.value;
+
+                    if (value && /^[0-9]$/.test(value)) {
+                        this.classList.add('filled');
+
+                        if (index < otpInputs.length - 1) {
+                            otpInputs[index + 1].focus();
+                        }
+
+                        checkOTPComplete();
+                    } else {
+                        this.classList.remove('filled');
+                        this.value = '';
+                    }
+                });
+
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && !this.value && index > 0) {
+                        otpInputs[index - 1].focus();
+                        otpInputs[index - 1].classList.remove('filled');
+                        otpInputs[index - 1].value = '';
+                    }
+                });
+
+                input.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text').replace(/\D/g, '');
+
+                    if (pastedData.length === 4) {
+                        otpInputs.forEach((inp, i) => {
+                            if (pastedData[i]) {
+                                inp.value = pastedData[i];
+                                inp.classList.add('filled');
+                            }
+                        });
+                        checkOTPComplete();
+                    }
+                });
+            });
+        }
+
+        function checkOTPComplete() {
+            const filledInputs = document.querySelectorAll('.otp-input.filled');
+            const verifyBtn = document.getElementById('verifyOtpBtn');
+
+            if (filledInputs.length === 4) {
+                verifyBtn.classList.add('enabled');
+            } else {
+                verifyBtn.classList.remove('enabled');
+            }
+        }
+
+        // Close modals when clicking on overlay
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeEditSIPModal();
+                closeSkipSIPModal();
+                closeCancelSIPModal();
+                closeViewDetailsModal();
+            }
+        });
     </script>
     <script src="assets/js/iphone-toggle.js"></script>
 </body>
