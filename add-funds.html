@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="funds-data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <style>
         :root {
@@ -1328,6 +1329,13 @@
             padding: 16px 20px;
             margin: var(--space-lg) 0 var(--space-md) 0;
             display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Old styles - kept for reference but unused after chart implementation */
+        /* .trust-projection .projection-content-row {
+            display: flex;
             align-items: center;
             gap: 12px;
         }
@@ -1353,43 +1361,133 @@
             flex: 1;
         }
 
-        .trust-projection .projection-main-row {
+        .trust-projection .projection-amount-row {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            align-items: baseline;
+            gap: 8px;
             margin-bottom: 4px;
         }
 
-        .trust-projection .projection-left {
+        .trust-projection .projection-duration {
+            font-size: 13px;
+            font-weight: 500;
+            color: #6B7280;
+            margin-bottom: 6px;
+        }
+
+        .trust-projection .projection-disclaimer .withdraw-highlight {
+            font-weight: 600;
+            color: #10B981;
+        }
+
+        .trust-projection .projection-subheading {
+            font-size: 10px;
+            font-weight: 500;
+            color: #6B7280;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .trust-projection .tenure-selector-wrapper {
             display: flex;
             align-items: center;
+            gap: 10px;
+            margin: 10px 0 0 0;
+            width: 100%;
+        }
+
+        .tenure-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .tenure-label .info-tooltip {
+            display: inline-flex;
+            align-items: center;
+            color: #9CA3AF;
+            cursor: help;
+            opacity: 0.7;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .tenure-label .info-tooltip:hover {
+            opacity: 1;
+            color: #6B7280;
+        } */
+
+        /* Old tenure button styles - no longer used after chart implementation
+        .tenure-buttons {
+            display: flex;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .tenure-buttons .time-btn {
+            flex: 1;
+            min-width: 0;
+            padding: 5px 8px;
+            font-size: 11px;
+        } */
+
+        /* Projection Header */
+        .trust-projection .projection-header {
+            margin-bottom: 16px;
+        }
+
+        .trust-projection .projection-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #6B7280;
+            margin-bottom: 4px;
+        }
+
+        .trust-projection .projection-main-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
         }
 
         .trust-projection .projection-amount {
-            font-size: 20px;
+            font-size: 28px;
             font-weight: 700;
             color: #22C55E;
-            margin: 0;
             line-height: 1.2;
         }
 
-        .trust-projection .projection-duration {
-            font-size: 14px;
-            font-weight: 600;
-            color: #374151;
-            display: inline;
-        }
-
         .trust-projection .projection-return {
-            font-size: 12px;
-            color: #6B7280;
-            font-weight: 500;
+            font-size: 14px;
+            color: #10B981;
+            font-weight: 600;
         }
 
+        /* Chart Container */
+        .projection-chart-container {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            margin: 16px 0;
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 8px 4px;
+        }
+
+        #projectionChart {
+            max-height: 240px;
+        }
+
+        /* Disclaimer */
         .trust-projection .projection-disclaimer {
             font-size: 10px;
             color: #9CA3AF;
-            margin-top: 4px;
+            margin-top: 12px;
+            line-height: 1.4;
+            text-align: center;
         }
 
         .trust-markers {
@@ -2079,20 +2177,23 @@
 
                         <!-- Returns Projection -->
                         <div class="trust-projection" id="trustProjectionCard">
-                            <div class="trending-icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
-                                </svg>
-                            </div>
-                            <div class="projection-content">
-                                <div class="projection-main-row">
-                                    <div class="projection-left">
-                                        <span class="projection-amount" id="trustProjectionAmount">₹3,58,967</span>
-                                        <span class="projection-duration"> in 10 years</span>
-                                    </div>
-                                    <span class="projection-return" id="trustProjectionReturn">(+124.6%*p.a.)</span>
+                            <!-- Header -->
+                            <div class="projection-header">
+                                <div class="projection-label">Projected Value</div>
+                                <div class="projection-main-amount">
+                                    <span class="projection-amount" id="trustProjectionAmount">₹3,58,967</span>
+                                    <span class="projection-return" id="trustProjectionReturn">(+12.5%*p.a.)</span>
                                 </div>
-                                <div class="projection-disclaimer">*Returns are based on past 3-year performance.</div>
+                            </div>
+
+                            <!-- Chart Canvas -->
+                            <div class="projection-chart-container">
+                                <canvas id="projectionChart" width="400" height="240"></canvas>
+                            </div>
+
+                            <!-- Disclaimer -->
+                            <div class="projection-disclaimer">
+                                *projection based on past 3-year performance. Actual returns may vary.
                             </div>
                         </div>
 
@@ -3488,16 +3589,20 @@
                 
                 const growth = futureValue - totalInvestment;
                 const growthPercentage = ((growth / totalInvestment) * 100);
-                
-                // Update display for compact card
+
+                // Update display for compact card (if elements exist)
                 // projectionPeriod removed - no longer showing "After X years..."
-                projectionAmount.textContent = `₹ ${Math.round(futureValue).toLocaleString('en-IN')}`;
-                projectionGrowth.innerHTML = `
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
-                    </svg>
-                    +₹${Math.round(growth).toLocaleString('en-IN')} (${growthPercentage.toFixed(1)}%)
-                `;
+                if (projectionAmount) {
+                    projectionAmount.textContent = `₹ ${Math.round(futureValue).toLocaleString('en-IN')}`;
+                }
+                if (projectionGrowth) {
+                    projectionGrowth.innerHTML = `
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                        </svg>
+                        +₹${Math.round(growth).toLocaleString('en-IN')} (${growthPercentage.toFixed(1)}%)
+                    `;
+                }
                 // totalInvested removed - no longer showing total invested in compact view
             }
 
@@ -3565,18 +3670,19 @@
         });
 
         // ==================== TRUST PROJECTION CALCULATION ====================
-        
-        // Calculate 10-year returns projection using same logic as basket-details
+
+        let projectionChart = null; // Global chart instance
+
+        // Calculate multi-tenure returns projection and display as area chart
         function updateTrustProjection() {
+            console.log('updateTrustProjection called');
             const amount = parseInt(document.getElementById('amountInput').value) || 5000;
             const frequency = document.querySelector('.frequency-btn.active')?.dataset.frequency || 'monthly';
-            const duration = 10; // Fixed to 10 years
-            
-            // Get annual return rate and display percentage from basket data
+
+            // Get annual return rate from basket data
             let annualReturn = 0.125; // Default 12.5%
-            let displayPercentage = "12.5"; // Default display percentage
-            
-            // Try to get basket specific return if available
+            let displayPercentage = "12.5";
+
             if (window.basketData && window.basketData.returns) {
                 const returnMatch = window.basketData.returns.match(/(\d+(?:\.\d+)?)/);
                 if (returnMatch) {
@@ -3585,36 +3691,182 @@
                 }
             }
 
-            let totalInvestment, futureValue;
+            // Define tenure points for chart
+            const tenures = [1, 3, 5, 7, 10];
+            const chartData = [];
+            const chartLabels = [];
 
-            // Calculate based on investment type
-            if (currentType === 'sip') {
-                const investmentsPerYear = frequency === 'daily' ? 365 : 12; // daily or monthly
-                totalInvestment = amount * investmentsPerYear * duration;
+            // Calculate projection for each tenure
+            tenures.forEach(duration => {
+                let futureValue;
 
-                // SIP compound interest calculation
-                const r = Math.pow(1 + annualReturn, 1/investmentsPerYear) - 1;
-                const n = investmentsPerYear * duration;
-                futureValue = amount * (((Math.pow(1 + r, n)) - 1) / r) * (1 + r);
-            } else {
-                // One-time investment
-                totalInvestment = amount;
-                futureValue = amount * Math.pow(1 + annualReturn, duration);
+                if (currentType === 'sip') {
+                    const investmentsPerYear = frequency === 'daily' ? 365 : 12;
+                    const r = Math.pow(1 + annualReturn, 1/investmentsPerYear) - 1;
+                    const n = investmentsPerYear * duration;
+                    futureValue = amount * (((Math.pow(1 + r, n)) - 1) / r) * (1 + r);
+                } else {
+                    // One-time investment
+                    futureValue = amount * Math.pow(1 + annualReturn, duration);
+                }
+
+                chartData.push(Math.round(futureValue));
+                chartLabels.push(duration + 'Y');
+            });
+
+            // Update header with 10Y value (last value)
+            const finalValue = chartData[chartData.length - 1];
+            document.getElementById('trustProjectionAmount').textContent =
+                '₹' + finalValue.toLocaleString('en-IN');
+            document.getElementById('trustProjectionReturn').textContent =
+                `(+${displayPercentage}%*p.a.)`;
+
+            console.log('Chart data:', chartData);
+            console.log('Chart labels:', chartLabels);
+
+            // Update or create chart
+            updateProjectionChart(chartLabels, chartData, displayPercentage);
+        }
+
+        function updateProjectionChart(labels, data, returnRate) {
+            const canvas = document.getElementById('projectionChart');
+            if (!canvas) {
+                console.error('Canvas element not found');
+                return;
             }
 
-            const profit = futureValue - totalInvestment;
-            const profitPercentage = ((profit / totalInvestment) * 100).toFixed(1);
-
-            // Update trust projection display
-            const trustProjectionAmount = document.getElementById('trustProjectionAmount');
-            const trustProjectionReturn = document.getElementById('trustProjectionReturn');
-            
-            if (trustProjectionAmount) {
-                trustProjectionAmount.textContent = '₹' + Math.round(futureValue).toLocaleString('en-IN');
+            // Check if Chart.js is loaded
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js is not loaded');
+                return;
             }
-            
-            if (trustProjectionReturn) {
-                trustProjectionReturn.textContent = `(+${displayPercentage}%*p.a.)`;
+
+            const ctx = canvas.getContext('2d');
+
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, 240);
+            gradient.addColorStop(0, 'rgba(34, 197, 94, 0.2)');
+            gradient.addColorStop(1, 'rgba(34, 197, 94, 0)');
+
+            // Destroy existing chart if it exists
+            if (projectionChart) {
+                console.log('Destroying existing chart');
+                projectionChart.destroy();
+            }
+
+            console.log('Creating new chart with data:', data);
+
+            // Create new chart
+            try {
+                projectionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Projected Value',
+                        data: data,
+                        borderColor: '#10B981',
+                        backgroundColor: gradient,
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#FFFFFF',
+                        pointBorderColor: '#10B981',
+                        pointBorderWidth: 3,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointHoverBorderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#FFFFFF',
+                            titleColor: '#22C55E',
+                            bodyColor: '#10B981',
+                            footerColor: '#6B7280',
+                            borderColor: '#E5E7EB',
+                            borderWidth: 1,
+                            padding: 12,
+                            boxPadding: 6,
+                            titleFont: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 11,
+                                weight: '600'
+                            },
+                            footerFont: {
+                                size: 11,
+                                weight: 'normal'
+                            },
+                            callbacks: {
+                                title: function(context) {
+                                    const value = context[0].parsed.y;
+                                    return '₹' + value.toLocaleString('en-IN');
+                                },
+                                label: function(context) {
+                                    return `(+${returnRate}%*p.a.)`;
+                                },
+                                footer: function(context) {
+                                    const label = context[0].label;
+                                    const years = label.replace('Y', '');
+                                    return years === '1' ? '1 year' : years + ' years';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    if (value >= 100000) {
+                                        return '₹' + (value / 100000).toFixed(1) + 'L';
+                                    }
+                                    return '₹' + (value / 1000).toFixed(0) + 'K';
+                                },
+                                color: '#9CA3AF',
+                                font: {
+                                    size: 10
+                                },
+                                maxTicksLimit: 6
+                            },
+                            grid: {
+                                color: '#F3F4F6',
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    size: 11,
+                                    weight: '500'
+                                }
+                            },
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            }
+                        }
+                    }
+                }
+            });
+            console.log('Chart created successfully');
+            } catch (error) {
+                console.error('Error creating chart:', error);
             }
         }
 
