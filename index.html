@@ -1064,6 +1064,210 @@
             color: #EF4444;
         }
 
+        /* ==================== VIDEO TUTORIALS SECTION ==================== */
+
+        .video-tutorials-container {
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Horizontal Scroll Container */
+        .video-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 8px 4px 16px 4px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            scroll-snap-type: x mandatory;
+        }
+
+        .video-scroll::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+
+        /* Video Card */
+        .video-card {
+            position: relative;
+            background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+            border-radius: 16px;
+            min-width: 155px;
+            max-width: 155px;
+            height: 220px;
+            flex-shrink: 0;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            scroll-snap-align: start;
+        }
+
+        /* Grid pattern overlay */
+        .video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 15px 15px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-card:active {
+            transform: translateY(-2px);
+        }
+
+        /* Card Content */
+        .video-card-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 14px 12px;
+        }
+
+        /* Video Title */
+        .video-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 1.3;
+            margin: 0 0 4px 0;
+            text-align: left;
+        }
+
+        /* Video Subtitle */
+        .video-subtitle {
+            font-size: 11px;
+            font-weight: 600;
+            color: #F59E0B; /* Orange/yellow color */
+            line-height: 1.4;
+            margin: 0 0 auto 0; /* Push to top, space below */
+            text-align: left;
+        }
+
+        /* Play Button */
+        .video-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+
+        .video-play-button svg {
+            color: #3B82F6; /* Light blue play icon */
+            width: 26px;
+            height: 26px;
+            margin-left: 3px; /* Optical centering */
+        }
+
+        .video-card:hover .video-play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-card:active .video-play-button {
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        /* Person Image at Bottom */
+        .video-thumbnail-person {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 110px;
+            overflow: hidden;
+            border-radius: 0 0 16px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-thumbnail-person img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        /* Scroll Indicators */
+        .video-scroll-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 8px 0;
+        }
+
+        .video-scroll-indicator .scroll-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-scroll-indicator .scroll-dot.active {
+            background: var(--color-green);
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 360px) {
+            .video-card {
+                min-width: 145px;
+                max-width: 145px;
+                height: 205px;
+            }
+
+            .video-title {
+                font-size: 12px;
+            }
+
+            .video-subtitle {
+                font-size: 10px;
+            }
+
+            .video-play-button {
+                width: 46px;
+                height: 46px;
+            }
+
+            .video-play-button svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .video-thumbnail-person {
+                height: 100px;
+            }
+        }
+
         /* Portfolio Health Card */
         .portfolio-health-card {
             background: white;
@@ -2380,6 +2584,76 @@
                 </div>
             </div>
 
+            <!-- Video Tutorials Section -->
+            <div class="video-tutorials-container section-spacing">
+                <div class="section-header">
+                    <h2 class="section-title">Videos to help you start</h2>
+                </div>
+
+                <div class="video-scroll" id="videoScroll">
+                    <!-- Video Card 1 -->
+                    <div class="video-card" onclick="openVideo('withdraw-tutorial')">
+                        <div class="video-card-content">
+                            <h3 class="video-title">How to withdraw your money?</h3>
+                            <p class="video-subtitle">Withdraw in just 2 steps</p>
+
+                            <div class="video-play-button">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+
+                            <div class="video-thumbnail-person">
+                                <img src="assets/images/tutorial-person-1.jpg" alt="Tutorial presenter" onerror="this.parentElement.style.background='linear-gradient(135deg, #667EEA 0%, #764BA2 100%)'; this.style.display='none';">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <div class="video-card" onclick="openVideo('sip-tutorial')">
+                        <div class="video-card-content">
+                            <h3 class="video-title">How does this SIP work?</h3>
+                            <p class="video-subtitle">SIP done. What's next?</p>
+
+                            <div class="video-play-button">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+
+                            <div class="video-thumbnail-person">
+                                <img src="assets/images/tutorial-person-2.jpg" alt="Tutorial presenter" onerror="this.parentElement.style.background='linear-gradient(135deg, #F093FB 0%, #F5576C 100%)'; this.style.display='none';">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 3 -->
+                    <div class="video-card" onclick="openVideo('returns-tutorial')">
+                        <div class="video-card-content">
+                            <h3 class="video-title">Understanding your returns</h3>
+                            <p class="video-subtitle">Track your growth</p>
+
+                            <div class="video-play-button">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+
+                            <div class="video-thumbnail-person">
+                                <img src="assets/images/tutorial-person-3.jpg" alt="Tutorial presenter" onerror="this.parentElement.style.background='linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%)'; this.style.display='none';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scroll Indicators -->
+                <div class="video-scroll-indicator" id="videoScrollIndicator">
+                    <div class="scroll-dot active"></div>
+                    <div class="scroll-dot"></div>
+                    <div class="scroll-dot"></div>
+                </div>
+            </div>
+
             <!-- Portfolio Health Section -->
             <div class="portfolio-health-container section-spacing-sm">
                 <div class="section-header">
@@ -3075,6 +3349,77 @@
             if (e.key === 'Escape') {
                 closeCertificate();
             }
+        });
+
+        // ==================== VIDEO TUTORIALS FUNCTIONALITY ====================
+
+        // Video scroll indicator tracking
+        const videoScrollContainer = document.getElementById('videoScroll');
+        const videoScrollIndicator = document.getElementById('videoScrollIndicator');
+
+        if (videoScrollContainer && videoScrollIndicator) {
+            const videoCards = videoScrollContainer.querySelectorAll('.video-card');
+            const scrollDots = videoScrollIndicator.querySelectorAll('.scroll-dot');
+
+            // Update active dot on scroll
+            videoScrollContainer.addEventListener('scroll', function() {
+                const scrollLeft = this.scrollLeft;
+                const cardWidth = videoCards[0].offsetWidth + 12; // card width + gap
+                const activeIndex = Math.round(scrollLeft / cardWidth);
+
+                scrollDots.forEach((dot, index) => {
+                    if (index === activeIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            });
+
+            // Click on dot to scroll to card
+            scrollDots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    const cardWidth = videoCards[0].offsetWidth + 12;
+                    videoScrollContainer.scrollTo({
+                        left: cardWidth * index,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        }
+
+        // Open video function
+        function openVideo(videoId) {
+            console.log('Opening video:', videoId);
+
+            // Option 1: Open YouTube/external video in new tab
+            const videoUrls = {
+                'withdraw-tutorial': 'https://youtube.com/watch?v=YOUR_VIDEO_ID',
+                'sip-tutorial': 'https://youtube.com/watch?v=YOUR_VIDEO_ID',
+                'returns-tutorial': 'https://youtube.com/watch?v=YOUR_VIDEO_ID'
+            };
+
+            if (videoUrls[videoId]) {
+                // TODO: Replace with actual video URLs
+                alert('Video tutorial will open here. Please update video URLs in the openVideo() function.');
+                // Uncomment when real URLs are available:
+                // window.open(videoUrls[videoId], '_blank');
+            }
+
+            // Option 2: Open in modal (if you implement modal)
+            // openVideoModal(videoId);
+
+            // Option 3: Navigate to dedicated video page
+            // window.location.href = 'video-tutorial.html?id=' + videoId;
+        }
+
+        // Optional: Add haptic feedback on mobile
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', function() {
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            });
         });
     </script>
 
