@@ -278,15 +278,52 @@
         }
 
         /* Risk Profile Badge */
-        .menu-risk-badge {
-            display: inline-block;
-            background: var(--color-green);
-            color: white;
-            padding: 6px 12px;
-            border-radius: var(--radius-full);
-            font-size: 12px;
+        .risk-profile-section {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .risk-profile-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .risk-profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FFFFFF;
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            border-radius: 9999px;
+            padding: 7px 14px;
+            width: fit-content;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .risk-profile-badge:hover {
+            border-color: rgba(255, 255, 255, 1);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .risk-profile-badge:active {
+            transform: scale(0.98);
+        }
+
+        .risk-profile-value {
+            font-size: 13px;
             font-weight: 600;
-            margin-top: 6px;
+            color: #059669;
+        }
+
+        .risk-chevron {
+            font-size: 14px;
+            color: #059669;
         }
 
         /* Action Pills Section */
@@ -758,7 +795,13 @@
             <div class="menu-profile">
                 <div class="menu-avatar">RY</div>
                 <div class="menu-user-name">Rajat Yadav</div>
-                <div class="menu-risk-badge">Balanced Investor</div>
+                <div class="risk-profile-section">
+                    <div class="risk-profile-label">Your Risk Profile:</div>
+                    <div class="risk-profile-badge" onclick="window.location.href='risk-profiling.html'">
+                        <span class="risk-profile-value">Balanced Investor</span>
+                        <span class="material-symbols-outlined risk-chevron">chevron_right</span>
+                    </div>
+                </div>
             </div>
         </div>
 
