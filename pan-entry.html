@@ -576,13 +576,9 @@
             margin-top: 12px;
         }
 
-        .btn-secondary:hover {
-            color: var(--color-blue);
-            background: rgba(37, 99, 235, 0.05);
-        }
-
         .btn-secondary:active {
             transform: scale(0.98);
+            color: var(--color-blue);
         }
 
         /* State Toggle Buttons */
@@ -636,6 +632,143 @@
             background: var(--color-red);
             border-color: var(--color-red);
         }
+
+        /* Version Toggle */
+        .version-toggle-container {
+            position: fixed;
+            top: 40%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10000;
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .toggle-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #9CA3AF;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .version-toggle-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .version-toggle-btn.active {
+            background: var(--color-blue);
+            border-color: var(--color-blue);
+            color: white;
+        }
+
+        /* V2 Name Card */
+        .v2-name-card {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: 16px;
+            padding: 24px 20px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .v2-name-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            color: #10B981;
+        }
+
+        .v2-name-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .v2-name-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .v2-confirm-question {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        .v2-edit-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 12px;
+        }
+
+        .v2-fetch-loading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .v2-fetch-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--color-border);
+            border-top-color: var(--color-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            flex-shrink: 0;
+        }
+
+        .v2-fetched-name {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: rgba(37, 99, 235, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 10px;
+        }
+
+        .v2-fetched-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .v2-fetched-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
     </style>
 </head>
 <body>
@@ -647,6 +780,13 @@
         </svg>
         <span id="frameToggleText">Normal View</span>
     </button>
+
+    <!-- Version Toggle (Step 1 V1/V2) -->
+    <div class="version-toggle-container" id="versionToggleContainer">
+        <span class="toggle-label">Step 1 Version</span>
+        <button class="version-toggle-btn v1-btn active" onclick="setPanVersion('v1')">V1</button>
+        <button class="version-toggle-btn v2-btn" onclick="setPanVersion('v2')">V2</button>
+    </div>
 
     <!-- PAN State Toggle Buttons -->
     <div class="state-toggle-container" id="panStateToggleContainer">
@@ -712,6 +852,50 @@
                                     <p>PAN verification is mandatory as per SEBI regulations for all mutual fund investments in India.</p>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- VERSION 2: Name Confirmation -->
+                        <div id="panV2Section" style="display:none;">
+
+                            <!-- Name Confirmation Card -->
+                            <div id="v2NameCard">
+                                <div class="v2-name-card">
+                                    <div class="v2-name-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="v2-name-label">Is this you?</div>
+                                    <div class="v2-name-value" id="v2NameDisplay">Rahul Kumar Sharma</div>
+                                </div>
+                                <button class="btn-primary" onclick="v2Confirm()">Yes, continue</button>
+                                <button class="btn-secondary" onclick="v2ShowEdit()">No, change details</button>
+                            </div>
+
+                            <!-- Edit / Re-fetch Section -->
+                            <div id="v2EditSection" style="display:none;">
+                                <div class="v2-edit-label">Enter PAN to continue</div>
+                                <div class="input-group" style="margin-bottom:0;">
+                                    <input type="text" id="v2PanInput" placeholder="ABCDE1234F" maxlength="10"
+                                           oninput="handleV2PanInput()" class="text-input" style="text-transform: uppercase;" />
+                                    <!-- Inline fetch loading -->
+                                    <div id="v2FetchLoading" style="display:none;" class="v2-fetch-loading">
+                                        <div class="v2-fetch-spinner"></div>
+                                        <span>Fetching name...</span>
+                                    </div>
+                                    <!-- Fetched name shown below input -->
+                                    <div id="v2FetchedName" style="display:none;" class="v2-fetched-name">
+                                        <span class="v2-fetched-label">Name on record</span>
+                                        <span class="v2-fetched-value" id="v2FetchedNameValue">Rahul Kumar Sharma</span>
+                                    </div>
+                                </div>
+                                <button class="btn-primary" id="v2ContinueBtn" disabled onclick="v2ProceedFromEdit()" style="margin-top:20px;">
+                                    Continue
+                                </button>
+                                <button class="btn-secondary" onclick="v2CancelEdit()">Go back</button>
+                            </div>
+
                         </div>
 
                         <!-- Loading State -->
@@ -905,6 +1089,9 @@
     <script>
         let currentPan = '';
         let currentState = 'success';
+        let currentVersion = 'v1';
+        let currentV2Pan = '';
+        let v2FetchTimeout = null;
 
         // Mock NSDL data (simulating fetched data)
         const mockNsdlData = {
@@ -941,11 +1128,92 @@
             }
         }
 
-        function verifyPan() {
-            currentPan = document.getElementById('panInput').value.toUpperCase();
+        // --- Version toggle ---
+        function setPanVersion(version) {
+            currentVersion = version;
+            document.querySelector('.v1-btn').classList.toggle('active', version === 'v1');
+            document.querySelector('.v2-btn').classList.toggle('active', version === 'v2');
+            document.getElementById('panInputSection').style.display = version === 'v1' ? 'block' : 'none';
+            document.getElementById('panV2Section').style.display   = version === 'v2' ? 'block' : 'none';
 
-            // Hide input section
+            const welcomeText = document.querySelector('.welcome-text');
+            const subtitleText = document.querySelector('.subtitle-text');
+            if (version === 'v2') {
+                welcomeText.textContent = 'Confirm your identity';
+                subtitleText.textContent = 'Review the name from your PAN records and confirm.';
+            } else {
+                welcomeText.textContent = 'Let\'s verify your identity';
+                subtitleText.textContent = 'Enter your PAN number to continue with your investment account setup';
+            }
+        }
+
+        // --- V2 helpers ---
+        function v2ShowEdit() {
+            document.getElementById('v2NameCard').style.display = 'none';
+            document.getElementById('v2EditSection').style.display = 'block';
+            document.getElementById('v2PanInput').focus();
+        }
+
+        function v2CancelEdit() {
+            document.getElementById('v2EditSection').style.display = 'none';
+            document.getElementById('v2NameCard').style.display = 'block';
+        }
+
+        function handleV2PanInput() {
+            const input = document.getElementById('v2PanInput');
+            const value = input.value.toUpperCase();
+            input.value = value;
+            const isValid = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value);
+
+            // Reset fetched state whenever input changes
+            document.getElementById('v2FetchedName').style.display = 'none';
+            document.getElementById('v2FetchLoading').style.display = 'none';
+            document.getElementById('v2ContinueBtn').disabled = true;
+            if (v2FetchTimeout) clearTimeout(v2FetchTimeout);
+
+            if (isValid) {
+                // Short delay before showing loading so fast typers don't see flicker
+                v2FetchTimeout = setTimeout(() => {
+                    document.getElementById('v2FetchLoading').style.display = 'flex';
+                    setTimeout(() => {
+                        currentV2Pan = value;
+                        document.getElementById('v2FetchLoading').style.display = 'none';
+                        document.getElementById('v2FetchedNameValue').textContent = mockNsdlData.name;
+                        document.getElementById('v2FetchedName').style.display = 'flex';
+                        document.getElementById('v2ContinueBtn').disabled = false;
+                    }, 1000);
+                }, 300);
+            }
+        }
+
+        function v2ProceedFromEdit() {
+            v2Confirm();
+        }
+
+        function v2Confirm() {
+            if (!currentV2Pan) currentV2Pan = 'ABCDE1234F';
+            localStorage.setItem('niveshpe_pan', currentV2Pan);
+            localStorage.setItem('niveshpe_pan_status', 'success');
+            localStorage.setItem('niveshpe_pan_name', mockNsdlData.name);
+            localStorage.setItem('niveshpe_pan_dob', mockNsdlData.dob);
+            localStorage.setItem('niveshpe_pan_father', mockNsdlData.fatherName);
+            window.location.href = 'investor-detail.html';
+        }
+
+        function verifyPan() {
+            // Read PAN from whichever section is active
+            if (currentVersion === 'v2') {
+                currentPan = currentV2Pan || 'ABCDE1234F';
+            } else {
+                currentPan = document.getElementById('panInput').value.toUpperCase();
+            }
+
+            // Hide both step 1 sections
             document.getElementById('panInputSection').style.display = 'none';
+            document.getElementById('panV2Section').style.display = 'none';
+
+            // Hide version toggle
+            document.getElementById('versionToggleContainer').style.display = 'none';
 
             // Show loading
             document.getElementById('loadingSection').classList.add('show');
@@ -1151,7 +1419,7 @@
         }
 
         function retryPan() {
-            // Hide toggle buttons
+            // Hide state toggle buttons
             document.getElementById('panStateToggleContainer').style.display = 'none';
 
             // Hide all status cards
@@ -1164,19 +1432,28 @@
             document.getElementById('pendingActions').classList.remove('show');
             document.getElementById('retrySection').classList.remove('show');
 
-            // Show input section
-            document.getElementById('panInputSection').style.display = 'block';
+            // Show the correct step 1 section based on current version
+            if (currentVersion === 'v2') {
+                document.getElementById('panV2Section').style.display = 'block';
+                // Reset V2 to name card view
+                document.getElementById('v2NameCard').style.display = 'block';
+                document.getElementById('v2EditSection').style.display = 'none';
+                document.getElementById('v2LoadingSection').style.display = 'none';
+            } else {
+                document.getElementById('panInputSection').style.display = 'block';
+                // Clear and focus input
+                const input = document.getElementById('panInput');
+                input.value = '';
+                input.classList.remove('valid', 'error');
+                input.focus();
+                // Reset continue button
+                document.getElementById('continueBtn').disabled = true;
+            }
 
-            // Clear and focus input
-            const input = document.getElementById('panInput');
-            input.value = '';
-            input.classList.remove('valid', 'error');
-            input.focus();
+            // Show version toggle
+            document.getElementById('versionToggleContainer').style.display = 'flex';
 
-            // Reset continue button
-            document.getElementById('continueBtn').disabled = true;
-
-            // Reset toggle buttons
+            // Reset state toggle buttons active state
             document.querySelector('.success-btn').classList.add('active');
             document.querySelector('.pending-btn').classList.remove('active');
             document.querySelector('.failure-btn').classList.remove('active');
