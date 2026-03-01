@@ -209,34 +209,35 @@
             padding-bottom: var(--space-lg);
         }
 
-        /* Investment Type Tabs - More Compact */
+        /* Investment Type Tabs - Capsule Style */
         .investment-tabs {
             display: flex;
-            background: var(--color-surface);
-            border-radius: var(--radius-md);
-            padding: 4px;
+            gap: var(--space-xs);
             margin-bottom: var(--space-xl);
-            border: 1px solid var(--color-border);
         }
 
         .tab-btn {
             flex: 1;
-            padding: 10px 16px;
-            border-radius: var(--radius-sm);
-            border: none;
-            background: transparent;
-            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--color-border);
+            background: var(--color-card);
+            font-size: 12px;
             font-weight: 600;
             color: var(--color-text-secondary);
             cursor: pointer;
             transition: all 0.3s ease;
-            min-height: 40px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .tab-btn.active {
-            background: var(--color-blue);
-            color: white;
-            box-shadow: var(--shadow-sm);
+            border-color: var(--color-blue);
+            color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.1);
+            transform: scale(1.02);
         }
 
         /* SIP Frequency - Compact Pills */
@@ -283,11 +284,11 @@
         .timing-display-btn {
             display: flex;
             align-items: center;
-            gap: var(--space-xs);
-            padding: 8px 12px;
-            background: var(--color-surface);
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--color-card);
             border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-full);
             font-size: 12px;
             color: var(--color-text-secondary);
             cursor: pointer;
@@ -2018,12 +2019,6 @@
 
                         <!-- SIP Frequency -->
                         <div class="frequency-section" id="sipFrequency">
-                            <div class="frequency-tabs">
-                                <button class="frequency-btn" data-frequency="daily">Daily</button>
-                                <!-- <button class="frequency-btn" data-frequency="weekly">Weekly</button> -->
-                                <button class="frequency-btn active" data-frequency="monthly">Monthly</button>
-                            </div>
-                            
                             <!-- Timing Display -->
                             <div class="timing-display" id="timingDisplay" style="display: none;">
                                 <button class="timing-display-btn" id="timingDisplayBtn">
@@ -2165,7 +2160,7 @@
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                                 </svg>
-                                Setup Daily SIP
+                                Setup Monthly SIP
                             </button>
                         </div>
 
@@ -2362,7 +2357,6 @@
             const ctaBtn = document.getElementById('ctaBtn');
             const projectionAmount = document.getElementById('projectionAmount');
             const tabBtns = document.querySelectorAll('.tab-btn');
-            const frequencyBtns = document.querySelectorAll('.frequency-btn');
             const amountBtns = document.querySelectorAll('.amount-btn');
             const goalCards = document.querySelectorAll('.goal-card-compact');
             const sipFrequency = document.getElementById('sipFrequency');
@@ -3147,36 +3141,6 @@
             });
 
             // Frequency buttons
-            frequencyBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const newFrequency = this.dataset.frequency;
-                    
-                    // Switch frequency
-                    frequencyBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    currentFrequency = newFrequency;
-                    
-                    // Update default amounts based on frequency
-                    if (currentFrequency === 'daily') {
-                        currentAmount = 100;
-                    } /*else if (currentFrequency === 'weekly') {
-                        currentAmount = 500;
-                    }*/ else if (currentFrequency === 'monthly') {
-                        currentAmount = 5000;
-                    }
-                    
-                    // Update amount input field
-                    amountInput.value = currentAmount;
-                    
-                    updateTimingDisplay();
-                    // updateQuickAmounts(); // Removed for cleaner UI
-                    updateCTA();
-                    updateProjection();
-                    updateTrustProjection();
-                });
-            });
-
             // Timing display button
             const timingDisplayBtn = document.getElementById('timingDisplayBtn');
             if (timingDisplayBtn) {
@@ -3316,21 +3280,14 @@
                 let amountConfig;
                 
                 if (currentType === 'sip') {
-                    if (currentFrequency === 'daily') {
-                        amountConfig = [
-                            { amount: 50, popular: false },
-                            { amount: 100, popular: true },
-                            { amount: 200, popular: false },
-                            { amount: 500, popular: false }
-                        ];
-                    /*} else if (currentFrequency === 'weekly') {
+                    /*else if (currentFrequency === 'weekly') {
                         amountConfig = [
                             { amount: 300, popular: false },
                             { amount: 500, popular: true },
                             { amount: 1000, popular: false },
                             { amount: 2000, popular: false }
-                        ];*/
-                    } else if (currentFrequency === 'monthly') {
+                        ];
+                    } else*/ if (currentFrequency === 'monthly') {
                         amountConfig = [
                             { amount: 2000, popular: false },
                             { amount: 5000, popular: true },
@@ -3422,22 +3379,7 @@
                 const timingValue = document.getElementById('timingValue');
                 const timingLabel = document.querySelector('.timing-display-label');
                 
-                if (currentFrequency === 'daily') {
-                    timingDisplay.style.display = 'none';
-                /*} else if (currentFrequency === 'weekly') {
-                    timingDisplay.style.display = 'block';
-                    const dayNames = {
-                        'monday': 'Monday',
-                        'tuesday': 'Tuesday', 
-                        'wednesday': 'Wednesday',
-                        'thursday': 'Thursday',
-                        'friday': 'Friday',
-                        'saturday': 'Saturday',
-                        'sunday': 'Sunday'
-                    };
-                    timingLabel.textContent = 'SIP every';
-                    timingValue.textContent = dayNames[currentDay];*/
-                } else if (currentFrequency === 'monthly') {
+                if (currentFrequency === 'monthly') {
                     timingDisplay.style.display = 'block';
                     const suffix = currentDate === 1 || currentDate === 21 ? 'st' :
                                   currentDate === 2 || currentDate === 22 ? 'nd' :
@@ -3467,11 +3409,9 @@
                 
                 if (currentType === 'sip') {
                     let investmentsPerYear;
-                    if (currentFrequency === 'daily') {
-                        investmentsPerYear = 365;
-                    /*} else if (currentFrequency === 'weekly') {
-                        investmentsPerYear = 52;*/
-                    } else {
+                    /*if (currentFrequency === 'weekly') {
+                        investmentsPerYear = 52;
+                    } else*/ {
                         investmentsPerYear = 12;
                     }
                     
@@ -3591,7 +3531,7 @@
             let futureValue;
 
             if (currentType === 'sip') {
-                const investmentsPerYear = frequency === 'daily' ? 365 : 12;
+                const investmentsPerYear = 12;
                 const r = Math.pow(1 + annualReturn, 1/investmentsPerYear) - 1;
                 const n = investmentsPerYear * duration;
                 futureValue = amount * (((Math.pow(1 + r, n)) - 1) / r) * (1 + r);
